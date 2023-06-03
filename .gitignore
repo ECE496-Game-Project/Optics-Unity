@@ -367,3 +367,9 @@ UserSettings/
 Temp/
 
 Library/
+
+*.sln
+
+*.csproj
+
+.vsconfig
