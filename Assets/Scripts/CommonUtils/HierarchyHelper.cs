@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Optics.Utils
-{
+namespace CommonUtils {
     public static class HierarchyHelper
     {
         /// <summary>
