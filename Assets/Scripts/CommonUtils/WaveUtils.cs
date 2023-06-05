@@ -25,6 +25,14 @@ namespace CommonUtils{
 		public float theta;
 		public float phi;
 	}
+	
+	[System.Serializable]
+	public class WavePlate {
+		// "Direction Settinggs"
+		// same as Wave that hit on to the Waveplate
+
+		public float degree; // reference to xHat, yHat
+	}
 
 	public static class waveAlgorithm {
 		public static Vector3 GetIrradiance(Vector3 r, float t, WaveParam p) {

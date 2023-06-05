@@ -29,9 +29,15 @@ namespace Wave {
         }
         private void CreateWaveLine() {
             ActiveParam = AssignWaveProfile.waveParam;
+
+            RaycastHit hit;
+
+            Physics.Raycast(this.transform.position, ActiveParam.kHat, out hit, Length);
+            //this.transform.position
+
             SamplePointList = new Transform[SampleCount];
             for (int i = 0; i < SampleCount; i++) {
-                Vector3 initPos = this.transform.position + i * SampleCount/Length * ActiveParam.kHat;
+                Vector3 initPos = this.transform.position + i * Length/SampleCount * ActiveParam.kHat;
                 SamplePointList[i] = Instantiate(
                     SamplePointPrefab, 
                     initPos, 
