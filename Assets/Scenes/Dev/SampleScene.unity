@@ -365,7 +365,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1607888151}
-  - component: {fileID: 1607888150}
+  - component: {fileID: 1607888152}
   m_Layer: 0
   m_Name: StraightWave
   m_TagString: Untagged
@@ -373,35 +373,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1607888150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1607888149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dcf472d2ac130e46a6b0450ca499858, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AssignWaveProfile: {fileID: 11400000, guid: 1213ca6e4f4a37b42a2daf4b9e975a06, type: 2}
-  SamplePointPrefab: {fileID: 5541711582044379763, guid: 64d27625c5e6d5c41b2b276210255a78,
-    type: 3}
-  SampleCount: 1
-  Length: 1
-  SamplePointList: []
-  ActiveParam:
-    uHat: {x: 0, y: 0, z: 0}
-    vHat: {x: 0, y: 0, z: 0}
-    kHat: {x: 0, y: 0, z: 0}
-    Eox: 0
-    Eoy: 0
-    w: 0
-    k: 0
-    n: 0
-    theta: 0
-    phi: 0
 --- !u!4 &1607888151
 Transform:
   m_ObjectHideFlags: 0
@@ -417,3 +388,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1607888152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607888149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dcf472d2ac130e46a6b0450ca499858, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AssignWaveSettings: {fileID: 11400000, guid: 7ef54563525bbac41bceb41120560248, type: 2}
+  ActiveWaveSettings:
+    uHat: {x: 0, y: 0, z: 0}
+    vHat: {x: 0, y: 0, z: 0}
+    kHat: {x: 0, y: 0, z: 0}
+    origin: {x: 0, y: 0, z: 0}
+    Eox: 0
+    Eoy: 0
+    w: 0
+    k: 0
+    n: 0
+    theta: 0
+    phi: 0
+  WaveDisplay:
+    SampleCount: 50
+    Length: 20
+    SamplePointPrefab: {fileID: 5541711582044379763, guid: 64d27625c5e6d5c41b2b276210255a78,
+      type: 3}
+    SamplePointList: []

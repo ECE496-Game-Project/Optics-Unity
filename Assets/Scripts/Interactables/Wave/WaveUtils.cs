@@ -1,16 +1,17 @@
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
-using ComplexNumber = System.Numerics.Complex;
+using Complex = System.Numerics.Complex;
+using Accord.Math;
 
-namespace CommonUtils{
+namespace Wave {
 	[System.Serializable]
 	public class WaveParam
 	{
-		//initial position is using the object transform
 		[Header("Direction Settinggs")]
 		public Vector3 uHat; // Vector x
 		public Vector3 vHat; // Vector y
 		public Vector3 kHat; //Wave movingDir
+		public Vector3 origin;
 
 		[Header("Magnitude Settings")]
 		public float Eox;
@@ -22,8 +23,15 @@ namespace CommonUtils{
 		public float n; //??qianli ??n???w?k?
 
 		[Header("Angle Settings in degree")]
+        [Range(0, 360)]
 		public float theta;
+		[Range(0, 360)]
 		public float phi;
+
+		/// <summary>
+		/// Calculated using uHat, vHat, kHat, and phi
+		/// </summary>
+		[HideInInspector] public Complex[] JohnsVector2;
 	}
 	
 	[System.Serializable]
@@ -32,10 +40,12 @@ namespace CommonUtils{
 		// same as Wave that hit on to the Waveplate
 
 		public float degree; // reference to xHat, yHat
+
+		public Complex[,] JohnsMatrix2X2;
 	}
 
-	public static class waveAlgorithm {
-		public static Vector3 GetIrradiance(Vector3 r, float t, WaveParam p) {
+	public static class WaveAlgorithm {
+		public static Vector3 CalcIrradiance(Vector3 r, float t, WaveParam p) {
 			float kdotr = Vector3.Dot(p.kHat, r) * p.k;
 			float expCommon = kdotr - Mathf.Deg2Rad * p.w * t + Mathf.Deg2Rad * p.phi;
 
@@ -44,5 +54,9 @@ namespace CommonUtils{
 			
 			return uMag * p.uHat + vMag * p.vHat;
         }
+		public static void CalcJohnsVector(WaveParam p) {
+
+        }
+		
     }
 }
