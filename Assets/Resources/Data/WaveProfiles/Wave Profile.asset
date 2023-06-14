@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f75c0fafcb809e4884b3619b546e68d, type: 3}
   m_Name: Wave Profile
   m_EditorClassIdentifier: 
-  waveParam:
-    uHat: {x: 1, y: 0, z: 0}
-    vHat: {x: 0, y: 1, z: 0}
-    kHat: {x: 0, y: 0, z: 1}
-    origin: {x: 0, y: 0, z: 0}
+  Parameters:
+    UHat: {x: 1, y: 0, z: 0}
+    VHat: {x: 0, y: 1, z: 0}
+    KHat: {x: 0, y: 0, z: 1}
+    Origin: {x: 0, y: 0, z: 0}
     Eox: 10
     Eoy: 10
-    w: 100
-    k: 1
-    n: 1
-    theta: 0
-    phi: 0
+    W: 50
+    K: 1
+    N: 1
+    Theta: 0
+    Phi: 0

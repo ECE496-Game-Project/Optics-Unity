@@ -1,9 +1,9 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
+using CommonUtils;
 
-namespace Wave {
+namespace Profiles {
 	[CreateAssetMenu(menuName = "Wave/New WaveProfile")]
 	public class WaveProfile : ScriptableObject {
-		public WaveParam waveParam;
+		public WaveParam Parameters;
 	}
 }
