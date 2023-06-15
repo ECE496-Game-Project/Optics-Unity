@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Optics.Utils
-{
+namespace CommonUtils {
     public static class DebugLogger
     {
         public static void Error(string objectName, string message)

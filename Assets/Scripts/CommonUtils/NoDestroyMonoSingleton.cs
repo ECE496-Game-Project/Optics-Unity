@@ -1,7 +1,6 @@
 using UnityEngine;
 
-namespace Optics.Utils
-{
+namespace CommonUtils {
     /// <summary>
     /// Dont destroy on Load version monosingleton
     /// </summary>

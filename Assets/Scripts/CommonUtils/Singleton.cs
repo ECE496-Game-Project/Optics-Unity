@@ -1,7 +1,6 @@
 ﻿using System;
 
-namespace Optics.Utils
-{
+namespace CommonUtils {
     /// <summary>
     /// 饿汉式单例模式
     /// </summary>
