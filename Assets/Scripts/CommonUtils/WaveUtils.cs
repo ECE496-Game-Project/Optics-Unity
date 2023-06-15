@@ -82,5 +82,7 @@ namespace CommonUtils {
 				Eoy * Complex.Exp(Complex.ImaginaryOne * Mathf.Deg2Rad * theta)
 			);
 		}
+
+		//TODO: JohnsVector to Eox Eoy theta
     }
 }

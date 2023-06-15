@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dcf472d2ac130e46a6b0450ca499858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AssignWaveSettings: {fileID: 11400000, guid: 7ef54563525bbac41bceb41120560248, type: 2}
+  AssignWaveSettings: {fileID: 0}
   WaveDisplay:
-    m_SampleCount: 20
-    _perSampleSpaceLength: 1
+    m_SampleCount: 0
+    _perSampleSpaceLength: 0
     _samplePointPrefab: {fileID: 5541711582044379763, guid: 64d27625c5e6d5c41b2b276210255a78,
       type: 3}
   ActiveWaveSettings:
@@ -62,3 +62,4 @@ MonoBehaviour:
     N: 0
     Theta: 0
     Phi: 0
+  m_ReferenceDir: {fileID: 0}

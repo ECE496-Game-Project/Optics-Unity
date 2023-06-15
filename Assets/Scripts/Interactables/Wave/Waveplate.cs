@@ -3,7 +3,7 @@ using UnityEngine;
 using CommonUtils;
 using Complex = System.Numerics.Complex;
 
-namespace Assets.Scripts.Interactables.Wave {
+namespace Wave {
     public class Waveplate : MonoBehaviour {
         [SerializeField] private float _plateDeg;
         [SerializeField] private float _axisDiffDeg;

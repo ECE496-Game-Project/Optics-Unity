@@ -11,7 +11,9 @@ namespace Wave {
 
         [SerializeField] private WaveParam ActiveWaveSettings;
 
-        public Transform m_ReferenceDir;
+        public void PreProcess(LineWave newLW, LineWaveDisplay wd, WaveParam wp) {
+
+        }
 
         private void UpdateWaveLine() {
             for (int i = 0; i < WaveDisplay.m_SampleCount; i++) {
@@ -63,10 +65,6 @@ namespace Wave {
 
         // Update is called once per frame
         void Update() {
-            ActiveWaveSettings.KHat = m_ReferenceDir.forward;
-            ActiveWaveSettings.UHat = m_ReferenceDir.up;
-            ActiveWaveSettings.VHat = m_ReferenceDir.right;
-
             UpdateWaveLine();
         }
     }

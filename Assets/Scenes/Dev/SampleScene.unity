@@ -453,6 +453,17 @@ PrefabInstance:
       objectReference: {fileID: 398161065}
     - target: {fileID: 1973762040204809174, guid: ced9998be59b80c4da2cc74402367fb2,
         type: 3}
+      propertyPath: AssignWaveSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 7ef54563525bbac41bceb41120560248,
+        type: 2}
+    - target: {fileID: 1973762040204809174, guid: ced9998be59b80c4da2cc74402367fb2,
+        type: 3}
+      propertyPath: WaveDisplay.m_SampleCount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1973762040204809174, guid: ced9998be59b80c4da2cc74402367fb2,
+        type: 3}
       propertyPath: WaveDisplay._perSampleSpaceLength
       value: 0.5
       objectReference: {fileID: 0}
