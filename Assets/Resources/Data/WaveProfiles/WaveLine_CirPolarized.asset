@@ -10,17 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f75c0fafcb809e4884b3619b546e68d, type: 3}
-  m_Name: Wave Profile
+  m_Name: WaveLine_CirPolarized
   m_EditorClassIdentifier: 
   Parameters:
-    UHat: {x: 1, y: 0, z: 0}
-    VHat: {x: 0, y: 1, z: 0}
-    KHat: {x: 0, y: 0, z: 1}
-    Origin: {x: 0, y: 0, z: 0}
+    Type: 1
     Eox: 10
     Eoy: 10
-    W: 50
-    K: 1
+    W: 100
+    K: 0.1
     N: 1
-    Theta: 0
+    Theta: 90
     Phi: 0
