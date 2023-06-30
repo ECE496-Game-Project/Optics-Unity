@@ -356,6 +356,86 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!1001 &1573696965
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 641244642240193131, guid: 530e718f8a5e10248bfa147bc2973c57,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 641244642240193131, guid: 530e718f8a5e10248bfa147bc2973c57,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 641244642240193131, guid: 530e718f8a5e10248bfa147bc2973c57,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 641244642240193131, guid: 530e718f8a5e10248bfa147bc2973c57,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 641244642240193131, guid: 530e718f8a5e10248bfa147bc2973c57,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 641244642240193131, guid: 530e718f8a5e10248bfa147bc2973c57,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 641244642240193131, guid: 530e718f8a5e10248bfa147bc2973c57,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 641244642240193131, guid: 530e718f8a5e10248bfa147bc2973c57,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 641244642240193131, guid: 530e718f8a5e10248bfa147bc2973c57,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 641244642240193131, guid: 530e718f8a5e10248bfa147bc2973c57,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 641244642240193131, guid: 530e718f8a5e10248bfa147bc2973c57,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3142269322546992196, guid: 530e718f8a5e10248bfa147bc2973c57,
+        type: 3}
+      propertyPath: m_Name
+      value: WaveLine_CrPol
+      objectReference: {fileID: 0}
+    - target: {fileID: 4440478354637159178, guid: 530e718f8a5e10248bfa147bc2973c57,
+        type: 3}
+      propertyPath: _profile
+      value: 
+      objectReference: {fileID: 11400000, guid: d2d780b4c9135d64d950038596d728eb,
+        type: 2}
+    - target: {fileID: 4440478354637159178, guid: 530e718f8a5e10248bfa147bc2973c57,
+        type: 3}
+      propertyPath: ActiveWaveParams.Type
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 530e718f8a5e10248bfa147bc2973c57, type: 3}
 --- !u!1001 &7616725871565982209
 PrefabInstance:
   m_ObjectHideFlags: 0
