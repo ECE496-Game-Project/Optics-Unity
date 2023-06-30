@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
-using CommonUtils;
+using WaveUtils;
 using Complex = System.Numerics.Complex;
 
-namespace Wave {
+namespace Devices {
     public class Waveplate : MonoBehaviour {
         [SerializeField] private float _plateDeg;
         [SerializeField] private float _axisDiffDeg;

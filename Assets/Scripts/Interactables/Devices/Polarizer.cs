@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using CommonUtils;
+using WaveUtils;
 using Complex = System.Numerics.Complex;
 
-namespace Wave {
+namespace Devices {
     public class Polarizer : MonoBehaviour {
         [SerializeField] private float _rotDeg;
 
