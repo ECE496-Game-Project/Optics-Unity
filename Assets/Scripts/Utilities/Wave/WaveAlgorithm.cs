@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Complex = System.Numerics.Complex;
 
@@ -12,13 +13,15 @@ namespace WaveUtils {
 			
 			return uMag * p.UHat(Vector3.zero) + vMag * p.VHat(Vector3.zero);
         }
-		public static ComplexVector2 CalcJohnsVector(float Eox, float Eoy, float theta) {
-			return new ComplexVector2(
-				new Complex(Eox, 0),
-				Eoy * Complex.Exp(Complex.ImaginaryOne * Mathf.Deg2Rad * theta)
+		public static void WaveToJohnsVector(in WaveParams wp, ref ComplexVector2 cv) {
+			cv = new ComplexVector2(
+				new Complex(wp.Eox, 0),
+				wp.Eoy * Complex.Exp(Complex.ImaginaryOne * Mathf.Deg2Rad * wp.Theta)
 			);
 		}
 
-		//TODO: JohnsVector to Eox Eoy theta
+		public static void JohnsVectorToWave(in ComplexVector2 cv, ref WaveParams wp) {
+
+        }
     }
 }

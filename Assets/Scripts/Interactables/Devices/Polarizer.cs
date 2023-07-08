@@ -1,12 +1,13 @@
-﻿using UnityEngine;
+﻿using GO_Wave;
+using UnityEngine;
 using WaveUtils;
 using Complex = System.Numerics.Complex;
 
-namespace Devices {
-    public class Polarizer : MonoBehaviour {
+namespace GO_Device {
+    public class Polarizer : PolarizeDevice {
         [SerializeField] private float _rotDeg;
 
-        public ComplexMatrix2X2 JohnsMatrix {
+        public override ComplexMatrix2X2 JohnsMatrix {
             get {
                 float rotRad = _rotDeg * Mathf.Deg2Rad;
                 return new ComplexMatrix2X2(
@@ -16,6 +17,10 @@ namespace Devices {
                     Complex.One * Mathf.Sin(rotRad) * Mathf.Sin(rotRad)
                 );
             }
+        }
+
+        public override WaveSource WaveHit(WaveSource sourceWS) {
+            return base.WaveHit(sourceWS);
         }
     }
 }

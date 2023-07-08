@@ -45,15 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d61437c0306227468bbcf8ab819c84d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EffectiveWaveParam:
-    Type: 0
-    Eox: 0
-    Eoy: 0
-    W: 0
-    K: 0
-    N: 0
-    Theta: 0
-    Phi: 0
 --- !u!1 &8996434619084698141
 GameObject:
   m_ObjectHideFlags: 0
@@ -66,12 +57,12 @@ GameObject:
   - component: {fileID: 6835691235305345066}
   - component: {fileID: 8186773198626419181}
   m_Layer: 0
-  m_Name: module
+  m_Name: _dispalyModule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1686739759687973326
 Transform:
   m_ObjectHideFlags: 0

@@ -10,15 +10,7 @@ namespace GO_Wave {
         public WaveParams ActiveWaveParams;
         public float EffectDistance = 100.0f;
 
-        #region PRIVATE METHOD
-        //[TODO]: Call when Wave Sample Should change
-        private void sampleChangeTrigger() {
-            //[TODO]: trigger Unity Event in InteractManager
-        }
-        #endregion
-
         #region DELEGATE FUNCTION (USED FOR WAVEPARAM)
-        public Vector3 GetOrigin() { return this.transform.position; }
         public Vector3 GetUHatParallel(in Vector3 r) { return this.transform.right; }
         public Vector3 GetVHatParallel(in Vector3 r) { return this.transform.up; }
         public Vector3 GetKHatParallel(in Vector3 r) { return this.transform.forward; }
@@ -32,8 +24,6 @@ namespace GO_Wave {
         void Start() {
             /*init ActiveWaveParams*/
             ActiveWaveParams = new WaveParams(_profile.Parameters);
-            ActiveWaveParams.Origin = GetOrigin;
-
             switch (ActiveWaveParams.Type) {
                 case WAVETYPE.PARALLEL: 
                     ActiveWaveParams.UHat = GetUHatParallel;
