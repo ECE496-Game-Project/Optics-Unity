@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
-using CommonUtils;
+using WaveUtils;
 using Complex = System.Numerics.Complex;
 
-namespace Wave {
-    public class Waveplate : MonoBehaviour {
+namespace GO_Device {
+    public class Waveplate : PolarizeDevice {
         [SerializeField] private float _plateDeg;
         [SerializeField] private float _axisDiffDeg;
 
-        public ComplexMatrix2X2 JohnsMatrix {
+        public override ComplexMatrix2X2 JohnsMatrix {
             get {
                 Complex axisdiff = Complex.Exp(Complex.ImaginaryOne * _axisDiffDeg * Mathf.Deg2Rad);
                 float plateRad = _plateDeg * Mathf.Deg2Rad;

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using CommonUtils;
+using WaveUtils;
 
 namespace Profiles {
 	[CreateAssetMenu(menuName = "Wave/New WaveProfile")]
-	public class WaveProfile : ScriptableObject {
-		public WaveParam Parameters;
+	public class SO_WaveParams : ScriptableObject {
+		public WaveParams Parameters;
 	}
 }

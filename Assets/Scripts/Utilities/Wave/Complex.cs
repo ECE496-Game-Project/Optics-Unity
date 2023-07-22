@@ -1,26 +1,28 @@
 ﻿using Complex = System.Numerics.Complex;
 
-namespace CommonUtils {
+namespace WaveUtils {
     public class ComplexVector2 {
         public Complex[] Value;
 
+        #region CONSTRUCTOR
         public ComplexVector2() {
             Value = new Complex[2];
         }
-
         public ComplexVector2(Complex a, Complex b) {
             Value = new Complex[2];
             Value[0] = a;
             Value[1] = b;
         }
+        #endregion
     }
+
     public class ComplexMatrix2X2 {
         public Complex[,] Value;
 
+        #region CONSTRUCTOR
         public ComplexMatrix2X2() {
             Value = new Complex[2,2];
         }
-
         public ComplexMatrix2X2(Complex a, Complex b, Complex c, Complex d) {
             Value = new Complex[2, 2];
             Value[0,0] = a;
@@ -28,7 +30,8 @@ namespace CommonUtils {
             Value[1,0] = c;
             Value[1,1] = d;
         }
-
+        #endregion
+        #region OPERATOR
         public static ComplexVector2 operator *(ComplexMatrix2X2 matrix, ComplexVector2 vec) {
             ComplexVector2 res = new ComplexVector2();
 
@@ -48,5 +51,6 @@ namespace CommonUtils {
 
             return res;
         }
+        #endregion
     }
 }
