@@ -14,7 +14,7 @@ namespace GO_Device {
                 return new ComplexMatrix2X2(
                     Complex.One * Mathf.Cos(rotRad) * Mathf.Cos(rotRad),
                     Complex.One * Mathf.Sin(rotRad) * Mathf.Cos(rotRad),
-                    Complex.One * -Mathf.Sin(rotRad) * Mathf.Cos(rotRad),
+                    Complex.One * Mathf.Sin(rotRad) * Mathf.Cos(rotRad),
                     Complex.One * Mathf.Sin(rotRad) * Mathf.Sin(rotRad)
                 );
             }
