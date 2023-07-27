@@ -1,8 +1,13 @@
-﻿using Complex = System.Numerics.Complex;
+﻿using System;
+using Complex = System.Numerics.Complex;
 
 namespace WaveUtils {
     public class ComplexVector2 {
         public Complex[] Value;
+
+        public override string ToString() {
+            return Value[0].ToString().PadRight(20) + " | " + Value[1].ToString().PadLeft(20);
+        }
 
         #region CONSTRUCTOR
         public ComplexVector2() {
@@ -19,6 +24,12 @@ namespace WaveUtils {
     public class ComplexMatrix2X2 {
         public Complex[,] Value;
 
+        public override string ToString() {
+            return Value[0,0] + " | " 
+                + Value[0,1] + "\n"
+                + Value[1,0] + " | " 
+                + Value[1,1];
+        }
         #region CONSTRUCTOR
         public ComplexMatrix2X2() {
             Value = new Complex[2,2];

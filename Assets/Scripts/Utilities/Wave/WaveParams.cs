@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 using CommonUtils;
 
 namespace WaveUtils {
@@ -31,10 +33,24 @@ namespace WaveUtils {
 		public float Theta;
 		[Range(0, 360)]
 		public float Phi;
-        #endregion
 
-        #region CONSTRUCTOR
-        public WaveParams(WaveParams src) {
+        [Header("Dispersion Distance")]
+		[SerializeField] private float _effectDistance = 100.0f;
+		public float EffectDistance {
+			get { 
+				return _effectDistance;
+			}
+            set { 
+				_effectDistance = value;
+				EffectDistanceListener?.Invoke();
+			}
+        }
+		
+		[HideInInspector] public UnityEvent EffectDistanceListener;
+		#endregion
+
+		#region CONSTRUCTOR
+		public WaveParams(WaveParams src) {
 			this.Type = src.Type;
 			this.UHat = src.UHat;
 			this.VHat = src.VHat;
