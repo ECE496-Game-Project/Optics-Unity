@@ -21,3 +21,4 @@ MonoBehaviour:
     N: 1
     Theta: 90
     Phi: 0
+    EffectDistance: 100

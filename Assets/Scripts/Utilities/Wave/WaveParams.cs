@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 using CommonUtils;
 
 namespace WaveUtils {
@@ -13,11 +15,9 @@ namespace WaveUtils {
 		#region GLOBAL VAR
 		public WAVETYPE Type = WAVETYPE.INVALID;
 
-        public del_Vec3GetterVec3Param UHat = DefaultVec3Getter;
-		public del_Vec3GetterVec3Param VHat = DefaultVec3Getter;
-		public del_Vec3GetterVec3Param KHat = DefaultVec3Getter;
-
-		public del_Vec3Getter Origin = DefaultOriginGetter;
+        public del_Vec3ParamVec3Getter UHat = Del_Default.DefaultVec3ParamVec3Getter;
+		public del_Vec3ParamVec3Getter VHat = Del_Default.DefaultVec3ParamVec3Getter;
+		public del_Vec3ParamVec3Getter KHat = Del_Default.DefaultVec3ParamVec3Getter;
 
 		[Header("Magnitude Settings")]
 		public float Eox;
@@ -33,15 +33,28 @@ namespace WaveUtils {
 		public float Theta;
 		[Range(0, 360)]
 		public float Phi;
-        #endregion
 
-        #region CONSTRUCTOR
-        public WaveParams(WaveParams src) {
+        [Header("Dispersion Distance")]
+		[SerializeField] private float _effectDistance = 100.0f;
+		public float EffectDistance {
+			get { 
+				return _effectDistance;
+			}
+            set { 
+				_effectDistance = value;
+				EffectDistanceListener?.Invoke();
+			}
+        }
+		
+		[HideInInspector] public UnityEvent EffectDistanceListener;
+		#endregion
+
+		#region CONSTRUCTOR
+		public WaveParams(WaveParams src) {
 			this.Type = src.Type;
 			this.UHat = src.UHat;
 			this.VHat = src.VHat;
             this.KHat = src.KHat;
-			this.Origin = src.Origin;
 			this.Eox = src.Eox;
 			this.Eoy = src.Eoy;
 			this.W = src.W;
@@ -51,29 +64,5 @@ namespace WaveUtils {
 			this.Phi = src.Phi;
 		}
         #endregion
-
-        #region METHOD
-		public void InitLineWaveParam(del_Vec3GetterVec3Param UHat, del_Vec3GetterVec3Param VHat, del_Vec3GetterVec3Param KHat) {
-			this.UHat = UHat;
-			this.VHat = VHat;
-			this.KHat = KHat;
-		}
-
-		public void InitPointWaveParam(del_Vec3Getter Origin) {
-			this.Origin = Origin;
-		}
-		#endregion
-
-		#region STATIC METHOD
-		public static Vector3 DefaultVec3Getter(in Vector3 r) {
-			DebugLogger.Warning("WaveParam", "del_Vec3Getter Invoke DefaultVec3Getter, return Vector3.zero");
-			return Vector3.zero;
-		}
-
-		public static Vector3 DefaultOriginGetter() {
-			DebugLogger.Warning("WaveParam", "del_Vec3Getter Invoke DefaultVec3Getter, return Vector3.zero");
-			return Vector3.zero;
-		}
-        #endregion
-    }
+	}
 }
