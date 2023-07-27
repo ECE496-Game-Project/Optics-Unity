@@ -11,10 +11,10 @@ namespace GO_Device {
 
 	public class DeviceBase : MonoBehaviour {
         public DEVICETYPE type = DEVICETYPE.INVALID;
+        public virtual void WaveHit(in RaycastHit hit, WaveSource sourceWS) { }
     }
 
     public class PolarizeDevice : DeviceBase {
         public virtual ComplexMatrix2X2 JohnsMatrix { get; }
-        public virtual WaveSource WaveHit(WaveSource sourceWS) { return null; }
     }
 }
