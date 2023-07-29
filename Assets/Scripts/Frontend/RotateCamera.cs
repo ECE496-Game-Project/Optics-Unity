@@ -21,5 +21,12 @@ public class RotateCamera : MonoBehaviour
         // Rotate the camera to the Z-axis
         transform.rotation = Quaternion.Euler(90f, 0f, 0f);
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.X)) RotateToAxisX();
+        if (Input.GetKeyDown(KeyCode.Y)) RotateToAxisY();
+        if (Input.GetKeyDown(KeyCode.Z)) RotateToAxisZ();
+    }
 }
 
