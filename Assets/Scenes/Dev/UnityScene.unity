@@ -536,8 +536,14 @@ PrefabInstance:
         type: 3}
       propertyPath: Profile
       value: 
-      objectReference: {fileID: 11400000, guid: 6a5b2048445c4c347bc1237bd67a7a7b,
+      objectReference: {fileID: 11400000, guid: d2d780b4c9135d64d950038596d728eb,
         type: 2}
+    - target: {fileID: 7130097508444834148, guid: 530e718f8a5e10248bfa147bc2973c57,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000,
+        type: 0}
     - target: {fileID: 7130097508444834148, guid: 530e718f8a5e10248bfa147bc2973c57,
         type: 3}
       propertyPath: m_Name
