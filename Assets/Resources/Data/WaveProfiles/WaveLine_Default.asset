@@ -14,10 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Parameters:
     Type: 1
-    Eox: 10
-    Eoy: 0
+    Eox: 0
+    Eoy: 10
     W: 100
     K: 0.1
     N: 1
     Theta: 0
     Phi: 0
+    _effectDistance: 0
+    EffectDistanceListener:
+      m_PersistentCalls:
+        m_Calls: []
