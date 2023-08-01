@@ -3,7 +3,7 @@ using UnityEngine.Events;
 using CommonUtils;
 using WaveUtils;
 using Profiles;
-using ns_Interface;
+using Interfaces;
 
 namespace GO_Wave {
     public class WaveSource : MonoBehaviour, I_WaveInput {
