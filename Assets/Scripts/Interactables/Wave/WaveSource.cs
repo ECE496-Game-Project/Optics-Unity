@@ -6,7 +6,7 @@ using Profiles;
 using Interfaces;
 
 namespace GO_Wave {
-    public class WaveSource : MonoBehaviour, I_WaveInput {
+    public class WaveSource : MonoBehaviour {
         #region INSPECTOR SETTINGS
         public SO_WaveParams Profile;
         #endregion
@@ -38,16 +38,10 @@ namespace GO_Wave {
         }
 
         public void ParamDestructCallback() {
+            _params.EffectDistance = Profile.Parameters.EffectDistance;
+            
             WaveDisplay.RefreshDisplay();
             WaveInteract.DestructInteract();
-        }
-
-        public void Rotate(Vector3 rot) {
-
-        }
-
-        public void Move(Vector3 dest) {
-            
         }
 
         private void RegisterCallback() {
