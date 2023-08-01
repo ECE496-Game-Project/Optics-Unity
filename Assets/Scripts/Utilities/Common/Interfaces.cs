@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ns_Interface {
+namespace Interfaces {
     public interface I_WaveDisplay {
         public void RefreshDisplay();
         public void UpdateDisplay();

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using ns_Interface;
+using Interfaces;
 using CommonUtils;
 using GO_Device;
 
