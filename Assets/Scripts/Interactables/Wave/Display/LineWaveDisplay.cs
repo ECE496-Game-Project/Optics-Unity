@@ -2,7 +2,7 @@
 using UnityEngine;
 using CommonUtils;
 using WaveUtils;
-using ns_Interface;
+using Interfaces;
 
 namespace GO_Wave {
     public class LineWaveDisplay : MonoBehaviour, I_WaveDisplay {
