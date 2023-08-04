@@ -2,7 +2,6 @@
 using UnityEngine.Events;
 using CommonUtils;
 using WaveUtils;
-using Profiles;
 using Interfaces;
 
 namespace GO_Wave {
@@ -33,7 +32,7 @@ namespace GO_Wave {
             WaveInteract.NonDestructInteract();
         }
 
-        public void ParamDestructCallback() {
+        public virtual void ParamDestructCallback() {
             /*Reset Each Root WaveSource's Effective Distance*/
             WaveDisplay.RefreshDisplay();
             WaveInteract.DestructInteract();

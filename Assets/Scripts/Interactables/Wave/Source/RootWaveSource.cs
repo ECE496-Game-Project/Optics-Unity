@@ -11,6 +11,12 @@ namespace GO_Wave {
         [SerializeField] private SO_WaveParams _profile;
         #endregion
 
+        public override void ParamDestructCallback() {
+            _params.EffectDistance = _profile.Parameters.EffectDistance;
+            
+            base.ParamDestructCallback();
+        }
+
         /// <summary>   
         /// Only Called if Profile is Set In Inspector
         /// </summary>
