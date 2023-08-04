@@ -11,7 +11,8 @@ namespace GO_Device {
 
 	public class DeviceBase : MonoBehaviour {
         public DEVICETYPE type = DEVICETYPE.INVALID;
-        public virtual void WaveHit(in RaycastHit hit, WaveSource sourceWS) { }
+        public virtual void WaveHit(in RaycastHit hit, WaveSource parentWS) { }
+        public virtual void WaveCleanup(WaveSource parentWS) { }
     }
 
     public class PolarizeDevice : DeviceBase {
