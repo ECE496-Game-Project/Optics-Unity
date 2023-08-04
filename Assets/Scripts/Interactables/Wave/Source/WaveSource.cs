@@ -7,10 +7,6 @@ using Interfaces;
 
 namespace GO_Wave {
     public class WaveSource : MonoBehaviour {
-        #region INSPECTOR SETTINGS
-        public SO_WaveParams Profile;
-        #endregion
-        
         #region GLOBAL VARIABLES
         public I_WaveDisplay WaveDisplay;
         public I_WaveInteract WaveInteract;
@@ -18,7 +14,7 @@ namespace GO_Wave {
         
         [Header("Debug")]
         #region PRIVATE VARIABLES
-        [SerializeField] private WaveParams _params;
+        [SerializeField] protected WaveParams _params;
         #endregion
 
         #region GLOBAL METHODS
@@ -38,13 +34,12 @@ namespace GO_Wave {
         }
 
         public void ParamDestructCallback() {
-            _params.EffectDistance = Profile.Parameters.EffectDistance;
-            
+            /*Reset Each Root WaveSource's Effective Distance*/
             WaveDisplay.RefreshDisplay();
             WaveInteract.DestructInteract();
         }
 
-        private void RegisterCallback() {
+        protected void RegisterCallback() {
             switch (_params.Type) {
                 case WAVETYPE.PARALLEL:
                     _params.UHat = (in Vector3 r) => { return this.transform.right; };
@@ -63,40 +58,6 @@ namespace GO_Wave {
 
             _params.EffectDistanceListener = new UnityEvent();
             _params.EffectDistanceListener.AddListener(ParamNonDestructCallback);
-        }
-
-        /// <summary>   
-        /// Only Called if Profile is Set In Inspector
-        /// </summary>
-        private void Awake() {
-            if (Profile != null) {
-                WaveDisplay = GetComponent<I_WaveDisplay>();
-                if (WaveDisplay == null)
-                    DebugLogger.Error(this.name, "GameObject Does not contain WaveDisplay! Stop Executing.");
-                WaveInteract = GetComponent<I_WaveInteract>();
-                if (WaveInteract == null)
-                    DebugLogger.Error(this.name, "GameObject Does not contain WaveInteract! Stop Executing.");
-
-                _params = new WaveParams(Profile.Parameters);
-                RegisterCallback();
-            }
-        }
-
-        /// <summary>
-        /// Script-Generated-WaveSource Requires to Call Prepare, since it does not have Profile Invoke.
-        /// </summary>
-        /// <param name="srcWP"> Pre initalized WaveParameter.</param>
-        public void Prepare(WaveParams srcWP) {
-            WaveDisplay = GetComponent<I_WaveDisplay>();
-            if (WaveDisplay == null)
-                DebugLogger.Error(this.name, "GameObject Does not contain WaveDisplay! Stop Executing.");
-            WaveInteract = GetComponent<I_WaveInteract>();
-            if (WaveInteract == null)
-                DebugLogger.Error(this.name, "GameObject Does not contain WaveInteract! Stop Executing.");
-
-            /*init ActiveWaveParams*/
-            _params = srcWP;
-            RegisterCallback();
         }
     }
 }

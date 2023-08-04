@@ -21,4 +21,7 @@ MonoBehaviour:
     N: 1
     Theta: 90
     Phi: 0
-    EffectDistance: 100
+    _effectDistance: 100
+    EffectDistanceListener:
+      m_PersistentCalls:
+        m_Calls: []

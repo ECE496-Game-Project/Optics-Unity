@@ -37,9 +37,6 @@ namespace GO_Wave {
 
         }
 
-        private void Awake() {
-        }
-
         public void Prepare(I_WaveInteract srcWI) {
             this._interactMask = ((LineWaveInteract)srcWI)._interactMask;
         }
