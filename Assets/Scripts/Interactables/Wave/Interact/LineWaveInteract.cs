@@ -13,33 +13,28 @@ namespace GO_Wave {
 
         [Header("Debug")]
         #region PRIVRATE VARIABLES
-        [SerializeField] private Dictionary<DeviceBase, WaveSource> _childWaves_Device;
+        [SerializeField] private DeviceBase _hit_Device;
         [SerializeField] private WaveSource _activeWS;
         #endregion
 
         public void DestructInteract() {
-            Debug.Log("DestructInteract");
+            DebugLogger.Log(this.name, "DestructInteract");
             /*Interact Device*/
-            foreach (var childWave in _childWaves_Device) {
-                Destroy(childWave.Value.gameObject);
-            }
-            _childWaves_Device.Clear();
+            if(_hit_Device != null)
+                _hit_Device.WaveCleanup(_activeWS);
 
-           RaycastHit hit;
+            RaycastHit hit;
             if (
                 Physics.Raycast(transform.position, transform.forward, out hit, _activeWS.Params.EffectDistance, _interactMask)
                 && ((1 << hit.collider.gameObject.layer) & _interactMask) != 0
             ) {
-                hit.collider.gameObject.GetComponent<DeviceBase>().WaveHit(hit, _activeWS);
+                _hit_Device = hit.collider.gameObject.GetComponent<DeviceBase>();
+                _hit_Device.WaveHit(hit, _activeWS);
             }
         }
 
         public void NonDestructInteract() {
 
-        }
-
-        private void Awake() {
-            _childWaves_Device = new Dictionary<DeviceBase, WaveSource>();
         }
 
         public void Prepare(I_WaveInteract srcWI) {
