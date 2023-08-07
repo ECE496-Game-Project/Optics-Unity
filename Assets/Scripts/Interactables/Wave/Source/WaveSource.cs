@@ -59,17 +59,5 @@ namespace GO_Wave {
             _params.EffectDistanceListener = new UnityEvent();
             _params.EffectDistanceListener.AddListener(ParamNonDestructCallback);
         }
-
-        public void AssignParams(WaveParams param)
-        {
-            param.Type = _params.Type;
-            param.Eox = _params.Eox;
-            param.Eoy = _params.Eoy;
-            param.W = _params.W;
-            param.K = _params.K;
-            param.N = _params.N;
-            param.Theta = _params.Theta;
-            param.Phi = _params.Phi;
-        }
     }
 }
