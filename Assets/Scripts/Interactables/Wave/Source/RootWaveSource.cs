@@ -4,6 +4,7 @@ using CommonUtils;
 using WaveUtils;
 using Profiles;
 using Interfaces;
+using System.Runtime.InteropServices;
 
 namespace GO_Wave {
     public class RootWaveSource : WaveSource {
@@ -28,16 +29,25 @@ namespace GO_Wave {
             }
         }
 
-        public void AssignParams(WaveParams param)
+        public void Start()
         {
-            param.Type = _params.Type;
-            param.Eox = _params.Eox;
-            param.Eoy = _params.Eoy;
-            param.W = _params.W;
-            param.K = _params.K;
-            param.N = _params.N;
-            param.Theta = _params.Theta;
-            param.Phi = _params.Phi;
+#if !UNITY_EDITOR && UNITY_WEBGL
+            SendParamsToWeb();
+#endif
+        }
+
+        [DllImport("__Internal")]
+        private static extern void ReceiveParams(float input, int idx);
+
+        public void SendParamsToWeb()
+        {
+            ReceiveParams(_params.Eox, 0);
+            ReceiveParams(_params.Eoy, 1);
+            ReceiveParams(_params.W, 2);
+            ReceiveParams(_params.K, 3);
+            ReceiveParams(_params.N, 4);
+            ReceiveParams(_params.Theta, 5);
+            ReceiveParams(_params.Phi, 6);
         }
     }
 }
