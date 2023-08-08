@@ -70,7 +70,7 @@
                 {
                     "name": "binding",
                     "id": "fc65c16e-0541-45ac-9c7d-018c526e5393",
-                    "path": "<Mouse>/position",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
