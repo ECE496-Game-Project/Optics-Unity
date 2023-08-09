@@ -53,5 +53,58 @@ namespace GO_Wave {
             ReceiveParams(_params.Theta, 5);
             ReceiveParams(_params.Phi, 6);
         }
+
+        public void SetTypeFromWeb(string value)
+        {
+            if (int.TryParse(value, out int val))
+            {
+                if (val == (int)WAVETYPE.INVALID) _params.Type = WAVETYPE.INVALID;
+                if (val == (int)WAVETYPE.PARALLEL) _params.Type = WAVETYPE.PARALLEL;
+                if (val == (int)WAVETYPE.POINT) _params.Type = WAVETYPE.POINT;
+            }
+                
+        }
+
+        public void SetEoxFromWeb(string value)
+        {
+            if (float.TryParse(value, out float val))
+                _params.Eox = val;
+        }
+
+        public void SetEoyFromWeb(string value)
+        {
+            if (float.TryParse(value, out float val))
+                _params.Eoy = val;
+        }
+
+        public void SetWFromWeb(string value)
+        {
+            if (float.TryParse(value, out float val))
+                _params.W = val;
+        }
+
+        public void SetKFromWeb(string value)
+        {
+            if (float.TryParse(value, out float val))
+                _params.K = val;
+        }
+
+        public void SetNFromWeb(string value)
+        {
+            if (float.TryParse(value, out float val))
+                _params.N = val;
+        }
+
+        public void SetThetaFromWeb(string value)
+        {
+            if (float.TryParse(value, out float val))
+                _params.Theta = val;
+        }
+
+        public void SetPhiFromWeb(string value)
+        {
+            if (float.TryParse(value, out float val))
+                _params.Phi = val;
+        }
     }
 }
