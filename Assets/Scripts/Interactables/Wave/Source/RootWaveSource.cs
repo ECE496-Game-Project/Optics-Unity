@@ -39,8 +39,12 @@ namespace GO_Wave {
         [DllImport("__Internal")]
         private static extern void ReceiveParams(float input, int idx);
 
+        [DllImport("__Internal")]
+        private static extern void ReceiveWaveType(int input);
+
         public void SendParamsToWeb()
         {
+            ReceiveWaveType((int)_params.Type);
             ReceiveParams(_params.Eox, 0);
             ReceiveParams(_params.Eoy, 1);
             ReceiveParams(_params.W, 2);
