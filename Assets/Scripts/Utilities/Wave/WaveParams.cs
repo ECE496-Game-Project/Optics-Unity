@@ -6,8 +6,8 @@ using CommonUtils;
 namespace WaveUtils {
 	public enum WAVETYPE {
 		INVALID = 0,
-		PARALLEL,
-		POINT
+		PARALLEL = 1,
+		POINT = 2,
     }
 
 	[System.Serializable]
