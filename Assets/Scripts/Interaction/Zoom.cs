@@ -16,6 +16,9 @@ public class Zoom : MonoBehaviour
 
     [SerializeField]
     private float m_zoomDelta = 1.5f;
+
+    public float CameraDepth => -m_transposer.m_FollowOffset.z;
+
     // Start is called before the first frame update
     void Start()
     {
