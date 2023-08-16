@@ -18,12 +18,14 @@ namespace GO_Wave {
         #endregion
 
         #region GLOBAL METHODS
-        public WaveParams Params {
+        public WaveParams Params
+        {
             get { return _params; }
-            set {
+            set
+            {
                 if (_params != null)
                     DebugLogger.Error(this.name, "Re-Initalize WaveParameter! Break.");
-                _params = value; 
+                _params = value;
             }
         }
         #endregion
