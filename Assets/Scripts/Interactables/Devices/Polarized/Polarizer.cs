@@ -24,6 +24,17 @@ namespace GO_Device {
             }
         }
 
+        public void ParamChange(WaveSource parentWS) {
+            //ComplexVector2 resVec = new ComplexVector2();
+            //WaveAlgorithm.WaveToJohnsVector(parentWS.Params, resVec);
+            //resVec = JohnsMatrix * resVec;
+            //WaveAlgorithm.JohnsVectorToWave(resVec, new_WSP);
+
+            //float tmpDistance = parentWS.Params.EffectDistance;
+            //parentWS.Params.EffectDistance = hit.distance;
+            //new_WSP.EffectDistance = tmpDistance - hit.distance;
+        }
+
         public override void WaveHit(in RaycastHit hit, WaveSource parentWS) {
             if (parentWS.Params.Type != WAVETYPE.PARALLEL) {
                 DebugLogger.Warning(this.name, "PolarizedDevice only support Parallel Wave! Will not Do anything.");

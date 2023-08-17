@@ -27,6 +27,10 @@ namespace GO_Wave {
         }
         #endregion
 
+        //public void ChangeParam(float Eox, float Eoy ....) {
+
+        //}
+
         public void ParamNonDestructCallback() {
             WaveDisplay.RefreshDisplay();
             WaveInteract.NonDestructInteract();
@@ -55,8 +59,7 @@ namespace GO_Wave {
                     break;
             }
 
-            _params.EffectDistanceListener = new UnityEvent();
-            _params.EffectDistanceListener.AddListener(ParamNonDestructCallback);
+            _params.DestructableListener.AddListener(ParamDestructCallback);
         }
     }
 }
