@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 using Interfaces;
 using CommonUtils;
 using GO_Device;
@@ -17,12 +16,16 @@ namespace GO_Wave {
         [SerializeField] private WaveSource _activeWS;
         #endregion
 
-        public void DestructInteract() {
-            DebugLogger.Log(this.name, "DestructInteract");
-            /*Interact Device*/
-            if(_hit_Device != null)
-                _hit_Device.WaveCleanup(_activeWS);
+        public void CleanInteract() {
+            if (_hit_Device != null)
+                _hit_Device.WaveClean(_activeWS);
+            _hit_Device = null;
+        }
 
+        public void DestructInteract() {
+            /*Interact Device*/
+            CleanInteract();
+            if(_activeWS==null)Debug.Break();
             RaycastHit hit;
             if (
                 Physics.Raycast(transform.position, transform.forward, out hit, _activeWS.Params.EffectDistance, _interactMask)
@@ -37,17 +40,15 @@ namespace GO_Wave {
 
         }
 
-        public void Prepare(I_WaveInteract srcWI) {
+        public void SyncRootParam(I_WaveInteract srcWI) {
             this._interactMask = ((LineWaveInteract)srcWI)._interactMask;
         }
 
-        public void Start() {
+        public void Awake() {
             _activeWS = GetComponent<WaveSource>();
             if (_activeWS == null) {
                 DebugLogger.Error(this.name, "GameObject Doesn't contains WaveSource Script, Stop Executing.");
             }
-
-            DestructInteract();
         }
     }
 }

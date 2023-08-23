@@ -66,25 +66,25 @@ namespace GO_Wave {
             }
         }
 
-        
+
         #endregion
 
         private void Awake() {
             m_SampleCount = 0;
             _samplePointList = new List<LineWaveSample>();
-        }
-        public void Prepare(I_WaveDisplay srcWD) {
-            this._perSampleSpaceLength = ((LineWaveDisplay)srcWD)._perSampleSpaceLength;
-            this._samplePointPrefab = ((LineWaveDisplay)srcWD)._samplePointPrefab;
-            this._timeScale = ((LineWaveDisplay)srcWD)._timeScale;
-        }
 
-        public void Start() {
             _activeWS = this.transform.GetComponent<WaveSource>();
             if (_activeWS == null) {
                 DebugLogger.Error(this.name, "GameObject Doesn't contains WaveSource Script, Stop Executing.");
             }
+        }
+        public void SyncRootParam(I_WaveDisplay rootWD) {
+            this._perSampleSpaceLength = ((LineWaveDisplay)rootWD)._perSampleSpaceLength;
+            this._samplePointPrefab = ((LineWaveDisplay)rootWD)._samplePointPrefab;
+            this._timeScale = ((LineWaveDisplay)rootWD)._timeScale;
+        }
 
+        public void Start() {
             if (_samplePointPrefab == null || _samplePointPrefab.GetComponent<LineWaveSample>() == null) {
                 DebugLogger.Error(this.name, "Prefab does not contains WaveLineSample Script! Stop Executing.");
             }

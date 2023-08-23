@@ -24,7 +24,7 @@ namespace GO_Device {
             }
         }
 
-        public void ParamChange(WaveSource parentWS) {
+        //public void ParamChange(WaveSource parentWS) {
             //ComplexVector2 resVec = new ComplexVector2();
             //WaveAlgorithm.WaveToJohnsVector(parentWS.Params, resVec);
             //resVec = JohnsMatrix * resVec;
@@ -33,8 +33,9 @@ namespace GO_Device {
             //float tmpDistance = parentWS.Params.EffectDistance;
             //parentWS.Params.EffectDistance = hit.distance;
             //new_WSP.EffectDistance = tmpDistance - hit.distance;
-        }
+        //}
 
+        // [TODO]: Transfer WaveHit and WaveClean into PolarizedBase in order for WavePlate usage.
         public override void WaveHit(in RaycastHit hit, WaveSource parentWS) {
             if (parentWS.Params.Type != WAVETYPE.PARALLEL) {
                 DebugLogger.Warning(this.name, "PolarizedDevice only support Parallel Wave! Will not Do anything.");
@@ -61,15 +62,16 @@ namespace GO_Device {
             parentWS.Params.EffectDistance = hit.distance;
             new_WSP.EffectDistance = tmpDistance - hit.distance;
 
-            childWS.Prepare(new_WSP);
-            lwd.Prepare(parentWS.WaveDisplay);
-            lwi.Prepare(parentWS.WaveInteract);
+            childWS.ManualAwake(new_WSP);
+            lwd.SyncRootParam(parentWS.WaveDisplay);
+            lwi.SyncRootParam(parentWS.WaveInteract);
 
             /*Store Pair*/
             _childParentPair.Add(parentWS, childWS);
         }
     
-        public override void WaveCleanup(WaveSource parentWS) {
+        public override void WaveClean(WaveSource parentWS) {
+            _childParentPair[parentWS].WaveInteract.CleanInteract();
             Destroy(_childParentPair[parentWS].gameObject);
             _childParentPair.Remove(parentWS);
         }

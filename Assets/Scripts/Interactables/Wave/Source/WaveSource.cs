@@ -2,6 +2,7 @@
 using UnityEngine.Events;
 using CommonUtils;
 using WaveUtils;
+using Profiles;
 using Interfaces;
 
 namespace GO_Wave {
@@ -17,29 +18,27 @@ namespace GO_Wave {
         #endregion
 
         #region GLOBAL METHODS
-        public WaveParams Params {
+        public WaveParams Params
+        {
             get { return _params; }
-            set {
+            set
+            {
                 if (_params != null)
                     DebugLogger.Error(this.name, "Re-Initalize WaveParameter! Break.");
-                _params = value; 
+                _params = value;
             }
         }
         #endregion
 
-        //public void ChangeParam(float Eox, float Eoy ....) {
-
-        //}
-
-        public void ParamNonDestructCallback() {
-            WaveDisplay.RefreshDisplay();
-            WaveInteract.NonDestructInteract();
+        public virtual void ParamNonDestructCallback() {
+            DebugLogger.Warning(this.name, "NonDestructCallback Not Implement yet!!!");
+            //WaveDisplay.RefreshDisplay();
+            //WaveInteract.NonDestructInteract();
         }
 
         public virtual void ParamDestructCallback() {
-            /*Reset Each Root WaveSource's Effective Distance*/
-            WaveDisplay.RefreshDisplay();
             WaveInteract.DestructInteract();
+            WaveDisplay.RefreshDisplay();
         }
 
         protected void RegisterCallback() {
@@ -59,6 +58,7 @@ namespace GO_Wave {
                     break;
             }
 
+            //_params.EffectDistanceListener = new UnityEvent();
             _params.DestructableListener.AddListener(ParamDestructCallback);
         }
     }

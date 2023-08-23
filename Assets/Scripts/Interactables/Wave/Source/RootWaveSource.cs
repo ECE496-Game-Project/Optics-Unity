@@ -4,18 +4,13 @@ using CommonUtils;
 using WaveUtils;
 using Profiles;
 using Interfaces;
+using System.Runtime.InteropServices;
 
 namespace GO_Wave {
     public class RootWaveSource : WaveSource {
         #region INSPECTOR SETTINGS
         [SerializeField] private SO_WaveParams _profile;
         #endregion
-
-        public override void ParamDestructCallback() {
-            _params.EffectDistance = _profile.Parameters.EffectDistance;
-            
-            base.ParamDestructCallback();
-        }
 
         /// <summary>   
         /// Only Called if Profile is Set In Inspector
@@ -32,6 +27,14 @@ namespace GO_Wave {
                 _params = new WaveParams(_profile.Parameters);
                 RegisterCallback();
             }
+        }
+
+        /// <summary>
+        /// Need Manual Reset Effective Distance since Distance Modified during Interaction.
+        /// </summary>
+        public override void ParamDestructCallback() {
+            Params.EffectDistance = _profile.Parameters.EffectDistance;
+            base.ParamDestructCallback();   
         }
     }
 }
