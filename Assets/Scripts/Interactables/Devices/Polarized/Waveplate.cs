@@ -4,7 +4,7 @@ using WaveUtils;
 using Complex = System.Numerics.Complex;
 
 namespace GO_Device {
-    public class Waveplate : PolarizeDevice {
+    public class Waveplate : PolarizedBase {
         [SerializeField] private float _plateDeg;
         [SerializeField] private float _axisDiffDeg;
 

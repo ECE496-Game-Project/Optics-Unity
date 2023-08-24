@@ -1,6 +1,5 @@
 using UnityEngine;
 using GO_Wave;
-using WaveUtils;
 
 namespace GO_Device {
     public enum DEVICETYPE {
@@ -13,9 +12,5 @@ namespace GO_Device {
         public DEVICETYPE type = DEVICETYPE.INVALID;
         public virtual void WaveHit(in RaycastHit hit, WaveSource parentWS) { }
         public virtual void WaveClean(WaveSource parentWS) { }
-    }
-
-    public class PolarizeDevice : DeviceBase {
-        public virtual ComplexMatrix2X2 JohnsMatrix { get; }
     }
 }
