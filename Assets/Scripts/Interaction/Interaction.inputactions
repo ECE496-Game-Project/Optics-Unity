@@ -1,0 +1,169 @@
+{
+    "name": "Interaction",
+    "maps": [
+        {
+            "name": "CameraInteraction",
+            "id": "dfe3b1e9-7b08-4683-9767-9ce5ec5cdb37",
+            "actions": [
+                {
+                    "name": "Rotate",
+                    "type": "Value",
+                    "id": "b1082d1e-f21b-4ece-bcbc-26b49085b22a",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Translation",
+                    "type": "Value",
+                    "id": "b1069576-719c-41a1-b33e-12635841c20a",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Zoom",
+                    "type": "Value",
+                    "id": "44b1c5d6-d7ae-42b7-9e70-6808911ab172",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "MouseClicked",
+                    "type": "Button",
+                    "id": "fb0c5f60-fce7-47ab-bf14-dbf0131ff0b0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MouseMovement",
+                    "type": "Value",
+                    "id": "7c1ad560-0f23-431a-9172-310d8ec1b6c9",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "Two Modifiers",
+                    "id": "8494f3aa-a120-49b0-bfda-7cd6ddcbd660",
+                    "path": "TwoModifiers",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier1",
+                    "id": "78041cf7-c0ad-4a60-81a8-bd0d4cec5922",
+                    "path": "<Keyboard>/leftAlt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "modifier2",
+                    "id": "a39bef5b-7cce-403b-a21d-31b4e350c42d",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "fc65c16e-0541-45ac-9c7d-018c526e5393",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "0d5f6dcc-5462-4e54-b0d9-27e6f68f19e2",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Translation",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "b5279b50-b643-4f41-8aab-09ea4e0fb821",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Translation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "b1a7d462-aea9-40d6-b5b9-57d9f9a7d4b4",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Translation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "acf7467f-6be8-4bb4-90be-7bed26069311",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d6277465-d8b2-4666-aa8a-8a3e27ea13d4",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseClicked",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ee68b3b8-130d-428b-b956-1ca14a809e76",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
