@@ -20,7 +20,7 @@ namespace GO_Device {
                     axisdiff * cos2PlateDeg + sin2PlateDeg * Complex.One,
                     axisdiff * sincosPlateDeg - sincosPlateDeg * Complex.One,
                     axisdiff * sincosPlateDeg - sincosPlateDeg * Complex.One,
-                    axisdiff * sin2PlateDeg - sincosPlateDeg * Complex.One
+                    axisdiff * sin2PlateDeg + cos2PlateDeg * Complex.One
                 );
             }
         }

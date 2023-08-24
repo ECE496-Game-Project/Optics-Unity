@@ -18,13 +18,18 @@ namespace GO_Wave {
         [SerializeField] private float _timeScale = 1.0f;
         #endregion
 
-        [Header("Debug")]
         #region PRIVRATE VARIABLES
+#if DEBUG_WAVE
+        [Header("DEBUG_WAVE")]
         [SerializeField] private int m_SampleCount;
         [SerializeField] private List<LineWaveSample> _samplePointList;
         [SerializeField] private WaveSource _activeWS;
+#else
+        private int m_SampleCount;
+        private List<LineWaveSample> _samplePointList;
+        private WaveSource _activeWS;
+#endif
         #endregion
-
 
         #region GLOBAL METHOD
         public void RefreshDisplay() {
@@ -67,7 +72,7 @@ namespace GO_Wave {
         }
 
 
-        #endregion
+#endregion
 
         private void Awake() {
             m_SampleCount = 0;

@@ -5,7 +5,6 @@ using CommonUtils;
 
 namespace GO_Wave {
     public class LineWaveSample : MonoBehaviour {
-
         private GameObject _dispalyModule;
 
         public bool DisplayStatus() {

@@ -10,10 +10,15 @@ namespace GO_Wave {
         [SerializeField] private LayerMask _interactMask;
         #endregion
 
-        [Header("Debug")]
         #region PRIVRATE VARIABLES
+#if DEBUG_WAVE
+        [Header("DEBUG_WAVE")]
         [SerializeField] private DeviceBase _hit_Device;
         [SerializeField] private WaveSource _activeWS;
+#else
+        private DeviceBase _hit_Device;
+        private WaveSource _activeWS;
+#endif
         #endregion
 
         public void CleanInteract() {

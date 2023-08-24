@@ -28,7 +28,7 @@ namespace WaveUtils {
 				DebugLogger.Error("JohnsVectorToWave", "Pass in NULL class, Error.");
 				return;
 			}
-			wp.Theta = (float)(Complex.Log(cv.Value[0]).Imaginary - Complex.Log(cv.Value[1]).Imaginary) * Mathf.Rad2Deg;
+			wp.Theta = (float)(Complex.Log(cv.Value[1]).Imaginary - Complex.Log(cv.Value[0]).Imaginary) * Mathf.Rad2Deg;
 
 			wp.Eox = (float)(cv.Value[0].Magnitude);
 			wp.Eoy = (float)(cv.Value[1].Magnitude);
