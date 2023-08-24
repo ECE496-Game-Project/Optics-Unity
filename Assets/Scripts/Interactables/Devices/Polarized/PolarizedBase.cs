@@ -11,7 +11,12 @@ namespace GO_Device {
 
         public virtual ComplexMatrix2X2 JohnsMatrix { get; }
 
+#if DEBUG_DEVICE
+        [Header("DEBUG_DEVICE")]        
+        [SerializeField] protected Dictionary<WaveSource, WaveSource> _childParentPair;
+#else
         protected Dictionary<WaveSource, WaveSource> _childParentPair;
+#endif
 
         public override void WaveHit(in RaycastHit hit, WaveSource parentWS) {
             if (parentWS.Params.Type != WAVETYPE.PARALLEL) {
@@ -31,8 +36,10 @@ namespace GO_Device {
             WaveParams new_WSP = new WaveParams(parentWS.Params);
 
             ComplexVector2 resVec = new ComplexVector2();
+
             WaveAlgorithm.WaveToJohnsVector(parentWS.Params, resVec);
             resVec = JohnsMatrix * resVec;
+
             WaveAlgorithm.JohnsVectorToWave(resVec, new_WSP);
 
             float tmpDistance = parentWS.Params.EffectDistance;

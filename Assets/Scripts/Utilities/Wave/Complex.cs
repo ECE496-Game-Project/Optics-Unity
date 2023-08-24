@@ -4,9 +4,11 @@ using Complex = System.Numerics.Complex;
 namespace WaveUtils {
     public class ComplexVector2 {
         public Complex[] Value;
-
+        public string printComplex(Complex a) {
+            return "(" + Math.Round(a.Real, 2) + " + " + Math.Round(a.Imaginary, 2) + "i)";
+        }
         public override string ToString() {
-            return Value[0].ToString().PadRight(20) + " | " + Value[1].ToString().PadLeft(20);
+            return printComplex(Value[0]) + " | " + printComplex(Value[1]);
         }
 
         #region CONSTRUCTOR
@@ -23,12 +25,15 @@ namespace WaveUtils {
 
     public class ComplexMatrix2X2 {
         public Complex[,] Value;
+        public string printComplex(Complex a) {
+            return "(" + Math.Round(a.Real, 2) + " + " + Math.Round(a.Imaginary, 2) + "i)";
+        }
 
         public override string ToString() {
-            return Value[0,0] + " | " 
-                + Value[0,1] + "\n"
-                + Value[1,0] + " | " 
-                + Value[1,1];
+            return printComplex(Value[0,0]) + " | " 
+                + printComplex(Value[0,1]) + "\n"
+                + printComplex(Value[1,0]) + " | " 
+                + printComplex(Value[1,1]);
         }
         #region CONSTRUCTOR
         public ComplexMatrix2X2() {

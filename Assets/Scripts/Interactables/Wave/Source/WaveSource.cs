@@ -11,10 +11,14 @@ namespace GO_Wave {
         public I_WaveDisplay WaveDisplay;
         public I_WaveInteract WaveInteract;
         #endregion
-        
-        [Header("Debug")]
+
         #region PRIVATE VARIABLES
+#if DEBUG_WAVE
+        [Header("DEBUG_WAVE")]
         [SerializeField] protected WaveParams _params;
+#else
+        protected WaveParams _params;
+#endif
         #endregion
 
         #region GLOBAL METHODS
@@ -28,7 +32,7 @@ namespace GO_Wave {
                 _params = value;
             }
         }
-        #endregion
+#endregion
 
         public virtual void ParamNonDestructCallback() {
             DebugLogger.Warning(this.name, "NonDestructCallback Not Implement yet!!!");
