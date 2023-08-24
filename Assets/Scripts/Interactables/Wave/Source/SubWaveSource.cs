@@ -6,12 +6,12 @@ using Profiles;
 using Interfaces;
 
 namespace GO_Wave {
-    public class SubWaveSource : WaveSource {     
+    public class SubWaveSource : WaveSource {
         /// <summary>
-        /// Script-Generated-WaveSource Requires to Call Prepare, since it does not have Profile Invoke.
+        /// Script-Generated-WaveSource Requires to Call ManualAwake.
         /// </summary>
         /// <param name="srcWP"> Pre initalized WaveParameter.</param>
-        public void Prepare(WaveParams srcWP) {
+        public void ManualAwake(WaveParams srcWP) {
             WaveDisplay = GetComponent<I_WaveDisplay>();
             if (WaveDisplay == null)
                 DebugLogger.Error(this.name, "GameObject Does not contain WaveDisplay! Stop Executing.");
@@ -23,5 +23,9 @@ namespace GO_Wave {
             _params = srcWP;
             RegisterCallback();
         }
+        public void Start() {
+            ParamDestructCallback();
+        }
+
     }
 }

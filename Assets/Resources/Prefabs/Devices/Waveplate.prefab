@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 5237302342889919748}
   - component: {fileID: 5237302342889919749}
   - component: {fileID: 5237302342889919738}
-  - component: {fileID: 5237302342889919739}
+  - component: {fileID: 8535428568456889454}
   m_Layer: 6
-  m_Name: Polarizer
+  m_Name: Waveplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,7 +99,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &5237302342889919739
+--- !u!114 &8535428568456889454
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,9 +108,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5237302342889919736}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dbf52191dc12284aa2c2ecb68f9519e, type: 3}
+  m_Script: {fileID: 11500000, guid: 85dffe29cbfdfaf4a99e1fa195e8d562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  type: 2
   _thicknessOffset: 1
-  _rotDeg: 60
+  _plateDeg: 90
+  _axisDiffDeg: 0

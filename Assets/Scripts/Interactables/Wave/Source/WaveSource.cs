@@ -30,15 +30,15 @@ namespace GO_Wave {
         }
         #endregion
 
-        public void ParamNonDestructCallback() {
-            WaveDisplay.RefreshDisplay();
-            WaveInteract.NonDestructInteract();
+        public virtual void ParamNonDestructCallback() {
+            DebugLogger.Warning(this.name, "NonDestructCallback Not Implement yet!!!");
+            //WaveDisplay.RefreshDisplay();
+            //WaveInteract.NonDestructInteract();
         }
 
-        public void ParamDestructCallback() {
-            /*Reset Each Root WaveSource's Effective Distance*/
-            WaveDisplay.RefreshDisplay();
+        public virtual void ParamDestructCallback() {
             WaveInteract.DestructInteract();
+            WaveDisplay.RefreshDisplay();
         }
 
         protected void RegisterCallback() {
@@ -58,8 +58,8 @@ namespace GO_Wave {
                     break;
             }
 
-            _params.EffectDistanceListener = new UnityEvent();
-            _params.EffectDistanceListener.AddListener(ParamNonDestructCallback);
+            //_params.EffectDistanceListener = new UnityEvent();
+            _params.DestructableListener.AddListener(ParamDestructCallback);
         }
     }
 }

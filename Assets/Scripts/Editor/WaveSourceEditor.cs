@@ -3,12 +3,12 @@ using UnityEngine;
 using GO_Wave;
 
 namespace ns_Editor {
-    [CustomEditor(typeof(WaveSource))]
+    [CustomEditor(typeof(RootWaveSource))]
     public class WaveSourceEditor : Editor {
 
         public override void OnInspectorGUI() {
             base.OnInspectorGUI();
-            WaveSource waveSource = (WaveSource)target;
+            RootWaveSource waveSource = (RootWaveSource)target;
 
             if (GUILayout.Button("Parameter NonDestructable Callback")) {
                 waveSource.ParamNonDestructCallback();
