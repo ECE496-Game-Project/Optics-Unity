@@ -137,6 +137,7 @@ public class WaveSourcePresenter : MonoBehaviour
 
 
 // data
+/*
 public class Param<T> where T : IConvertible
 {
     T m_value;
@@ -151,3 +152,4 @@ public class Param<T> where T : IConvertible
         m_value = (T)Convert.ChangeType(str, typeof(T));
     }
 }
+*/
