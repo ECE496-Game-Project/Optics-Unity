@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GO_Wave.LineWaveDisplay" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEEAAACCAAAAAAAAAAAAAAEAAAQCAAAAJIAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Interactables\Wave\Display\LineWaveDisplay.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GO_Wave.LineWaveSample" Collapsed="true">
+    <Position X="11" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAACABAAAAAAAAAAAAAAAAAAAAggAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Interactables\Wave\Display\LineWaveSample.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GO_Wave.LineWaveInteract" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAACAAAAAEACEAAAgAAAAAIAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Interactables\Wave\Interact\LineWaveInteract.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GO_Wave.RootWaveSource" Collapsed="true">
+    <Position X="5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Interactables\Wave\Source\RootWaveSource.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GO_Wave.WaveSource" Collapsed="true">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AggAFAIAACAAAAAAAIAAAAAAAAAAAAAAgEAAAAIAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interactables\Wave\Source\WaveSource.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GO_Device.DeviceBase" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interactables\Devices\DeviceBases.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GO_Device.PolarizedBase" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAgAAAAEAAAAAAEAAAAAAAABAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Interactables\Devices\Polarized\PolarizedBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GO_Device.Polarizer" Collapsed="true">
+    <Position X="0.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interactables\Devices\Polarized\Polarizer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GO_Device.Waveplate" Collapsed="true">
+    <Position X="2.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Interactables\Devices\Polarized\Waveplate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Profiles.SO_WaveParams" Collapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Profiles\SO_WaveParams.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WaveUtils.ComplexVector2" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAiAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Utilities\Wave\Complex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WaveUtils.ComplexMatrix2X2" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAAAAAiAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Utilities\Wave\Complex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WaveUtils.WaveAlgorithm" Collapsed="true">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAACAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Assets\Scripts\Utilities\Wave\WaveAlgorithm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WaveUtils.WaveParams" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAEAAIAAAAAAAAYAAAAIAAABAAAAwAAAQBQAZCICGA=</HashCode>
+      <FileName>Assets\Scripts\Utilities\Wave\WaveParams.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Interfaces.I_WaveDisplay" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAEAAAAAAAAABAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Utilities\Common\Interfaces.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Interfaces.I_WaveInteract" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAACAAAAAAAAEAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Utilities\Common\Interfaces.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

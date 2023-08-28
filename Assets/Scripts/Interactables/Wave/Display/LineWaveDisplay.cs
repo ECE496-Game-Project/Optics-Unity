@@ -19,6 +19,7 @@ namespace GO_Wave {
         #endregion
 
         #region PRIVRATE VARIABLES
+        private bool _isActive = false;
 #if DEBUG_WAVE
         [Header("DEBUG_WAVE")]
         [SerializeField] private int m_SampleCount;
@@ -32,7 +33,15 @@ namespace GO_Wave {
         #endregion
 
         #region GLOBAL METHOD
+        public void CleanDisplay() {
+            _isActive = false;
+            foreach (LineWaveSample sample in _samplePointList) {
+                sample.DisableDisplay();
+            }
+        }
         public void RefreshDisplay() {
+            _isActive = true;
+
             /*Reposition All Sample Points base on WaveSource*/
             m_SampleCount = Mathf.FloorToInt(_activeWS.Params.EffectDistance / _perSampleSpaceLength);
 
@@ -71,8 +80,12 @@ namespace GO_Wave {
             }
         }
 
-
-#endregion
+        public void SyncRootParam(I_WaveDisplay rootWD) {
+            this._perSampleSpaceLength = ((LineWaveDisplay)rootWD)._perSampleSpaceLength;
+            this._samplePointPrefab = ((LineWaveDisplay)rootWD)._samplePointPrefab;
+            this._timeScale = ((LineWaveDisplay)rootWD)._timeScale;
+        }
+        #endregion
 
         private void Awake() {
             m_SampleCount = 0;
@@ -83,22 +96,15 @@ namespace GO_Wave {
                 DebugLogger.Error(this.name, "GameObject Doesn't contains WaveSource Script, Stop Executing.");
             }
         }
-        public void SyncRootParam(I_WaveDisplay rootWD) {
-            this._perSampleSpaceLength = ((LineWaveDisplay)rootWD)._perSampleSpaceLength;
-            this._samplePointPrefab = ((LineWaveDisplay)rootWD)._samplePointPrefab;
-            this._timeScale = ((LineWaveDisplay)rootWD)._timeScale;
-        }
 
         public void Start() {
             if (_samplePointPrefab == null || _samplePointPrefab.GetComponent<LineWaveSample>() == null) {
                 DebugLogger.Error(this.name, "Prefab does not contains WaveLineSample Script! Stop Executing.");
             }
-
-            RefreshDisplay();
         }
 
         private void Update() {
-            UpdateDisplay();
+            if(_isActive) UpdateDisplay();
         }
     }
 }

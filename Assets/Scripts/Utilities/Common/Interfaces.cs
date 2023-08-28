@@ -2,6 +2,7 @@
 
 namespace Interfaces {
     public interface I_WaveDisplay {
+        public void CleanDisplay();
         public void RefreshDisplay();
         public void UpdateDisplay();
         public void SyncRootParam(I_WaveDisplay srcWD);

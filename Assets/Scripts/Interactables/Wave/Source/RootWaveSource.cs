@@ -16,25 +16,18 @@ namespace GO_Wave {
         /// Only Called if Profile is Set In Inspector
         /// </summary>
         private void Awake() {
-            if (_profile != null) {
-                WaveDisplay = GetComponent<I_WaveDisplay>();
-                if (WaveDisplay == null)
-                    DebugLogger.Error(this.name, "GameObject Does not contain WaveDisplay! Stop Executing.");
-                WaveInteract = GetComponent<I_WaveInteract>();
-                if (WaveInteract == null)
-                    DebugLogger.Error(this.name, "GameObject Does not contain WaveInteract! Stop Executing.");
+            if(_profile == null)
+                DebugLogger.Error(this.name, "RootWave Does not contain WaveProfile! Stop Executing.");
 
-                _params = new WaveParams(_profile.Parameters);
-                RegisterCallback();
-            }
+            _awake(new WaveParams(_profile.Parameters));
         }
 
         /// <summary>
         /// Need Manual Reset Effective Distance since Distance Modified during Interaction.
         /// </summary>
-        public override void ParamDestructCallback() {
+        public override void DestructCallback() {
             Params.EffectDistance = _profile.Parameters.EffectDistance;
-            base.ParamDestructCallback();   
+            base.DestructCallback();   
         }
     }
 }
