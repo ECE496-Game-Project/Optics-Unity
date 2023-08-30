@@ -1,19 +1,42 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Reflection;
 using UnityEngine;
 
 public static class ExtensionMethods 
 {
-    public static void SetValue(this int val, string str)
+    public static Dictionary<Type, MethodInfo> m_extensionMethods;
+
+    public static void Initialize()
     {
-        val = int.Parse(str);
+        Type type = typeof(ExtensionMethods);
+
+        MethodInfo[] methods = type.GetMethods();
+        m_extensionMethods = new Dictionary<Type, MethodInfo>();
+        
+        for (int i = 0; i < methods.Length; i++)
+        {
+            if (!methods[i].Name.Equals("SetValue")) continue;
+
+            ParameterInfo parameters = methods[i].ReturnParameter;
+
+            Type parameterType = parameters.ParameterType;
+            Debug.Log(parameterType);
+
+            m_extensionMethods.Add(parameterType, methods[i]);
+        }
     }
 
-    public static void SetValue(this float val, string str)
+    public static int SetValue(this int val, string str)
+    {
+
+        val =  int.Parse(str);
+        return val;
+    }
+
+    public static float SetValue(this float val, string str)
     {
         val = float.Parse(str);
-
-       
+        return val;
     }
 }

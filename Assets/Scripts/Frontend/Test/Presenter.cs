@@ -12,6 +12,8 @@ namespace Test
         List<FieldInfo> m_fieldInfos = new List<FieldInfo>();
         object m_curObject = null;
 
+        
+
 
         public void Parsing(object o)
         {

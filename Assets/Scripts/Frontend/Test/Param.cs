@@ -47,15 +47,17 @@ namespace Test{
         public void SetValue(string str)
         {
             Type type = m_value.GetType();
-            
-            MethodInfo method = type.GetMethod("SetValue");
+
+            MethodInfo method;
+            ExtensionMethods.m_extensionMethods.TryGetValue(type, out method);
             if (method == null)
             {
                 Debug.LogError($"Type {type} does not have SetValue(string str) function");
                 return;
             }
 
-            method.Invoke(m_value, new object[]{str});
+            
+            m_value = (T) method.Invoke(null, new object[]{m_value, str});
             m_logicEvent?.Invoke(m_value);
         }
     }

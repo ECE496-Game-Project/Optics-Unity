@@ -10,9 +10,12 @@ public class ParamTest : MonoBehaviour
 
     Presenter m_presenter = new Presenter();
 
+    
     // Start is called before the first frame update
     void Start()
     {
+
+        ExtensionMethods.Initialize();
         ParamObject testObj = new ParamObject();
         UnityEvent<int> Uevent = new UnityEvent<int>();
         UnityAction<object> act = (object a) => { Debug.Log(a); };
@@ -23,7 +26,12 @@ public class ParamTest : MonoBehaviour
         testObj.b.Value = 2.0f;
         testObj.c.Value = new Vector3(1, 2, 3);
 
-        m_presenter.ReceiveInfo("2", 0);
+        Debug.Log($"Before: {testObj.b.Value}");
+        
+
+        m_presenter.ReceiveInfo("7", 0);
+        Debug.Log($"After: {testObj.b.Value}");
+
 
         m_presenter.Clear();
         testObj.a = 5;
