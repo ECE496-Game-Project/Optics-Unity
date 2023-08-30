@@ -7,6 +7,8 @@ using UnityEngine.Events;
 
 namespace Test{
 
+
+
     [Serializable]
     public class Param<T> where T: new()
     {
@@ -24,16 +26,22 @@ namespace Test{
         }
 
         [HideInInspector]
-        public UnityEvent<T> m_logicEvent, m_webEvent;
+        public UnityEvent<T> m_logicEvent;
+        public UnityEvent<object> m_webEvent;
 
 
         public Param(T value){
             m_value = value;
+            m_logicEvent = new UnityEvent<T>();
+            m_webEvent = new UnityEvent<object>();
         }
 
         public Param()
         {
+            
             m_value = new T();
+            m_logicEvent = new UnityEvent<T>();
+            m_webEvent = new UnityEvent<object>();
         }
 
         public void SetValue(string str)
