@@ -19,7 +19,7 @@ namespace Test{
             get => m_value;
             set
             {
-                value = m_value;
+                m_value = value;
                 m_logicEvent?.Invoke(value);
                 m_webEvent?.Invoke(value);
             }

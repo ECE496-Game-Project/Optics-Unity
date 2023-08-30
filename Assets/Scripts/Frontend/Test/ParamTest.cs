@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
@@ -9,7 +8,7 @@ using UnityEngine.Events;
 public class ParamTest : MonoBehaviour
 {
 
-    List<UnityAction<object>> m_actionReference = new List<UnityAction<object>>();
+    Presenter m_presenter = new Presenter();
 
     // Start is called before the first frame update
     void Start()
@@ -18,79 +17,29 @@ public class ParamTest : MonoBehaviour
         UnityEvent<int> Uevent = new UnityEvent<int>();
         UnityAction<object> act = (object a) => { Debug.Log(a); };
 
-        Uevent.Invoke(3);
-
-        //Uevent.RemoveListener(act);
-
-        Uevent.Invoke(4);
-
-        Parsing(testObj);
+        m_presenter.Parsing(testObj);
 
         testObj.a = 2;
         testObj.b.Value = 2.0f;
         testObj.c.Value = new Vector3(1, 2, 3);
 
+        m_presenter.ReceiveInfo("2", 0);
+
+        m_presenter.Clear();
+        testObj.a = 5;
+        testObj.b.Value = 3.0f;
+        testObj.c.Value = new Vector3(4, 2, 3);
+
+        ParamObject testObj2 = new ParamObject();
+        m_presenter.Parsing(testObj2);
+
+        testObj2.a = 5;
+        testObj2.b.Value = 3.0f;
+        testObj2.c.Value = new Vector3(4, 2, 4);
+        m_presenter.Clear();
     }
 
-
-    private void Parsing(object o)
-    {
-        if (o == null) return;
-
-        Type type = o.GetType();
-
-        FieldInfo[] myFieldInfo = type.GetFields();
-
-        
-
-        for(int i = 0; i < myFieldInfo.Length; i++)
-        {
-            FieldInfo fi = myFieldInfo[i];
-            Type filedType = fi.FieldType;
-           
-            string typeName = filedType.ToString();
-            object field = fi.GetValue(o);
-
-            // it must be Param<T>
-            if (!typeName.Contains("Param")) continue;
-
-            Type genericArgument = fi.FieldType.GetGenericArguments()[0];
-
-            // create the lambda expression that store in unity Action
-            // redeclare the index variable because lambda expression capture by reference
-            // if we use i, i will never get destroyed and always be the last value of i
-            int temp = i;
-            UnityAction<object> newAction = (object info) => { SendInfo(info, temp); };
-
-            // subscribe the corresponding variable event
-            FieldInfo webEventFI = filedType.GetField("m_webEvent");
-
-            object webEventObj = webEventFI.GetValue(field);
-
-            Type webEventType = webEventFI.FieldType;
-
-            MethodInfo addListenerMethod = webEventType.GetMethod("AddListener");
-
-            // subscribe the event
-            addListenerMethod.Invoke(webEventObj, new object[] { newAction });
-
-            m_actionReference.Add(newAction);
-
-
-
-
-
-
-        }
-    }
-
-    private void SendInfo(object info, int index)
-    {
-        // change the info variable to corresponding string
-
-        // send the string to to the corresponding UI
-        Debug.Log($"{info}: {index}");
-    }
+    
 }
 
 public class ReflectionTest : MonoBehaviour
