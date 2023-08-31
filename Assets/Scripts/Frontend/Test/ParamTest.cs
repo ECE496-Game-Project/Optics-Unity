@@ -102,23 +102,6 @@ public class ReflectionObject
     }
 }
 
-public static class ExtensionMethod
-{
-
-
-    public static void SetValue(this Vector3 vec, string a)
-    {
-        vec = new UnityEngine.Vector3(0, 0, 0);
-
-    }
-    public static void SetValue(this float vec, string a)
-    {
-
-    }
-
-
-}
-
 
 public class ParamObject
 {

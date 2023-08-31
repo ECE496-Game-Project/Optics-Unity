@@ -27,6 +27,8 @@ namespace Test{
 
         [HideInInspector]
         public UnityEvent<T> m_logicEvent;
+
+        [HideInInspector]
         public UnityEvent<object> m_webEvent;
 
 

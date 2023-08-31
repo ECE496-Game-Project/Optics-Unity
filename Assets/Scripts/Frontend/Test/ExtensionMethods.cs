@@ -21,7 +21,6 @@ public static class ExtensionMethods
             ParameterInfo parameters = methods[i].ReturnParameter;
 
             Type parameterType = parameters.ParameterType;
-            Debug.Log(parameterType);
 
             m_extensionMethods.Add(parameterType, methods[i]);
         }
