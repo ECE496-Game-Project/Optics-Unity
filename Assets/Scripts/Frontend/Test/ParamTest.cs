@@ -58,8 +58,6 @@ public class ReflectionTest : MonoBehaviour
     void Start()
     {
         Vector3 a = Vector3.one;
-        a.SetValue("(1,1,1)");
-
         Param<ReflectionObject> test = new Param<ReflectionObject>();
         test.Value = new ReflectionObject();
         Type[] typeArguments = test.GetType().GetGenericArguments();
