@@ -3,6 +3,7 @@ using UnityEngine;
 using CommonUtils;
 using WaveUtils;
 using Interfaces;
+using ObjectPool;
 
 namespace GO_Wave {
     public class LineWaveDisplay : MonoBehaviour, I_WaveDisplay {
@@ -19,6 +20,7 @@ namespace GO_Wave {
         #endregion
 
         #region PRIVRATE VARIABLES
+        private bool _isPause = false;
 #if DEBUG_WAVE
         [Header("DEBUG_WAVE")]
         [SerializeField] private int m_SampleCount;
@@ -32,27 +34,34 @@ namespace GO_Wave {
         #endregion
 
         #region GLOBAL METHOD
+        public void CleanDisplay() {
+            foreach (LineWaveSample sample in _samplePointList) {
+                LineWaveSamplePool.Instance.Pool.Release(sample);
+                //sample.DisableDisplay();
+            }
+            _samplePointList.Clear();
+        }
         public void RefreshDisplay() {
+            _isPause = false;
+
             /*Reposition All Sample Points base on WaveSource*/
             m_SampleCount = Mathf.FloorToInt(_activeWS.Params.EffectDistance / _perSampleSpaceLength);
 
             int diff = m_SampleCount - _samplePointList.Count;
             while(diff > 0) {
-                _samplePointList.Add(
-                    Object.Instantiate(
-                        _samplePointPrefab,
-                        this.transform.position,
-                        Quaternion.LookRotation(this.transform.forward, this.transform.up),
-                        this.transform
-                    ).GetComponent<LineWaveSample>()
-                );
+                LineWaveSample sample = LineWaveSamplePool.Instance.Pool.Get();
+                sample.transform.rotation = Quaternion.LookRotation(this.transform.forward, this.transform.up);
+                sample.transform.parent = this.transform;
+                _samplePointList.Add(sample);
                 diff--;
             }
 
             if (diff == 0) goto RePosEnd;
 
             while(diff < 0) {
-                _samplePointList[_samplePointList.Count + diff].DisableDisplay();
+                _samplePointList[_samplePointList.Count + diff].transform.parent = LineWaveSamplePool.Instance.transform;
+                LineWaveSamplePool.Instance.Pool.Release(_samplePointList[_samplePointList.Count + diff]);
+                _samplePointList.RemoveAt(_samplePointList.Count + diff);
                 diff++;
             }
 
@@ -60,7 +69,6 @@ namespace GO_Wave {
             for (int i = 0; i < m_SampleCount; i++) {
                 _samplePointList[i].name = _samplePointPrefab.name + "[" + i + "]";
                 _samplePointList[i].transform.position = this.transform.position + i * _perSampleSpaceLength * this.transform.forward;
-                _samplePointList[i].EnableDisplay();
             }
         }
 
@@ -71,8 +79,12 @@ namespace GO_Wave {
             }
         }
 
-
-#endregion
+        public void SyncRootParam(I_WaveDisplay rootWD) {
+            this._perSampleSpaceLength = ((LineWaveDisplay)rootWD)._perSampleSpaceLength;
+            this._samplePointPrefab = ((LineWaveDisplay)rootWD)._samplePointPrefab;
+            this._timeScale = ((LineWaveDisplay)rootWD)._timeScale;
+        }
+        #endregion
 
         private void Awake() {
             m_SampleCount = 0;
@@ -83,22 +95,15 @@ namespace GO_Wave {
                 DebugLogger.Error(this.name, "GameObject Doesn't contains WaveSource Script, Stop Executing.");
             }
         }
-        public void SyncRootParam(I_WaveDisplay rootWD) {
-            this._perSampleSpaceLength = ((LineWaveDisplay)rootWD)._perSampleSpaceLength;
-            this._samplePointPrefab = ((LineWaveDisplay)rootWD)._samplePointPrefab;
-            this._timeScale = ((LineWaveDisplay)rootWD)._timeScale;
-        }
 
         public void Start() {
             if (_samplePointPrefab == null || _samplePointPrefab.GetComponent<LineWaveSample>() == null) {
                 DebugLogger.Error(this.name, "Prefab does not contains WaveLineSample Script! Stop Executing.");
             }
-
-            RefreshDisplay();
         }
 
         private void Update() {
-            UpdateDisplay();
+            if(!_isPause) UpdateDisplay();
         }
     }
 }

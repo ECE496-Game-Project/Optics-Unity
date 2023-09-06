@@ -33,19 +33,18 @@ namespace GO_Wave {
             }
         }
 #endregion
-
-        public virtual void ParamNonDestructCallback() {
-            DebugLogger.Warning(this.name, "NonDestructCallback Not Implement yet!!!");
-            //WaveDisplay.RefreshDisplay();
-            //WaveInteract.NonDestructInteract();
-        }
-
-        public virtual void ParamDestructCallback() {
-            WaveInteract.DestructInteract();
+        public virtual void ParamChangeTrigger() {
+            WaveInteract.CleanInteract();
+            WaveInteract.Interact();
             WaveDisplay.RefreshDisplay();
         }
 
-        protected void RegisterCallback() {
+        public void DisableTrigger() {
+            WaveInteract.CleanInteract();
+            WaveDisplay.CleanDisplay();
+        }
+
+        private void RegisterCallback() {
             switch (_params.Type) {
                 case WAVETYPE.PARALLEL:
                     _params.UHat = (in Vector3 r) => { return this.transform.right; };
@@ -62,8 +61,27 @@ namespace GO_Wave {
                     break;
             }
 
-            //_params.EffectDistanceListener = new UnityEvent();
-            _params.DestructableListener.AddListener(ParamDestructCallback);
+            _params.DestructableListener.AddListener(ParamChangeTrigger);
+        }
+
+        /// <summary>
+        /// Script-Generated-WaveSource Requires to Call ManualAwake.
+        /// </summary>
+        /// <param name="srcWP"> Pre initalized WaveParameter.</param>
+        public void _awake(WaveParams srcWP) {
+            WaveDisplay = GetComponent<I_WaveDisplay>();
+            if (WaveDisplay == null)
+                DebugLogger.Error(this.name, "GameObject Does not contain WaveDisplay! Stop Executing.");
+            WaveInteract = GetComponent<I_WaveInteract>();
+            if (WaveInteract == null)
+                DebugLogger.Error(this.name, "GameObject Does not contain WaveInteract! Stop Executing.");
+
+            /*init ActiveWaveParams*/
+            _params = srcWP;
+            RegisterCallback();
+        }
+        public void Start() {
+            ParamChangeTrigger();
         }
     }
 }

@@ -15,6 +15,8 @@ namespace WaveUtils {
 		#region GLOBAL VAR
 		public WAVETYPE Type = WAVETYPE.INVALID;
 
+        public Vector3 _rotation = Vector3.zero;
+        public Vector3 _position = Vector3.zero;
         public del_Vec3ParamVec3Getter UHat = Del_Default.DefaultVec3ParamVec3Getter;
 		public del_Vec3ParamVec3Getter VHat = Del_Default.DefaultVec3ParamVec3Getter;
 		public del_Vec3ParamVec3Getter KHat = Del_Default.DefaultVec3ParamVec3Getter;
@@ -43,49 +45,49 @@ namespace WaveUtils {
             get { return _eox; }
             set {
                 _eox = value;
-                if (!ListenerLock) NondestructableListener?.Invoke();
+                //if (!ListenerLock) DestructableListener?.Invoke();
             }
         }
         public float Eoy {
             get { return _eoy; }
             set {
                 _eoy = value;
-                if (!ListenerLock) NondestructableListener?.Invoke();
+                //if (!ListenerLock) DestructableListener?.Invoke();
             }
         }
         public float W {
             get { return _w; }
             set {
                 _w = value;
-                if (!ListenerLock) NondestructableListener?.Invoke();
+                //if (!ListenerLock) DestructableListener?.Invoke();
             }
         }
         public float K {
             get { return _k; }
             set {
                 _k = value;
-                if (!ListenerLock) NondestructableListener?.Invoke();
+                //if (!ListenerLock) DestructableListener?.Invoke();
             }
         }
         public float N {
             get { return _n; }
             set {
                 _n = value;
-                if (!ListenerLock) NondestructableListener?.Invoke();
+                //if (!ListenerLock) DestructableListener?.Invoke();
             }
         }
         public float Theta {
             get { return _theta; }
             set {
                 _theta = value;
-                if (!ListenerLock) NondestructableListener?.Invoke();
+                //if (!ListenerLock) DestructableListener?.Invoke();
             }
         }
         public float Phi {
             get { return _phi; }
             set {
                 _phi = value;
-                if (!ListenerLock) NondestructableListener?.Invoke();
+                //if (!ListenerLock) DestructableListener?.Invoke();
             }
         }
         public float EffectDistance {
@@ -94,7 +96,7 @@ namespace WaveUtils {
 			}
 			set {
 				_effectDistance = value;
-                if (!ListenerLock) NondestructableListener?.Invoke();
+                //if (!ListenerLock) DestructableListener?.Invoke();
 			}
 		}
         #endregion
@@ -104,14 +106,13 @@ namespace WaveUtils {
         /// Set To True when don't want Listener to Callback.
         /// </summary>
         [HideInInspector] public bool ListenerLock = false;
-        [HideInInspector] public UnityEvent NondestructableListener;
         [HideInInspector] public UnityEvent DestructableListener;
         #endregion
 
         #region CONSTRUCTOR
         public WaveParams() {
-            NondestructableListener = new UnityEvent();
             DestructableListener = new UnityEvent();
+            ListenerLock = false;
         }
         public WaveParams(WaveParams src) {
 			this.Type = src.Type;
@@ -123,9 +124,9 @@ namespace WaveUtils {
 			this._theta = src._theta;
 			this._phi = src._phi;
 
-            NondestructableListener = new UnityEvent();
             DestructableListener = new UnityEvent();
+            ListenerLock = false;
         }
         #endregion
-	}
+    }
 }
