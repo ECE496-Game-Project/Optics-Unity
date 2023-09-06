@@ -10,10 +10,10 @@ namespace ns_Editor {
             RootWaveSource waveSource = (RootWaveSource)target;
 
             if (GUILayout.Button("Clean Callback")) {
-                waveSource.CleanCallback();
+                waveSource.DisableTrigger();
             }
             if (GUILayout.Button("Destructable Callback")) {
-                waveSource.DestructCallback();
+                waveSource.ParamChangeTrigger();
             }
         }
     }

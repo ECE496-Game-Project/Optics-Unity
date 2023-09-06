@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Parameters:
     Type: 1
+    _rotation: {x: 0, y: 0, z: 0}
+    _position: {x: 0, y: 0, z: 0}
     _eox: 10
     _eoy: 10
     _w: 100
@@ -23,9 +25,6 @@ MonoBehaviour:
     _phi: 0
     _effectDistance: 100
     ListenerLock: 0
-    NondestructableListener:
-      m_PersistentCalls:
-        m_Calls: []
     DestructableListener:
       m_PersistentCalls:
         m_Calls: []

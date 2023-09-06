@@ -7,17 +7,17 @@ namespace GO_Wave {
     public class LineWaveSample : MonoBehaviour {
         private GameObject _dispalyModule;
 
-        public bool DisplayStatus() {
-            return _dispalyModule.activeSelf;
-        }
+        //public bool DisplayStatus() {
+        //    return _dispalyModule.activeSelf;
+        //}
 
-        public void DisableDisplay() {
-            _dispalyModule.SetActive(false);
-        }
+        //public void DisableDisplay() {
+        //    _dispalyModule.SetActive(false);
+        //}
 
-        public void EnableDisplay() {
-            _dispalyModule.SetActive(true);
-        }
+        //public void EnableDisplay() {
+        //    _dispalyModule.SetActive(true);
+        //}
 
         public void UpdateEVec(Vector3 vec) {
             this.transform.LookAt((this.transform.position + this.transform.forward), vec);

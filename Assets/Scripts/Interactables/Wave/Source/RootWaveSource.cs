@@ -25,9 +25,9 @@ namespace GO_Wave {
         /// <summary>
         /// Need Manual Reset Effective Distance since Distance Modified during Interaction.
         /// </summary>
-        public override void DestructCallback() {
+        public override void ParamChangeTrigger() {
             Params.EffectDistance = _profile.Parameters.EffectDistance;
-            base.DestructCallback();   
+            base.ParamChangeTrigger();   
         }
     }
 }

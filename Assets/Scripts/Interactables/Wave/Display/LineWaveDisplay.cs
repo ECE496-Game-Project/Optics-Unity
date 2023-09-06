@@ -3,6 +3,7 @@ using UnityEngine;
 using CommonUtils;
 using WaveUtils;
 using Interfaces;
+using ObjectPool;
 
 namespace GO_Wave {
     public class LineWaveDisplay : MonoBehaviour, I_WaveDisplay {
@@ -19,7 +20,7 @@ namespace GO_Wave {
         #endregion
 
         #region PRIVRATE VARIABLES
-        private bool _isActive = false;
+        private bool _isPause = false;
 #if DEBUG_WAVE
         [Header("DEBUG_WAVE")]
         [SerializeField] private int m_SampleCount;
@@ -34,34 +35,33 @@ namespace GO_Wave {
 
         #region GLOBAL METHOD
         public void CleanDisplay() {
-            _isActive = false;
             foreach (LineWaveSample sample in _samplePointList) {
-                sample.DisableDisplay();
+                LineWaveSamplePool.Instance.Pool.Release(sample);
+                //sample.DisableDisplay();
             }
+            _samplePointList.Clear();
         }
         public void RefreshDisplay() {
-            _isActive = true;
+            _isPause = false;
 
             /*Reposition All Sample Points base on WaveSource*/
             m_SampleCount = Mathf.FloorToInt(_activeWS.Params.EffectDistance / _perSampleSpaceLength);
 
             int diff = m_SampleCount - _samplePointList.Count;
             while(diff > 0) {
-                _samplePointList.Add(
-                    Object.Instantiate(
-                        _samplePointPrefab,
-                        this.transform.position,
-                        Quaternion.LookRotation(this.transform.forward, this.transform.up),
-                        this.transform
-                    ).GetComponent<LineWaveSample>()
-                );
+                LineWaveSample sample = LineWaveSamplePool.Instance.Pool.Get();
+                sample.transform.rotation = Quaternion.LookRotation(this.transform.forward, this.transform.up);
+                sample.transform.parent = this.transform;
+                _samplePointList.Add(sample);
                 diff--;
             }
 
             if (diff == 0) goto RePosEnd;
 
             while(diff < 0) {
-                _samplePointList[_samplePointList.Count + diff].DisableDisplay();
+                _samplePointList[_samplePointList.Count + diff].transform.parent = LineWaveSamplePool.Instance.transform;
+                LineWaveSamplePool.Instance.Pool.Release(_samplePointList[_samplePointList.Count + diff]);
+                _samplePointList.RemoveAt(_samplePointList.Count + diff);
                 diff++;
             }
 
@@ -69,7 +69,6 @@ namespace GO_Wave {
             for (int i = 0; i < m_SampleCount; i++) {
                 _samplePointList[i].name = _samplePointPrefab.name + "[" + i + "]";
                 _samplePointList[i].transform.position = this.transform.position + i * _perSampleSpaceLength * this.transform.forward;
-                _samplePointList[i].EnableDisplay();
             }
         }
 
@@ -104,7 +103,7 @@ namespace GO_Wave {
         }
 
         private void Update() {
-            if(_isActive) UpdateDisplay();
+            if(!_isPause) UpdateDisplay();
         }
     }
 }

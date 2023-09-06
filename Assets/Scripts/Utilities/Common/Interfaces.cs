@@ -9,8 +9,7 @@ namespace Interfaces {
     }
     public interface I_WaveInteract {
         public void CleanInteract();
-        public void DestructInteract();
-        public void NonDestructInteract();
+        public void Interact();
         public void SyncRootParam(I_WaveInteract srcWI);
     }
 }

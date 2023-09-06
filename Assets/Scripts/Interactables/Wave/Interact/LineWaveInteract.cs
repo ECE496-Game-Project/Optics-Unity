@@ -27,9 +27,8 @@ namespace GO_Wave {
             _hit_Device = null;
         }
 
-        public void DestructInteract() {
+        public void Interact() {
             /*Interact Device*/
-            CleanInteract();
             if(_activeWS==null)Debug.Break();
             RaycastHit hit;
             if (
@@ -39,10 +38,6 @@ namespace GO_Wave {
                 _hit_Device = hit.collider.gameObject.GetComponent<DeviceBase>();
                 _hit_Device.WaveHit(hit, _activeWS);
             }
-        }
-
-        public void NonDestructInteract() {
-
         }
 
         public void SyncRootParam(I_WaveInteract srcWI) {

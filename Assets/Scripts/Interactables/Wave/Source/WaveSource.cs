@@ -33,12 +33,13 @@ namespace GO_Wave {
             }
         }
 #endregion
-        public virtual void DestructCallback() {
-            WaveInteract.DestructInteract();
+        public virtual void ParamChangeTrigger() {
+            WaveInteract.CleanInteract();
+            WaveInteract.Interact();
             WaveDisplay.RefreshDisplay();
         }
 
-        public void CleanCallback() {
+        public void DisableTrigger() {
             WaveInteract.CleanInteract();
             WaveDisplay.CleanDisplay();
         }
@@ -60,7 +61,7 @@ namespace GO_Wave {
                     break;
             }
 
-            _params.DestructableListener.AddListener(DestructCallback);
+            _params.DestructableListener.AddListener(ParamChangeTrigger);
         }
 
         /// <summary>
@@ -80,7 +81,7 @@ namespace GO_Wave {
             RegisterCallback();
         }
         public void Start() {
-            DestructCallback();
+            ParamChangeTrigger();
         }
     }
 }
