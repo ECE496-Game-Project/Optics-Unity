@@ -13,7 +13,7 @@ namespace WaveUtils {
 	[System.Serializable]
 	public class WaveParams {
 		#region GLOBAL VAR
-		public WAVETYPE Type = WAVETYPE.INVALID;
+		public Parameter<WAVETYPE> Type;
 
         public Vector3 _rotation = Vector3.zero;
         public Vector3 _position = Vector3.zero;
@@ -102,17 +102,17 @@ namespace WaveUtils {
         #endregion
 
         #region CALLBACK
-        /// <summary>
-        /// Set To True when don't want Listener to Callback.
-        /// </summary>
-        [HideInInspector] public bool ListenerLock = false;
-        [HideInInspector] public UnityEvent DestructableListener;
+        ///// <summary>
+        ///// Set To True when don't want Listener to Callback.
+        ///// </summary>
+        [HideInInspector] public UnityEvent VTOMListener;
+        [HideInInspector] public UnityEvent MTOVListener;
         #endregion
 
         #region CONSTRUCTOR
         public WaveParams() {
-            DestructableListener = new UnityEvent();
-            ListenerLock = false;
+            VTOMListener = new UnityEvent();
+            MTOVListener = new UnityEvent();
         }
         public WaveParams(WaveParams src) {
 			this.Type = src.Type;
@@ -124,8 +124,8 @@ namespace WaveUtils {
 			this._theta = src._theta;
 			this._phi = src._phi;
 
-            DestructableListener = new UnityEvent();
-            ListenerLock = false;
+            VTOMListener = new UnityEvent();
+            MTOVListener = new UnityEvent();
         }
         #endregion
     }

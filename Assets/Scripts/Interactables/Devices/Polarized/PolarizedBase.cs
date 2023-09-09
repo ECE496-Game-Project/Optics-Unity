@@ -19,7 +19,7 @@ namespace GO_Device {
 #endif
 
         public override void WaveHit(in RaycastHit hit, WaveSource parentWS) {
-            if (parentWS.Params.Type != WAVETYPE.PARALLEL) {
+            if (parentWS.Params.Type.Value != WAVETYPE.PARALLEL) {
                 DebugLogger.Warning(this.name, "PolarizedDevice only support Parallel Wave! Will not Do anything.");
                 return;
             }
