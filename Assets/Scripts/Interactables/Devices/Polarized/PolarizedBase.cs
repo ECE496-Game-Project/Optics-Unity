@@ -24,14 +24,14 @@ namespace GO_Device {
                 return;
             }
             /*GO Setup*/
-            GameObject new_GO = new GameObject(parentWS.name + "_Child", typeof(WaveSource), typeof(LineWaveDisplay), typeof(LineWaveInteract));
+            GameObject new_GO = new GameObject(parentWS.name + "_Child", typeof(WaveSource), typeof(LineWaveRender), typeof(LineWaveLogic));
             new_GO.transform.position = hit.point + Vector3.Normalize(hit.point - parentWS.transform.position) * _thicknessOffset;
             new_GO.transform.rotation = parentWS.transform.rotation;
 
             /*Wave Source, Display, Interact Setup*/
             WaveSource childWS = new_GO.GetComponent<WaveSource>();
-            LineWaveDisplay lwd = new_GO.GetComponent<LineWaveDisplay>();
-            LineWaveInteract lwi = new_GO.GetComponent<LineWaveInteract>();
+            LineWaveRender lwd = new_GO.GetComponent<LineWaveRender>();
+            LineWaveLogic lwi = new_GO.GetComponent<LineWaveLogic>();
 
             WaveParams new_WSP = new WaveParams(parentWS.Params);
 

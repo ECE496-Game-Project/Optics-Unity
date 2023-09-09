@@ -30,7 +30,7 @@ public class WaveSourcePresenter : MonoBehaviour {
     }
 
     public void SendParamsToWeb() {
-        ReceiveWaveType((int)_activeWS.Params.Type);
+        ReceiveWaveType((int)_activeWS.Params.Type.Value);
         ReceiveParams(_activeWS.Params.Eox, 0);
         ReceiveParams(_activeWS.Params.Eoy, 1);
         ReceiveParams(_activeWS.Params.W, 2);
@@ -48,9 +48,9 @@ public class WaveSourcePresenter : MonoBehaviour {
     {
         if (int.TryParse(value, out int val))
         {
-            if (val == (int)WAVETYPE.INVALID) _activeWS.Params.Type = WAVETYPE.INVALID;
-            if (val == (int)WAVETYPE.PARALLEL) _activeWS.Params.Type = WAVETYPE.PARALLEL;
-            if (val == (int)WAVETYPE.POINT) _activeWS.Params.Type = WAVETYPE.POINT;
+            if (val == (int)WAVETYPE.INVALID) _activeWS.Params.Type.VTOMValue = WAVETYPE.INVALID;
+            if (val == (int)WAVETYPE.PARALLEL) _activeWS.Params.Type.VTOMValue = WAVETYPE.PARALLEL;
+            if (val == (int)WAVETYPE.POINT) _activeWS.Params.Type.VTOMValue = WAVETYPE.POINT;
         }
 
     }

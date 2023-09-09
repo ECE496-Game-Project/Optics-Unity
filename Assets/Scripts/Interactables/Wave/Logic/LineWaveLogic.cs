@@ -4,7 +4,7 @@ using CommonUtils;
 using GO_Device;
 
 namespace GO_Wave {
-    public class LineWaveInteract : MonoBehaviour, I_WaveInteract {
+    public class LineWaveLogic : MonoBehaviour, I_WaveLogic {
 
         #region INSPECTOR SETTINGS
         [SerializeField] private LayerMask _interactMask;
@@ -40,8 +40,8 @@ namespace GO_Wave {
             }
         }
 
-        public void SyncRootParam(I_WaveInteract srcWI) {
-            this._interactMask = ((LineWaveInteract)srcWI)._interactMask;
+        public void SyncRootParam(I_WaveLogic srcWI) {
+            this._interactMask = ((LineWaveLogic)srcWI)._interactMask;
         }
 
         public void Awake() {

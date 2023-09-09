@@ -8,8 +8,8 @@ using Interfaces;
 namespace GO_Wave {
     public class WaveSource : MonoBehaviour {
         #region GLOBAL VARIABLES
-        public I_WaveDisplay WaveDisplay;
-        public I_WaveInteract WaveInteract;
+        public I_WaveRender WaveDisplay;
+        public I_WaveLogic WaveInteract;
         #endregion
 
         #region PRIVATE VARIABLES
@@ -69,10 +69,10 @@ namespace GO_Wave {
         /// </summary>
         /// <param name="srcWP"> Pre initalized WaveParameter.</param>
         public void _awake(WaveParams srcWP) {
-            WaveDisplay = GetComponent<I_WaveDisplay>();
+            WaveDisplay = GetComponent<I_WaveRender>();
             if (WaveDisplay == null)
                 DebugLogger.Error(this.name, "GameObject Does not contain WaveDisplay! Stop Executing.");
-            WaveInteract = GetComponent<I_WaveInteract>();
+            WaveInteract = GetComponent<I_WaveLogic>();
             if (WaveInteract == null)
                 DebugLogger.Error(this.name, "GameObject Does not contain WaveInteract! Stop Executing.");
 
