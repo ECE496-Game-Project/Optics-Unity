@@ -13,119 +13,60 @@ namespace WaveUtils {
 	[System.Serializable]
 	public class WaveParams {
 		#region GLOBAL VAR
-		public Parameter<WAVETYPE> Type;
+		public Param<WAVETYPE> Type;
 
-        public Vector3 _rotation = Vector3.zero;
-        public Vector3 _position = Vector3.zero;
+        //public Vector3 _rotation = Vector3.zero;
+        //public Vector3 _position = Vector3.zero;
         public del_Vec3ParamVec3Getter UHat = Del_Default.DefaultVec3ParamVec3Getter;
 		public del_Vec3ParamVec3Getter VHat = Del_Default.DefaultVec3ParamVec3Getter;
 		public del_Vec3ParamVec3Getter KHat = Del_Default.DefaultVec3ParamVec3Getter;
 
 		[Header("Magnitude Settings")]
-		public float _eox;
-		public float _eoy;
+		public Param<float> Eox;
+		public Param<float> Eoy;
 
 		[Header("Frequency Settings")]
-		public float _w;
-		public float _k;
-		public float _n;
+		public Param<float> W;
+		public Param<float> K;
+		public Param<float> N;
 
 		[Header("Angle Settings in degree")]
 		[Range(0, 360)]
-		public float _theta;
+		public Param<float> Theta;
 		[Range(0, 360)]
-		public float _phi;
+		public Param<float> Phi;
 
 		[Header("Dispersion Distance")]
-		[SerializeField] private float _effectDistance;
-        #endregion
-
-        #region GLOBAL METHOD
-        public float Eox {
-            get { return _eox; }
-            set {
-                _eox = value;
-                //if (!ListenerLock) DestructableListener?.Invoke();
-            }
-        }
-        public float Eoy {
-            get { return _eoy; }
-            set {
-                _eoy = value;
-                //if (!ListenerLock) DestructableListener?.Invoke();
-            }
-        }
-        public float W {
-            get { return _w; }
-            set {
-                _w = value;
-                //if (!ListenerLock) DestructableListener?.Invoke();
-            }
-        }
-        public float K {
-            get { return _k; }
-            set {
-                _k = value;
-                //if (!ListenerLock) DestructableListener?.Invoke();
-            }
-        }
-        public float N {
-            get { return _n; }
-            set {
-                _n = value;
-                //if (!ListenerLock) DestructableListener?.Invoke();
-            }
-        }
-        public float Theta {
-            get { return _theta; }
-            set {
-                _theta = value;
-                //if (!ListenerLock) DestructableListener?.Invoke();
-            }
-        }
-        public float Phi {
-            get { return _phi; }
-            set {
-                _phi = value;
-                //if (!ListenerLock) DestructableListener?.Invoke();
-            }
-        }
-        public float EffectDistance {
-			get {
-				return _effectDistance;
-			}
-			set {
-				_effectDistance = value;
-                //if (!ListenerLock) DestructableListener?.Invoke();
-			}
-		}
-        #endregion
-
-        #region CALLBACK
-        ///// <summary>
-        ///// Set To True when don't want Listener to Callback.
-        ///// </summary>
-        [HideInInspector] public UnityEvent VTOMListener;
-        [HideInInspector] public UnityEvent MTOVListener;
+		public Param<float> EffectDistance;
         #endregion
 
         #region CONSTRUCTOR
         public WaveParams() {
-            VTOMListener = new UnityEvent();
-            MTOVListener = new UnityEvent();
+            Type = new Param<WAVETYPE>();
+            Eox = new Param<float>();
+            Eoy = new Param<float>();
+            W = new Param<float>();
+            K = new Param<float>();
+            N = new Param<float>();
         }
         public WaveParams(WaveParams src) {
-			this.Type = src.Type;
-			this._eox = src._eox;
-			this._eoy = src._eoy;
-			this._w = src._w;
-			this._k = src._k;
-			this._n = src._n;
-			this._theta = src._theta;
-			this._phi = src._phi;
+            Type = new Param<WAVETYPE>();
+            Eox = new Param<float>();
+            Eoy = new Param<float>();
+            W = new Param<float>();
+            K = new Param<float>();
+            N = new Param<float>();
+			EffectDistance = new Param<float>();
 
-            VTOMListener = new UnityEvent();
-            MTOVListener = new UnityEvent();
+			this.Type.Value = src.Type.Value;
+			this.Eox.Value = src.Eox.Value;
+			this.Eoy.Value = src.Eoy.Value;
+			this.W.Value = src.W.Value;
+			this.K.Value = src.K.Value;
+			this.N.Value = src.N.Value;
+			this.Theta.Value = src.Theta.Value;
+			this.Phi.Value = src.Phi.Value;
+			this.EffectDistance.Value = src.EffectDistance.Value;
         }
         #endregion
     }

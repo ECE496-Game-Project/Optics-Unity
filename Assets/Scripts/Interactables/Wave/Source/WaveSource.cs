@@ -15,21 +15,21 @@ namespace GO_Wave {
         #region PRIVATE VARIABLES
 #if DEBUG_WAVE
         [Header("DEBUG_WAVE")]
-        [SerializeField] protected WaveParams _params;
+        [SerializeField] protected WaveParams m_params;
 #else
-        protected WaveParams _params;
+        protected WaveParams m_params;
 #endif
         #endregion
 
         #region GLOBAL METHODS
         public WaveParams Params
         {
-            get { return _params; }
+            get { return m_params; }
             set
             {
-                if (_params != null)
+                if (m_params != null)
                     DebugLogger.Error(this.name, "Re-Initalize WaveParameter! Break.");
-                _params = value;
+                m_params = value;
             }
         }
 #endregion
@@ -45,23 +45,23 @@ namespace GO_Wave {
         }
 
         private void RegisterCallback() {
-            switch (_params.Type.Value) {
+            switch (m_params.Type.Value) {
                 case WAVETYPE.PARALLEL:
-                    _params.UHat = (in Vector3 r) => { return this.transform.right; };
-                    _params.VHat = (in Vector3 r) => { return this.transform.up; };
-                    _params.KHat = (in Vector3 r) => { return this.transform.forward; };
+                    m_params.UHat = (in Vector3 r) => { return this.transform.right; };
+                    m_params.VHat = (in Vector3 r) => { return this.transform.up; };
+                    m_params.KHat = (in Vector3 r) => { return this.transform.forward; };
                     break;
                 case WAVETYPE.POINT:
                     // [TODO][PointWave]: PointWave UVK direction Function
-                    _params.UHat = (in Vector3 r) => { return Vector3.zero; };
-                    _params.VHat = (in Vector3 r) => { return Vector3.zero; };
-                    _params.KHat = (in Vector3 r) => { return Vector3.zero; };
+                    m_params.UHat = (in Vector3 r) => { return Vector3.zero; };
+                    m_params.VHat = (in Vector3 r) => { return Vector3.zero; };
+                    m_params.KHat = (in Vector3 r) => { return Vector3.zero; };
                     break;
                 default:
                     break;
             }
 
-            //_params.VTOMListener.AddListener(ParamChangeTrigger);
+            //m_params.Eox.m_logicEvent.AddListener(ParamChangeTrigger);
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace GO_Wave {
                 DebugLogger.Error(this.name, "GameObject Does not contain WaveInteract! Stop Executing.");
 
             /*init ActiveWaveParams*/
-            _params = srcWP;
+            m_params = srcWP;
             RegisterCallback();
         }
         public void Start() {

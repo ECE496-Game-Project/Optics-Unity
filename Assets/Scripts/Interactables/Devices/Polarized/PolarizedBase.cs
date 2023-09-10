@@ -13,9 +13,9 @@ namespace GO_Device {
 
 #if DEBUG_DEVICE
         [Header("DEBUG_DEVICE")]        
-        [SerializeField] protected Dictionary<WaveSource, WaveSource> _childParentPair;
+        [SerializeField] protected Dictionary<WaveSource, WaveSource> m_childParentPair;
 #else
-        protected Dictionary<WaveSource, WaveSource> _childParentPair;
+        protected Dictionary<WaveSource, WaveSource> m_childParentPair;
 #endif
 
         public override void WaveHit(in RaycastHit hit, WaveSource parentWS) {
@@ -42,26 +42,26 @@ namespace GO_Device {
 
             WaveAlgorithm.JohnsVectorToWave(resVec, new_WSP);
 
-            float tmpDistance = parentWS.Params.EffectDistance;
-            parentWS.Params.EffectDistance = hit.distance;
-            new_WSP.EffectDistance = tmpDistance - hit.distance;
+            float tmpDistance = parentWS.Params.EffectDistance.Value;
+            parentWS.Params.EffectDistance.Value = hit.distance;
+            new_WSP.EffectDistance.Value = tmpDistance - hit.distance;
 
             childWS._awake(new_WSP);
             lwd.SyncRootParam(parentWS.WaveDisplay);
             lwi.SyncRootParam(parentWS.WaveInteract);
 
             /*Store Pair*/
-            _childParentPair.Add(parentWS, childWS);
+            m_childParentPair.Add(parentWS, childWS);
         }
 
         public override void WaveClean(WaveSource parentWS) {
-            _childParentPair[parentWS].WaveInteract.CleanInteract();
-            Destroy(_childParentPair[parentWS].gameObject);
-            _childParentPair.Remove(parentWS);
+            m_childParentPair[parentWS].WaveInteract.CleanInteract();
+            Destroy(m_childParentPair[parentWS].gameObject);
+            m_childParentPair.Remove(parentWS);
         }
 
         public void Awake() {
-            _childParentPair = new Dictionary<WaveSource, WaveSource>();
+            m_childParentPair = new Dictionary<WaveSource, WaveSource>();
         }
     }
 }
