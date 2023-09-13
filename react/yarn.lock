@@ -1485,6 +1485,11 @@
     schema-utils "^3.0.0"
     source-map "^0.7.3"
 
+"@reactunity/previewer@^0.15.0":
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/@reactunity/previewer/-/previewer-0.15.0.tgz#54fa45ccbe69b11965d27998b1f74a8701b5c9b4"
+  integrity sha512-WRpaXE5ZubpFtmyWbicFaO7E0eVmQwiStLeKU1WZJ7APeTkjBOVzTD/CihyhwgySpao6glf4ntRcHM1mduYeJg==
+
 "@reactunity/renderer@^0.16.0":
   version "0.16.0"
   resolved "https://registry.yarnpkg.com/@reactunity/renderer/-/renderer-0.16.0.tgz#9a18c4287ef60d0614ac5853e9336099311b4dda"

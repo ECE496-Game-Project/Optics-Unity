@@ -14,6 +14,7 @@
     "react": "^18.2.0"
   },
   "devDependencies": {
+    "@reactunity/previewer": "^0.15.0",
     "@reactunity/scripts": "^0.16.0",
     "typescript": "^5.2.2"
   }

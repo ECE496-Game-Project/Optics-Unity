@@ -6116,6 +6116,30 @@ ___CSS_LOADER_EXPORT___.locals = {};
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].oneOf[6].use[1]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[0].oneOf[6].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].oneOf[6].use[3]!./src/param_ui.scss":
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Z: () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./node_modules/css-loader/dist/runtime/noSourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, `.panels-container{display:flex;height:100%;width:100%}.panel-container{flex:0 0 auto;background-color:#1a1a1a;color:#fff;border-radius:10px;box-shadow:0 2px 4px rgba(0,0,0,.2);margin:20px;padding:20px;width:100%}.left-rectangle{justify-content:left}.right-rectangle{justify-content:right}.small-rectangle{display:flex;justify-content:space-between;background-color:#1a1a1a;color:#fff;padding:20px;border-radius:10px;box-shadow:0 2px 4px rgba(0,0,0,.2)}.param-label{display:block;margin-bottom:5px}.param-input[type=number],.param-select,.param-input[type=range]{width:100%;padding:5px;margin-bottom:10px;background-color:#272727;color:#fff;border:1px solid #444;border-radius:5px}.param-input[type=range]{width:calc(100% - 12px)}`, ""]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
 /***/ ((module) => {
 
@@ -7457,6 +7481,66 @@ var Renderer = {
 };
 var batchedUpdates = asyncReconciler.batchedUpdates;
 var flushSync = asyncReconciler.flushSync;
+;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js
+function _iterableToArrayLimit(r, l) {
+  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+  if (null != t) {
+    var e,
+      n,
+      i,
+      u,
+      a = [],
+      f = !0,
+      o = !1;
+    try {
+      if (i = (t = t.call(r)).next, 0 === l) {
+        if (Object(t) !== t) return;
+        f = !1;
+      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+    } catch (r) {
+      o = !0, n = r;
+    } finally {
+      try {
+        if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return;
+      } finally {
+        if (o) throw n;
+      }
+    }
+    return a;
+  }
+}
+;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+  return arr2;
+}
+;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/nonIterableRest.js
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+;// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/slicedToArray.js
+
+
+
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
 // EXTERNAL MODULE: ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js
 var injectStylesIntoStyleTag = __webpack_require__("./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 var injectStylesIntoStyleTag_default = /*#__PURE__*/__webpack_require__.n(injectStylesIntoStyleTag);
@@ -7475,9 +7559,9 @@ var insertStyleElement_default = /*#__PURE__*/__webpack_require__.n(insertStyleE
 // EXTERNAL MODULE: ./node_modules/style-loader/dist/runtime/styleTagTransform.js
 var styleTagTransform = __webpack_require__("./node_modules/style-loader/dist/runtime/styleTagTransform.js");
 var styleTagTransform_default = /*#__PURE__*/__webpack_require__.n(styleTagTransform);
-// EXTERNAL MODULE: ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].oneOf[6].use[1]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[0].oneOf[6].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].oneOf[6].use[3]!./src/index.scss
-var cjs_ruleSet_1_rules_0_oneOf_6_use_3_src = __webpack_require__("./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].oneOf[6].use[1]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[0].oneOf[6].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].oneOf[6].use[3]!./src/index.scss");
-;// CONCATENATED MODULE: ./src/index.scss
+// EXTERNAL MODULE: ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].oneOf[6].use[1]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[0].oneOf[6].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].oneOf[6].use[3]!./src/param_ui.scss
+var param_ui = __webpack_require__("./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].oneOf[6].use[1]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[0].oneOf[6].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].oneOf[6].use[3]!./src/param_ui.scss");
+;// CONCATENATED MODULE: ./src/param_ui.scss
 
       
       
@@ -7499,7 +7583,44 @@ options.setAttributes = (setAttributesWithoutAttributes_default());
 options.domAPI = (styleDomAPI_default());
 options.insertStyleElement = (insertStyleElement_default());
 
-var update = injectStylesIntoStyleTag_default()(cjs_ruleSet_1_rules_0_oneOf_6_use_3_src/* default */.Z, options);
+var update = injectStylesIntoStyleTag_default()(param_ui/* default */.Z, options);
+
+
+
+
+       /* harmony default export */ const src_param_ui = (param_ui/* default */.Z && param_ui/* default */.Z.locals ? param_ui/* default */.Z.locals : undefined);
+
+;// CONCATENATED MODULE: ./src/param_ui.tsx
+function Panels(){return/*#__PURE__*/(0,jsx_runtime.jsx)("div",{className:"panels-container right-rectangle",children:/*#__PURE__*/(0,jsx_runtime.jsx)(WaveSourcePanel,{})});}function WaveSourcePanel(){var types={INVALID:0,PARALLEL:1,POINT:2};return/*#__PURE__*/(0,jsx_runtime.jsxs)("div",{className:"panel-container",children:[/*#__PURE__*/(0,jsx_runtime.jsx)(DropdownList,{name:'Type',options:types}),/*#__PURE__*/(0,jsx_runtime.jsx)(InputField,{name:'Eox'}),/*#__PURE__*/(0,jsx_runtime.jsx)(InputField,{name:'Eoy'}),/*#__PURE__*/(0,jsx_runtime.jsx)(InputField,{name:'W'}),/*#__PURE__*/(0,jsx_runtime.jsx)(InputField,{name:'K'}),/*#__PURE__*/(0,jsx_runtime.jsx)(InputField,{name:'N'}),/*#__PURE__*/(0,jsx_runtime.jsx)(Slider,{name:'Theta',min:'0',max:'360'}),/*#__PURE__*/(0,jsx_runtime.jsx)(Slider,{name:'Phi',min:'0',max:'360'}),/*#__PURE__*/(0,jsx_runtime.jsx)(InputField,{name:'Distance'})]});}function InputField(_ref){var name=_ref.name;var _useState=(0,react.useState)(1),_useState2=_slicedToArray(_useState,2),inputValue=_useState2[0],setInputValue=_useState2[1];function handleInputChange(e){var value=e.target.value;setInputValue(value);//sendMessage("WaveLine", "Set" + name + "FromWeb", value);
+}return/*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment,{children:[/*#__PURE__*/(0,jsx_runtime.jsx)("label",{className:"param-label",htmlFor:name,children:name+':'}),/*#__PURE__*/(0,jsx_runtime.jsx)("input",{className:"param-input",type:"number",id:name,value:inputValue,onChange:handleInputChange})]});}function Slider(_ref2){var name=_ref2.name,min=_ref2.min,max=_ref2.max;var _useState3=(0,react.useState)(180),_useState4=_slicedToArray(_useState3,2),inputValue=_useState4[0],setInputValue=_useState4[1];function handleInputChange(e){var value=e.target.value;setInputValue(value);//sendMessage("WaveLine", "Set" + name + "FromWeb", value);
+}return/*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment,{children:[/*#__PURE__*/(0,jsx_runtime.jsxs)("label",{className:"param-label",htmlFor:name,children:[name+":",/*#__PURE__*/(0,jsx_runtime.jsx)("output",{children:inputValue})]}),/*#__PURE__*/(0,jsx_runtime.jsx)("input",{className:"param-input",type:"range",id:name,min:min,max:max,value:inputValue,onChange:handleInputChange})]});}function DropdownList(_ref3){var name=_ref3.name,options=_ref3.options;function handleInputChange(e){// const value = e.target.value;
+//sendMessage("WaveLine", "Set" + name + "FromWeb", value);
+}return/*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment,{children:[/*#__PURE__*/(0,jsx_runtime.jsx)("label",{className:"param-label",htmlFor:name,children:name+':'}),/*#__PURE__*/(0,jsx_runtime.jsx)("select",{className:"param-select",id:name,onChange:handleInputChange})]});}
+// EXTERNAL MODULE: ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].oneOf[6].use[1]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[0].oneOf[6].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].oneOf[6].use[3]!./src/index.scss
+var cjs_ruleSet_1_rules_0_oneOf_6_use_3_src = __webpack_require__("./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].oneOf[6].use[1]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[0].oneOf[6].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].oneOf[6].use[3]!./src/index.scss");
+;// CONCATENATED MODULE: ./src/index.scss
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+var src_options = {};
+
+src_options.styleTagTransform = (styleTagTransform_default());
+src_options.setAttributes = (setAttributesWithoutAttributes_default());
+
+      src_options.insert = insertBySelector_default().bind(null, "head");
+    
+src_options.domAPI = (styleDomAPI_default());
+src_options.insertStyleElement = (insertStyleElement_default());
+
+var src_update = injectStylesIntoStyleTag_default()(cjs_ruleSet_1_rules_0_oneOf_6_use_3_src/* default */.Z, src_options);
 
 
 
@@ -7507,7 +7628,7 @@ var update = injectStylesIntoStyleTag_default()(cjs_ruleSet_1_rules_0_oneOf_6_us
        /* harmony default export */ const src = (cjs_ruleSet_1_rules_0_oneOf_6_use_3_src/* default */.Z && cjs_ruleSet_1_rules_0_oneOf_6_use_3_src/* default */.Z.locals ? cjs_ruleSet_1_rules_0_oneOf_6_use_3_src/* default */.Z.locals : undefined);
 
 ;// CONCATENATED MODULE: ./src/index.tsx
-function App(){return/*#__PURE__*/(0,jsx_runtime.jsx)("div",{children:/*#__PURE__*/(0,jsx_runtime.jsx)("text",{children:"Go to <color=red>src/index.tsx</color> to edit this file"})});}_render(/*#__PURE__*/(0,jsx_runtime.jsx)(App,{}));
+function App(){return/*#__PURE__*/(0,jsx_runtime.jsx)("div",{children:/*#__PURE__*/(0,jsx_runtime.jsx)(Panels,{})});}_render(/*#__PURE__*/(0,jsx_runtime.jsx)(App,{}));
 })();
 
 /******/ })()
