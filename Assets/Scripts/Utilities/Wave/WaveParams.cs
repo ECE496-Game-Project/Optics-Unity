@@ -31,9 +31,9 @@ namespace WaveUtils {
 		public Param<float> N;
 
 		[Header("Angle Settings in degree")]
-		[Range(0, 360)]
+		//[Range(0, 360)]
 		public Param<float> Theta;
-		[Range(0, 360)]
+		//[Range(0, 360)]
 		public Param<float> Phi;
 
 		[Header("Dispersion Distance")]
@@ -48,14 +48,19 @@ namespace WaveUtils {
             W = new Param<float>();
             K = new Param<float>();
             N = new Param<float>();
-        }
-        public WaveParams(WaveParams src) {
+			Theta = new Param<float>();
+            Phi = new Param<float>();
+			EffectDistance = new Param<float>();
+		}
+		public WaveParams(WaveParams src) {
             Type = new Param<WAVETYPE>();
             Eox = new Param<float>();
             Eoy = new Param<float>();
             W = new Param<float>();
             K = new Param<float>();
             N = new Param<float>();
+			Theta = new Param<float>();
+			Phi = new Param<float>();
 			EffectDistance = new Param<float>();
 
 			this.Type.Value = src.Type.Value;
