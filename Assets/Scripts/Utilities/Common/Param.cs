@@ -1,24 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
 using System;
 using UnityEngine.Events;
 
-namespace Test{
-
-
+namespace CommonUtils{
+    [Serializable]
+    public class ParamReadOnly<T> where T : new() {
+        [SerializeField]
+        protected T m_value;
+        public T Value {
+            get => m_value;
+        }
+    }
 
     [Serializable]
-    public class Param<T> where T: new()
+    public class Param<T> : ParamReadOnly<T> where T: new()
     {
-        [SerializeField]
-        private T m_value;
-        public T Value
+        //[SerializeField]
+        //private T m_value;+
+        public new T Value
         {
             get => m_value;
-            set
-            {
+            set => m_value = value;
+        }
+        public T WEValue {
+            set {
+                m_value = value;
+                m_webEvent?.Invoke(value);
+            }
+        }
+        public T LWEValue {
+            set {
                 m_value = value;
                 m_logicEvent?.Invoke(value);
                 m_webEvent?.Invoke(value);
@@ -45,7 +57,10 @@ namespace Test{
             m_logicEvent = new UnityEvent<T>();
             m_webEvent = new UnityEvent<object>();
         }
-
+        /// <summary>
+        /// Replacement of LEValue setter, since JS returned Value requires string cast Type.
+        /// </summary>
+        /// <param name="str"></param>
         public void SetValue(string str)
         {
             Type type = m_value.GetType();
@@ -62,6 +77,10 @@ namespace Test{
             m_value = (T) method.Invoke(null, new object[]{m_value, str});
             m_logicEvent?.Invoke(m_value);
         }
+    }
+
+    public class ParamWithRange<T> : Param<T> where T : new() {
+
     }
 }
 
