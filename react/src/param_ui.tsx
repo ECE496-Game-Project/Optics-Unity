@@ -40,8 +40,12 @@ export function InputField({name}) {
 
   return (
     <>
-      <label className="param-label" htmlFor={name}>{name + ':'}</label>
-      <input className="param-input" type="number" id={name} value={inputValue} onChange={handleInputChange}/>
+      <label className="param-label">
+        {name + ':'}
+      </label>
+      <input className="param-input" type="number" id={name}
+             value={inputValue} onChange={handleInputChange}
+      />
     </>
   )
 }
@@ -52,12 +56,12 @@ export function Slider({name, min, max}) {
   function handleInputChange(e) {
     const value = e.target.value;
     setInputValue(value);
-    //sendMessage("WaveLine", "Set" + name + "FromWeb", value);
+    // sendMessage("WaveLine", "Set" + name + "FromWeb", value);
   }
 
   return (
     <>
-      <label className={"param-label"} htmlFor={name}>
+      <label className={"param-label"}>
         {name + ":"}
         <output>{inputValue}</output>
       </label>
@@ -71,20 +75,22 @@ export function Slider({name, min, max}) {
 export function DropdownList({name, options}) {
   function handleInputChange(e) {
     // const value = e.target.value;
-    //sendMessage("WaveLine", "Set" + name + "FromWeb", value);
+    // sendMessage("WaveLine", "Set" + name + "FromWeb", value);
   }
 
   return (
     <>
-      <label className={"param-label"} htmlFor={name}>{name + ':'}</label>
+      <label className={"param-label"}>
+        {name + ':'}
+      </label>
       <select className={"param-select"} id={name} onChange={handleInputChange}>
-        {/*{*/}
-        {/*  Object.values(options).map((value) => (*/}
-        {/*    <option key={value} value={value}>*/}
-        {/*      {value}*/}
-        {/*    </option>*/}
-        {/*  ))*/}
-        {/*}*/}
+        {
+          // Object.values(options).map((value) => (
+          //   <option key={value} value={value}>
+          //     {value}
+          //   </option>
+          // ))
+        }
       </select>
     </>
   )

@@ -3,9 +3,11 @@ import Panels from "./param_ui";
 import './index.scss';
 
 function App() {
-  return<div>
-          <Panels/>
-        </div>;
+  return(
+    <div>
+      <Panels/>
+    </div>
+  )
 }
 
 render(<App />);

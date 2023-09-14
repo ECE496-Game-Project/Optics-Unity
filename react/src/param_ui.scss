@@ -23,25 +23,14 @@
   justify-content: right;
 }
 
-.small-rectangle {
-  display: flex;
-  justify-content: space-between;
-  background-color: #1a1a1a;
-  color: #ffffff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
 /* Add any additional global styling here */
 .param-label {
   display: block;
   margin-bottom: 5px;
 }
 
-.param-input[type="number"],
 .param-select,
-.param-input[type="range"] {
+.param-input {
   width: 100%;
   padding: 5px;
   margin-bottom: 10px;
