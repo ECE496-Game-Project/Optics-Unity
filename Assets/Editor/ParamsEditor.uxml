@@ -1,6 +1,12 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Editor/ParamsEditor.uss?fileID=7433441132597879392&amp;guid=4831f31d08b5a45d99b811a45c4bc8c2&amp;type=3#ParamsEditor" />
-    <ui:Label text="Wave Source" />
-    <ui:Label text="Stylish Wave" class="custom-label" />
-    <ui:Button text="Play" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+    <ui:Foldout text="Wave Source">
+        <ui:EnumField label="Type" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" value="Center" />
+        <ui:TextField picking-mode="Ignore" label="Eox" value="filler text" />
+        <ui:TextField picking-mode="Ignore" label="Eoy" value="filler text" name="TextField" />
+        <ui:TextField picking-mode="Ignore" label="W" value="filler text" />
+        <ui:Slider picking-mode="Ignore" label="Theta" value="42" high-value="100" />
+        <ui:Slider picking-mode="Ignore" label="Phi" value="42" high-value="100" />
+        <ui:Button text="Play" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+    </ui:Foldout>
 </ui:UXML>
