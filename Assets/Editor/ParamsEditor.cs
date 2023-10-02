@@ -1,11 +1,17 @@
+using System;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class ParamsEditor : EditorWindow
 {
     [SerializeField]
     private VisualTreeAsset m_VisualTreeAsset = default;
+
+    private GameObject[] objList;
+    private ListView listView;
+    private Button refreshBtn;
 
     [MenuItem("Window/UI Toolkit/ParamsEditor")]
     public static void ShowExample()
@@ -16,15 +22,16 @@ public class ParamsEditor : EditorWindow
 
     public void CreateGUI()
     {
-        // Each editor window contains a root VisualElement object
         VisualElement root = rootVisualElement;
+        refreshBtn = root.Q<Button>("Params/unity-content/Refresh");
+        refreshBtn.clicked += OnRefresh;
+        listView = root.Q<ListView>("GOList");
+    }
 
-        // VisualElements objects can contain other VisualElement following a tree hierarchy.
-        VisualElement label = new Label("Hello World! From C#");
-        root.Add(label);
-
-        // Instantiate UXML
-        VisualElement labelFromUXML = m_VisualTreeAsset.Instantiate();
-        root.Add(labelFromUXML);
+    private void OnRefresh()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        objList = scene.GetRootGameObjects();
+        listView.itemsSource = objList;
     }
 }
