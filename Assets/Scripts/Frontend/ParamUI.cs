@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 using GO_Wave;
 using WaveUtils;
 using System.Collections.Generic;
-using System;
+using System.Linq;
 
 public class ParamUI : MonoBehaviour
 {
@@ -19,8 +19,8 @@ public class ParamUI : MonoBehaviour
         "Waveplate",
     };
 
+    private TextField _name;
     private EnumField _type;
-
     private IntegerField[] _E = new IntegerField[2];
     private IntegerField[] _WKN = new IntegerField[3];
     private Slider[] _angle = new Slider[2];
@@ -51,6 +51,7 @@ public class ParamUI : MonoBehaviour
     {
         var uiDocument = GetComponent<UIDocument>();
 
+        _name = uiDocument.rootVisualElement.Q<TextField>("Name");
         _type = uiDocument.rootVisualElement.Q<EnumField>("Type");
 
         _E[0] = uiDocument.rootVisualElement.Q<IntegerField>("Eox");
@@ -66,6 +67,7 @@ public class ParamUI : MonoBehaviour
         _listView = uiDocument.rootVisualElement.Q<ListView>("GOList");
         _listView.makeItem = MakeListItem;
         _listView.bindItem = BindListItem;
+        _listView.selectionChanged += OnSelectItem;
 
         _refreshBtn = uiDocument.rootVisualElement.Q<Button>("Refresh");
     }
@@ -74,8 +76,9 @@ public class ParamUI : MonoBehaviour
 
     #region Model Value
 
-    private void SetUIValues()
+    private void SetWaveSourceUIValues()
     {
+        _name.value = _waveSource.gameObject.name;
         _type.value = _waveSource.Params.Type;
         _E[0].value = (int)_waveSource.Params.Eox;
         _E[1].value = (int)_waveSource.Params.Eoy;
@@ -102,7 +105,6 @@ public class ParamUI : MonoBehaviour
         _angle[1].RegisterCallback<ChangeEvent<float>>(OnPhiChanged);
 
         _refreshBtn.RegisterCallback<ClickEvent>(OnRefresh);
-        //_listView.RegisterCallback<ClickEvent>
     }
 
     private void UnregisterCallbacks()
@@ -164,9 +166,13 @@ public class ParamUI : MonoBehaviour
         label.text = obj.name;
     }
 
-    private void OnSelectItem()
+    private void OnSelectItem(IEnumerable<object> objects)
     {
-
+        foreach (GameObject obj in objects.Cast<GameObject>())
+        {
+            _waveSource = obj.GetComponent<WaveSource>();
+            SetWaveSourceUIValues();
+        }
     } 
 
     #endregion

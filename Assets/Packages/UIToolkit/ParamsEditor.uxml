@@ -4,6 +4,7 @@
         <ui:ListView focusable="true" name="GOList" style="position: relative; align-items: flex-start; width: 30%; height: 100%; background-color: rgba(0, 0, 0, 0.43);" />
         <ui:VisualElement name="Params" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.43); width: 30%; position: relative; flex-direction: column; flex-wrap: nowrap; align-items: stretch; align-self: flex-start; height: 100%; display: flex; overflow: visible; translate: 0 0; transform-origin: left;">
             <ui:Foldout text="Wave Source" name="WaveSource">
+                <ui:TextField picking-mode="Ignore" label="Name" value="leo" name="Name" is-delayed="false" password="false" />
                 <ui:EnumField label="Type" type="WaveUtils.WAVETYPE, Assembly-CSharp" name="Type" />
                 <ui:VisualElement name="E" style="flex-grow: 1; flex-direction: column; justify-content: flex-start; align-self: flex-start;">
                     <ui:IntegerField label="Eox" value="10" name="Eox" />
