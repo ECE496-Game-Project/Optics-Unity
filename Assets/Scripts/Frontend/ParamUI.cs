@@ -3,10 +3,21 @@ using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using GO_Wave;
 using WaveUtils;
+using System.Collections.Generic;
+using System;
 
 public class ParamUI : MonoBehaviour
 {
-    [SerializeField] private WaveSource _waveSource;
+    [SerializeField]
+    private WaveSource _waveSource;
+
+    [SerializeField]
+    private List<string> _componentsToDisplay = new List<string>
+    {
+        "RootWaveSource",
+        "Polarizer",
+        "Waveplate",
+    };
 
     private EnumField _type;
 
@@ -14,7 +25,7 @@ public class ParamUI : MonoBehaviour
     private IntegerField[] _WKN = new IntegerField[3];
     private Slider[] _angle = new Slider[2];
 
-    private GameObject[] _objList;
+    private List<GameObject> _objList = new List<GameObject>();
     private ListView _listView;
     private Button _refreshBtn;
 
@@ -34,7 +45,7 @@ public class ParamUI : MonoBehaviour
 
     #endregion
 
-    #region UI Elements
+    #region UI Elements 
 
     private void InitUIElements()
     {
@@ -53,6 +64,9 @@ public class ParamUI : MonoBehaviour
         _angle[1] = uiDocument.rootVisualElement.Q<Slider>("Phi");
 
         _listView = uiDocument.rootVisualElement.Q<ListView>("GOList");
+        _listView.makeItem = MakeListItem;
+        _listView.bindItem = BindListItem;
+
         _refreshBtn = uiDocument.rootVisualElement.Q<Button>("Refresh");
     }
 
@@ -86,7 +100,9 @@ public class ParamUI : MonoBehaviour
         _WKN[2].RegisterCallback<ChangeEvent<int>>(OnNChanged);
         _angle[0].RegisterCallback<ChangeEvent<float>>(OnThetaChanged);
         _angle[1].RegisterCallback<ChangeEvent<float>>(OnPhiChanged);
+
         _refreshBtn.RegisterCallback<ClickEvent>(OnRefresh);
+        //_listView.RegisterCallback<ClickEvent>
     }
 
     private void UnregisterCallbacks()
@@ -102,12 +118,60 @@ public class ParamUI : MonoBehaviour
         _refreshBtn.UnregisterCallback<ClickEvent>(OnRefresh);
     }
 
+    #region List View
+
     private void OnRefresh(ClickEvent evt)
     {
+        _objList.Clear();
+
         Scene scene = SceneManager.GetActiveScene();
-        _objList = scene.GetRootGameObjects();
+
+        foreach(GameObject obj in scene.GetRootGameObjects())
+        {
+            Component[] components = obj.GetComponents<Component>();
+            bool toKeep = false;
+
+            foreach(Component component in components)
+            {
+                string name = component.GetType().Name;
+                if (_componentsToDisplay.Contains(name))
+                {
+                    toKeep = true;
+                    break;
+                }
+            }
+
+            if (toKeep)
+            {
+                _objList.Add(obj);
+            }
+
+        }
+
         _listView.itemsSource = _objList;
     }
+
+    private VisualElement MakeListItem()
+    {
+        var label = new Label();
+        return label;
+    }
+
+    private void BindListItem(VisualElement ve, int idx)
+    {
+        Label label = ve as Label;
+        var obj = _objList[idx];
+        label.text = obj.name;
+    }
+
+    private void OnSelectItem()
+    {
+
+    } 
+
+    #endregion
+
+    #region Params
 
     private void OnTypeChange(ChangeEvent<WAVETYPE> evt)
     {
@@ -148,6 +212,8 @@ public class ParamUI : MonoBehaviour
     {
         _waveSource.Params.Phi = evt.newValue;
     }
+
+    #endregion
 
     #endregion
 }
