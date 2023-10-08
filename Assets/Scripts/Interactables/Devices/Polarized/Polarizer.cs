@@ -4,7 +4,7 @@ using Complex = System.Numerics.Complex;
 
 namespace GO_Device {
     public class Polarizer : PolarizedBase {
-        [SerializeField] private float _rotDeg;
+        public float _rotDeg;
 
         public override ComplexMatrix2X2 JohnsMatrix {
             get {

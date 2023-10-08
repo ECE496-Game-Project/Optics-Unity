@@ -7,7 +7,7 @@ using CommonUtils;
 namespace GO_Device {
 
     public class PolarizedBase : DeviceBase {
-        [SerializeField] private float _thicknessOffset;
+        public float _thicknessOffset;
 
         public virtual ComplexMatrix2X2 JohnsMatrix { get; }
 

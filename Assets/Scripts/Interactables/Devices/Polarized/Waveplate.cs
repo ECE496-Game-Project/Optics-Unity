@@ -5,8 +5,8 @@ using Complex = System.Numerics.Complex;
 
 namespace GO_Device {
     public class Waveplate : PolarizedBase {
-        [SerializeField] private float _plateDeg;
-        [SerializeField] private float _axisDiffDeg;
+        public float _plateDeg;
+        public float _axisDiffDeg;
 
         public override ComplexMatrix2X2 JohnsMatrix {
             get {
