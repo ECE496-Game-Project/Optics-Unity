@@ -45,7 +45,7 @@ namespace GO_Wave {
             _isPause = false;
 
             /*Reposition All Sample Points base on WaveSource*/
-            m_SampleCount = Mathf.FloorToInt(_activeWS.Params.EffectDistance.Value / _perSampleSpaceLength);
+            m_SampleCount = Mathf.FloorToInt(_activeWS.Params.EffectDistance / _perSampleSpaceLength);
 
             int diff = m_SampleCount - _samplePointList.Count;
             while(diff > 0) {

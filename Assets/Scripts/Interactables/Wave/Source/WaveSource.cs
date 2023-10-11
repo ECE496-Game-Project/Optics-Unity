@@ -45,7 +45,7 @@ namespace GO_Wave {
         }
 
         private void RegisterCallback() {
-            switch (m_params.Type.Value) {
+            switch (m_params.Type) {
                 case WAVETYPE.PARALLEL:
                     m_params.UHat = (in Vector3 r) => { return this.transform.right; };
                     m_params.VHat = (in Vector3 r) => { return this.transform.up; };
