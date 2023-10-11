@@ -13,7 +13,7 @@ namespace WaveUtils {
 	[System.Serializable]
 	public class WaveParams {
 		#region GLOBAL VAR
-		public Param<WAVETYPE> Type;
+		public WAVETYPE Type;
 
         //public Vector3 _rotation = Vector3.zero;
         //public Vector3 _position = Vector3.zero;
@@ -22,56 +22,38 @@ namespace WaveUtils {
 		public del_Vec3ParamVec3Getter KHat = Del_Default.DefaultVec3ParamVec3Getter;
 
 		[Header("Magnitude Settings")]
-		public Param<float> Eox;
-		public Param<float> Eoy;
+		public float Eox;
+		public float Eoy;
 
 		[Header("Frequency Settings")]
-		public Param<float> W;
-		public Param<float> K;
-		public Param<float> N;
+		public float W;
+		public float K;
+		public float N;
 
 		[Header("Angle Settings in degree")]
 		//[Range(0, 360)]
-		public Param<float> Theta;
+		public float Theta;
 		//[Range(0, 360)]
-		public Param<float> Phi;
+		public float Phi;
 
 		[Header("Dispersion Distance")]
-		public Param<float> EffectDistance;
+		public float EffectDistance;
         #endregion
 
         #region CONSTRUCTOR
         public WaveParams() {
-            Type = new Param<WAVETYPE>();
-            Eox = new Param<float>();
-            Eoy = new Param<float>();
-            W = new Param<float>();
-            K = new Param<float>();
-            N = new Param<float>();
-			Theta = new Param<float>();
-            Phi = new Param<float>();
-			EffectDistance = new Param<float>();
+            
 		}
 		public WaveParams(WaveParams src) {
-            Type = new Param<WAVETYPE>();
-            Eox = new Param<float>();
-            Eoy = new Param<float>();
-            W = new Param<float>();
-            K = new Param<float>();
-            N = new Param<float>();
-			Theta = new Param<float>();
-			Phi = new Param<float>();
-			EffectDistance = new Param<float>();
-
-			this.Type.Value = src.Type.Value;
-			this.Eox.Value = src.Eox.Value;
-			this.Eoy.Value = src.Eoy.Value;
-			this.W.Value = src.W.Value;
-			this.K.Value = src.K.Value;
-			this.N.Value = src.N.Value;
-			this.Theta.Value = src.Theta.Value;
-			this.Phi.Value = src.Phi.Value;
-			this.EffectDistance.Value = src.EffectDistance.Value;
+			this.Type = src.Type;
+			this.Eox = src.Eox;
+			this.Eoy = src.Eoy;
+			this.W = src.W;
+			this.K = src.K;
+			this.N = src.N;
+			this.Theta = src.Theta;
+			this.Phi = src.Phi;
+			this.EffectDistance = src.EffectDistance;
         }
         #endregion
     }

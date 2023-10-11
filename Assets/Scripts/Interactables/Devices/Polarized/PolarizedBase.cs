@@ -19,7 +19,7 @@ namespace GO_Device {
 #endif
 
         public override void WaveHit(in RaycastHit hit, WaveSource parentWS) {
-            if (parentWS.Params.Type.Value != WAVETYPE.PARALLEL) {
+            if (parentWS.Params.Type != WAVETYPE.PARALLEL) {
                 DebugLogger.Warning(this.name, "PolarizedDevice only support Parallel Wave! Will not Do anything.");
                 return;
             }
@@ -42,9 +42,9 @@ namespace GO_Device {
 
             WaveAlgorithm.JohnsVectorToWave(resVec, new_WSP);
 
-            float tmpDistance = parentWS.Params.EffectDistance.Value;
-            parentWS.Params.EffectDistance.Value = hit.distance;
-            new_WSP.EffectDistance.Value = tmpDistance - hit.distance;
+            float tmpDistance = parentWS.Params.EffectDistance;
+            parentWS.Params.EffectDistance = hit.distance;
+            new_WSP.EffectDistance = tmpDistance - hit.distance;
 
             childWS._awake(new_WSP);
             lwd.SyncRootParam(parentWS.WaveDisplay);
