@@ -13,54 +13,12 @@ MonoBehaviour:
   m_Name: WaveLine_CirPolarized
   m_EditorClassIdentifier: 
   Parameters:
-    Type:
-      m_value: 1
-      m_logicEvent:
-        m_PersistentCalls:
-          m_Calls: []
-      m_webEvent:
-        m_PersistentCalls:
-          m_Calls: []
-    Eox:
-      m_value: 10
-      m_logicEvent:
-        m_PersistentCalls:
-          m_Calls: []
-      m_webEvent:
-        m_PersistentCalls:
-          m_Calls: []
-    Eoy:
-      m_value: 10
-      m_logicEvent:
-        m_PersistentCalls:
-          m_Calls: []
-      m_webEvent:
-        m_PersistentCalls:
-          m_Calls: []
-    W:
-      m_value: 100
-      m_logicEvent:
-        m_PersistentCalls:
-          m_Calls: []
-      m_webEvent:
-        m_PersistentCalls:
-          m_Calls: []
-    K:
-      m_value: 0.3
-      m_logicEvent:
-        m_PersistentCalls:
-          m_Calls: []
-      m_webEvent:
-        m_PersistentCalls:
-          m_Calls: []
-    N:
-      m_value: 1
-      m_logicEvent:
-        m_PersistentCalls:
-          m_Calls: []
-      m_webEvent:
-        m_PersistentCalls:
-          m_Calls: []
-    _theta: 90
-    _phi: 0
-    _effectDistance: 100
+    Type: 1
+    Eox: 10
+    Eoy: 10
+    W: 100
+    K: 0.3
+    N: 0
+    Theta: 90
+    Phi: 0
+    EffectDistance: 100
