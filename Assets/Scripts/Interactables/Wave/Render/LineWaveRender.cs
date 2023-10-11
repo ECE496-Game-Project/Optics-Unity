@@ -6,7 +6,7 @@ using Interfaces;
 using ObjectPool;
 
 namespace GO_Wave {
-    public class LineWaveDisplay : MonoBehaviour, I_WaveDisplay {
+    public class LineWaveRender : MonoBehaviour, I_WaveRender {
 
         #region INSPECTOR SETTINGS
         [Header("Line Wave Display Settings")]
@@ -45,7 +45,7 @@ namespace GO_Wave {
             _isPause = false;
 
             /*Reposition All Sample Points base on WaveSource*/
-            m_SampleCount = Mathf.FloorToInt(_activeWS.Params.EffectDistance / _perSampleSpaceLength);
+            m_SampleCount = Mathf.FloorToInt(_activeWS.Params.EffectDistance.Value / _perSampleSpaceLength);
 
             int diff = m_SampleCount - _samplePointList.Count;
             while(diff > 0) {
@@ -79,10 +79,10 @@ namespace GO_Wave {
             }
         }
 
-        public void SyncRootParam(I_WaveDisplay rootWD) {
-            this._perSampleSpaceLength = ((LineWaveDisplay)rootWD)._perSampleSpaceLength;
-            this._samplePointPrefab = ((LineWaveDisplay)rootWD)._samplePointPrefab;
-            this._timeScale = ((LineWaveDisplay)rootWD)._timeScale;
+        public void SyncRootParam(I_WaveRender rootWD) {
+            this._perSampleSpaceLength = ((LineWaveRender)rootWD)._perSampleSpaceLength;
+            this._samplePointPrefab = ((LineWaveRender)rootWD)._samplePointPrefab;
+            this._timeScale = ((LineWaveRender)rootWD)._timeScale;
         }
         #endregion
 

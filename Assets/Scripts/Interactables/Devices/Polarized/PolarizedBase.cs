@@ -13,25 +13,25 @@ namespace GO_Device {
 
 #if DEBUG_DEVICE
         [Header("DEBUG_DEVICE")]        
-        [SerializeField] protected Dictionary<WaveSource, WaveSource> _childParentPair;
+        [SerializeField] protected Dictionary<WaveSource, WaveSource> m_childParentPair;
 #else
-        protected Dictionary<WaveSource, WaveSource> _childParentPair;
+        protected Dictionary<WaveSource, WaveSource> m_childParentPair;
 #endif
 
         public override void WaveHit(in RaycastHit hit, WaveSource parentWS) {
-            if (parentWS.Params.Type != WAVETYPE.PARALLEL) {
+            if (parentWS.Params.Type.Value != WAVETYPE.PARALLEL) {
                 DebugLogger.Warning(this.name, "PolarizedDevice only support Parallel Wave! Will not Do anything.");
                 return;
             }
             /*GO Setup*/
-            GameObject new_GO = new GameObject(parentWS.name + "_Child", typeof(WaveSource), typeof(LineWaveDisplay), typeof(LineWaveInteract));
+            GameObject new_GO = new GameObject(parentWS.name + "_Child", typeof(WaveSource), typeof(LineWaveRender), typeof(LineWaveLogic));
             new_GO.transform.position = hit.point + Vector3.Normalize(hit.point - parentWS.transform.position) * _thicknessOffset;
             new_GO.transform.rotation = parentWS.transform.rotation;
 
             /*Wave Source, Display, Interact Setup*/
             WaveSource childWS = new_GO.GetComponent<WaveSource>();
-            LineWaveDisplay lwd = new_GO.GetComponent<LineWaveDisplay>();
-            LineWaveInteract lwi = new_GO.GetComponent<LineWaveInteract>();
+            LineWaveRender lwd = new_GO.GetComponent<LineWaveRender>();
+            LineWaveLogic lwi = new_GO.GetComponent<LineWaveLogic>();
 
             WaveParams new_WSP = new WaveParams(parentWS.Params);
 
@@ -42,26 +42,26 @@ namespace GO_Device {
 
             WaveAlgorithm.JohnsVectorToWave(resVec, new_WSP);
 
-            float tmpDistance = parentWS.Params.EffectDistance;
-            parentWS.Params.EffectDistance = hit.distance;
-            new_WSP.EffectDistance = tmpDistance - hit.distance;
+            float tmpDistance = parentWS.Params.EffectDistance.Value;
+            parentWS.Params.EffectDistance.Value = hit.distance;
+            new_WSP.EffectDistance.Value = tmpDistance - hit.distance;
 
             childWS._awake(new_WSP);
             lwd.SyncRootParam(parentWS.WaveDisplay);
             lwi.SyncRootParam(parentWS.WaveInteract);
 
             /*Store Pair*/
-            _childParentPair.Add(parentWS, childWS);
+            m_childParentPair.Add(parentWS, childWS);
         }
 
         public override void WaveClean(WaveSource parentWS) {
-            _childParentPair[parentWS].WaveInteract.CleanInteract();
-            Destroy(_childParentPair[parentWS].gameObject);
-            _childParentPair.Remove(parentWS);
+            m_childParentPair[parentWS].WaveInteract.CleanInteract();
+            Destroy(m_childParentPair[parentWS].gameObject);
+            m_childParentPair.Remove(parentWS);
         }
 
         public void Awake() {
-            _childParentPair = new Dictionary<WaveSource, WaveSource>();
+            m_childParentPair = new Dictionary<WaveSource, WaveSource>();
         }
     }
 }
