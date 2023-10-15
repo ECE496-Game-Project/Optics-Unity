@@ -1,38 +1,43 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
+using System.Reflection;
+using System;
+
 using CommonUtils;
 using WaveUtils;
-using Profiles;
 using Interfaces;
 
 namespace GO_Wave {
-    public class WaveSource : MonoBehaviour {
+    public class WaveSource : MonoBehaviour, I_ParameterTransfer {
         #region GLOBAL VARIABLES
         public I_WaveRender WaveDisplay;
         public I_WaveLogic WaveInteract;
         #endregion
 
-        #region PRIVATE VARIABLES
+#region PRIVATE VARIABLES
 #if DEBUG_WAVE
         [Header("DEBUG_WAVE")]
         [SerializeField] protected WaveParams m_params;
+        [SerializeField] protected float m_effectDistance;
 #else
         protected WaveParams m_params;
+        protected float m_effectDistance;
 #endif
         #endregion
 
         #region GLOBAL METHODS
-        public WaveParams Params
-        {
+        public WaveParams Params {
             get { return m_params; }
-            set
-            {
+            set {
                 if (m_params != null)
                     DebugLogger.Error(this.name, "Re-Initalize WaveParameter! Break.");
                 m_params = value;
             }
         }
-#endregion
+        public float EffectDistance {
+            get { return m_effectDistance; }
+            set { m_effectDistance = value; }
+        }
+        
         public virtual void ParamChangeTrigger() {
             WaveInteract.CleanInteract();
             WaveInteract.Interact();
@@ -43,6 +48,34 @@ namespace GO_Wave {
             WaveInteract.CleanInteract();
             WaveDisplay.CleanDisplay();
         }
+
+        public bool ParameterSet<T>(string paramName, T value) {
+            if(paramName == "EffectDistance") {
+                EffectDistance = (float)Convert.ToDouble(value);
+                ParamChangeTrigger();
+                return true;
+            }
+            bool res = I_ParameterTransfer.ParameterSetHelper(m_params, paramName, value);
+            if(res) ParamChangeTrigger();
+            return res;
+        }
+        public T ParameterGet<T>(string paramName) {
+            if (paramName == "EffectDistance") {
+                return (T)(object)EffectDistance;
+            }
+            return I_ParameterTransfer.ParameterGetHelper<T>(m_params, paramName);
+        }
+        public void ParameterGetAll(out WAVETYPE type, out float eox, out float eoy, out float w, out float k, out float n, out float theta, out float phi) {
+            type = m_params.Type;
+            eox = m_params.Eox;
+            eoy = m_params.Eoy;
+            w = m_params.W; 
+            k = m_params.K;
+            n = m_params.N;
+            theta = m_params.Theta;
+            phi = m_params.Phi;
+        }
+        #endregion
 
         private void RegisterCallback() {
             switch (m_params.Type) {
@@ -60,8 +93,6 @@ namespace GO_Wave {
                 default:
                     break;
             }
-
-            //m_params.Eox.m_logicEvent.AddListener(ParamChangeTrigger);
         }
 
         /// <summary>
@@ -80,6 +111,7 @@ namespace GO_Wave {
             m_params = srcWP;
             RegisterCallback();
         }
+        
         public void Start() {
             ParamChangeTrigger();
         }

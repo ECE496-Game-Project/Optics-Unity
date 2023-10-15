@@ -32,7 +32,7 @@ namespace GO_Wave {
             if(m_activeWS==null)Debug.Break();
             RaycastHit hit;
             if (
-                Physics.Raycast(transform.position, transform.forward, out hit, m_activeWS.Params.EffectDistance, _interactMask)
+                Physics.Raycast(transform.position, transform.forward, out hit, m_activeWS.EffectDistance, _interactMask)
                 && ((1 << hit.collider.gameObject.layer) & _interactMask) != 0
             ) {
                 m_hit_Device = hit.collider.gameObject.GetComponent<DeviceBase>();

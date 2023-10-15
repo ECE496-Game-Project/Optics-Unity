@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using GO_Wave;
 using WaveUtils;
 using CommonUtils;
+using Interfaces;
+using System;
 
 namespace GO_Device {
 
-    public class PolarizedBase : DeviceBase {
-        public float _thicknessOffset;
-
+    public class PolarizedBase : DeviceBase, I_ParameterTransfer {
+        public float ThicknessOffset;
+        
         public virtual ComplexMatrix2X2 JohnsMatrix { get; }
 
 #if DEBUG_DEVICE
@@ -17,15 +19,27 @@ namespace GO_Device {
 #else
         protected Dictionary<WaveSource, WaveSource> m_childParentPair;
 #endif
-
+        public virtual bool ParameterSet<T>(string paramName, T value) {
+            if (paramName == "ThicknessOffset") {
+                ThicknessOffset = (float)Convert.ToDouble(value);
+                return true;
+            }
+            return false;
+        }
+        public virtual T ParameterGet<T>(string paramName) {
+            if (paramName == "ThicknessOffset") {
+                return (T)(object)ThicknessOffset;
+            }
+            return default(T);
+        }
         public override void WaveHit(in RaycastHit hit, WaveSource parentWS) {
-            if (parentWS.Params.Type != WAVETYPE.PARALLEL) {
+            if (parentWS.ParameterGet<WAVETYPE>("Type") != WAVETYPE.PARALLEL) {
                 DebugLogger.Warning(this.name, "PolarizedDevice only support Parallel Wave! Will not Do anything.");
                 return;
             }
             /*GO Setup*/
             GameObject new_GO = new GameObject(parentWS.name + "_Child", typeof(WaveSource), typeof(LineWaveRender), typeof(LineWaveLogic));
-            new_GO.transform.position = hit.point + Vector3.Normalize(hit.point - parentWS.transform.position) * _thicknessOffset;
+            new_GO.transform.position = hit.point + Vector3.Normalize(hit.point - parentWS.transform.position) * ThicknessOffset;
             new_GO.transform.rotation = parentWS.transform.rotation;
 
             /*Wave Source, Display, Interact Setup*/
@@ -33,20 +47,39 @@ namespace GO_Device {
             LineWaveRender lwd = new_GO.GetComponent<LineWaveRender>();
             LineWaveLogic lwi = new_GO.GetComponent<LineWaveLogic>();
 
-            WaveParams new_WSP = new WaveParams(parentWS.Params);
+            ComplexVector2 resVec;
+            WAVETYPE parType;
+            float parEox, parEoy, parW, parK, parN, parTheta, parPhi;
+            float resEox, resEoy, resTheta;
+            parentWS.ParameterGetAll(out parType, out parEox, out parEoy, out parW, out parK, out parN, out parTheta, out parPhi);
 
-            ComplexVector2 resVec = new ComplexVector2();
+            WaveAlgorithm.WaveToJohnsVector(
+                parEox,
+                parEoy,
+                parTheta, 
+                out resVec
+            );
 
-            WaveAlgorithm.WaveToJohnsVector(parentWS.Params, resVec);
             resVec = JohnsMatrix * resVec;
 
-            WaveAlgorithm.JohnsVectorToWave(resVec, new_WSP);
+            WaveAlgorithm.JohnsVectorToWave(
+                resVec,
+                out resEox,
+                out resEoy,
+                out resTheta
+                );
 
-            float tmpDistance = parentWS.Params.EffectDistance;
-            parentWS.Params.EffectDistance = hit.distance;
-            new_WSP.EffectDistance = tmpDistance - hit.distance;
+            float tmpDistance = parentWS.EffectDistance;
+            parentWS.EffectDistance = hit.distance;
+            childWS.EffectDistance = tmpDistance - hit.distance;
 
-            childWS._awake(new_WSP);
+            childWS._awake(
+                new WaveParams(
+                    parType, resEox, resEoy,
+                    parW, parK, parN,
+                    resTheta, parPhi
+                )
+            );
             lwd.SyncRootParam(parentWS.WaveDisplay);
             lwi.SyncRootParam(parentWS.WaveInteract);
 

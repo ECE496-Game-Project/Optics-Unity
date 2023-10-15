@@ -15,8 +15,6 @@ namespace WaveUtils {
 		#region GLOBAL VAR
 		public WAVETYPE Type;
 
-        //public Vector3 _rotation = Vector3.zero;
-        //public Vector3 _position = Vector3.zero;
         public del_Vec3ParamVec3Getter UHat = Del_Default.DefaultVec3ParamVec3Getter;
 		public del_Vec3ParamVec3Getter VHat = Del_Default.DefaultVec3ParamVec3Getter;
 		public del_Vec3ParamVec3Getter KHat = Del_Default.DefaultVec3ParamVec3Getter;
@@ -31,18 +29,25 @@ namespace WaveUtils {
 		public float N;
 
 		[Header("Angle Settings in degree")]
-		//[Range(0, 360)]
-		public float Theta;
-		//[Range(0, 360)]
+		[Range(0, 360)]
+        public float Theta;
+		[Range(0, 360)]
 		public float Phi;
 
 		[Header("Dispersion Distance")]
-		public float EffectDistance;
+		public float RODistance;
         #endregion
 
         #region CONSTRUCTOR
-        public WaveParams() {
-            
+        public WaveParams(WAVETYPE type, float eox, float eoy, float w, float k, float n, float theta, float phi) {
+			this.Type = type;
+			this.Eox = eox;
+			this.Eoy = eoy;
+			this.W = w;
+			this.K = k;
+			this.N = n;
+			this.Theta = theta;
+			this.Phi = phi;
 		}
 		public WaveParams(WaveParams src) {
 			this.Type = src.Type;
@@ -53,7 +58,6 @@ namespace WaveUtils {
 			this.N = src.N;
 			this.Theta = src.Theta;
 			this.Phi = src.Phi;
-			this.EffectDistance = src.EffectDistance;
         }
         #endregion
     }

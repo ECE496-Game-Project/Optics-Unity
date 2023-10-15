@@ -98,7 +98,7 @@ public class ParamUI : MonoBehaviour
     {
         _name.value = _waveSource.gameObject.name;
         _type.value = _waveSource.Params.Type;
-        _E[0].value = (int)_waveSource.Params.Eox;
+        _E[0].value = (int)_waveSource.ParameterGet<float>("Eox");
         _E[1].value = (int)_waveSource.Params.Eoy;
         _WKN[0].value = (int)_waveSource.Params.W;
         _WKN[1].value = (int)_waveSource.Params.K;
@@ -109,15 +109,15 @@ public class ParamUI : MonoBehaviour
 
     private void SetPolarizerUIValues()
     {
-        _polarizerFields[0].value = (int)_polarizer._thicknessOffset;
-        _polarizerFields[1].value = (int)_polarizer._rotDeg;
+        _polarizerFields[0].value = (int)_polarizer.ThicknessOffset;
+        _polarizerFields[1].value = (int)_polarizer.RotDeg;
     }
 
     private void SetWaveplateUIValues()
     {
-        _waveplateFields[0].value = (int)_waveplate._thicknessOffset;
-        _waveplateFields[1].value = (int)_waveplate._plateDeg;
-        _waveplateFields[2].value = (int)_waveplate._axisDiffDeg;
+        _waveplateFields[0].value = (int)_waveplate.ThicknessOffset;
+        _waveplateFields[1].value = (int)_waveplate.PlateDeg;
+        _waveplateFields[2].value = (int)_waveplate.AxisDiffDeg;
     }
 
     #endregion
@@ -263,27 +263,28 @@ public class ParamUI : MonoBehaviour
 
     private void OnEoxChanged(ChangeEvent<int> evt)
     {
-        _waveSource.Params.Eox = evt.newValue;
+        //_waveSource.Params.Eox = evt.newValue;
+        _waveSource.ParameterSet<int>("Eox", evt.newValue);
     }
 
     private void OnEoyChanged(ChangeEvent<int> evt)
     {
-        _waveSource.Params.Eox = evt.newValue;
+        _waveSource.Params.Eoy = evt.newValue;
     }
 
     private void OnWChanged(ChangeEvent<int> evt)
     {
-        _waveSource.Params.Eox = evt.newValue;
+        _waveSource.Params.W = evt.newValue;
     }
 
     private void OnKChanged(ChangeEvent<int> evt)
     {
-        _waveSource.Params.Eox = evt.newValue;
+        _waveSource.Params.K = evt.newValue;
     }
 
     private void OnNChanged(ChangeEvent<int> evt)
     {
-        _waveSource.Params.Eox = evt.newValue;
+        _waveSource.Params.N = evt.newValue;
     }
 
     private void OnThetaChanged(ChangeEvent<float> evt)
@@ -302,12 +303,13 @@ public class ParamUI : MonoBehaviour
 
     private void OnRotDegChanged(ChangeEvent<int> evt)
     {
-        _polarizer._rotDeg = evt.newValue;
+        //_polarizer.RotDeg = evt.newValue;
+        _polarizer.ParameterSet<int>("RotDeg", evt.newValue);
     }
 
     private void OnThicknessChanged(ChangeEvent<int> evt)
     {
-        _polarizer._thicknessOffset = evt.newValue;
+        _polarizer.ThicknessOffset = evt.newValue;
     }
 
     #endregion
@@ -316,12 +318,12 @@ public class ParamUI : MonoBehaviour
 
     private void OnAxisDiffChanged(ChangeEvent<int> evt)
     {
-        _waveplate._axisDiffDeg = evt.newValue;
+        _waveplate.AxisDiffDeg = evt.newValue;
     }
 
     private void OnPlateDegChanged(ChangeEvent<int> evt)
     {
-        _waveplate._plateDeg = evt.newValue;
+        _waveplate.PlateDeg = evt.newValue;
     }
 
     #endregion
