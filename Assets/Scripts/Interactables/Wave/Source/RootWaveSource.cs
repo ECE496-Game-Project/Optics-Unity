@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 using CommonUtils;
 using WaveUtils;
 using Profiles;
-using Interfaces;
-using System.Runtime.InteropServices;
 
 namespace GO_Wave {
     public class RootWaveSource : WaveSource {
@@ -26,8 +23,8 @@ namespace GO_Wave {
         /// Need Manual Reset Effective Distance since Distance Modified during Interaction.
         /// </summary>
         public override void ParamChangeTrigger() {
-            Params.EffectDistance = _profile.Parameters.EffectDistance;
-            base.ParamChangeTrigger();   
+            EffectDistance = _profile.Parameters.RODistance;
+            base.ParamChangeTrigger();
         }
     }
 }

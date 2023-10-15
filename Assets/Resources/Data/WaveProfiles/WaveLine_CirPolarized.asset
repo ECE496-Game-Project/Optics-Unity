@@ -18,7 +18,7 @@ MonoBehaviour:
     Eoy: 10
     W: 100
     K: 0.3
-    N: 0
+    N: 1
     Theta: 90
     Phi: 0
-    EffectDistance: 100
+    RODistance: 100

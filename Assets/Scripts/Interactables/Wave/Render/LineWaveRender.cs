@@ -35,9 +35,10 @@ namespace GO_Wave {
 
         #region GLOBAL METHOD
         public void CleanDisplay() {
+            m_SampleCount = 0;
+
             foreach (LineWaveSample sample in _samplePointList) {
                 LineWaveSamplePool.Instance.Pool.Release(sample);
-                //sample.DisableDisplay();
             }
             _samplePointList.Clear();
         }
@@ -45,7 +46,7 @@ namespace GO_Wave {
             _isPause = false;
 
             /*Reposition All Sample Points base on WaveSource*/
-            m_SampleCount = Mathf.FloorToInt(_activeWS.Params.EffectDistance / _perSampleSpaceLength);
+            m_SampleCount = Mathf.FloorToInt(_activeWS.EffectDistance / _perSampleSpaceLength);
 
             int diff = m_SampleCount - _samplePointList.Count;
             while(diff > 0) {
@@ -74,7 +75,14 @@ namespace GO_Wave {
 
         public void UpdateDisplay() {
             for (int i = 0; i < m_SampleCount; i++) {
-                Vector3 vec = WaveAlgorithm.CalcIrradiance(_samplePointList[i].transform.position - this.transform.position, Time.time * _timeScale, _activeWS.Params);
+                Vector3 vec = WaveAlgorithm.CalcIrradiance(
+                    _samplePointList[i].transform.position - this.transform.position, 
+                    Time.time * _timeScale,
+                    _activeWS.Params.Eox, _activeWS.Params.Eoy,
+                    _activeWS.Params.W, _activeWS.Params.K, _activeWS.Params.N,
+                    _activeWS.Params.Theta, _activeWS.Params.Phi,
+                    _activeWS.Params.UHat, _activeWS.Params.VHat, _activeWS.Params.KHat
+                );
                 _samplePointList[i].UpdateEVec(vec);
             }
         }
