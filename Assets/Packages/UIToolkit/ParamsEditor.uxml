@@ -1,18 +1,18 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Packages/UIToolkit/ParamsEditor.uss?fileID=7433441132597879392&amp;guid=4831f31d08b5a45d99b811a45c4bc8c2&amp;type=3#ParamsEditor" />
     <ui:VisualElement name="container" style="flex-grow: 1; flex-direction: row; width: 40%;">
-        <ui:ListView focusable="true" name="GOList" style="position: relative; align-items: flex-start; width: 30%; height: 100%; background-color: rgba(0, 0, 0, 0.43);" />
+        <ui:ListView focusable="true" name="GOList" class="param-label" style="position: relative; align-items: flex-start; width: 30%; height: 100%; background-color: rgba(0, 0, 0, 0.43);" />
         <ui:VisualElement name="Params" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.43); width: 30%; position: relative; flex-direction: column; flex-wrap: nowrap; align-items: stretch; align-self: flex-start; height: 100%; display: flex; overflow: visible; translate: 0 0; transform-origin: left;">
-            <ui:Foldout text="Polarizer" name="Polarizer" style="display: none;">
+            <ui:Foldout text="Polarizer" name="Polarizer" class="param-label" style="display: none;">
                 <ui:IntegerField label="Thickness" value="1" readonly="false" name="ThicknessP" />
                 <ui:IntegerField label="Rotation Degree" value="180" readonly="false" name="RotDeg" />
             </ui:Foldout>
-            <ui:Foldout text="Waveplate" name="Waveplate" style="display: none;">
+            <ui:Foldout text="Waveplate" name="Waveplate" class="param-label" style="display: none;">
                 <ui:IntegerField label="Thickness" value="1" readonly="false" name="ThicknessW" />
                 <ui:IntegerField label="Plate Degree" value="180" readonly="false" name="PlateDeg" />
                 <ui:IntegerField label="Axis Diff Degree" value="90" readonly="false" name="AxisDiff" />
             </ui:Foldout>
-            <ui:Foldout text="Wave Source" name="WaveSource" style="display: flex; visibility: visible;">
+            <ui:Foldout text="Wave Source" name="WaveSource" class="param-label" style="display: flex; visibility: visible;">
                 <ui:TextField picking-mode="Ignore" label="Name" value="leo" name="Name" is-delayed="false" password="false" />
                 <ui:EnumField label="Type" type="WaveUtils.WAVETYPE, Assembly-CSharp" name="Type" />
                 <ui:VisualElement name="E" style="flex-grow: 1; flex-direction: column; justify-content: flex-start; align-self: flex-start;">
