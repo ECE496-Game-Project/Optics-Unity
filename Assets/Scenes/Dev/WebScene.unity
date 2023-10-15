@@ -198,8 +198,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8535428568456889454, guid: fbf046120f7b1d24791c57a6705eb07c,
         type: 3}
+      propertyPath: PlateDeg
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8535428568456889454, guid: fbf046120f7b1d24791c57a6705eb07c,
+        type: 3}
       propertyPath: _plateDeg
       value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8535428568456889454, guid: fbf046120f7b1d24791c57a6705eb07c,
+        type: 3}
+      propertyPath: AxisDiffDeg
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 8535428568456889454, guid: fbf046120f7b1d24791c57a6705eb07c,
         type: 3}
@@ -404,8 +414,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8535428568456889454, guid: fbf046120f7b1d24791c57a6705eb07c,
         type: 3}
+      propertyPath: PlateDeg
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8535428568456889454, guid: fbf046120f7b1d24791c57a6705eb07c,
+        type: 3}
       propertyPath: _plateDeg
       value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8535428568456889454, guid: fbf046120f7b1d24791c57a6705eb07c,
+        type: 3}
+      propertyPath: AxisDiffDeg
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 8535428568456889454, guid: fbf046120f7b1d24791c57a6705eb07c,
         type: 3}
@@ -460,6 +480,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Polarizer2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237302342889919739, guid: 41d44d652ec2ac645a757149e46cfefb,
+        type: 3}
+      propertyPath: RotDeg
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 5237302342889919739, guid: 41d44d652ec2ac645a757149e46cfefb,
         type: 3}
@@ -669,6 +694,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5237302342889919739, guid: 41d44d652ec2ac645a757149e46cfefb,
         type: 3}
+      propertyPath: RotDeg
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237302342889919739, guid: 41d44d652ec2ac645a757149e46cfefb,
+        type: 3}
       propertyPath: _rotDeg
       value: 240
       objectReference: {fileID: 0}
@@ -792,6 +822,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Polarizer3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237302342889919739, guid: 41d44d652ec2ac645a757149e46cfefb,
+        type: 3}
+      propertyPath: RotDeg
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 5237302342889919739, guid: 41d44d652ec2ac645a757149e46cfefb,
         type: 3}
@@ -1079,8 +1114,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8535428568456889454, guid: fbf046120f7b1d24791c57a6705eb07c,
         type: 3}
+      propertyPath: PlateDeg
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8535428568456889454, guid: fbf046120f7b1d24791c57a6705eb07c,
+        type: 3}
       propertyPath: _plateDeg
       value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8535428568456889454, guid: fbf046120f7b1d24791c57a6705eb07c,
+        type: 3}
+      propertyPath: AxisDiffDeg
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 8535428568456889454, guid: fbf046120f7b1d24791c57a6705eb07c,
         type: 3}
@@ -1235,8 +1280,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8535428568456889454, guid: fbf046120f7b1d24791c57a6705eb07c,
         type: 3}
+      propertyPath: PlateDeg
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8535428568456889454, guid: fbf046120f7b1d24791c57a6705eb07c,
+        type: 3}
       propertyPath: _plateDeg
       value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8535428568456889454, guid: fbf046120f7b1d24791c57a6705eb07c,
+        type: 3}
+      propertyPath: AxisDiffDeg
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 8535428568456889454, guid: fbf046120f7b1d24791c57a6705eb07c,
         type: 3}
@@ -1440,6 +1495,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Polarizer1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237302342889919739, guid: 41d44d652ec2ac645a757149e46cfefb,
+        type: 3}
+      propertyPath: RotDeg
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5237302342889919739, guid: 41d44d652ec2ac645a757149e46cfefb,
         type: 3}

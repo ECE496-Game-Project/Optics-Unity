@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Parameters:
     Type: 1
-    Eox: 6.66
+    Eox: 10
     Eoy: 10
     W: 100
     K: 0.3
