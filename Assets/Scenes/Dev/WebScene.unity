@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465788, g: 0.49641287, b: 0.5748173, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -135,6 +135,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Waveplate4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237302342889919736, guid: fbf046120f7b1d24791c57a6705eb07c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5237302342889919751, guid: fbf046120f7b1d24791c57a6705eb07c,
         type: 3}
@@ -336,6 +341,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Waveplate2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237302342889919736, guid: fbf046120f7b1d24791c57a6705eb07c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5237302342889919751, guid: fbf046120f7b1d24791c57a6705eb07c,
         type: 3}
@@ -609,7 +619,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734fcf633f9484b25bd27d5a37f9c0ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waveSource: {fileID: 1784636216}
+  _componentsToDisplay:
+  - RootWaveSource
+  - Polarizer
+  - Waveplate
 --- !u!1 &1137722187
 GameObject:
   m_ObjectHideFlags: 0
@@ -981,6 +994,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaveplateWave
       objectReference: {fileID: 0}
+    - target: {fileID: 467164277421919784, guid: 530e718f8a5e10248bfa147bc2973c57,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -998,6 +1016,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Waveplate1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237302342889919736, guid: fbf046120f7b1d24791c57a6705eb07c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5237302342889919751, guid: fbf046120f7b1d24791c57a6705eb07c,
         type: 3}
@@ -1150,6 +1173,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Waveplate3
       objectReference: {fileID: 0}
+    - target: {fileID: 5237302342889919736, guid: fbf046120f7b1d24791c57a6705eb07c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5237302342889919751, guid: fbf046120f7b1d24791c57a6705eb07c,
         type: 3}
       propertyPath: m_RootOrder
@@ -1220,18 +1248,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fbf046120f7b1d24791c57a6705eb07c, type: 3}
---- !u!114 &1784636216 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 467164277421919783, guid: 530e718f8a5e10248bfa147bc2973c57,
-    type: 3}
-  m_PrefabInstance: {fileID: 1380371469}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa805d578cd6bd747a4062822164b28d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1796758690
 GameObject:
   m_ObjectHideFlags: 0
