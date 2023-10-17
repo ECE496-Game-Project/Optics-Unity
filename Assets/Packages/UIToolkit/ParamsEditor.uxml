@@ -21,8 +21,8 @@
                 </ui:VisualElement>
                 <ui:VisualElement name="WKN" style="flex-grow: 1; flex-direction: column; justify-content: flex-start; align-self: flex-start;">
                     <ui:FloatField label="Angular Frequency" value="100" name="W" />
-                    <ui:FloatField label="K" value="0" name="K" />
-                    <ui:FloatField label="N" value="0" name="N" />
+                    <ui:FloatField label="Spatial Frequency" value="0" name="K" />
+                    <ui:FloatField label="Refractive Index" value="0" name="N" />
                 </ui:VisualElement>
                 <ui:Slider picking-mode="Ignore" label="Theta" value="180" high-value="360" name="Theta" />
                 <ui:Slider picking-mode="Ignore" label="Phi" value="180" high-value="360" name="Phi" />
