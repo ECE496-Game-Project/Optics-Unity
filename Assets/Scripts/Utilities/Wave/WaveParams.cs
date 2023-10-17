@@ -5,10 +5,10 @@ using CommonUtils;
 
 namespace WaveUtils {
 	public enum WAVETYPE {
-		INVALID = 0,
-		PARALLEL = 1,
-		POINT = 2,
-	}
+		PLANE = 1,
+		SPHERE = 2,
+        INVALID = 0,
+    }
 
 	[System.Serializable]
 	public class WaveParams {
