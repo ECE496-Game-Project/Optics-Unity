@@ -79,12 +79,12 @@ namespace GO_Wave {
 
         private void RegisterCallback() {
             switch (m_params.Type) {
-                case WAVETYPE.PARALLEL:
+                case WAVETYPE.PLANE:
                     m_params.UHat = (in Vector3 r) => { return this.transform.right; };
                     m_params.VHat = (in Vector3 r) => { return this.transform.up; };
                     m_params.KHat = (in Vector3 r) => { return this.transform.forward; };
                     break;
-                case WAVETYPE.POINT:
+                case WAVETYPE.SPHERE:
                     // [TODO][PointWave]: PointWave UVK direction Function
                     m_params.UHat = (in Vector3 r) => { return Vector3.zero; };
                     m_params.VHat = (in Vector3 r) => { return Vector3.zero; };
