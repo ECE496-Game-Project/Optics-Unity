@@ -6,8 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 
 using GO_Device;
+
 using GO_Wave;
 using WaveUtils;
+
+using UnityEngine.Assertions;
+using System;
 
 public class ParamUI : MonoBehaviour
 {
@@ -41,6 +45,10 @@ public class ParamUI : MonoBehaviour
     private ListView _listView;
     private Button _refreshBtn;
 
+
+
+    //##########################################UI Highlight Controller##########################################
+    private UIHighlightController m_highlightController;
     #region Life Cycle
 
     private void OnEnable()
@@ -48,11 +56,15 @@ public class ParamUI : MonoBehaviour
         InitUIElements();
         RegisterCallbacks();
         ClearParamsUI();
+        m_highlightController = GetComponent<UIHighlightController>();
+        Assert.IsNotNull(m_highlightController);
     }
 
     private void OnDisable()
     {
         UnregisterCallbacks();
+        m_highlightController.UnhighlightObject();
+        
     }
 
     #endregion
@@ -213,6 +225,7 @@ public class ParamUI : MonoBehaviour
     private void OnSelectItem(IEnumerable<object> objects)
     {
         ClearParamsUI();
+        m_highlightController.UnhighlightObject();
 
         foreach (GameObject obj in objects.Cast<GameObject>())
         {
@@ -222,16 +235,19 @@ public class ParamUI : MonoBehaviour
                     _waveSource = obj.GetComponent<WaveSource>();
                     SetWaveSourceUIValues();
                     _waveSourceUI.style.display = DisplayStyle.Flex;
+                    m_highlightController.HighlightObject(obj);
                     break;
                 case "Polarizer":
                     _polarizer = obj.GetComponent<Polarizer>();
                     SetPolarizerUIValues();
                     _polarizerUI.style.display = DisplayStyle.Flex;
+                    m_highlightController.HighlightObject(obj);
                     break;
                 case "Waveplate":
                     _waveplate = obj.GetComponent<Waveplate>();
                     SetWaveplateUIValues();
                     _waveplateUI.style.display = DisplayStyle.Flex;
+                    m_highlightController.HighlightObject(obj);
                     break;
                 default:
                     break;
