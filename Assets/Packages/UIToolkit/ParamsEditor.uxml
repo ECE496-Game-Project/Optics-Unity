@@ -4,25 +4,25 @@
         <ui:ListView focusable="true" name="GOList" class="param-label" style="position: relative; align-items: flex-start; width: 30%; height: 100%; background-color: rgba(0, 0, 0, 0.43);" />
         <ui:VisualElement name="Params" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.43); width: 30%; position: relative; flex-direction: column; flex-wrap: nowrap; align-items: stretch; align-self: flex-start; height: 100%; display: flex; overflow: visible; translate: 0 0; transform-origin: left;">
             <ui:Foldout text="Polarizer" name="Polarizer" class="param-label" style="display: none;">
-                <ui:IntegerField label="Thickness" value="1" readonly="false" name="ThicknessP" />
-                <ui:IntegerField label="Rotation Degree" value="180" readonly="false" name="RotDeg" />
+                <ui:FloatField label="Thickness" value="1" name="ThicknessP" />
+                <ui:FloatField label="Rotation Degree" value="180" name="RotDeg" />
             </ui:Foldout>
             <ui:Foldout text="Waveplate" name="Waveplate" class="param-label" style="display: none;">
-                <ui:IntegerField label="Thickness" value="1" readonly="false" name="ThicknessW" />
-                <ui:IntegerField label="Plate Degree" value="180" readonly="false" name="PlateDeg" />
-                <ui:IntegerField label="Axis Diff Degree" value="90" readonly="false" name="AxisDiff" />
+                <ui:FloatField label="Thickness" value="1" name="ThicknessW" />
+                <ui:FloatField label="Plate Degree" value="180" name="PlateDeg" />
+                <ui:FloatField label="Axis Diff Degree" value="90" name="AxisDiff" />
             </ui:Foldout>
             <ui:Foldout text="Wave Source" name="WaveSource" class="param-label" style="display: flex; visibility: visible;">
                 <ui:TextField picking-mode="Ignore" label="Name" value="leo" name="Name" is-delayed="false" password="false" />
                 <ui:EnumField label="Type" type="WaveUtils.WAVETYPE, Assembly-CSharp" name="Type" />
                 <ui:VisualElement name="E" style="flex-grow: 1; flex-direction: column; justify-content: flex-start; align-self: flex-start;">
-                    <ui:IntegerField label="Eox" value="10" name="Eox" />
-                    <ui:IntegerField label="Eoy" value="10" name="Eoy" />
+                    <ui:FloatField label="Eox" value="10" name="Eox" />
+                    <ui:FloatField label="Eoy" value="10" name="Eoy" />
                 </ui:VisualElement>
                 <ui:VisualElement name="WKN" style="flex-grow: 1; flex-direction: column; justify-content: flex-start; align-self: flex-start;">
-                    <ui:IntegerField label="W" value="100" name="W" />
-                    <ui:IntegerField label="K" value="0" name="K" />
-                    <ui:IntegerField label="N" value="1" name="N" />
+                    <ui:FloatField label="Angular Frequency" value="100" name="W" />
+                    <ui:FloatField label="K" value="0" name="K" />
+                    <ui:FloatField label="N" value="0" name="N" />
                 </ui:VisualElement>
                 <ui:Slider picking-mode="Ignore" label="Theta" value="180" high-value="360" name="Theta" />
                 <ui:Slider picking-mode="Ignore" label="Phi" value="180" high-value="360" name="Phi" />

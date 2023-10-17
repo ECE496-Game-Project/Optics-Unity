@@ -23,16 +23,16 @@ public class ParamUI : MonoBehaviour
     };
 
     private Foldout _polarizerUI;
-    private IntegerField[] _polarizerFields = new IntegerField[2];
+    private FloatField[] _polarizerFields = new FloatField[2];
 
     private Foldout _waveplateUI;
-    private IntegerField[] _waveplateFields = new IntegerField[3];
+    private FloatField[] _waveplateFields = new FloatField[3];
 
     private Foldout _waveSourceUI;
     private TextField _name;
     private EnumField _type;
-    private IntegerField[] _E = new IntegerField[2];
-    private IntegerField[] _WKN = new IntegerField[3];
+    private FloatField[] _E = new FloatField[2];
+    private FloatField[] _WKN = new FloatField[3];
     private Slider[] _angle = new Slider[2];
 
     private List<GameObject> _objList = new List<GameObject>();
@@ -63,22 +63,22 @@ public class ParamUI : MonoBehaviour
         var uiDocument = GetComponent<UIDocument>();
 
         _polarizerUI = uiDocument.rootVisualElement.Q<Foldout>("Polarizer");
-        _polarizerFields[0] = uiDocument.rootVisualElement.Q<IntegerField>("ThicknessP");
-        _polarizerFields[1] = uiDocument.rootVisualElement.Q<IntegerField>("RotDeg");
+        _polarizerFields[0] = uiDocument.rootVisualElement.Q<FloatField>("ThicknessP");
+        _polarizerFields[1] = uiDocument.rootVisualElement.Q<FloatField>("RotDeg");
 
         _waveplateUI = uiDocument.rootVisualElement.Q<Foldout>("Waveplate");
-        _waveplateFields[0] = uiDocument.rootVisualElement.Q<IntegerField>("ThicknessW");
-        _waveplateFields[1] = uiDocument.rootVisualElement.Q<IntegerField>("PlateDeg");
-        _waveplateFields[2] = uiDocument.rootVisualElement.Q<IntegerField>("AxisDiff");
+        _waveplateFields[0] = uiDocument.rootVisualElement.Q<FloatField>("ThicknessW");
+        _waveplateFields[1] = uiDocument.rootVisualElement.Q<FloatField>("PlateDeg");
+        _waveplateFields[2] = uiDocument.rootVisualElement.Q<FloatField>("AxisDiff");
 
         _waveSourceUI = uiDocument.rootVisualElement.Q<Foldout>("WaveSource");
         _name = uiDocument.rootVisualElement.Q<TextField>("Name");
         _type = uiDocument.rootVisualElement.Q<EnumField>("Type");
-        _E[0] = uiDocument.rootVisualElement.Q<IntegerField>("Eox");
-        _E[1] = uiDocument.rootVisualElement.Q<IntegerField>("Eoy");
-        _WKN[0] = uiDocument.rootVisualElement.Q<IntegerField>("W");
-        _WKN[1] = uiDocument.rootVisualElement.Q<IntegerField>("K");
-        _WKN[2] = uiDocument.rootVisualElement.Q<IntegerField>("N");
+        _E[0] = uiDocument.rootVisualElement.Q<FloatField>("Eox");
+        _E[1] = uiDocument.rootVisualElement.Q<FloatField>("Eoy");
+        _WKN[0] = uiDocument.rootVisualElement.Q<FloatField>("W");
+        _WKN[1] = uiDocument.rootVisualElement.Q<FloatField>("K");
+        _WKN[2] = uiDocument.rootVisualElement.Q<FloatField>("N");
         _angle[0] = uiDocument.rootVisualElement.Q<Slider>("Theta");
         _angle[1] = uiDocument.rootVisualElement.Q<Slider>("Phi");
 
@@ -98,26 +98,26 @@ public class ParamUI : MonoBehaviour
     {
         _name.value = _waveSource.gameObject.name;
         _type.value = _waveSource.Params.Type;
-        _E[0].value = (int)_waveSource.ParameterGet<float>("Eox");
-        _E[1].value = (int)_waveSource.Params.Eoy;
-        _WKN[0].value = (int)_waveSource.Params.W;
-        _WKN[1].value = (int)_waveSource.Params.K;
-        _WKN[2].value = (int)_waveSource.Params.N;
+        _E[0].value = _waveSource.ParameterGet<float>("Eox");
+        _E[1].value = _waveSource.ParameterGet<float>("Eoy");
+        _WKN[0].value = _waveSource.Params.W;
+        _WKN[1].value = _waveSource.Params.K;
+        _WKN[2].value = _waveSource.Params.N;
         _angle[0].value = _waveSource.Params.Theta;
         _angle[1].value = _waveSource.Params.Phi;
     }
 
     private void SetPolarizerUIValues()
     {
-        _polarizerFields[0].value = (int)_polarizer.ThicknessOffset;
-        _polarizerFields[1].value = (int)_polarizer.RotDeg;
+        _polarizerFields[0].value = _polarizer.ThicknessOffset;
+        _polarizerFields[1].value = _polarizer.RotDeg;
     }
 
     private void SetWaveplateUIValues()
     {
-        _waveplateFields[0].value = (int)_waveplate.ThicknessOffset;
-        _waveplateFields[1].value = (int)_waveplate.PlateDeg;
-        _waveplateFields[2].value = (int)_waveplate.AxisDiffDeg;
+        _waveplateFields[0].value = _waveplate.ThicknessOffset;
+        _waveplateFields[1].value = _waveplate.PlateDeg;
+        _waveplateFields[2].value = _waveplate.AxisDiffDeg;
     }
 
     #endregion
@@ -126,20 +126,20 @@ public class ParamUI : MonoBehaviour
 
     private void RegisterCallbacks()
     {
-        _polarizerFields[0].RegisterCallback<ChangeEvent<int>>(OnThicknessChanged);
-        _polarizerFields[1].RegisterCallback<ChangeEvent<int>>(OnRotDegChanged);
+        _polarizerFields[0].RegisterCallback<ChangeEvent<float>>(OnThicknessChanged);
+        _polarizerFields[1].RegisterCallback<ChangeEvent<float>>(OnRotDegChanged);
 
-        _waveplateFields[0].RegisterCallback<ChangeEvent<int>>(OnThicknessChanged);
-        _waveplateFields[1].RegisterCallback<ChangeEvent<int>>(OnPlateDegChanged);
-        _waveplateFields[2].RegisterCallback<ChangeEvent<int>>(OnAxisDiffChanged);
+        _waveplateFields[0].RegisterCallback<ChangeEvent<float>>(OnThicknessChanged);
+        _waveplateFields[1].RegisterCallback<ChangeEvent<float>>(OnPlateDegChanged);
+        _waveplateFields[2].RegisterCallback<ChangeEvent<float>>(OnAxisDiffChanged);
 
         _name.RegisterCallback<ChangeEvent<string>>(OnNameChanged);
         _type.RegisterCallback<ChangeEvent<WAVETYPE>>(OnTypeChange);
-        _E[0].RegisterCallback<ChangeEvent<int>>(OnEoxChanged);
-        _E[1].RegisterCallback<ChangeEvent<int>>(OnEoyChanged);
-        _WKN[0].RegisterCallback<ChangeEvent<int>>(OnWChanged);
-        _WKN[1].RegisterCallback<ChangeEvent<int>>(OnKChanged);
-        _WKN[2].RegisterCallback<ChangeEvent<int>>(OnNChanged);
+        _E[0].RegisterCallback<ChangeEvent<float>>(OnEoxChanged);
+        _E[1].RegisterCallback<ChangeEvent<float>>(OnEoyChanged);
+        _WKN[0].RegisterCallback<ChangeEvent<float>>(OnWChanged);
+        _WKN[1].RegisterCallback<ChangeEvent<float>>(OnKChanged);
+        _WKN[2].RegisterCallback<ChangeEvent<float>>(OnNChanged);
         _angle[0].RegisterCallback<ChangeEvent<float>>(OnThetaChanged);
         _angle[1].RegisterCallback<ChangeEvent<float>>(OnPhiChanged);
 
@@ -148,20 +148,20 @@ public class ParamUI : MonoBehaviour
 
     private void UnregisterCallbacks()
     {
-        _polarizerFields[0].UnregisterCallback<ChangeEvent<int>>(OnThicknessChanged);
-        _polarizerFields[1].UnregisterCallback<ChangeEvent<int>>(OnRotDegChanged);
+        _polarizerFields[0].UnregisterCallback<ChangeEvent<float>>(OnThicknessChanged);
+        _polarizerFields[1].UnregisterCallback<ChangeEvent<float>>(OnRotDegChanged);
 
-        _waveplateFields[0].UnregisterCallback<ChangeEvent<int>>(OnThicknessChanged);
-        _waveplateFields[1].UnregisterCallback<ChangeEvent<int>>(OnPlateDegChanged);
-        _waveplateFields[2].UnregisterCallback<ChangeEvent<int>>(OnAxisDiffChanged);
+        _waveplateFields[0].UnregisterCallback<ChangeEvent<float>>(OnThicknessChanged);
+        _waveplateFields[1].UnregisterCallback<ChangeEvent<float>>(OnPlateDegChanged);
+        _waveplateFields[2].UnregisterCallback<ChangeEvent<float>>(OnAxisDiffChanged);
 
         _name.UnregisterCallback<ChangeEvent<string>>(OnNameChanged);
         _type.UnregisterCallback<ChangeEvent<WAVETYPE>>(OnTypeChange);
-        _E[0].UnregisterCallback<ChangeEvent<int>>(OnEoxChanged);
-        _E[1].UnregisterCallback<ChangeEvent<int>>(OnEoyChanged);
-        _WKN[0].UnregisterCallback<ChangeEvent<int>>(OnWChanged);
-        _WKN[1].UnregisterCallback<ChangeEvent<int>>(OnKChanged);
-        _WKN[2].UnregisterCallback<ChangeEvent<int>>(OnNChanged);
+        _E[0].UnregisterCallback<ChangeEvent<float>>(OnEoxChanged);
+        _E[1].UnregisterCallback<ChangeEvent<float>>(OnEoyChanged);
+        _WKN[0].UnregisterCallback<ChangeEvent<float>>(OnWChanged);
+        _WKN[1].UnregisterCallback<ChangeEvent<float>>(OnKChanged);
+        _WKN[2].UnregisterCallback<ChangeEvent<float>>(OnNChanged);
         _angle[0].UnregisterCallback<ChangeEvent<float>>(OnThetaChanged);
         _angle[1].UnregisterCallback<ChangeEvent<float>>(OnPhiChanged);
 
@@ -261,28 +261,28 @@ public class ParamUI : MonoBehaviour
         _waveSource.Params.Type = evt.newValue;
     }
 
-    private void OnEoxChanged(ChangeEvent<int> evt)
+    private void OnEoxChanged(ChangeEvent<float> evt)
     {
         //_waveSource.Params.Eox = evt.newValue;
-        _waveSource.ParameterSet<int>("Eox", evt.newValue);
+        _waveSource.ParameterSet<float>("Eox", evt.newValue);
     }
 
-    private void OnEoyChanged(ChangeEvent<int> evt)
+    private void OnEoyChanged(ChangeEvent<float> evt)
     {
         _waveSource.Params.Eoy = evt.newValue;
     }
 
-    private void OnWChanged(ChangeEvent<int> evt)
+    private void OnWChanged(ChangeEvent<float> evt)
     {
         _waveSource.Params.W = evt.newValue;
     }
 
-    private void OnKChanged(ChangeEvent<int> evt)
+    private void OnKChanged(ChangeEvent<float> evt)
     {
         _waveSource.Params.K = evt.newValue;
     }
 
-    private void OnNChanged(ChangeEvent<int> evt)
+    private void OnNChanged(ChangeEvent<float> evt)
     {
         _waveSource.Params.N = evt.newValue;
     }
@@ -301,13 +301,13 @@ public class ParamUI : MonoBehaviour
 
     #region Polarizer
 
-    private void OnRotDegChanged(ChangeEvent<int> evt)
+    private void OnRotDegChanged(ChangeEvent<float> evt)
     {
         //_polarizer.RotDeg = evt.newValue;
-        _polarizer.ParameterSet<int>("RotDeg", evt.newValue);
+        _polarizer.ParameterSet<float>("RotDeg", evt.newValue);
     }
 
-    private void OnThicknessChanged(ChangeEvent<int> evt)
+    private void OnThicknessChanged(ChangeEvent<float> evt)
     {
         _polarizer.ThicknessOffset = evt.newValue;
     }
@@ -316,12 +316,12 @@ public class ParamUI : MonoBehaviour
 
     #region Waveplate
 
-    private void OnAxisDiffChanged(ChangeEvent<int> evt)
+    private void OnAxisDiffChanged(ChangeEvent<float> evt)
     {
         _waveplate.AxisDiffDeg = evt.newValue;
     }
 
-    private void OnPlateDegChanged(ChangeEvent<int> evt)
+    private void OnPlateDegChanged(ChangeEvent<float> evt)
     {
         _waveplate.PlateDeg = evt.newValue;
     }

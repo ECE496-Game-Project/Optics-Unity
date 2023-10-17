@@ -9,3 +9,9 @@
     border-top-color: rgba(255, 255, 255, 0);
     border-bottom-color: rgba(255, 255, 255, 0);
 }
+
+.unity-integer-field {
+}
+
+.unity-float-field {
+}
