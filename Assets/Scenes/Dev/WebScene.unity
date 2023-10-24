@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2331076, g: 0.23627803, b: 0.27289605, a: 1}
+  m_IndirectSpecularColor: {r: 0.23236361, g: 0.23479086, b: 0.27237764, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -638,7 +638,7 @@ GameObject:
   m_Component:
   - component: {fileID: 976523358}
   m_Layer: 0
-  m_Name: Managers-------------------------------
+  m_Name: -------------Managers------------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
