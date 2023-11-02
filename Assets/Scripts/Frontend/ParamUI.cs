@@ -45,10 +45,9 @@ public class ParamUI : MonoBehaviour
     private ListView _listView;
     private Button _refreshBtn;
 
-
-
-    //##########################################UI Highlight Controller##########################################
+    /* ########################################UI Highlight Controller######################################### */
     private UIHighlightController m_highlightController;
+
     #region Life Cycle
 
     private void OnEnable()
@@ -63,8 +62,7 @@ public class ParamUI : MonoBehaviour
     private void OnDisable()
     {
         UnregisterCallbacks();
-        m_highlightController.UnhighlightObject();
-        
+        m_highlightController.UnhighlightObject(); 
     }
 
     #endregion
