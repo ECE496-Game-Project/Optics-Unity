@@ -1,0 +1,78 @@
+/* Global */
+:root {
+    --title-font-color: #43a7bc; /* Title Font Color: A shade of blue */
+    --font-color: #9bdaf0; /* Font Color: Light blue */
+    --background-color: #12202d; /* Background Color: Dark blue */
+    --field-color: #0c1821; /* Field Color: Deeper blue */
+    --border-color: #3f8fcf; /* Border Color: Accent shade of blue */
+}
+
+/* Type Selectors */
+Label{
+    font-size: 14px;
+    color: var(--font-color);
+    -unity-font-style: bold;
+}
+
+InputField{
+    color: var(--field-color);
+}
+
+/* Common Classes */
+.container {
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: var(--border-color);
+    padding: 1px;
+    margin: 1px;
+    background-color: var(--background-color);
+}
+
+.title{
+    font-size: 20px;
+    color: var(--title-font-color);
+}
+
+/* Level 1 */
+.root{
+    flex-direction: column;
+    width: 40%;
+}
+
+/* Level 2 */
+.sideBar{
+    width: 10%;
+}
+
+.currScene{
+    flex-direction: row;
+    width: 90%;
+}
+
+/* Level 3 */
+.content{
+    flex-direction: column;
+}
+
+/* Level 4 */
+.listView{
+    flex-direction: row;
+    width: 40%;
+}
+
+.listView__item{
+
+}
+
+.listView__item:hover{
+
+}
+
+.listView__item--selected{
+
+}
+
+.paramView{
+    flex-direction: row;
+    width: 60%;
+}

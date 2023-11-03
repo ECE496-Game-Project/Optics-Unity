@@ -704,6 +704,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _uiDocument: {fileID: 0}
+  _styleSheet: {fileID: 7433441132597879392, guid: 5d30735f9d1c14c9193680c0124289b1,
+    type: 3}
 --- !u!1 &976523357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,6 +1072,10 @@ PrefabInstance:
     - target: {fileID: 1028210981, guid: d7b07370d2c584fd2b6fcffcec839d18, type: 3}
       propertyPath: m_ClearFlags
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028210981, guid: d7b07370d2c584fd2b6fcffcec839d18, type: 3}
+      propertyPath: orthographic
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1028210981, guid: d7b07370d2c584fd2b6fcffcec839d18, type: 3}
       propertyPath: m_BackGroundColor.b
