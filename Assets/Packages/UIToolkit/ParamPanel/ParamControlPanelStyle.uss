@@ -17,6 +17,7 @@ Label{
 TextField, FloatField{
     color: var(--field-color);
     width: 60px;
+    height: 35px;
 }
 
 /* Common Classes */

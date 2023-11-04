@@ -13,11 +13,11 @@
                 <ui:FloatField label="Axis Diff Degree" value="90" name="AxisDiff" />
             </ui:Foldout>
             <ui:Foldout text="Wave Source" name="WaveSource" class="param-label" style="display: flex; visibility: visible;">
+                <ui:FloatField label="Eoy" value="10" name="Eoy" />
                 <ui:TextField picking-mode="Ignore" label="Name" value="leo" name="Name" is-delayed="false" password="false" />
                 <ui:EnumField label="Type" type="WaveUtils.WAVETYPE, Assembly-CSharp" name="Type" />
                 <ui:VisualElement name="E" style="flex-grow: 1; flex-direction: column; justify-content: flex-start; align-self: flex-start;">
                     <ui:FloatField label="Eox" value="10" name="Eox" />
-                    <ui:FloatField label="Eoy" value="10" name="Eoy" />
                 </ui:VisualElement>
                 <ui:VisualElement name="WKN" style="flex-grow: 1; flex-direction: column; justify-content: flex-start; align-self: flex-start;">
                     <ui:FloatField label="Angular Frequency" value="100" name="W" />

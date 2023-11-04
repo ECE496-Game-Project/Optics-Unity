@@ -64,7 +64,7 @@ public class ParamControlPanel : MonoBehaviour
         currScene.Add(content);
         
         // level 3.
-        _listView = new ListView();
+        _listView = GenerateListView();
         _listView.AddToClassList("listView");
         _listView.AddToClassList("container");
         content.Add(_listView);
@@ -234,23 +234,19 @@ public class ParamControlPanel : MonoBehaviour
     void RegisterEvent()
     {
         // return a visual element, and assign it to _paramView based on the type of the selected listViewItem. 
-        OnSelectlistViewItem();
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        _listView.makeItem = MakeListViewItem;
+        _listView.bindItem = BindListViewItem;
+        _listView.selectionChanged += OnSelectlistViewItem;
     }
 
     void UnRegisterEvent()
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+
     }
 
-    void OnSelectlistViewItem()
+    void OnSelectlistViewItem(IEnumerable<object> objects)
     {
-        LoadParamView();
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        LoadlistView();
+        GenerateParamView();
     }
 
     void LowerBoundCheck(ChangeEvent<float> evt, float bound)
@@ -275,23 +271,39 @@ public class ParamControlPanel : MonoBehaviour
 
     #region Control Logic
 
-    void LoadParamView()
+    void GenerateParamView()
     {
         // _paramView = GenerateWaveSourceParam();
         // _paramView = GeneratePolarizerParam();
         // _paramView = GenerateWavePlateParam();
     }
 
-    void LoadlistView()
+    ListView GenerateListView()
     {
+        ListView listView = new ListView();
         GameObject[] objs = SceneManager.GetActiveScene().GetRootGameObjects();
+        List<GameObject> objList = new List<GameObject>();
+        
         for(int i = 0; i < objs.Length; i++)
         {
-            var item = new VisualElement(){
-                name = objs[i].name
-            };
-            // _listView.AddItem();
+            objList.Add(objs[i]);
         }
+
+        listView.itemsSource = objList;
+
+        return listView;
+    }
+
+    VisualElement MakeListViewItem()
+    {
+        return new Label();
+    }
+
+    void BindListViewItem(VisualElement ve, int idx)
+    {
+        Label label = ve as Label;
+        var obj = _listView.itemsSource[idx] as GameObject;
+        label.text = obj.name;
     }
 
     #endregion
