@@ -85,6 +85,20 @@ public class ParamControlPanel : MonoBehaviour
     #endregion
 
     #region Param View
+
+    /*
+    目的：为了能够不hardcode所有不同Type的可展示Object（包括wave source, child wave, devices）
+    方法：为所有需要展示的不同Type的Object，写一个统一的Interface
+    要求：
+    1. 能够用相同的Type去概括所有的可展示Object
+    2. 所有实现该Interface的class，必须包含一个list，罗列所有需要展示的parameter。其中的信息包括：
+    parameter的名字（required, string type），单位（required, string type, 若无单位则为“”），权限（required, Read&Write or ReadOnly），默认值（required, float type）, 上限（optional, float type），下限（optional, float type）。
+    3. 所有实现该Interface的class，所列在list中的parameter，必须有符合其所写权限的读写权，如可以get和set，或只能get
+    效果：
+    1. UI侧可以根据该Interface去简单地判断Object是否可以被展示，且拓展性高
+    2. UI侧不用HardCode所有不同的可展示Object的UI排版，而是可以Traverse List，然后程序化生成
+        */
+
     VisualElement GenerateWaveSourceParam()
     {
         var waveSource = new VisualElement();
