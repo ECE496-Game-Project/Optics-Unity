@@ -1,0 +1,60 @@
+/* Global */
+:root {
+    --title-font-color: #43a7bc; /* Title Font Color: A shade of blue */
+    --font-color: #9bdaf0; /* Font Color: Light blue */
+    --background-color: #12202d; /* Background Color: Dark blue */
+    --field-color: #0c1821; /* Field Color: Deeper blue */
+    --border-color: #3f8fcf; /* Border Color: Accent shade of blue */
+}
+
+/* Type Selectors */
+Label{
+    padding: 4px;
+    color: var(--font-color);
+}
+
+/* Common Classes */
+*{
+    margin: 4px;
+}
+
+/* Level 1 */
+.root{
+    flex-direction: column;
+    width: 40%;
+}
+
+/* Level 2 */
+.header{
+    height: 20%;
+}
+
+.content{
+    height: 80%;
+}
+
+/* Level 3 */
+.title{
+    font-size: 50px;
+    -unity-font-style: bold;
+    color: var(--title-font-color);
+    align-self: center;
+}
+
+.scenes{
+    flex-direction: row;
+}
+
+.thumbnail{
+    padding: 10px;
+    border-width: 2px;
+    border-radius: 5px;
+    border-color: var(--border-color);
+    height: 80%;
+    width: 80%;
+    align-self: center;
+}
+
+.name{
+    font-size: 25px;
+}
