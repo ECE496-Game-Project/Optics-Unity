@@ -15,7 +15,8 @@ public class ParamControlPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        if(_uiDocument == null) _uiDocument = gameObject?.GetComponent<UIDocument>();   
+        if(_uiDocument == null) 
+            _uiDocument = gameObject?.GetComponent<UIDocument>();   
         Generate();
         RegisterEvent();
     }
@@ -42,6 +43,7 @@ public class ParamControlPanel : MonoBehaviour
         sideBar.AddToClassList("sideBar");
         sideBar.AddToClassList("container");
         _root.Add(sideBar);
+
         var currScene = new VisualElement();
         currScene.AddToClassList("currScene");
         currScene.AddToClassList("container");
@@ -67,7 +69,8 @@ public class ParamControlPanel : MonoBehaviour
         _listView.AddToClassList("container");
         content.Add(_listView);
 
-        _paramView = new VisualElement();
+        // _paramView = new VisualElement();
+        _paramView = GenerateWaveSourceParam();
         _paramView.AddToClassList("paramView");
         _paramView.AddToClassList("container");
         content.Add(_paramView);
@@ -174,49 +177,52 @@ public class ParamControlPanel : MonoBehaviour
     VisualElement GenerateParameter(string label, string unit, int lowerBound, int upperBound, float defaultVal)
     {
         var param = new VisualElement();
+        param.AddToClassList("parameter__slider");
         var slide = new Slider(label, lowerBound, upperBound){
             value=defaultVal
         };
         param.Add(slide);
-        var field = new FloatField(){
+        
+        var field = new VisualElement();
+        field.AddToClassList("parameter__field");
+        var num = new FloatField(){
             value=defaultVal
         };
+        num.RegisterCallback<ChangeEvent<float>>(evt => LowerBoundCheck(evt, lowerBound));
+        num.RegisterCallback<ChangeEvent<float>>(evt => UpperBoundCheck(evt, upperBound));
+        field.Add(num);
+        var uni = new Label(unit);
+        field.Add(uni);
         param.Add(field);
-        if(unit != ""){
-            var uni = new Label(unit);
-            param.Add(uni);
-        }
         return param;
     }
 
     VisualElement GenerateParameter(string label, string unit, float bound, float defaultVal)
     {
         var param = new VisualElement();
+        param.AddToClassList("parameter__field");
         var field = new FloatField(){
             label=label,
             value=defaultVal
         };
-        field.RegisterCallback<ChangeEvent<float>>(evt => BoundValueCheck(evt, bound));
+        field.RegisterCallback<ChangeEvent<float>>(evt => LowerBoundCheck(evt, bound));
         param.Add(field);
-        if(unit != ""){
-            var uni = new Label(unit);
-            param.Add(uni);
-        }
+        var uni = new Label(unit);
+        param.Add(uni);
         return param;
     }
 
     VisualElement GenerateParameter(string label, string unit, float defaultVal)
     {
         var param = new VisualElement();
+        param.AddToClassList("parameter__field");
         var field = new FloatField(){
             label=label,
             value=defaultVal
         };
         param.Add(field);
-        if(unit != ""){
-            var uni = new Label(unit);
-            param.Add(uni);
-        }
+        var uni = new Label(unit);
+        param.Add(uni);
         return param;
     }
     #endregion
@@ -247,9 +253,18 @@ public class ParamControlPanel : MonoBehaviour
         LoadlistView();
     }
 
-    void BoundValueCheck(ChangeEvent<float> evt, float bound)
+    void LowerBoundCheck(ChangeEvent<float> evt, float bound)
     {
         if(evt.newValue < bound)
+        {
+            var field = evt.currentTarget as FloatField;
+            field.SetValueWithoutNotify(bound);
+        }
+    }
+
+    void UpperBoundCheck(ChangeEvent<float> evt, float bound)
+    {
+        if(evt.newValue > bound)
         {
             var field = evt.currentTarget as FloatField;
             field.SetValueWithoutNotify(bound);
@@ -262,10 +277,9 @@ public class ParamControlPanel : MonoBehaviour
 
     void LoadParamView()
     {
-         _paramView = GenerateWaveSourceParam();
+        // _paramView = GenerateWaveSourceParam();
         // _paramView = GeneratePolarizerParam();
         // _paramView = GenerateWavePlateParam();
-        _root.Add(_paramView);
     }
 
     void LoadlistView()

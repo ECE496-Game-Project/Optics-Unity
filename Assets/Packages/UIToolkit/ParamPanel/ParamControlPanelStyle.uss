@@ -14,8 +14,9 @@ Label{
     -unity-font-style: bold;
 }
 
-InputField{
+TextField, FloatField{
     color: var(--field-color);
+    width: 60px;
 }
 
 /* Common Classes */
@@ -35,7 +36,7 @@ InputField{
 
 /* Level 1 */
 .root{
-    flex-direction: column;
+    flex-direction: row;
     width: 40%;
 }
 
@@ -45,19 +46,19 @@ InputField{
 }
 
 .currScene{
-    flex-direction: row;
+    flex-direction: column;
     width: 90%;
 }
 
 /* Level 3 */
 .content{
-    flex-direction: column;
+    flex-direction: row;
 }
 
-/* Level 4 */
+/* Level 4.1 List View */
 .listView{
-    flex-direction: row;
-    width: 40%;
+    flex-direction: column;
+    width: 30%;
 }
 
 .listView__item{
@@ -72,7 +73,18 @@ InputField{
 
 }
 
+/* Level 4.2 ParamView */
 .paramView{
+    flex-direction: column;
+    width: 70%;
+}
+
+.parameter__field{
     flex-direction: row;
-    width: 60%;
+    width: 90%;
+}
+
+.parameter__slider{
+    flex-direction: column;
+    width: 90%;
 }
