@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class SceneSelectionMenu : MonoBehaviour
 {
@@ -55,10 +55,13 @@ public class SceneSelectionMenu : MonoBehaviour
         for(int i = 0; i < _selectionList.Count; i++)
         {
             VisualElement scene = new VisualElement();
+            scene.AddToClassList("scene");
             selections.Add(scene);
             
             Button thumbnail = new Button();
             thumbnail.AddToClassList("thumbnail");
+            thumbnail.style.backgroundImage = Resources.Load<Texture2D>($"Art/Images/placeholder{i+1}");
+            thumbnail.RegisterCallback<ClickEvent, string>(LoadScene,  _selectionList[i]);
             scene.Add(thumbnail);
 
             Label label = new Label(_selectionList[i]);
@@ -72,5 +75,17 @@ public class SceneSelectionMenu : MonoBehaviour
     void RegisterEvent()
     {
 
+    }
+
+    void LoadScene(ClickEvent evt, string scene)
+    {
+        try
+        {
+            SceneManager.LoadScene(scene);
+        }
+        catch
+        {
+            Debug.LogWarning("Scene " + scene + " does not exist.");
+        }
     }
 }
