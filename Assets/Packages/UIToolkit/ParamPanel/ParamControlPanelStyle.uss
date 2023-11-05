@@ -5,6 +5,7 @@
     --background-color: #12202d; /* Background Color: Dark blue */
     --field-color: #0c1821; /* Field Color: Deeper blue */
     --border-color: #3f8fcf; /* Border Color: Accent shade of blue */
+    --button-color: #43B1B1; /* Button color (another shade of blue) */
 }
 
 /* Type Selectors */
@@ -18,6 +19,10 @@ TextField, FloatField{
     color: var(--field-color);
     width: 60px;
     height: 35px;
+}
+
+Button{
+    color: var(--button-color);
 }
 
 /* Common Classes */
@@ -52,29 +57,38 @@ TextField, FloatField{
 }
 
 /* Level 3 */
+.scenes{
+
+}
+
 .content{
     flex-direction: row;
 }
 
-/* Level 4.1 List View */
-.listView{
+/* Level 4.1 Side Bar */
+.sceneList__item{
+    margin: 5px 0px;
+}
+
+/* Level 4.2 List View */
+.objectList{
     flex-direction: column;
     width: 30%;
 }
 
-.listView__item{
+.objectList__item{
 
 }
 
-.listView__item:hover{
+.objectList__item:hover{
 
 }
 
-.listView__item--selected{
+.objectList__item--selected{
 
 }
 
-/* Level 4.2 ParamView */
+/* Level 4.3 ParamView */
 .paramView{
     flex-direction: column;
     width: 70%;
