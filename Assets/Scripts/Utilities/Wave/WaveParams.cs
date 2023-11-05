@@ -5,15 +5,15 @@ using CommonUtils;
 
 namespace WaveUtils {
 	public enum WAVETYPE {
-		INVALID = 0,
-		PARALLEL = 1,
-		POINT = 2,
+		PLANE = 1,
+		SPHERE = 2,
+        INVALID = 0,
     }
 
 	[System.Serializable]
 	public class WaveParams {
 		#region GLOBAL VAR
-		public WAVETYPE Type = WAVETYPE.INVALID;
+		public WAVETYPE Type;
 
         public del_Vec3ParamVec3Getter UHat = Del_Default.DefaultVec3ParamVec3Getter;
 		public del_Vec3ParamVec3Getter VHat = Del_Default.DefaultVec3ParamVec3Getter;
@@ -30,31 +30,27 @@ namespace WaveUtils {
 
 		[Header("Angle Settings in degree")]
 		[Range(0, 360)]
-		public float Theta;
+        public float Theta;
 		[Range(0, 360)]
 		public float Phi;
 
-        [Header("Dispersion Distance")]
-		[SerializeField] private float _effectDistance = 100.0f;
-		public float EffectDistance {
-			get { 
-				return _effectDistance;
-			}
-            set { 
-				_effectDistance = value;
-				EffectDistanceListener?.Invoke();
-			}
-        }
-		
-		[HideInInspector] public UnityEvent EffectDistanceListener;
-		#endregion
+		[Header("Dispersion Distance")]
+		public float RODistance;
+        #endregion
 
-		#region CONSTRUCTOR
+        #region CONSTRUCTOR
+        public WaveParams(WAVETYPE type, float eox, float eoy, float w, float k, float n, float theta, float phi) {
+			this.Type = type;
+			this.Eox = eox;
+			this.Eoy = eoy;
+			this.W = w;
+			this.K = k;
+			this.N = n;
+			this.Theta = theta;
+			this.Phi = phi;
+		}
 		public WaveParams(WaveParams src) {
 			this.Type = src.Type;
-			this.UHat = src.UHat;
-			this.VHat = src.VHat;
-            this.KHat = src.KHat;
 			this.Eox = src.Eox;
 			this.Eoy = src.Eoy;
 			this.W = src.W;
@@ -62,7 +58,7 @@ namespace WaveUtils {
 			this.N = src.N;
 			this.Theta = src.Theta;
 			this.Phi = src.Phi;
-		}
+        }
         #endregion
-	}
+    }
 }

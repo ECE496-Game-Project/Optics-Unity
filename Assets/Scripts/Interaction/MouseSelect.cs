@@ -8,10 +8,7 @@ public class MouseSelect : MonoBehaviour
 {
     [SerializeField] private PlayerInput m_playerInput;
 
-    [SerializeField] private Color m_outlineColor;
-    [SerializeField] private float m_outlineWidth;
-
-    private Outline m_highlight, m_select;
+    private GameObject m_highlight, m_select;
 
 
 
@@ -30,7 +27,7 @@ public class MouseSelect : MonoBehaviour
         // disable the previous highlight
         if (m_highlight != null)
         {
-            m_highlight.enabled = false;
+            OutlineManager.Instance.UnHighlight(m_highlight.gameObject);
             m_highlight = null;
         }
 
@@ -56,18 +53,9 @@ public class MouseSelect : MonoBehaviour
             return;
         }
 
-        Outline outline = go.GetComponent<Outline>();
-        if (outline == null)
-        {
-            outline = go.AddComponent<Outline>();
-            outline.OutlineMode = Outline.Mode.OutlineAll;
-            outline.OutlineColor = m_outlineColor;
-            outline.OutlineWidth = m_outlineWidth;
-        }
-
-        outline.enabled = true;
-        m_highlight = outline;
-
+        OutlineManager.Instance.Highlight(go);
+        m_highlight = go;
+        
 
     }
 
@@ -76,14 +64,14 @@ public class MouseSelect : MonoBehaviour
         // turn off previous select
         if (m_select != null)
         {
-            m_select.enabled = false;
+            OutlineManager.Instance.UnHighlight(m_select);
             m_select = null;
         }
 
         // turn off previous select
         if (m_highlight != null)
         {
-            m_highlight.enabled = false;
+            OutlineManager.Instance.UnHighlight(m_highlight);
             m_highlight = null;
         }
 
@@ -93,13 +81,9 @@ public class MouseSelect : MonoBehaviour
 
         RaycastHit hit;
 
+        // if mouse is not on anything
         if (!Physics.Raycast(ray, out hit))
         {
-            if (m_select != null)
-            {
-                m_select.enabled = false;
-                m_select = null;
-            }
             return;
         }
 
@@ -111,18 +95,9 @@ public class MouseSelect : MonoBehaviour
             return;
         }
 
-        Outline outline = go.GetComponent<Outline>();
-        if (outline == null)
-        {
-            outline = go.AddComponent<Outline>();
-            outline.OutlineMode = Outline.Mode.OutlineAll;
-            outline.OutlineColor = m_outlineColor;
-            outline.OutlineWidth = m_outlineWidth;
-        }
-
-        outline.enabled = true;
-        m_highlight = outline;
-        m_select = outline;
+        OutlineManager.Instance.Highlight(go);
+        m_highlight = go;
+        m_select = go;
 
         clickable.OnMouseClicked();
 

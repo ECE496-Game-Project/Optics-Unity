@@ -17,11 +17,8 @@ MonoBehaviour:
     Eox: 10
     Eoy: 10
     W: 100
-    K: 0.1
+    K: 0.3
     N: 1
     Theta: 90
     Phi: 0
-    _effectDistance: 100
-    EffectDistanceListener:
-      m_PersistentCalls:
-        m_Calls: []
+    RODistance: 100
