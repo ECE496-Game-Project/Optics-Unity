@@ -54,6 +54,7 @@ public class ParamControlPanel : MonoBehaviour
         // level 2. 
         // 2.1 Scene List
         _sceneList = GenerateSideBar();
+        _sceneList.AddToClassList("sceneList");
         sideBar.Add(_sceneList);
 
         // 2.2 Current Scene 
@@ -105,6 +106,7 @@ public class ParamControlPanel : MonoBehaviour
     VisualElement MakeSideBarItem()
     {
         var button = new Button();
+        button.styleSheets.Add(_styleSheet);
         button.AddToClassList("sceneList__item");
         return button;
     }    
@@ -112,7 +114,8 @@ public class ParamControlPanel : MonoBehaviour
     void BindSideBarItem(VisualElement ve, int idx)
     {
         Button button = ve as Button;
-        button.text = _sceneList.itemsSource[idx] as String;
+        Label text = new Label(_sceneList.itemsSource[idx] as String);
+        button.Add(text);
         button.RegisterCallback<ClickEvent, int>(LoadScene, idx);
     }
 
