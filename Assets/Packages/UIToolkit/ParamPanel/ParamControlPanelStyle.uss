@@ -1,20 +1,23 @@
 /* Global */
 :root {
-    --title-font-color: #43a7bc; /* Title Font Color: A shade of blue */
-    --font-color: #9bdaf0; /* Font Color: Light blue */
-    --background-color: #12202d; /* Background Color: Dark blue */
-    --field-color: #0c1821; /* Field Color: Deeper blue */
-    --border-color: #3f8fcf; /* Border Color: Accent shade of blue */
+    --title-color: #CCD9FF; /* Title Font Color: A shade of blue */
+    --font-color: #E6E6FF; /* Font Color: Light blue */
+    --background-color: #0D0D1A; /* Background Color: Dark blue */
+    --field-color: #1A1A29; /* Field Color: Deeper blue */
+    --border-color: #6699FF; /* Border Color: Accent shade of blue */
+    --button-color: #335999; /* Button color (another shade of blue) */
 }
 
 /* Type Selectors */
-Label{
+Label, 
+TextElement{
     font-size: 14px;
     color: var(--font-color);
     -unity-font-style: bold;
 }
 
-TextField, FloatField{
+TextField,
+FloatField{
     color: var(--field-color);
     width: 60px;
     height: 35px;
@@ -32,7 +35,7 @@ TextField, FloatField{
 
 .title{
     font-size: 20px;
-    color: var(--title-font-color);
+    color: var(--title-color);
 }
 
 /* Level 1 */
@@ -52,29 +55,49 @@ TextField, FloatField{
 }
 
 /* Level 3 */
+.sceneList{
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+}
+
 .content{
     flex-direction: row;
 }
 
-/* Level 4.1 List View */
-.listView{
+/* Level 4.1 Side Bar */
+.sceneList__item{
+    margin-bottom: 5px;
+    align-self: center;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: var(--border-color);
+    background-color: var(--button-color);
+}
+
+.sceneList__item > Label{
+    font-size: 6px;
+}
+
+/* Level 4.2 List View */
+.objectList{
     flex-direction: column;
     width: 30%;
 }
 
-.listView__item{
+.objectList__item{
 
 }
 
-.listView__item:hover{
+.objectList__item:hover{
 
 }
 
-.listView__item--selected{
+.objectList__item--selected{
 
 }
 
-/* Level 4.2 ParamView */
+/* Level 4.3 ParamView */
 .paramView{
     flex-direction: column;
     width: 70%;

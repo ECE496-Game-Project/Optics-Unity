@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using System;
 
 public class ParamControlPanel : MonoBehaviour
 {
@@ -15,7 +16,8 @@ public class ParamControlPanel : MonoBehaviour
     //private ParameterInfoList polarizer;
 
     private VisualElement _root;
-    private ListView _listView;
+    private ListView _objectList;
+    private ListView _sceneList;
     private VisualElement _paramView;
 
     private void OnEnable()
@@ -55,7 +57,10 @@ public class ParamControlPanel : MonoBehaviour
         _root.Add(currScene);
 
         // level 2. 
-        // 2.1 Side Bar (All Scenes)
+        // 2.1 Scene List
+        _sceneList = GenerateSideBar();
+        _sceneList.AddToClassList("sceneList");
+        sideBar.Add(_sceneList);
 
         // 2.2 Current Scene 
         var title = new Label("Scene Title");
@@ -69,10 +74,10 @@ public class ParamControlPanel : MonoBehaviour
         currScene.Add(content);
         
         // level 3.
-        _listView = GenerateListView();
-        _listView.AddToClassList("listView");
-        _listView.AddToClassList("container");
-        content.Add(_listView);
+        _objectList = GenerateListView();
+        _objectList.AddToClassList("objectList");
+        _objectList.AddToClassList("container");
+        content.Add(_objectList);
 
         // _paramView = new VisualElement();
         _paramView = GenerateWaveSourceParam();
@@ -83,13 +88,81 @@ public class ParamControlPanel : MonoBehaviour
 
     #region Side Bar
 
+    ListView GenerateSideBar()
+    {
+        ListView sceneList = new ListView
+        {
+            makeItem = MakeSideBarItem,
+            bindItem = BindSideBarItem
+        };
+
+        int count = SceneManager.sceneCountInBuildSettings;
+        string[] sceneNames = new string[count];
+
+        for(int i = 0; i < count; i++)
+        {
+            sceneNames[i] = SceneManager.GetSceneByBuildIndex(i).name;
+        }
+
+        sceneList.itemsSource = sceneNames;
+        return sceneList;
+    }
+
+    VisualElement MakeSideBarItem()
+    {
+        var button = new Button();
+        button.styleSheets.Add(_styleSheet);
+        button.AddToClassList("sceneList__item");
+        return button;
+    }    
+
+    void BindSideBarItem(VisualElement ve, int idx)
+    {
+        Button button = ve as Button;
+        Label text = new Label(_sceneList.itemsSource[idx] as String);
+        button.Add(text);
+        button.RegisterCallback<ClickEvent, int>(LoadScene, idx);
+    }
+
     #endregion
 
     #region List View
+    ListView GenerateListView()
+    {
+        ListView listView = new ListView();
+        GameObject[] objs = SceneManager.GetActiveScene().GetRootGameObjects();
+        List<GameObject> objList = new List<GameObject>();
+     
+        for(int i = 0; i < objs.Length; i++)
+        {
+            objList.Add(objs[i]);
+        }
+        listView.itemsSource = objList;
+        return listView;
+    }
+
+    VisualElement MakeListViewItem()
+    {
+        return new Label();
+    }
+
+    void BindListViewItem(VisualElement ve, int idx)
+    {
+        Label label = ve as Label;
+        var obj = _objectList.itemsSource[idx] as GameObject;
+        label.text = obj.name;
+    }
 
     #endregion
 
     #region Param View
+
+    void GenerateParamView()
+    {
+        // _paramView = GenerateWaveSourceParam();
+        // _paramView = GeneratePolarizerParam();
+        // _paramView = GenerateWavePlateParam();
+    }
 
     /*
     目的：为了能够不hardcode所有不同Type的可展示Object（包括wave source, child wave, devices）
@@ -253,9 +326,9 @@ public class ParamControlPanel : MonoBehaviour
     void RegisterEvent()
     {
         // return a visual element, and assign it to _paramView based on the type of the selected listViewItem. 
-        _listView.makeItem = MakeListViewItem;
-        _listView.bindItem = BindListViewItem;
-        _listView.selectionChanged += OnSelectlistViewItem;
+        _objectList.makeItem = MakeListViewItem;
+        _objectList.bindItem = BindListViewItem;
+        _objectList.selectionChanged += OnSelectlistViewItem;
     }
 
     void UnRegisterEvent()
@@ -263,6 +336,15 @@ public class ParamControlPanel : MonoBehaviour
 
     }
 
+    void LoadScene(ClickEvent evt, int index)
+    {
+        try{
+            SceneManager.LoadScene(index);
+        }catch{
+            Debug.LogWarning("Scene " + index + " does not exist.");
+        }
+    }
+   
     void OnSelectlistViewItem(IEnumerable<object> objects)
     {
         GenerateParamView();
@@ -289,41 +371,6 @@ public class ParamControlPanel : MonoBehaviour
     #endregion
 
     #region Control Logic
-
-    void GenerateParamView()
-    {
-        // _paramView = GenerateWaveSourceParam();
-        // _paramView = GeneratePolarizerParam();
-        // _paramView = GenerateWavePlateParam();
-    }
-
-    ListView GenerateListView()
-    {
-        ListView listView = new ListView();
-        GameObject[] objs = SceneManager.GetActiveScene().GetRootGameObjects();
-        List<GameObject> objList = new List<GameObject>();
-        
-        for(int i = 0; i < objs.Length; i++)
-        {
-            objList.Add(objs[i]);
-        }
-
-        listView.itemsSource = objList;
-
-        return listView;
-    }
-
-    VisualElement MakeListViewItem()
-    {
-        return new Label();
-    }
-
-    void BindListViewItem(VisualElement ve, int idx)
-    {
-        Label label = ve as Label;
-        var obj = _listView.itemsSource[idx] as GameObject;
-        label.text = obj.name;
-    }
 
     #endregion
 }
