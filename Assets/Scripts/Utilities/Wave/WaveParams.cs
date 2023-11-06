@@ -31,7 +31,7 @@ namespace WaveUtils {
 		public float w;
 
 		[Header("Spatial Freq Settings")]
-		public float Lambda;
+		public float lambda;
 		public float f;
 		public float k;
 

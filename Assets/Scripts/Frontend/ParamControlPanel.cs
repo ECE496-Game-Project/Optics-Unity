@@ -4,25 +4,30 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using System;
+using ParameterTransfer;
 
 public class ParamControlPanel : MonoBehaviour
 {
     [SerializeField] private UIDocument _uiDocument;
     [SerializeField] private StyleSheet _styleSheet;
 
-    //private ParameterInfoList rootWave;
-    //private ParameterInfoList childWave;
-    //private ParameterInfoList polarizer;
-    //private ParameterInfoList polarizer;
-
     private VisualElement _root;
     private ListView _objectList;
     private ListView _sceneList;
     private VisualElement _paramView;
 
+    private ParameterInfoList RootWaveSourceInfo;
+    private ParameterInfoList ChildWaveSourceInfo;
+
     private void OnEnable()
     {
-        if(_uiDocument == null) 
+        if(RootWaveSourceInfo == null)
+            RootWaveSourceInfo = CSVReader.ReadParametersCSV("Data/ParameterInfos/RootWaveParameters");
+
+        if (ChildWaveSourceInfo == null)
+            ChildWaveSourceInfo = CSVReader.ReadParametersCSV("Data/ParameterInfos/ChildWaveParameters");
+
+        if (_uiDocument == null) 
             _uiDocument = gameObject?.GetComponent<UIDocument>();   
         Generate();
         RegisterEvent();

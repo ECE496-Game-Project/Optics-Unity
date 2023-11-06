@@ -33,10 +33,6 @@ namespace GO_Device {
             return default(T);
         }
         public override void WaveHit(in RaycastHit hit, WaveSource parentWS) {
-            if (parentWS.ParameterGet<WAVETYPE>("Type") != WAVETYPE.PLANE) {
-                DebugLogger.Warning(this.name, "PolarizedDevice only support Parallel Wave! Will not Do anything.");
-                return;
-            }
             /*GO Setup*/
             GameObject new_GO = new GameObject(parentWS.name + "_Child", typeof(WaveSource), typeof(LineWaveRender), typeof(LineWaveLogic));
             new_GO.transform.position = hit.point + Vector3.Normalize(hit.point - parentWS.transform.position) * ThicknessOffset;

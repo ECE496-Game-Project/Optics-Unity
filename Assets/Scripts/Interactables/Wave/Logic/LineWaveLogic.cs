@@ -31,6 +31,7 @@ namespace GO_Wave {
                 && ((1 << hit.collider.gameObject.layer) & _interactMask) != 0
             ) {
                 m_hit_Device = hit.collider.gameObject.GetComponent<DeviceBase>();
+                Debug.Log(hit.collider.gameObject.name);
                 m_hit_Device.WaveHit(hit, m_activeWS);
             }
         }

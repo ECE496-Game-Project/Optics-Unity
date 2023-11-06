@@ -16,9 +16,13 @@ MonoBehaviour:
     Type: 1
     Eox: 10
     Eoy: 10
-    W: 100
-    K: 0.3
-    N: 1
-    Theta: 90
-    Phi: 0
+    theta: 90
+    T: 0.01
+    mu: 15.91549
+    w: 100
+    lambda: 10
+    f: 1.591549
+    k: 0.1
+    phi: 0
+    n: 0
     RODistance: 100

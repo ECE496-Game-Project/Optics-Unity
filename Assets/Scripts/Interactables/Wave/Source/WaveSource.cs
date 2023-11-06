@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System;
-using System.Collections.Generic;
 using CommonUtils;
 using WaveUtils;
 using Interfaces;
+using ParameterTransfer;
 
 namespace GO_Wave {
     public class WaveSource : MonoBehaviour, I_ParameterTransfer {
@@ -45,24 +45,6 @@ namespace GO_Wave {
             WaveDisplay.CleanDisplay();
         }
 
-        public bool ParameterSet<T>(string paramName, T value) {
-            if (paramName == "Name") {
-                this.name = Convert.ToString(value);
-                ParamChangeTrigger();
-                return true;
-            }
-            bool res = false;
-            //I_ParameterTransfer.ParameterSetHelper(m_params, paramName, value);
-            if (res) ParamChangeTrigger();
-            return res;
-        }
-        public T ParameterGet<T>(string paramName) {
-            if (paramName == "Name") {
-                return (T)(object)this.name;
-            }
-            return default;
-            //I_ParameterTransfer.ParameterGetHelper<T>(m_params, paramName);
-        }
         public void WaveParameterGetAll(out WAVETYPE type, out float eox, out float eoy, out float w, out float k, out float n, out float theta, out float phi) {
             type = m_params.Type;
             eox = m_params.Eox;
@@ -94,7 +76,46 @@ namespace GO_Wave {
         }
         public virtual void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
             // Child Wave Parameter Registration
+            var NameTuple = (ParameterInfo<string>)ParameterInfos.SymbolQuickAccess["name"];
+            var EoxTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["Eox"];
+            var EoyTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["Eoy"];
+            var thetaTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["theta"];
+            var TTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["T"];
+            var muTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["mu"];
+            var wTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["w"];
+            var lambdaTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["lambda"];
+            var fTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["f"];
+            var kTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["k"];
+            var phiTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["phi"];
+            var nTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["n"];
 
+            NameTuple.Getter = () => { return this.name; };
+            EoxTuple.Getter = () => { return m_params.Eox; };
+            EoyTuple.Getter = () => { return m_params.Eoy; };
+            thetaTuple.Getter = () => { return m_params.theta; };
+            TTuple.Getter = () => { return m_params.T; };
+            muTuple.Getter = () => { return m_params.mu; };
+            wTuple.Getter = () => { return m_params.w; };
+            lambdaTuple.Getter = () => { return m_params.lambda; };
+            fTuple.Getter = () => { return m_params.f; };
+            kTuple.Getter = () => { return m_params.k; };
+            phiTuple.Getter = () => { return m_params.phi; };
+            nTuple.Getter = () => { return m_params.n; };
+
+            NameTuple.Default = this.name;
+            EoxTuple.Default = m_params.Eox;
+            EoyTuple.Default = m_params.Eoy;
+            thetaTuple.Default = m_params.theta;
+            TTuple.Default = m_params.T;
+            muTuple.Default = m_params.mu;
+            wTuple.Default = m_params.w;
+            lambdaTuple.Default = m_params.lambda;
+            fTuple.Default = m_params.f;
+            kTuple.Default = m_params.k;
+            phiTuple.Default = m_params.phi;
+            nTuple.Default = m_params.n;
+
+            NameTuple.Setter = (evt) => { this.name = evt.newValue; };
         }
         /// <summary>
         /// Script-Generated-WaveSource Requires to Call ManualAwake.
@@ -116,11 +137,5 @@ namespace GO_Wave {
         public void Start() {
             ParamChangeTrigger();
         }
-        public void UIOnClick(ParameterInfoList waveSource) {
-            // DeInitalize and Initalize all Getter and Setter
-        }
-        //public static void UIGenerate() {
-        //    //m_paramInfoList = new ParameterInfoList();
-        //}
     }
 }

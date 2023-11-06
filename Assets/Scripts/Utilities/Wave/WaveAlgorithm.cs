@@ -6,38 +6,38 @@ using CommonUtils;
 namespace WaveUtils {
     public static class WaveAlgorithm {
 		public static float C = 299792458;
-        public static void changeT(in float T, out float mu, out float w, out float lambda, out float f, out float k, in float n) {
-			mu = 1 / T;
-			w = 2 * Mathf.PI * mu;
-			k = w * n / C;
-			f = k / (2 * Mathf.PI);
-			lambda = 1 / f;
+        public static void changeT(WaveParams param) {
+			param.mu = 1 / param.T;
+			param.w = 2 * Mathf.PI * param.mu;
+			param.k = param.w * param.n / C;
+			param.f = param.k / (2 * Mathf.PI);
+			param.lambda = 1 / param.f;
 		}
-        public static void changeW(out float T, out float mu, in float w, out float lambda, out float f, out float k, in float n) {
-			mu = w / (2 * Mathf.PI);
-			T = 1 / mu;
-			k = w * n / C;
-			f = k / (2 * Mathf.PI);
-			lambda = 1 / f;
+        public static void changeW(WaveParams param) {
+			param.mu = param.w / (2 * Mathf.PI);
+			param.T = 1 / param.mu;
+			param.k = param.w * param.n / C;
+			param.f = param.k / (2 * Mathf.PI);
+			param.lambda = 1 / param.f;
 		}
-		public static void changeLambda(out float T, out float mu, out float w, in float lambda, out float f, out float k, in float n) {
-			f = 1 / lambda;
-			k = 2 * Mathf.PI * f;
-			w = C * k / n;
-			T = 2 * Mathf.PI / w;
-			mu = 1 / T;
+		public static void changeLambda(WaveParams param) {
+			param.f = 1 / param.lambda;
+			param.k = 2 * Mathf.PI * param.f;
+			param.w = C * param.k / param.n;
+			param.T = 2 * Mathf.PI / param.w;
+			param.mu = 1 / param.T;
 		}
-		public static void changeK(out float T, out float mu, out float w, out float lambda, out float f, in float k, in float n) {
-			lambda = (2 * Mathf.PI) / k;
-			f = 1 / lambda;
-			w = C * k / n;
-			T = 2 * Mathf.PI / w;
-			mu = 1 / T;
+		public static void changeK(WaveParams param) {
+			param.lambda = (2 * Mathf.PI) / param.k;
+			param.f = 1 / param.lambda;
+			param.w = C * param.k / param.n;
+			param.T = 2 * Mathf.PI / param.w;
+			param.mu = 1 / param.T;
 		}
-		public static void changeN(in float w, out float lambda, out float f, out float k, in float n) {
-			k = w * n / C;
-			f = k / (2 * Mathf.PI);
-			lambda = 1 / f;
+		public static void changeN(WaveParams param) {
+			param.k = param.w * param.n / C;
+			param.f = param.k / (2 * Mathf.PI);
+			param.lambda = 1 / param.f;
 		}
 
 		public static Vector3 CalcIrradiance(
