@@ -5,7 +5,7 @@ using Interfaces;
 using Complex = System.Numerics.Complex;
 
 namespace GO_Device {
-    public class Waveplate : PolarizedBase, I_ParameterTransfer {
+    public class Waveplate : PolarizedBase {
         public float PlateDeg;
         public float AxisDiffDeg;
 

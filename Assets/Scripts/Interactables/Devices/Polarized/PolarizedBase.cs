@@ -8,7 +8,7 @@ using System;
 
 namespace GO_Device {
 
-    public class PolarizedBase : DeviceBase, I_ParameterTransfer {
+    public class PolarizedBase : DeviceBase/*, I_ParameterTransfer*/ {
         public float ThicknessOffset;
         
         public virtual ComplexMatrix2X2 JohnsMatrix { get; }
@@ -51,7 +51,7 @@ namespace GO_Device {
             WAVETYPE parType;
             float parEox, parEoy, parW, parK, parN, parTheta, parPhi;
             float resEox, resEoy, resTheta;
-            parentWS.ParameterGetAll(out parType, out parEox, out parEoy, out parW, out parK, out parN, out parTheta, out parPhi);
+            parentWS.WaveParameterGetAll(out parType, out parEox, out parEoy, out parW, out parK, out parN, out parTheta, out parPhi);
 
             WaveAlgorithm.WaveToJohnsVector(
                 parEox,

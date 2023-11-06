@@ -11,14 +11,9 @@ namespace GO_Wave {
         #endregion
 
         #region PRIVRATE VARIABLES
-#if DEBUG_WAVE
         [Header("DEBUG_WAVE")]
         [SerializeField] private DeviceBase m_hit_Device;
         [SerializeField] private WaveSource m_activeWS;
-#else
-        private DeviceBase m_hit_Device;
-        private WaveSource m_activeWS;
-#endif
         #endregion
 
         public void CleanInteract() {

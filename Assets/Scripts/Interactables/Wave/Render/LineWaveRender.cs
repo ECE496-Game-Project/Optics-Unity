@@ -21,16 +21,11 @@ namespace GO_Wave {
 
         #region PRIVRATE VARIABLES
         private bool _isPause = false;
-#if DEBUG_WAVE
+
         [Header("DEBUG_WAVE")]
         [SerializeField] private int m_SampleCount;
         [SerializeField] private List<LineWaveSample> _samplePointList;
         [SerializeField] private WaveSource _activeWS;
-#else
-        private int m_SampleCount;
-        private List<LineWaveSample> _samplePointList;
-        private WaveSource _activeWS;
-#endif
         #endregion
 
         #region GLOBAL METHOD
@@ -79,8 +74,8 @@ namespace GO_Wave {
                     _samplePointList[i].transform.position - this.transform.position, 
                     Time.time * _timeScale,
                     _activeWS.Params.Eox, _activeWS.Params.Eoy,
-                    _activeWS.Params.W, _activeWS.Params.K, _activeWS.Params.N,
-                    _activeWS.Params.Theta, _activeWS.Params.Phi,
+                    _activeWS.Params.w, _activeWS.Params.k, _activeWS.Params.n,
+                    _activeWS.Params.theta, _activeWS.Params.phi,
                     _activeWS.Params.UHat, _activeWS.Params.VHat, _activeWS.Params.KHat
                 );
                 _samplePointList[i].UpdateEVec(vec);

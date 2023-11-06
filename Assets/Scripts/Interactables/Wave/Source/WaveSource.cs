@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using System.Reflection;
 using System;
-
+using System.Collections.Generic;
 using CommonUtils;
 using WaveUtils;
 using Interfaces;
@@ -14,14 +13,11 @@ namespace GO_Wave {
         #endregion
 
 #region PRIVATE VARIABLES
-#if DEBUG_WAVE
         [Header("DEBUG_WAVE")]
         [SerializeField] protected WaveParams m_params;
+        // Current Section's Wave Distance
         [SerializeField] protected float m_effectDistance;
-#else
-        protected WaveParams m_params;
-        protected float m_effectDistance;
-#endif
+        protected ParameterInfoList m_paramInfoList;
         #endregion
 
         #region GLOBAL METHODS
@@ -50,34 +46,36 @@ namespace GO_Wave {
         }
 
         public bool ParameterSet<T>(string paramName, T value) {
-            if(paramName == "EffectDistance") {
-                EffectDistance = (float)Convert.ToDouble(value);
+            if (paramName == "Name") {
+                this.name = Convert.ToString(value);
                 ParamChangeTrigger();
                 return true;
             }
-            bool res = I_ParameterTransfer.ParameterSetHelper(m_params, paramName, value);
-            if(res) ParamChangeTrigger();
+            bool res = false;
+            //I_ParameterTransfer.ParameterSetHelper(m_params, paramName, value);
+            if (res) ParamChangeTrigger();
             return res;
         }
         public T ParameterGet<T>(string paramName) {
-            if (paramName == "EffectDistance") {
-                return (T)(object)EffectDistance;
+            if (paramName == "Name") {
+                return (T)(object)this.name;
             }
-            return I_ParameterTransfer.ParameterGetHelper<T>(m_params, paramName);
+            return default;
+            //I_ParameterTransfer.ParameterGetHelper<T>(m_params, paramName);
         }
-        public void ParameterGetAll(out WAVETYPE type, out float eox, out float eoy, out float w, out float k, out float n, out float theta, out float phi) {
+        public void WaveParameterGetAll(out WAVETYPE type, out float eox, out float eoy, out float w, out float k, out float n, out float theta, out float phi) {
             type = m_params.Type;
             eox = m_params.Eox;
             eoy = m_params.Eoy;
-            w = m_params.W; 
-            k = m_params.K;
-            n = m_params.N;
-            theta = m_params.Theta;
-            phi = m_params.Phi;
+            w = m_params.w; 
+            k = m_params.k;
+            n = m_params.n;
+            theta = m_params.theta;
+            phi = m_params.phi;
         }
         #endregion
 
-        private void RegisterCallback() {
+        protected void RegisterDirCallback() {
             switch (m_params.Type) {
                 case WAVETYPE.PLANE:
                     m_params.UHat = (in Vector3 r) => { return this.transform.right; };
@@ -94,7 +92,10 @@ namespace GO_Wave {
                     break;
             }
         }
+        public virtual void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
+            // Child Wave Parameter Registration
 
+        }
         /// <summary>
         /// Script-Generated-WaveSource Requires to Call ManualAwake.
         /// </summary>
@@ -109,11 +110,17 @@ namespace GO_Wave {
 
             /*init ActiveWaveParams*/
             m_params = srcWP;
-            RegisterCallback();
+            RegisterDirCallback();
         }
         
         public void Start() {
             ParamChangeTrigger();
         }
+        public void UIOnClick(ParameterInfoList waveSource) {
+            // DeInitalize and Initalize all Getter and Setter
+        }
+        //public static void UIGenerate() {
+        //    //m_paramInfoList = new ParameterInfoList();
+        //}
     }
 }

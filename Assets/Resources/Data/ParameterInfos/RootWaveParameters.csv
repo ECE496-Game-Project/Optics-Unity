@@ -1,0 +1,19 @@
+﻿Type,Name,Symbol,Unit,Permission,DefaultValue,UpperBound,LowerBound
+String,WaveName,,,RW,,,
+Hierarchy,Amplitude(Eo),,,,,,
+Float,Udir Amp,Eox,V/m,RW,0,,
+Float,Vdir Amp,Eoy,V/m,RW,0,,
+Float,Phase Diff,theta,°,RWS,0,0,360
+HierarchyEnd,,,,,,,
+Hierarchy,Temporal Properties,,,,,,
+Float,Period,T,fs,RW,0,,
+Float,Frequency,mu,THz,RO,,,
+Float,Angular Frequency,w,rad/fs,RW,0,,
+HierarchyEnd,,,,,,,
+Hierarchy,Spatial Properties,,,,,,
+Float,Period,lambda,nm,RW,0,,
+Float,Frequency,f,1/nm,RO,,,
+Float,Angular Frequency,k,rad/nm,RW,0,,
+HierarchyEnd,,,,,,,
+Float,Initial Phase,phi,°,RWS,0,0,360
+Float,Refractive Index,n,,RWS,1,1,5

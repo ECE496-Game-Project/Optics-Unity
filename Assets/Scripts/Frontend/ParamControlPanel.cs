@@ -9,6 +9,11 @@ public class ParamControlPanel : MonoBehaviour
     [SerializeField] private UIDocument _uiDocument;
     [SerializeField] private StyleSheet _styleSheet;
 
+    //private ParameterInfoList rootWave;
+    //private ParameterInfoList childWave;
+    //private ParameterInfoList polarizer;
+    //private ParameterInfoList polarizer;
+
     private VisualElement _root;
     private ListView _listView;
     private VisualElement _paramView;

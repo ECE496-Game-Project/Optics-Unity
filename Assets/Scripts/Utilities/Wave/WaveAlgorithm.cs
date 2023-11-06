@@ -5,6 +5,41 @@ using CommonUtils;
 
 namespace WaveUtils {
     public static class WaveAlgorithm {
+		public static float C = 299792458;
+        public static void changeT(in float T, out float mu, out float w, out float lambda, out float f, out float k, in float n) {
+			mu = 1 / T;
+			w = 2 * Mathf.PI * mu;
+			k = w * n / C;
+			f = k / (2 * Mathf.PI);
+			lambda = 1 / f;
+		}
+        public static void changeW(out float T, out float mu, in float w, out float lambda, out float f, out float k, in float n) {
+			mu = w / (2 * Mathf.PI);
+			T = 1 / mu;
+			k = w * n / C;
+			f = k / (2 * Mathf.PI);
+			lambda = 1 / f;
+		}
+		public static void changeLambda(out float T, out float mu, out float w, in float lambda, out float f, out float k, in float n) {
+			f = 1 / lambda;
+			k = 2 * Mathf.PI * f;
+			w = C * k / n;
+			T = 2 * Mathf.PI / w;
+			mu = 1 / T;
+		}
+		public static void changeK(out float T, out float mu, out float w, out float lambda, out float f, in float k, in float n) {
+			lambda = (2 * Mathf.PI) / k;
+			f = 1 / lambda;
+			w = C * k / n;
+			T = 2 * Mathf.PI / w;
+			mu = 1 / T;
+		}
+		public static void changeN(in float w, out float lambda, out float f, out float k, in float n) {
+			k = w * n / C;
+			f = k / (2 * Mathf.PI);
+			lambda = 1 / f;
+		}
+
 		public static Vector3 CalcIrradiance(
 			Vector3 r, float t, 
 			in float Eox, in float Eoy,
