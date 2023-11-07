@@ -1,31 +1,18 @@
 ﻿using UnityEngine;
 using WaveUtils;
-using System;
+using ParameterTransfer;
 using Complex = System.Numerics.Complex;
 
 namespace GO_Device {
     public class Polarizer : PolarizedBase {
         public float RotDeg;
-        public override bool ParameterSet<T>(string paramName, T value) {
-            if(paramName == "RotDeg") {
-                RotDeg = (float)Convert.ToDouble(value);
-                //foreach (var pair in m_childParentPair) {
-                //    WaveClean(pair.Value);
-                //    pair.Key.ParamChangeTrigger();
-                //}
-                return true;
-            }
-            else return base.ParameterSet(paramName, value);
+        public override void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
+            var RotDegTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["RotDeg"];
+            RotDegTuple.Getter = () => { return RotDeg; };
+            RotDegTuple.Default = RotDeg;
+            RotDegTuple.Setter = (evt) => { RotDeg = evt.newValue; ParameterChangeTrigger(); };
+        }
 
-        }
-        public override T ParameterGet<T>(string paramName) {
-            if (paramName == "RotDeg") {
-                return (T)(object)RotDeg;
-            }
-            else {
-                return base.ParameterGet<T>(paramName);
-            }
-        }
         public override ComplexMatrix2X2 JohnsMatrix {
             get {
                 float rotRad = RotDeg * Mathf.Deg2Rad;

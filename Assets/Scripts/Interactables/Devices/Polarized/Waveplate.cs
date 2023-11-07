@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using WaveUtils;
-using Interfaces;
+using ParameterTransfer;
 using Complex = System.Numerics.Complex;
 
 namespace GO_Device {
@@ -9,32 +8,15 @@ namespace GO_Device {
         public float PlateDeg;
         public float AxisDiffDeg;
 
-        public override bool ParameterSet<T>(string paramName, T value) {
-            if(paramName == "PlateDeg") {
-                PlateDeg = (float)Convert.ToDouble(value);
-            }
-            else if (paramName == "AxisDiffDeg") {
-                AxisDiffDeg = (float)Convert.ToDouble(value);
-            }
-            else {
-                return base.ParameterSet(paramName, value);
-            }
-            //foreach(var pair in m_childParentPair) {
-            //    WaveClean(pair.Value);
-            //    pair.Key.ParamChangeTrigger();
-            //}
-            return true;
-        }
-        public override T ParameterGet<T>(string paramName) {
-            if (paramName == "PlateDeg") {
-                return (T)(object)PlateDeg;
-            }
-            else if (paramName == "AxisDiffDeg") {
-                return (T)(object)AxisDiffDeg;
-            }
-            else {
-                return base.ParameterGet<T>(paramName);
-            }
+        public override void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
+            var PlateDegTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["PlateDeg"];
+            var AxisDiffDegTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["AxisDiffDeg"];
+            PlateDegTuple.Getter = () => { return PlateDeg; };
+            AxisDiffDegTuple.Getter = () => { return AxisDiffDeg; };
+            PlateDegTuple.Default = PlateDeg;
+            AxisDiffDegTuple.Default = AxisDiffDeg;
+            PlateDegTuple.Setter = (evt) => { PlateDeg = evt.newValue; ParameterChangeTrigger(); };
+            AxisDiffDegTuple.Setter = (evt) => { AxisDiffDeg = evt.newValue; ParameterChangeTrigger(); };
         }
 
         public override ComplexMatrix2X2 JohnsMatrix {

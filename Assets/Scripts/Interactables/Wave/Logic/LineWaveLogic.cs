@@ -18,7 +18,7 @@ namespace GO_Wave {
 
         public void CleanInteract() {
             if (m_hit_Device != null)
-                m_hit_Device.WaveClean(m_activeWS);
+                m_hit_Device.CleanDeviceHitTrace(m_activeWS);
             m_hit_Device = null;
         }
 
@@ -31,7 +31,6 @@ namespace GO_Wave {
                 && ((1 << hit.collider.gameObject.layer) & _interactMask) != 0
             ) {
                 m_hit_Device = hit.collider.gameObject.GetComponent<DeviceBase>();
-                Debug.Log(hit.collider.gameObject.name);
                 m_hit_Device.WaveHit(hit, m_activeWS);
             }
         }

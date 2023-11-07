@@ -20,65 +20,62 @@ namespace GO_Wave {
         #endregion
 
         #region PRIVRATE VARIABLES
-        private bool _isPause = false;
-
         [Header("DEBUG_WAVE")]
         [SerializeField] private int m_SampleCount;
-        [SerializeField] private List<LineWaveSample> _samplePointList;
+        [SerializeField] private Stack<LineWaveSample> _samplePointList;
         [SerializeField] private WaveSource _activeWS;
         #endregion
 
         #region GLOBAL METHOD
         public void CleanDisplay() {
-            m_SampleCount = 0;
-
-            foreach (LineWaveSample sample in _samplePointList) {
-                LineWaveSamplePool.Instance.Pool.Release(sample);
+            while (_samplePointList.Count > 0) {
+                var popitem = _samplePointList.Pop();
+                popitem.transform.parent = LineWaveSamplePool.Instance.transform;
+                LineWaveSamplePool.Instance.Pool.Release(popitem);
             }
-            _samplePointList.Clear();
+            m_SampleCount = 0;
         }
         public void RefreshDisplay() {
-            _isPause = false;
-
             /*Reposition All Sample Points base on WaveSource*/
             m_SampleCount = Mathf.FloorToInt(_activeWS.EffectDistance / _perSampleSpaceLength);
-
+            
             int diff = m_SampleCount - _samplePointList.Count;
-            while(diff > 0) {
+            while (diff > 0) {
                 LineWaveSample sample = LineWaveSamplePool.Instance.Pool.Get();
                 sample.transform.rotation = Quaternion.LookRotation(this.transform.forward, this.transform.up);
                 sample.transform.parent = this.transform;
-                _samplePointList.Add(sample);
+                _samplePointList.Push(sample);
                 diff--;
             }
 
             if (diff == 0) goto RePosEnd;
 
             while(diff < 0) {
-                _samplePointList[_samplePointList.Count + diff].transform.parent = LineWaveSamplePool.Instance.transform;
-                LineWaveSamplePool.Instance.Pool.Release(_samplePointList[_samplePointList.Count + diff]);
-                _samplePointList.RemoveAt(_samplePointList.Count + diff);
+                var popitem = _samplePointList.Pop();
+                popitem.transform.parent = LineWaveSamplePool.Instance.transform;
+                LineWaveSamplePool.Instance.Pool.Release(popitem);
                 diff++;
             }
 
             RePosEnd:
-            for (int i = 0; i < m_SampleCount; i++) {
-                _samplePointList[i].name = _samplePointPrefab.name + "[" + i + "]";
-                _samplePointList[i].transform.position = this.transform.position + i * _perSampleSpaceLength * this.transform.forward;
+            int i = 0;
+            foreach(var item in _samplePointList) {
+                i++;
+                item.transform.position = this.transform.position + i * _perSampleSpaceLength * this.transform.forward;
             }
         }
 
         public void UpdateDisplay() {
-            for (int i = 0; i < m_SampleCount; i++) {
+            foreach (var item in _samplePointList) {
                 Vector3 vec = WaveAlgorithm.CalcIrradiance(
-                    _samplePointList[i].transform.position - this.transform.position, 
+                    item.transform.position - this.transform.position,
                     Time.time * _timeScale,
                     _activeWS.Params.Eox, _activeWS.Params.Eoy,
                     _activeWS.Params.w, _activeWS.Params.k, _activeWS.Params.n,
                     _activeWS.Params.theta, _activeWS.Params.phi,
                     _activeWS.Params.UHat, _activeWS.Params.VHat, _activeWS.Params.KHat
                 );
-                _samplePointList[i].UpdateEVec(vec);
+                item.UpdateEVec(vec);
             }
         }
 
@@ -91,7 +88,7 @@ namespace GO_Wave {
 
         private void Awake() {
             m_SampleCount = 0;
-            _samplePointList = new List<LineWaveSample>();
+            _samplePointList = new Stack<LineWaveSample>();
 
             _activeWS = this.transform.GetComponent<WaveSource>();
             if (_activeWS == null) {
@@ -106,7 +103,7 @@ namespace GO_Wave {
         }
 
         private void Update() {
-            if(!_isPause) UpdateDisplay();
+            UpdateDisplay();
         }
     }
 }

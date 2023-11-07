@@ -62,23 +62,23 @@ namespace GO_Wave {
             nTuple.Default = m_params.n;
 
             NameTuple.Setter    = (evt) => { this.name = evt.newValue; };
-            EoxTuple.Setter     = (evt) => { m_params.Eox = evt.newValue; ParamChangeTrigger(); };
-            EoyTuple.Setter     = (evt) => { m_params.Eoy = evt.newValue; ParamChangeTrigger(); };
-            thetaTuple.Setter   = (evt) => { m_params.theta = evt.newValue; ParamChangeTrigger(); };
-            TTuple.Setter       = (evt) => { m_params.T = evt.newValue; WaveAlgorithm.changeT(m_params); ParamChangeTrigger(); };
-            wTuple.Setter       = (evt) => { m_params.w = evt.newValue; WaveAlgorithm.changeW(m_params); ParamChangeTrigger(); };
-            lambdaTuple.Setter  = (evt) => { m_params.lambda = evt.newValue; WaveAlgorithm.changeLambda(m_params); ParamChangeTrigger(); };
-            kTuple.Setter       = (evt) => { m_params.k = evt.newValue; WaveAlgorithm.changeK(m_params); ParamChangeTrigger(); };
-            nTuple.Setter       = (evt) => { m_params.n = evt.newValue; WaveAlgorithm.changeN(m_params); ParamChangeTrigger(); };
-            phiTuple.Setter     = (evt) => { m_params.phi = evt.newValue; ParamChangeTrigger(); };
+            EoxTuple.Setter     = (evt) => { m_params.Eox = evt.newValue; ParameterChangeTrigger(); };
+            EoyTuple.Setter     = (evt) => { m_params.Eoy = evt.newValue; ParameterChangeTrigger(); };
+            thetaTuple.Setter   = (evt) => { m_params.theta = evt.newValue; ParameterChangeTrigger(); };
+            TTuple.Setter       = (evt) => { m_params.T = evt.newValue; WaveAlgorithm.changeT(m_params); ParameterChangeTrigger(); };
+            wTuple.Setter       = (evt) => { m_params.w = evt.newValue; WaveAlgorithm.changeW(m_params); ParameterChangeTrigger(); };
+            lambdaTuple.Setter  = (evt) => { m_params.lambda = evt.newValue; WaveAlgorithm.changeLambda(m_params); ParameterChangeTrigger(); };
+            kTuple.Setter       = (evt) => { m_params.k = evt.newValue; WaveAlgorithm.changeK(m_params); ParameterChangeTrigger(); };
+            nTuple.Setter       = (evt) => { m_params.n = evt.newValue; WaveAlgorithm.changeN(m_params); ParameterChangeTrigger(); };
+            phiTuple.Setter     = (evt) => { m_params.phi = evt.newValue; ParameterChangeTrigger(); };
         }
 
         /// <summary>
         /// Need Manual Reset Effective Distance since Distance Modified during Interaction.
         /// </summary>
-        public override void ParamChangeTrigger() {
+        public override void ParameterChangeTrigger() {
             EffectDistance = _profile.Parameters.RODistance;
-            base.ParamChangeTrigger();
+            base.ParameterChangeTrigger();
         }
     }
 }

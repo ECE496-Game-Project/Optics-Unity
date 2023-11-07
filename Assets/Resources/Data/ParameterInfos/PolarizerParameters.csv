@@ -1,0 +1,2 @@
+﻿Type,Permission,Name,Symbol,Unit,DefaultValue,UpperBound,LowerBound
+Float,RWSlider,Rotation Degree,RotDeg,°,0,0,360

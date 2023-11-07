@@ -550,12 +550,12 @@ PrefabInstance:
     - target: {fileID: 5237302342889919751, guid: 41d44d652ec2ac645a757149e46cfefb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5237302342889919751, guid: 41d44d652ec2ac645a757149e46cfefb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 20
+      value: 22.91
       objectReference: {fileID: 0}
     - target: {fileID: 5237302342889919751, guid: 41d44d652ec2ac645a757149e46cfefb,
         type: 3}
@@ -800,15 +800,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 734fcf633f9484b25bd27d5a37f9c0ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waveSource: {fileID: 0}
-  _polarizer: {fileID: 0}
-  _waveplate: {fileID: 0}
-  _componentsToDisplay:
-  - RootWaveSource
-  - Polarizer
-  - Waveplate
-  _objList: []
-  m_highlightController: {fileID: 0}
 --- !u!114 &979597760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1817,7 +1808,7 @@ PrefabInstance:
     - target: {fileID: 5237302342889919751, guid: 41d44d652ec2ac645a757149e46cfefb,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10
+      value: 5.1
       objectReference: {fileID: 0}
     - target: {fileID: 5237302342889919751, guid: 41d44d652ec2ac645a757149e46cfefb,
         type: 3}

@@ -2,37 +2,28 @@ using UnityEngine;
 using System.Collections.Generic;
 using GO_Wave;
 using WaveUtils;
-using CommonUtils;
 using Interfaces;
+using ParameterTransfer;
 using System;
-
 namespace GO_Device {
 
-    public class PolarizedBase : DeviceBase/*, I_ParameterTransfer*/ {
+    public class PolarizedBase : DeviceBase, I_ParameterTransfer {
         public float ThicknessOffset;
-        
+        private WaveSource m_parent;
+        private WaveSource m_child;
+        private RaycastHit m_hit;
+
         public virtual ComplexMatrix2X2 JohnsMatrix { get; }
 
-#if DEBUG_DEVICE
-        [Header("DEBUG_DEVICE")]        
-        [SerializeField] protected Dictionary<WaveSource, WaveSource> m_childParentPair;
-#else
-        protected Dictionary<WaveSource, WaveSource> m_childParentPair;
-#endif
-        public virtual bool ParameterSet<T>(string paramName, T value) {
-            if (paramName == "ThicknessOffset") {
-                ThicknessOffset = (float)Convert.ToDouble(value);
-                return true;
-            }
-            return false;
+        public virtual void RegisterParametersCallback(ParameterInfoList ParameterInfos) { }
+
+        public void ParameterChangeTrigger() {
+            m_parent.ParameterChangeTrigger();
         }
-        public virtual T ParameterGet<T>(string paramName) {
-            if (paramName == "ThicknessOffset") {
-                return (T)(object)ThicknessOffset;
-            }
-            return default(T);
-        }
+
         public override void WaveHit(in RaycastHit hit, WaveSource parentWS) {
+            m_hit = hit;
+
             /*GO Setup*/
             GameObject new_GO = new GameObject(parentWS.name + "_Child", typeof(WaveSource), typeof(LineWaveRender), typeof(LineWaveLogic));
             new_GO.transform.position = hit.point + Vector3.Normalize(hit.point - parentWS.transform.position) * ThicknessOffset;
@@ -80,17 +71,21 @@ namespace GO_Device {
             lwi.SyncRootParam(parentWS.WaveInteract);
 
             /*Store Pair*/
-            m_childParentPair.Add(parentWS, childWS);
+            m_parent = parentWS;
+            m_child = childWS;
         }
 
-        public override void WaveClean(WaveSource parentWS) {
-            m_childParentPair[parentWS].WaveInteract.CleanInteract();
-            Destroy(m_childParentPair[parentWS].gameObject);
-            m_childParentPair.Remove(parentWS);
+        public override void CleanDeviceHitTrace(WaveSource parentWS) {
+            if (m_parent == null && m_child == null) return;
+            m_child.WaveClean();
+            Destroy(m_child.gameObject);
+            m_child = null;
+            m_parent = null;
         }
 
         public void Awake() {
-            m_childParentPair = new Dictionary<WaveSource, WaveSource>();
+            m_child = null;
+            m_parent = null;
         }
     }
 }

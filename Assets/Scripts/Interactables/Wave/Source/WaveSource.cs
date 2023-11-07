@@ -34,13 +34,13 @@ namespace GO_Wave {
             set { m_effectDistance = value; }
         }
         
-        public virtual void ParamChangeTrigger() {
+        public virtual void ParameterChangeTrigger() {
             WaveInteract.CleanInteract();
             WaveInteract.Interact();
             WaveDisplay.RefreshDisplay();
         }
 
-        public void DisableTrigger() {
+        public void WaveClean() {
             WaveInteract.CleanInteract();
             WaveDisplay.CleanDisplay();
         }
@@ -135,7 +135,7 @@ namespace GO_Wave {
         }
         
         public void Start() {
-            ParamChangeTrigger();
+            ParameterChangeTrigger();
         }
     }
 }
