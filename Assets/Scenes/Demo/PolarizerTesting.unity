@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 552010732}
   - component: {fileID: 552010731}
   m_Layer: 0
-  m_Name: WaveLine1
+  m_Name: WaveTrack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -329,7 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxDeviceCount: 4
-  DeviceSeperationDistance: 10
+  DeviceSeperationDistance: 15
 --- !u!4 &552010732
 Transform:
   m_ObjectHideFlags: 0

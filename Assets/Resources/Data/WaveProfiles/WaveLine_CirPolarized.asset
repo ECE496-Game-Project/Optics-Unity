@@ -25,4 +25,4 @@ MonoBehaviour:
     k: 0.1
     phi: 0
     n: 0
-    RODistance: 50
+    RODistance: 100

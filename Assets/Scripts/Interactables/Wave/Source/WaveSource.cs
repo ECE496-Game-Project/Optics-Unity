@@ -4,6 +4,7 @@ using CommonUtils;
 using WaveUtils;
 using Interfaces;
 using ParameterTransfer;
+using System.Collections;
 
 namespace GO_Wave {
     public class WaveSource : MonoBehaviour, I_ParameterTransfer {
@@ -135,6 +136,12 @@ namespace GO_Wave {
         }
         
         public void Start() {
+            StartCoroutine(WaitForOneFixedUpdateAndTrigger());
+        }
+
+        IEnumerator WaitForOneFixedUpdateAndTrigger()
+        {
+            yield return new WaitForFixedUpdate();
             ParameterChangeTrigger();
         }
     }

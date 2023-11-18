@@ -1,4 +1,5 @@
 using GO_Device;
+using GO_Wave;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -13,9 +14,9 @@ namespace Constraint
 
         private List<DeviceBase> m_devices = new List<DeviceBase>();
 
-        private Transform m_waveSource;
+        private WaveSource m_waveSource;
 
-        public Transform WaveSource
+        public WaveSource WaveSource
         {
             get => m_waveSource;
             set => m_waveSource = value;
@@ -30,7 +31,7 @@ namespace Constraint
             DeviceSeperationDistance = deviceSeperationDistance;
         }
 
-        public WaveDeviceOrder(Transform waveSource, int maxDeviceCount, int deviceSeperationDistance)
+        public WaveDeviceOrder(WaveSource waveSource, int maxDeviceCount, int deviceSeperationDistance)
         {
             m_waveSource = waveSource;
             MaxDeviceCount = maxDeviceCount;
@@ -98,7 +99,7 @@ namespace Constraint
             Assert.IsNotNull(m_waveSource);
             Assert.IsTrue(index >= 0 && index < m_devices.Count);
 
-            return m_waveSource.position + m_waveSource.forward * DeviceSeperationDistance * (index + 1);
+            return m_waveSource.transform.position + m_waveSource.transform.forward * DeviceSeperationDistance * (index + 1);
         }
 
     }
