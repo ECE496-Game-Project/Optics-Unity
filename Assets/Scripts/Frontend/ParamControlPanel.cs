@@ -5,14 +5,19 @@ using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using System;
 using ParameterTransfer;
+using GO_Device;
+using GO_Wave;
+using CommonUtils;
 
 public class ParamControlPanel : MonoBehaviour
 {
     [SerializeField] private UIDocument _uiDocument;
     [SerializeField] private StyleSheet _styleSheet;
 
+
     private VisualElement _root;
     private ListView _objectList;
+
     private ListView _sceneList;
     private VisualElement _paramView;
 
@@ -85,7 +90,7 @@ public class ParamControlPanel : MonoBehaviour
         content.Add(_objectList);
 
         // _paramView = new VisualElement();
-        _paramView = GenerateWaveSourceParam();
+        //_paramView = GenerateRootWaveSourceParam();
         _paramView.AddToClassList("paramView");
         _paramView.AddToClassList("container");
         content.Add(_paramView);
@@ -162,9 +167,16 @@ public class ParamControlPanel : MonoBehaviour
 
     #region Param View
 
-    void GenerateParamView()
+    void GenerateParamView(GameObject obj)
     {
-        // _paramView = GenerateWaveSourceParam();
+        //_paramView.Clear();
+        RootWaveSource rws = obj.GetComponent<RootWaveSource>();
+        if(rws != null)
+            _paramView = GenerateRootWaveSourceParam(rws);
+
+
+
+        // _paramView = GenerateRootWaveSourceParam();
         // _paramView = GeneratePolarizerParam();
         // _paramView = GenerateWavePlateParam();
     }
@@ -182,8 +194,9 @@ public class ParamControlPanel : MonoBehaviour
     2. UI侧不用HardCode所有不同的可展示Object的UI排版，而是可以Traverse List，然后程序化生成
         */
 
-    VisualElement GenerateWaveSourceParam()
+    VisualElement GenerateRootWaveSourceParam(RootWaveSource rootWS)
     {
+        Debug.Log("GenerateRootWaveSourceParam");
         var waveSource = new VisualElement();
 
         var title = new Label("Wave Source");
@@ -352,7 +365,15 @@ public class ParamControlPanel : MonoBehaviour
    
     void OnSelectlistViewItem(IEnumerable<object> objects)
     {
-        GenerateParamView();
+        int counter = 0;
+        foreach (object obj in objects) {
+            if (counter >= 1) {
+                DebugLogger.Warning(this.name, "Selecting Multiple Objects!");
+                break;
+            }
+            GenerateParamView(obj as GameObject);
+            counter++;
+        }
     }
 
     void LowerBoundCheck(ChangeEvent<float> evt, float bound)
