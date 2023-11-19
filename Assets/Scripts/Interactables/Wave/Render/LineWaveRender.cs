@@ -70,10 +70,7 @@ namespace GO_Wave {
                 Vector3 vec = WaveAlgorithm.CalcIrradiance(
                     item.transform.position - this.transform.position,
                     Time.time * _timeScale,
-                    _activeWS.Params.Eox, _activeWS.Params.Eoy,
-                    _activeWS.Params.w, _activeWS.Params.k, _activeWS.Params.n,
-                    _activeWS.Params.theta, _activeWS.Params.phi,
-                    _activeWS.Params.UHat, _activeWS.Params.VHat, _activeWS.Params.KHat
+                    _activeWS.Params
                 );
                 item.UpdateEVec(vec);
             }

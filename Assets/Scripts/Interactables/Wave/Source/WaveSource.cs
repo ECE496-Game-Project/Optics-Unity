@@ -59,9 +59,6 @@ namespace GO_Wave {
             theta = m_params.theta;
             phi = m_params.phi;
         }
-        public void WaveParameterGetDistance(out float distance) {
-            distance = m_params.RODistance;
-        }
         #endregion
 
         protected void RegisterDirCallback() {
@@ -129,6 +126,9 @@ namespace GO_Wave {
         /// </summary>
         /// <param name="srcWP"> Pre initalized WaveParameter.</param>
         public void _awake(WaveParams srcWP) {
+            WaveAlgorithm.changeT(srcWP);
+            if (srcWP.Type == WAVETYPE.INVALID)
+                DebugLogger.Error(this.name, "SourceWave Parameter Type Invalid! Stop Executing.");
             WaveDisplay = GetComponent<I_WaveRender>();
             if (WaveDisplay == null)
                 DebugLogger.Error(this.name, "GameObject Does not contain WaveDisplay! Stop Executing.");
