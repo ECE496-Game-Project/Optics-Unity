@@ -4,6 +4,7 @@ using CommonUtils;
 using WaveUtils;
 using Interfaces;
 using ParameterTransfer;
+using System.Collections;
 
 namespace GO_Wave {
     public class WaveSource : MonoBehaviour, I_ParameterTransfer {
@@ -35,6 +36,9 @@ namespace GO_Wave {
         }
         
         public virtual void ParameterChangeTrigger() {
+            // Refresh EffectDistance from ReadOnly Value
+            EffectDistance = m_params.RODistance;
+
             WaveInteract.CleanInteract();
             WaveInteract.Interact();
             WaveDisplay.RefreshDisplay();
@@ -54,6 +58,9 @@ namespace GO_Wave {
             n = m_params.n;
             theta = m_params.theta;
             phi = m_params.phi;
+        }
+        public void WaveParameterGetDistance(out float distance) {
+            distance = m_params.RODistance;
         }
         #endregion
 
@@ -135,6 +142,12 @@ namespace GO_Wave {
         }
         
         public void Start() {
+            StartCoroutine(WaitForOneFixedUpdateAndTrigger());
+        }
+
+        IEnumerator WaitForOneFixedUpdateAndTrigger()
+        {
+            yield return new WaitForFixedUpdate();
             ParameterChangeTrigger();
         }
     }

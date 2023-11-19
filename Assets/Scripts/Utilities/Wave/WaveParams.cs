@@ -45,7 +45,7 @@ namespace WaveUtils {
         #endregion
 
         #region CONSTRUCTOR
-        public WaveParams(WAVETYPE type, float eox, float eoy, float w, float k, float n, float theta, float phi) {
+        public WaveParams(WAVETYPE type, float eox, float eoy, float w, float k, float n, float theta, float phi, float roDistance) {
 			this.Type = type;
 			this.Eox = eox;
 			this.Eoy = eoy;
@@ -54,6 +54,7 @@ namespace WaveUtils {
 			this.n = n;
 			this.theta = theta;
 			this.phi = phi;
+			this.RODistance = roDistance;
 		}
 		public WaveParams(WaveParams src) {
 			this.Type = src.Type;
@@ -64,6 +65,7 @@ namespace WaveUtils {
 			this.n = src.n;
 			this.theta = src.theta;
 			this.phi = src.phi;
+			this.RODistance = src.RODistance;
         }
         #endregion
     }

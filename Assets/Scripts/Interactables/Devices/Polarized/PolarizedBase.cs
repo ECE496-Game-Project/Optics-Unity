@@ -58,13 +58,13 @@ namespace GO_Device {
 
             float tmpDistance = parentWS.EffectDistance;
             parentWS.EffectDistance = hit.distance;
-            childWS.EffectDistance = tmpDistance - hit.distance;
 
             childWS._awake(
                 new WaveParams(
                     parType, resEox, resEoy,
                     parW, parK, parN,
-                    resTheta, parPhi
+                    resTheta, parPhi,
+                    tmpDistance - hit.distance
                 )
             );
             lwd.SyncRootParam(parentWS.WaveDisplay);
