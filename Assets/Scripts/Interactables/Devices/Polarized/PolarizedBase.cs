@@ -56,6 +56,9 @@ namespace GO_Device {
                 out resTheta
                 );
 
+            Vector3 r = new_GO.transform.position - parentWS.transform.position;
+            parPhi = WaveAlgorithm.CalculateTravelAccumulatedPhase(r, parK, parPhi, parentWS.Params.KHat);
+
             float tmpDistance = parentWS.EffectDistance;
             parentWS.EffectDistance = hit.distance;
 

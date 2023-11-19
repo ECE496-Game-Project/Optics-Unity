@@ -329,7 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxDeviceCount: 4
-  DeviceSeperationDistance: 15
+  DeviceSeperationDistance: 10
 --- !u!4 &552010732
 Transform:
   m_ObjectHideFlags: 0

@@ -57,6 +57,29 @@ namespace WaveUtils {
 			
 			return uMag * UHat(Vector3.zero) + vMag * VHat(Vector3.zero);
         }
+
+
+		/// <summary>
+		/// calculate the phase accumulated by a wave traveling from origin to r 
+		/// </summary>
+		/// <param name="r"></param>
+		/// <param name="K"></param>
+		/// <param name="Phi"></param>
+		/// <param name="KHat"></param>
+		/// <returns>The accumulated phase in degree [0, 360)</returns>
+		public static float CalculateTravelAccumulatedPhase(
+			Vector3 r, float K, float Phi,
+			in del_Vec3ParamVec3Getter KHat)
+		{
+            float kdotr = Vector3.Dot(KHat(Vector3.zero), r) * K;
+            float expCommon = kdotr + Mathf.Deg2Rad * Phi;
+
+			float degree = Mathf.Rad2Deg * expCommon;
+
+			while (degree >= 360) degree -= 360;
+			return degree;
+        }
+
 		public static void WaveToJohnsVector(in float Eox, in float Eoy, in float Theta, out ComplexVector2 cv) {
 			cv = new ComplexVector2(
 				new Complex(Eox, 0),
