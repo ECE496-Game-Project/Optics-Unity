@@ -93,8 +93,25 @@ namespace WaveUtils {
 				Eox = Eoy = Theta = accumulatedPhase = 0;
 				return;
 			}
-			accumulatedPhase = (float)Complex.Log(cv.Value[0]).Imaginary * Mathf.Rad2Deg;
-            Theta = (float)(Complex.Log(cv.Value[1]).Imaginary - Complex.Log(cv.Value[0]).Imaginary) * Mathf.Rad2Deg;
+
+			if (cv.Value[0].Magnitude == 0)
+			{
+                accumulatedPhase = (float)Complex.Log(cv.Value[1]).Imaginary * Mathf.Rad2Deg;
+				Theta = 0;
+            }
+			else if (cv.Value[1].Magnitude == 0)
+			{
+                accumulatedPhase = (float)Complex.Log(cv.Value[0]).Imaginary * Mathf.Rad2Deg;
+				Theta = 0;
+
+			}
+			else
+			{
+                accumulatedPhase = (float)Complex.Log(cv.Value[0]).Imaginary * Mathf.Rad2Deg;
+                Theta = (float)(Complex.Log(cv.Value[1]).Imaginary - Complex.Log(cv.Value[0]).Imaginary) * Mathf.Rad2Deg;
+            }
+			
+            
 
 			if (Theta < 0) Theta += 360;
 
