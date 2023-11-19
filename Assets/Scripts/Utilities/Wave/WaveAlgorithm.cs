@@ -87,13 +87,16 @@ namespace WaveUtils {
 			);
 		}
 
-		public static void JohnsVectorToWave(in ComplexVector2 cv, out float Eox, out float Eoy, out float Theta) {
+		public static void JohnsVectorToWave(in ComplexVector2 cv, out float Eox, out float Eoy, out float Theta, out float accumulatedPhase) {
 			if (cv == null) {
 				DebugLogger.Error("JohnsVectorToWave", "Pass in NULL class, Error.");
-				Eox = Eoy = Theta = 0;
+				Eox = Eoy = Theta = accumulatedPhase = 0;
 				return;
 			}
-			Theta = (float)(Complex.Log(cv.Value[1]).Imaginary - Complex.Log(cv.Value[0]).Imaginary) * Mathf.Rad2Deg;
+			accumulatedPhase = (float)Complex.Log(cv.Value[0]).Imaginary * Mathf.Rad2Deg;
+            Theta = (float)(Complex.Log(cv.Value[1]).Imaginary - Complex.Log(cv.Value[0]).Imaginary) * Mathf.Rad2Deg;
+
+			if (Theta < 0) Theta += 360;
 
 			Eox = (float)(cv.Value[0].Magnitude);
 			Eoy = (float)(cv.Value[1].Magnitude);

@@ -48,16 +48,17 @@ namespace GO_Device {
             );
 
             resVec = JohnsMatrix * resVec;
-
+            float extraPhase;
             WaveAlgorithm.JohnsVectorToWave(
                 resVec,
                 out resEox,
                 out resEoy,
-                out resTheta
+                out resTheta,
+                out extraPhase
                 );
 
             Vector3 r = new_GO.transform.position - parentWS.transform.position;
-            parPhi = WaveAlgorithm.CalculateTravelAccumulatedPhase(r, parK, parPhi, parentWS.Params.KHat);
+            parPhi = WaveAlgorithm.CalculateTravelAccumulatedPhase(r, parK, parPhi, parentWS.Params.KHat) + extraPhase;
 
             float tmpDistance = parentWS.EffectDistance;
             parentWS.EffectDistance = hit.distance;
