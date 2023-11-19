@@ -3,6 +3,7 @@
 using GO_Device;
 using GO_Wave;
 using Interfaces;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -37,7 +38,7 @@ namespace Constraint
 
             SetDevicePositions();
 
-            
+            WaitForOneFixedUpdateAndTrigger(waveSource);
         }
 
         private void SetDevicePositions()
@@ -73,7 +74,8 @@ namespace Constraint
 
             Assert.IsNotNull(deviceParameterTransfer);
 
-            deviceParameterTransfer.ParameterChangeTrigger();
+            WaitForOneFixedUpdateAndTrigger(deviceParameterTransfer);
+
 
         }
 
@@ -90,6 +92,18 @@ namespace Constraint
         public void AddDevice(string deviceType)
         {
 
+        }
+
+        void WaitForOneFixedUpdateAndTrigger(I_ParameterTransfer i_ParameterTransfer)
+        {
+            StartCoroutine(WaitForOneFixedUpdateAndTriggerCoroutine(i_ParameterTransfer));
+        }
+
+        IEnumerator WaitForOneFixedUpdateAndTriggerCoroutine(I_ParameterTransfer i_ParameterTransfer)
+        {
+            yield return new WaitForFixedUpdate();
+
+            i_ParameterTransfer.ParameterChangeTrigger();
         }
     }
 }
