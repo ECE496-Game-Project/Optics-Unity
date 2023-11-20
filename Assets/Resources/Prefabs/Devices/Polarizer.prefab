@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5237302342889919751}
   - component: {fileID: 5237302342889919748}
   - component: {fileID: 5237302342889919749}
-  - component: {fileID: 5237302342889919739}
+  - component: {fileID: 7576343308639130988}
   - component: {fileID: 2658449147443807073}
   m_Layer: 6
   m_Name: Polarizer
@@ -85,7 +85,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5237302342889919739
+--- !u!114 &7576343308639130988
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,12 +94,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5237302342889919736}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dbf52191dc12284aa2c2ecb68f9519e, type: 3}
+  m_Script: {fileID: 11500000, guid: f91d9d635803bbb44bc8ba6c974dfcb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
-  ThicknessOffset: 0.2
-  RotDeg: 0
+  DeviceType: 1
+  ThicknessOffset: 0.005
+  RotDeg: 30
+  AxisDiffDeg: 0
 --- !u!65 &2658449147443807073
 BoxCollider:
   m_ObjectHideFlags: 0

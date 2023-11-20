@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f75c0fafcb809e4884b3619b546e68d, type: 3}
-  m_Name: WaveLine_CirPolarized
+  m_Name: WaveLine_LinearPolarized
   m_EditorClassIdentifier: 
   Parameters:
     Type: 1
     Eox: 10
-    Eoy: 10
-    theta: 90
+    Eoy: 0
+    theta: 0
     T: 0.06283186
     mu: 0
     w: 0
