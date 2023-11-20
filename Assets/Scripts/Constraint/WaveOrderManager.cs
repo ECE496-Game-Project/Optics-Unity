@@ -3,6 +3,7 @@
 using GO_Device;
 using GO_Wave;
 using Interfaces;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -65,6 +66,7 @@ namespace Constraint
 
             SetDevicePositions();
 
+            //might also need to update gameobject hierarchy
 
             // the device which is currently in has the lower hierarchy was the device that has the higher hierarchy
             // we need to notify this device's parent wave source that need to regenerate
@@ -74,7 +76,7 @@ namespace Constraint
 
             Assert.IsNotNull(deviceParameterTransfer);
 
-            WaitForOneFixedUpdateAndTrigger(deviceParameterTransfer);
+            WaitForOneFixedUpdateAndTrigger(deviceParameterTransfer, null);
 
 
         }
@@ -84,9 +86,16 @@ namespace Constraint
             var device = m_waveDeviceOrder.GetDevice(deviceIdx);
             m_waveDeviceOrder.removeDevice(deviceIdx);
 
-            Destroy(device.gameObject);
+            device.gameObject.GetComponent<Collider>().enabled = false;
+
+
 
             SetDevicePositions();
+
+           
+            // Destroy the object after param is trigger
+            WaitForOneFixedUpdateAndTrigger((I_ParameterTransfer) device, 
+                () => { Destroy(device.gameObject); });
         }
 
         public void AddDevice(string deviceType)
@@ -94,16 +103,17 @@ namespace Constraint
 
         }
 
-        void WaitForOneFixedUpdateAndTrigger(I_ParameterTransfer i_ParameterTransfer)
+        void WaitForOneFixedUpdateAndTrigger(I_ParameterTransfer i_ParameterTransfer, Action extraBehavior)
         {
-            StartCoroutine(WaitForOneFixedUpdateAndTriggerCoroutine(i_ParameterTransfer));
+            StartCoroutine(WaitForOneFixedUpdateAndTriggerCoroutine(i_ParameterTransfer, extraBehavior));
         }
 
-        IEnumerator WaitForOneFixedUpdateAndTriggerCoroutine(I_ParameterTransfer i_ParameterTransfer)
+        IEnumerator WaitForOneFixedUpdateAndTriggerCoroutine(I_ParameterTransfer i_ParameterTransfer, Action extraBehavior)
         {
             yield return new WaitForFixedUpdate();
 
             i_ParameterTransfer.ParameterChangeTrigger();
+            extraBehavior?.Invoke();
         }
     }
 }
