@@ -142,13 +142,8 @@ namespace GO_Wave {
         }
         
         public void Start() {
-            StartCoroutine(WaitForOneFixedUpdateAndTrigger());
-        }
-
-        IEnumerator WaitForOneFixedUpdateAndTrigger()
-        {
-            yield return new WaitForFixedUpdate();
             ParameterChangeTrigger();
         }
+
     }
 }
