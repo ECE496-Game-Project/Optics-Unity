@@ -39,7 +39,7 @@ namespace Constraint
 
             SetDevicePositions();
 
-            WaitForOneFixedUpdateAndTrigger(waveSource);
+            WaitForOneFixedUpdateAndTrigger(waveSource, null);
         }
 
         private void SetDevicePositions()

@@ -24,13 +24,13 @@ public class DevicePrefabLibrary : MonoSingleton<DevicePrefabLibrary>
 
             m_deviceNameDict.Add(m_deviceName[i], m_devicePrefab[i]);
 
-            Assert.IsFalse(m_deviceEnumDic.ContainsKey(m_devicePrefab[i].type));
+            Assert.IsFalse(m_deviceEnumDic.ContainsKey(m_devicePrefab[i].DeviceType));
 
-            m_deviceEnumDic.Add(m_devicePrefab[i].type, m_devicePrefab[i]);
+            m_deviceEnumDic.Add(m_devicePrefab[i].DeviceType, m_devicePrefab[i]);
 
-            m_deviceNameEnumDic.Add(m_deviceName[i], m_devicePrefab[i].type);
+            m_deviceNameEnumDic.Add(m_deviceName[i], m_devicePrefab[i].DeviceType);
 
-            m_deviceEnumNameDic.Add(m_devicePrefab[i].type, m_deviceName[i]);
+            m_deviceEnumNameDic.Add(m_devicePrefab[i].DeviceType, m_deviceName[i]);
         }
     }
 

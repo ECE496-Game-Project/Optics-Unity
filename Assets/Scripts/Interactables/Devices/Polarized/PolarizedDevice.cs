@@ -78,14 +78,19 @@ namespace GO_Device {
             
             /* Calculate Eox, Eoy, Theta*/
             ComplexVector2 resVec = WaveAlgorithm.WaveToJohnsVector(parentWS.Params);
+            
             if(DeviceType == DEVICETYPE.POLARIZER)
                 resVec = PolarizerMatrix() * resVec;
             else if(DeviceType == DEVICETYPE.WEAVEPLATE)
+            {
+                var tmp = WaveplateMatrix().Value[0,0];
                 resVec = WaveplateMatrix() * resVec;
+            }
+                
             else
                 DebugLogger.Error(this.name, "DeviceType " + DeviceType + " Invalid!");
 
-            WaveAlgorithm.JohnsVectorToWave(resVec, childWP);
+           
 
             /* Calculate ReadOnly Effective Distance*/
             float tmpDistance = parentWS.EffectDistance;
@@ -100,9 +105,15 @@ namespace GO_Device {
             childWP.Type = WAVETYPE.PLANE;
 
             childWS._awake(childWP);
+            
+
+            WaveAlgorithm.CalculateTravelAccumulatedPhase(hit.point - parentWS.transform.position, parentWS.Params, childWS.Params);
+            WaveAlgorithm.JohnsVectorToWave(resVec, childWP);
+
             lwd.SyncRootParam(parentWS.WaveDisplay);
             lwi.SyncRootParam(parentWS.WaveInteract);
 
+            
             /*Store Pair*/
             m_parent = parentWS;
             m_child = childWS;
