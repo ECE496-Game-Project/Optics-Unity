@@ -8,7 +8,9 @@ namespace GO_Device {
     public enum DEVICETYPE {
         INVALID = 0,
         POLARIZER,
-        WEAVEPLATE
+        WEAVEPLATE,
+        QUATERWAVEPLATE,
+        HALFWAVEPLATE,
     }
 
 	public class DeviceBase : MonoBehaviour, I_ParameterTransfer, ISelectable {

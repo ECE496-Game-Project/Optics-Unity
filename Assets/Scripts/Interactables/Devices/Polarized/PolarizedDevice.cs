@@ -44,7 +44,8 @@ namespace GO_Device {
         }
 
         public override void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
-            if(DeviceType != DEVICETYPE.WEAVEPLATE && DeviceType != DEVICETYPE.POLARIZER)
+            if(DeviceType != DEVICETYPE.WEAVEPLATE && DeviceType != DEVICETYPE.POLARIZER && 
+               DeviceType != DEVICETYPE.HALFWAVEPLATE && DeviceType != DEVICETYPE.QUATERWAVEPLATE)
                 DebugLogger.Error(this.name, "DeviceType " + DeviceType + " Invalid!");
 
             var RotDegTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["RotDeg"];
@@ -52,7 +53,7 @@ namespace GO_Device {
             RotDegTuple.Default = RotDeg;
             RotDegTuple.Setter = (evt) => { RotDeg = evt.newValue; ParameterChangeTrigger(); };
 
-            if (DeviceType == DEVICETYPE.WEAVEPLATE) {
+            if (DeviceType == DEVICETYPE.WEAVEPLATE || DeviceType == DEVICETYPE.HALFWAVEPLATE || DeviceType == DEVICETYPE.QUATERWAVEPLATE) {
                 var AxisDiffDegTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["AxisDiffDeg"];
                 AxisDiffDegTuple.Getter = () => { return AxisDiffDeg; };
                 AxisDiffDegTuple.Default = AxisDiffDeg;
@@ -81,7 +82,8 @@ namespace GO_Device {
             
             if(DeviceType == DEVICETYPE.POLARIZER)
                 resVec = PolarizerMatrix() * resVec;
-            else if(DeviceType == DEVICETYPE.WEAVEPLATE)
+            else if(DeviceType == DEVICETYPE.WEAVEPLATE ||
+                DeviceType == DEVICETYPE.QUATERWAVEPLATE || DeviceType == DEVICETYPE.HALFWAVEPLATE)
             {
                 var tmp = WaveplateMatrix().Value[0,0];
                 resVec = WaveplateMatrix() * resVec;

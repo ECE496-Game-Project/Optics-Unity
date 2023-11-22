@@ -209,11 +209,13 @@ namespace Constraint
             m_selectedDeviceIdx = -1;
         }
 
-        public void removeSelectedDevice()
+        public bool removeSelectedDevice()
         {
-            if (m_selectedDeviceIdx == - 1) return;
+            if (m_selectedDeviceIdx == - 1) return false;
 
             RemoveDevice(m_selectedDeviceIdx);
+
+            return true;
         }
     }
 }

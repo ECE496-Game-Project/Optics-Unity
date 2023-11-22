@@ -9,6 +9,12 @@ public class ClickTest : MonoBehaviour, ISelectable
         Debug.Log($"Clicked on {gameObject.name}");
     }
 
+    public void OnMouseUnselect()
+    {
+        throw new System.NotImplementedException();
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
