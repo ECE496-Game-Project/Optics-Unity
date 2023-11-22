@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using System;
 using ParameterTransfer;
+using Interfaces;
 
 public class ParamControlPanel : MonoBehaviour
 {
@@ -184,6 +185,20 @@ public class ParamControlPanel : MonoBehaviour
 
     VisualElement GenerateWaveSourceParam()
     {
+        
+        // ParameterInfoList info = CSVReader.ReadParametersCSV("");
+
+        // I_ParameterTransfer param = gameObject as I_ParameterTransfer;
+
+        // param.RegisterParametersCallback(info);
+
+        // foreach(var tuple in info.List){
+            // create visual element
+            //
+            // add to class
+            // registerCallBack<>(tuple.setter);
+        // }
+        
         var waveSource = new VisualElement();
 
         var title = new Label("Wave Source");
