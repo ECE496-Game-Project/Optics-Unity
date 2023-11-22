@@ -3,11 +3,11 @@ using UnityEngine;
 using GO_Device;
 
 namespace ns_Editor {
-    [CustomEditor(typeof(Polarizer))]
-    public class PolarizerEditor : Editor {
+    [CustomEditor(typeof(PolarizedDevice))]
+    public class PolarizedDeviceEditor : Editor {
         public override void OnInspectorGUI() {
             base.OnInspectorGUI();
-            Polarizer db = (Polarizer)target;
+            PolarizedDevice db = (PolarizedDevice)target;
 
             if (GUILayout.Button("ParameterChangeTrigger")) {
                 db.ParameterChangeTrigger();

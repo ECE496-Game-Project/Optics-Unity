@@ -73,12 +73,12 @@ namespace GO_Wave {
             phiTuple.Setter     = (evt) => { m_params.phi = evt.newValue; ParameterChangeTrigger(); };
         }
 
-        /// <summary>
-        /// Need Manual Reset Effective Distance since Distance Modified during Interaction.
-        /// </summary>
-        public override void ParameterChangeTrigger() {
-            EffectDistance = _profile.Parameters.RODistance;
-            base.ParameterChangeTrigger();
-        }
+        ///// <summary>
+        ///// Need Manual Reset Effective Distance since Distance Modified during Interaction.
+        ///// </summary>
+        //public override void ParameterChangeTrigger() {
+            
+        //    base.ParameterChangeTrigger();
+        //}
     }
 }

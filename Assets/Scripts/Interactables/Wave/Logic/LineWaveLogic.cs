@@ -25,9 +25,10 @@ namespace GO_Wave {
         public void Interact() {
             /*Interact Device*/
             if(m_activeWS==null)Debug.Break();
+            float effDistance = m_activeWS.Params.RODistance;
             RaycastHit hit;
             if (
-                Physics.Raycast(transform.position, transform.forward, out hit, m_activeWS.EffectDistance, _interactMask)
+                Physics.Raycast(transform.position, transform.forward, out hit, effDistance, _interactMask)
                 && ((1 << hit.collider.gameObject.layer) & _interactMask) != 0
             ) {
                 m_hit_Device = hit.collider.gameObject.GetComponent<DeviceBase>();

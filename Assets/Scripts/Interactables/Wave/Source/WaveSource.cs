@@ -4,6 +4,7 @@ using CommonUtils;
 using WaveUtils;
 using Interfaces;
 using ParameterTransfer;
+using System.Collections;
 
 namespace GO_Wave {
     public class WaveSource : MonoBehaviour, I_ParameterTransfer {
@@ -12,7 +13,7 @@ namespace GO_Wave {
         public I_WaveLogic WaveInteract;
         #endregion
 
-#region PRIVATE VARIABLES
+        #region PRIVATE VARIABLES
         [Header("DEBUG_WAVE")]
         [SerializeField] protected WaveParams m_params;
         // Current Section's Wave Distance
@@ -35,6 +36,9 @@ namespace GO_Wave {
         }
         
         public virtual void ParameterChangeTrigger() {
+            // Refresh EffectDistance from ReadOnly Value
+            EffectDistance = m_params.RODistance;
+
             WaveInteract.CleanInteract();
             WaveInteract.Interact();
             WaveDisplay.RefreshDisplay();
@@ -122,6 +126,9 @@ namespace GO_Wave {
         /// </summary>
         /// <param name="srcWP"> Pre initalized WaveParameter.</param>
         public void _awake(WaveParams srcWP) {
+            WaveAlgorithm.changeT(srcWP);
+            if (srcWP.Type == WAVETYPE.INVALID)
+                DebugLogger.Error(this.name, "SourceWave Parameter Type Invalid! Stop Executing.");
             WaveDisplay = GetComponent<I_WaveRender>();
             if (WaveDisplay == null)
                 DebugLogger.Error(this.name, "GameObject Does not contain WaveDisplay! Stop Executing.");
@@ -137,5 +144,6 @@ namespace GO_Wave {
         public void Start() {
             ParameterChangeTrigger();
         }
+
     }
 }
