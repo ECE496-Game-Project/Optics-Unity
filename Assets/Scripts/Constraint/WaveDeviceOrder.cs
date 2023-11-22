@@ -4,16 +4,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+
 namespace Constraint
 {
     public class WaveDeviceOrder
     {
+        public class DeviceOrderInfo
+        {
+            public DeviceBase device;
+            public int index;
+
+            public DeviceOrderInfo(DeviceBase device, int index)
+            {
+                this.device = device;
+                this.index = index;
+            }
+        }
+
         private readonly int MaxDeviceCount;
 
         private readonly int DeviceSeperationDistance;
 
-        private List<DeviceBase> m_devices = new List<DeviceBase>();
-
+        private List<DeviceOrderInfo> m_devices = new List<DeviceOrderInfo>();
+        
         private WaveSource m_waveSource;
 
         public WaveSource WaveSource
@@ -42,7 +55,7 @@ namespace Constraint
         {
             if (m_devices.Count < MaxDeviceCount)
             {
-                m_devices.Add(device);
+                m_devices.Add(new DeviceOrderInfo(device, m_devices.Count));
                 return true;
             }
             else
@@ -62,7 +75,13 @@ namespace Constraint
 
             Assert.IsNotNull(device);
 
-            m_devices.Insert(index, device);
+            m_devices.Insert(index, new DeviceOrderInfo(device, index));
+
+            // update each device's index
+            for (int i = index + 1; i < m_devices.Count; i++)
+            {
+                m_devices[i].index = i;
+            }
 
             return true;
         }
@@ -73,7 +92,7 @@ namespace Constraint
 
             Assert.IsNotNull(device);
 
-            m_devices[index] = device;
+            m_devices[index].device = device;
 
             return true;
         }
@@ -84,10 +103,22 @@ namespace Constraint
 
             m_devices.RemoveAt(index);
 
+            for(int i = index; i < m_devices.Count; i++)
+            {
+                m_devices[i].index = i;
+            }
+
             return true;
         }
 
         public DeviceBase GetDevice(int index)
+        {
+            Assert.IsTrue(index >= 0 && index < m_devices.Count);
+
+            return m_devices[index].device;
+        }
+
+        public DeviceOrderInfo GetDeviceOrderInfo(int index)
         {
             Assert.IsTrue(index >= 0 && index < m_devices.Count);
 

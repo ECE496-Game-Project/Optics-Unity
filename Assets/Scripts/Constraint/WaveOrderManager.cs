@@ -3,10 +3,13 @@
 using GO_Device;
 using GO_Wave;
 using Interfaces;
-using System;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
+using static Constraint.WaveDeviceOrder;
 
 namespace Constraint
 {
@@ -35,6 +38,8 @@ namespace Constraint
                 Assert.IsNotNull(waveDevice);
 
                 m_waveDeviceOrder.AppendDevice(waveDevice);
+
+                RegisterClickEvent(m_waveDeviceOrder.GetDeviceOrderInfo(i - 1));
             }
 
             SetDevicePositions();
@@ -87,7 +92,9 @@ namespace Constraint
         public void RemoveDevice(int deviceIdx)
         {
             var device = m_waveDeviceOrder.GetDevice(deviceIdx);
+            var deviceInfo = m_waveDeviceOrder.GetDeviceOrderInfo(deviceIdx);
             m_waveDeviceOrder.removeDevice(deviceIdx);
+            UnRegisterClickEvent(deviceInfo);
 
             // disable the collider so that the wave source can pass through
             device.gameObject.GetComponent<Collider>().enabled = false;
@@ -116,6 +123,7 @@ namespace Constraint
             var lastSecondDevice = m_waveDeviceOrder.GetDevice(m_waveDeviceOrder.DeviceCount - 2);
 
             m_waveDeviceOrder.AppendDevice(newDevice);
+            RegisterClickEvent(m_waveDeviceOrder.GetDeviceOrderInfo(m_waveDeviceOrder.DeviceCount - 1));
             SetDevicePositions();
             WaitForOneFixedUpdateAndTrigger((I_ParameterTransfer)lastSecondDevice, null);
         }
@@ -139,17 +147,73 @@ namespace Constraint
         }
 
 
-        void WaitForOneFixedUpdateAndTrigger(I_ParameterTransfer i_ParameterTransfer, Action extraBehavior)
+        void WaitForOneFixedUpdateAndTrigger(I_ParameterTransfer i_ParameterTransfer, UnityAction extraBehavior)
         {
             StartCoroutine(WaitForOneFixedUpdateAndTriggerCoroutine(i_ParameterTransfer, extraBehavior));
         }
 
-        IEnumerator WaitForOneFixedUpdateAndTriggerCoroutine(I_ParameterTransfer i_ParameterTransfer, Action extraBehavior)
+        IEnumerator WaitForOneFixedUpdateAndTriggerCoroutine(I_ParameterTransfer i_ParameterTransfer, UnityAction extraBehavior)
         {
             yield return new WaitForFixedUpdate();
 
             i_ParameterTransfer.ParameterChangeTrigger();
             extraBehavior?.Invoke();
+        }
+
+        private Dictionary<int, UnityAction> deviceClickActions = new Dictionary<int, UnityAction>();
+        private Dictionary<int, UnityAction> deviceUnclickAction = new Dictionary<int, UnityAction>();
+        void RegisterClickEvent(DeviceOrderInfo deviceOrderInfo)
+        {
+            UnityAction clickAction = () =>
+            {
+                DeviceOnClick(deviceOrderInfo.index);
+            };
+
+            UnityAction unclickAction = () =>
+            {
+                DeviceOnUnClick(deviceOrderInfo.index);
+            };
+
+            deviceOrderInfo.device.OnDeviceSelected.AddListener(clickAction);
+            deviceOrderInfo.device.OnDeviceUnselected.AddListener(unclickAction);
+            deviceClickActions.Add(deviceOrderInfo.device.gameObject.GetInstanceID(), clickAction);
+            deviceUnclickAction.Add(deviceOrderInfo.device.gameObject.GetInstanceID(), unclickAction);
+        }
+
+        void UnRegisterClickEvent(DeviceOrderInfo deviceOrderInfo)
+        {
+            Assert.IsNotNull(deviceOrderInfo.device);
+            Assert.IsNotNull(deviceOrderInfo.device);
+            int id = deviceOrderInfo.device.gameObject.GetInstanceID();
+            
+            Assert.IsTrue(deviceClickActions.ContainsKey(id));
+            Assert.IsTrue(deviceUnclickAction.ContainsKey(id));
+
+            
+            deviceOrderInfo.device.OnDeviceSelected.RemoveListener(deviceClickActions[id]);
+            deviceOrderInfo.device.OnDeviceUnselected.RemoveListener(deviceUnclickAction[id]);
+
+            deviceClickActions.Remove(id);
+            deviceUnclickAction.Remove(id);
+        }
+
+
+        private int m_selectedDeviceIdx = -1;
+        void DeviceOnClick(int idx)
+        {
+            m_selectedDeviceIdx = 1;
+        }
+
+        void DeviceOnUnClick(int idx)
+        {
+            m_selectedDeviceIdx = -1;
+        }
+
+        public void removeSelectedDevice()
+        {
+            if (m_selectedDeviceIdx == - 1) return;
+
+            RemoveDevice(m_selectedDeviceIdx);
         }
     }
 }

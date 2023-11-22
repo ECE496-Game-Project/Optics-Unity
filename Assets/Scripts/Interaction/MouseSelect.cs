@@ -47,7 +47,7 @@ public class MouseSelect : MonoBehaviour
         GameObject go = hit.collider.gameObject;
 
         // it is not a selectable object
-        IClickable clickable = go.GetComponent<IClickable>();
+        ISelectable clickable = go.GetComponent<ISelectable>();
         if (clickable == null)
         {
             return;
@@ -65,6 +65,7 @@ public class MouseSelect : MonoBehaviour
         if (m_select != null)
         {
             OutlineManager.Instance.UnHighlight(m_select);
+            m_select.GetComponent<ISelectable>().OnMouseUnselect();
             m_select = null;
         }
 
@@ -89,7 +90,7 @@ public class MouseSelect : MonoBehaviour
 
         GameObject go = hit.collider.gameObject;
 
-        IClickable clickable = go.GetComponent<IClickable>();
+        ISelectable clickable = go.GetComponent<ISelectable>();
         if (clickable == null)
         {
             return;
@@ -99,7 +100,7 @@ public class MouseSelect : MonoBehaviour
         m_highlight = go;
         m_select = go;
 
-        clickable.OnMouseClicked();
+        clickable.OnMouseSelect();
 
     }
 }
