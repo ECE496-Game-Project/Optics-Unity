@@ -54,25 +54,28 @@ namespace Constraint
 
         public void SwapDeviceOrder(int firstDeviceIdx, int secondDeviceIdx)
         {
-            
-            int highestIdx = (firstDeviceIdx > secondDeviceIdx) ? firstDeviceIdx : secondDeviceIdx;
+            Assert.IsFalse(firstDeviceIdx == secondDeviceIdx);
 
-            var firstDevice = m_waveDeviceOrder.GetDevice(firstDeviceIdx);
+            int higherIdx = (firstDeviceIdx > secondDeviceIdx) ? firstDeviceIdx : secondDeviceIdx;
+            int lowerIdx = (firstDeviceIdx < secondDeviceIdx) ? firstDeviceIdx : secondDeviceIdx;
 
-            var secondDevice = m_waveDeviceOrder.GetDevice(secondDeviceIdx);
+            var higherIdxDevice = m_waveDeviceOrder.GetDevice(higherIdx);
 
-            m_waveDeviceOrder.ReplaceDevice(firstDevice, secondDeviceIdx);
-            m_waveDeviceOrder.ReplaceDevice(secondDevice, firstDeviceIdx);
+            var lowerIdxDevice = m_waveDeviceOrder.GetDevice(lowerIdx);
+
+            m_waveDeviceOrder.ReplaceDevice(higherIdxDevice, lowerIdx);
+            m_waveDeviceOrder.ReplaceDevice(lowerIdxDevice, higherIdx);
 
             SetDevicePositions();
 
             //might also need to update gameobject hierarchy
+            higherIdxDevice.transform.SetSiblingIndex(lowerIdx);
+            lowerIdxDevice.transform.SetSiblingIndex(higherIdx);
 
             // the device which is currently in has the lower hierarchy was the device that has the higher hierarchy
             // we need to notify this device's parent wave source that need to regenerate
-            var lowerHierarchyDevice = m_waveDeviceOrder.GetDevice(highestIdx);
 
-            var deviceParameterTransfer = (I_ParameterTransfer)lowerHierarchyDevice;
+            var deviceParameterTransfer = (I_ParameterTransfer)lowerIdxDevice;
 
             Assert.IsNotNull(deviceParameterTransfer);
 
@@ -86,6 +89,7 @@ namespace Constraint
             var device = m_waveDeviceOrder.GetDevice(deviceIdx);
             m_waveDeviceOrder.removeDevice(deviceIdx);
 
+            // disable the collider so that the wave source can pass through
             device.gameObject.GetComponent<Collider>().enabled = false;
 
 
@@ -100,8 +104,40 @@ namespace Constraint
 
         public void AddDevice(string deviceType)
         {
+            var newDevice = DevicePrefabLibrary.Instance.CreateDevice(deviceType);
 
+            // when we add a new device we assume its rotation is its default rotation
+            Quaternion newDeviceRotation = newDevice.transform.rotation;
+            newDevice.transform.parent = transform;
+
+            // in the wave track point of view, the new device is the default rotation
+            newDevice.transform.localRotation = newDeviceRotation;
+
+            var lastSecondDevice = m_waveDeviceOrder.GetDevice(m_waveDeviceOrder.DeviceCount - 2);
+
+            m_waveDeviceOrder.AppendDevice(newDevice);
+            SetDevicePositions();
+            WaitForOneFixedUpdateAndTrigger((I_ParameterTransfer)lastSecondDevice, null);
         }
+
+        public void AddDevice(DEVICETYPE deviceType)
+        {
+            var newDevice = DevicePrefabLibrary.Instance.CreateDevice(deviceType);
+
+            // when we add a new device we assume its rotation is its default rotation
+            Quaternion newDeviceRotation = newDevice.transform.rotation;
+            newDevice.transform.parent = transform;
+
+            // in the wave track point of view, the new device is the default rotation
+            newDevice.transform.localRotation = newDeviceRotation;
+
+            var lastSecondDevice = m_waveDeviceOrder.GetDevice(m_waveDeviceOrder.DeviceCount - 2);
+
+            m_waveDeviceOrder.AppendDevice(newDevice);
+            SetDevicePositions();
+            WaitForOneFixedUpdateAndTrigger((I_ParameterTransfer)lastSecondDevice, null);
+        }
+
 
         void WaitForOneFixedUpdateAndTrigger(I_ParameterTransfer i_ParameterTransfer, Action extraBehavior)
         {
