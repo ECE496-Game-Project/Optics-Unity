@@ -1,0 +1,21 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="root" style="flex-grow: 1; height: auto; align-self: auto;">
+        <ui:VisualElement name="title" style="flex-grow: 1; height: 20%; display: flex;">
+            <ui:Label tabindex="-1" text="Optics" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title__label" enable-rich-text="false" style="align-self: center; font-size: 50px; -unity-font-style: bold; -unity-font: url(&apos;project://database/Assets/Packages/TextMeshPro/Fonts/LiberationSans.ttf?fileID=12800000&amp;guid=e3265ab4bf004d28a9537516768c1c75&amp;type=3#LiberationSans&apos;); -unity-text-align: upper-center; color: rgb(158, 246, 255); top: 25%;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="content" style="flex-grow: 1; height: 80%; flex-direction: row; display: flex;">
+            <ui:VisualElement name="scene" style="flex-grow: 1; width: 20%; height: 80%;">
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="scene__thumbnail" style="align-self: center; width: 80%; height: 80%; background-image: resource(&apos;Art/Images/Polarizer&apos;); border-left-color: rgb(67, 234, 255); border-right-color: rgb(67, 234, 255); border-top-color: rgb(67, 234, 255); border-bottom-color: rgb(67, 234, 255);" />
+                <ui:Label tabindex="-1" text="Polarizer" parse-escape-sequences="true" display-tooltip-when-elided="true" name="scene__label" style="align-self: center; font-size: 25px; color: rgb(83, 232, 255);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="scene" style="flex-grow: 1; width: 20%; height: 80%;">
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="scene__thumbnail" style="align-self: center; width: 80%; height: 80%; background-image: resource(&apos;Art/Images/Waveplate&apos;); border-left-color: rgb(67, 234, 255); border-right-color: rgb(67, 234, 255); border-top-color: rgb(67, 234, 255); border-bottom-color: rgb(67, 234, 255);" />
+                <ui:Label tabindex="-1" text="Wave Plate" parse-escape-sequences="true" display-tooltip-when-elided="true" name="scene__label" style="align-self: center; font-size: 25px; color: rgb(84, 231, 255);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="scene" style="flex-grow: 1; width: 20%; height: 80%;">
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="scene__thumbnail" style="align-self: center; width: 80%; height: 80%; background-image: resource(&apos;Art/Images/Reflection&apos;); border-left-color: rgb(66, 234, 255); border-right-color: rgb(66, 234, 255); border-top-color: rgb(66, 234, 255); border-bottom-color: rgb(66, 234, 255); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px;" />
+                <ui:Label tabindex="-1" text="Reflection" parse-escape-sequences="true" display-tooltip-when-elided="true" name="scene__label" style="align-self: center; font-size: 25px; color: rgb(84, 231, 255);" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
