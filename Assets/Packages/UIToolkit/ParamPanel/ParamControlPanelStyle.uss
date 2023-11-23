@@ -13,7 +13,7 @@ Label,
 TextElement{
     font-size: 14px;
     color: var(--font-color);
-    -unity-font-style: bold;
+    -unity-font-definition: url('/Assets/Resources/Art/Font/Square-Black.ttf');
 }
 
 TextField,

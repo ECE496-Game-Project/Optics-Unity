@@ -1,6 +1,6 @@
 /* Global */
 :root {
-    --title-font-color: #43a7bc; /* Title Font Color: A shade of blue */
+    --title-font-color: #9EF6FF; /* Title Font Color: A shade of blue */
     --font-color: #9bdaf0; /* Font Color: Light blue */
     --background-color: #12202d; /* Background Color: Dark blue */
     --field-color: #0c1821; /* Field Color: Deeper blue */
@@ -11,6 +11,7 @@
 Label{
     padding: 4px;
     color: var(--font-color);
+    -unity-font-definition: url('/Assets/Resources/Art/Font/Square-Black.ttf');
 }
 
 /* Common Classes */
@@ -35,15 +36,15 @@ Label{
 }
 
 .content{
-    width: 100%;
+    width: 120%;
     height: 80%;
     align-items: stretch;
 }
 
 /* Level 3 */
 .title{
-    font-size: 50px;
-    -unity-font-style: bold;
+    font-size: 100px;
+    -unity-text-align: middle-center;
     color: var(--title-font-color);
     align-self: center;
 }
@@ -54,7 +55,6 @@ Label{
     height: 90%;
     width: 90%;
     align-items: stretch;
-    justify-content: space-between;
 }
 
 .scene{
@@ -77,5 +77,6 @@ Label{
 
 .name{
     font-size: 25px;
+    -unity-text-align: middle-center;
     align-self: center;
 }
