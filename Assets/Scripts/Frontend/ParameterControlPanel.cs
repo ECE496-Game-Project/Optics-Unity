@@ -11,17 +11,17 @@ using CommonUtils;
  * Parameter Portion of Control Pannel
  *
  */
-
 namespace ControlPanel {
     public partial class ControlPanel : MonoBehaviour {
         private VisualElement _rootWSParamView;
-        private VisualElement _polarizerParamView;
-        private VisualElement _waveplateParamView;
+        private VisualElement _WSParamView;
+        private VisualElement _PDParamView;
         
         private VisualElement _selectedParam;
 
         private ParameterInfoList _rootWSInfo;
         private ParameterInfoList _WSInfo;
+        private ParameterInfoList _PDInfo;
 
         private void EnableParamView() {
             if (_rootWSInfo == null)
@@ -29,155 +29,137 @@ namespace ControlPanel {
 
             if (_WSInfo == null)
                 _WSInfo = CSVReader.ReadParametersCSV("Data/ParameterInfos/ChildWaveParameters");
+            
+            if (_PDInfo == null)
+                _PDInfo = CSVReader.ReadParametersCSV("Data/ParameterInfos/PolarizedDeviceParameters");
 
             if (_uiDocument == null)
                 _uiDocument = gameObject?.GetComponent<UIDocument>();
 
-            _rootWSParamView = GenRootWSParamView();
-            _rootWSParamView.AddToClassList("paramView");
-            _rootWSParamView.AddToClassList("container");
+            _rootWSParamView = GenVEFromPIL(_rootWSInfo);
+            //_rootWSParamView = GenRootWSParamView();
+            //_rootWSParamView.AddToClassList("paramView");
+            //_rootWSParamView.AddToClassList("container");
 
-            _polarizerParamView = GenePolarizerParamView();
-            _polarizerParamView.AddToClassList("paramView");
-            _polarizerParamView.AddToClassList("container");
+            _WSParamView = GenVEFromPIL(_WSInfo);
+            //_WSParamView.AddToClassList("paramView");
+            //_WSParamView.AddToClassList("container");
 
-            _waveplateParamView = GenerateWavePlateParam();
-            _waveplateParamView.AddToClassList("paramView");
-            _waveplateParamView.AddToClassList("container");
+            _PDParamView = GenVEFromPIL(_PDInfo);
+            //_polarizerParamView.AddToClassList("paramView");
+            //_polarizerParamView.AddToClassList("container");
         }
+        
+        private VisualElement GenVEFromPIL(in ParameterInfoList infoList) {
+            var ptr = new VisualElement();
+            Stack<VisualElement> hier = new Stack<VisualElement>();
+
+            foreach (var entry in infoList.List) {
+                switch (entry.Type) {
+                    case ParamType.Hierarchy:
+                        GenHierarchy(entry.Name, ref ptr, ref hier);
+                        break;
+                    case ParamType.HierarchyEnd:
+                        GenHierarchyEnd(ref ptr, ref hier);
+                        break;
+                    case ParamType.String:
+                        GenText(entry.Name, (entry.Permit == Permission.RO), ptr);
+                        break;
+                    case ParamType.Int:
+                        if (entry.Permit == Permission.RWEnum) {
+                            ParameterInfo<int> intEntry = entry as ParameterInfo<int>;
+                            if (intEntry.Name == "DEVICETYPE") {
+                                ptr.Add(new EnumField(entry.Symbol, (DEVICETYPE)intEntry.Default));
+                            }
+                        }
+                        break;
+                    case ParamType.Float:
+                        string name = entry.Name + "(" + entry.Symbol + ")";
+                        ParameterInfo<float> floatEntry = entry as ParameterInfo<float>;
+                        ParameterInfoBound<float> floatEntryBound = entry as ParameterInfoBound<float>;
+
+                        switch (entry.Permit) {
+                            case Permission.RO:
+                                GenFloat(name, entry.Unit, ptr);
+                                break;
+                            case Permission.RW:
+                                GenFloat(name, entry.Unit, floatEntry.Default, ptr);
+                                break;
+                            case Permission.RWSlider:
+                                GenFloat(
+                                    name, entry.Unit, 
+                                    floatEntryBound.Default, 
+                                    floatEntryBound.UpperBound, 
+                                    floatEntryBound.LowerBound, 
+                                    ptr);
+                                break;
+                            default:
+                                DebugLogger.Error(this.name, "Unrecognized Info, break!");
+                                break;
+                        }
+                        break;
+                    default:
+                        DebugLogger.Error(this.name, "Unrecognized Info, break!");
+                        break;
+                }
+            }
+            return ptr;
+        }
+        
         private void SelectParamView(GameObject obj) {
-            /* Remove the previous showing Parameter View*/
-            if(_selectedParam != null)
+            /* Remove the previous showing Parameter View */
+            if (_selectedParam != null) {
                 _content.Remove(_selectedParam);
+            }
 
             RootWaveSource rws = obj.GetComponent<RootWaveSource>();
             if (rws != null) {
                 _content.Add(_rootWSParamView);
                 _selectedParam = _rootWSParamView;
+                return;
+            }
+
+            WaveSource ws = obj.GetComponent<WaveSource>();
+            if (ws != null) {
+                _content.Add(_WSParamView);
+                _selectedParam = _WSParamView;
+                return;
             }
 
             PolarizedDevice pd = obj.GetComponent<PolarizedDevice>();
             if (pd != null) {
-                if (pd.DeviceType == DEVICETYPE.POLARIZER) {
-                    _content.Add(_polarizerParamView);
-                    _selectedParam = _polarizerParamView;
-                }
-                else {
-                    _content.Add(_waveplateParamView);
-                    _selectedParam = _waveplateParamView;
-                }
+                _content.Add(_PDParamView);
+                _selectedParam = _PDParamView;
             }
         }
 
-        /*
-        目的：为了能够不hardcode所有不同Type的可展示Object（包括wave source, child wave, devices）
-        方法：为所有需要展示的不同Type的Object，写一个统一的Interface
-        要求：
-        1. 能够用相同的Type去概括所有的可展示Object
-        2. 所有实现该Interface的class，必须包含一个list，罗列所有需要展示的parameter。其中的信息包括：
-        parameter的名字（required, string type），单位（required, string type, 若无单位则为“”），权限（required, Read&Write or ReadOnly），默认值（required, float type）, 上限（optional, float type），下限（optional, float type）。
-        3. 所有实现该Interface的class，所列在list中的parameter，必须有符合其所写权限的读写权，如可以get和set，或只能get
-        效果：
-        1. UI侧可以根据该Interface去简单地判断Object是否可以被展示，且拓展性高
-        2. UI侧不用HardCode所有不同的可展示Object的UI排版，而是可以Traverse List，然后程序化生成
-            */
-
-        VisualElement GenRootWSParamView() {
-            var rootWaveSource = new VisualElement();
-
-            var title = new Label("Wave Source");
-            title.AddToClassList("title");
-            rootWaveSource.Add(title);
-
-            var nameField = new TextField("Name");
-            rootWaveSource.Add(nameField);
-
-            var amplitude = new Foldout() {
-                text = "Amplitude(Eo)"
-            };
-            rootWaveSource.Add(amplitude);
-            var eox = GenerateParameter("X Amplitude(Eox)", "V/nm", 10);
-            amplitude.Add(eox);
-            var eoy = GenerateParameter("Y Amplitude(Eoy)", "V/nm", 10);
-            amplitude.Add(eoy);
-            var theta = GenerateParameter("Phase Differece(Theta)", "Deg", -180, 180, 0);
-            amplitude.Add(theta);
-
-            var temperal = new Foldout() {
-                text = "Temperal Properties"
-            };
-            rootWaveSource.Add(temperal);
-            var temperalPeriod = GenerateParameter("Period(T)", "fs", 0, 10);
-            temperal.Add(temperalPeriod);
-            var temperalAgular = GenerateParameter("Angular Frequency(w)", "rad/fs", 0, 10);
-            temperal.Add(temperalAgular);
-            var temperalFreq = new Label("Frequency(v) 10 THz");
-            temperal.Add(temperalFreq);
-
-            var spatial = new Foldout() {
-                text = "Spatial Properties"
-            };
-            rootWaveSource.Add(spatial);
-            var spatialPeriod = GenerateParameter("Period(Lambda)", "nm", 0, 10);
-            spatial.Add(spatialPeriod);
-            var spatialAgular = GenerateParameter("Angular Frequency(k)", "rad/nm", 0, 10);
-            spatial.Add(spatialAgular);
-            var spatialFreq = new Label("Frequency(f) 10 nm^(-1)");
-            spatial.Add(spatialFreq);
-
-            var refractiveIndex = GenerateParameter("Refractive Index(n)", "", 1, 5, 1.5f);
-            rootWaveSource.Add(refractiveIndex);
-            var phi = GenerateParameter("Initial Phase(Phi)", "Deg", -180, 180, 0);
-            rootWaveSource.Add(phi);
-
-            return rootWaveSource;
+        void GenText(string name, bool isReadonly, in VisualElement ptr) {
+            var text = new TextField(name);
+            text.isReadOnly = isReadonly;
+            ptr.Add(text);
         }
 
-        VisualElement GenePolarizerParamView() {
-            VisualElement polarizer = new VisualElement();
-
-            var title = new Label("Polarizer");
-            polarizer.Add(title);
-            title.AddToClassList("title");
-
-            var nameField = new TextField("Name");
-            polarizer.Add(nameField);
-
-            var degree = GenerateParameter("Rotation Degree", "Deg", 0, 180, 90);
-            polarizer.Add(degree);
-
-            return polarizer;
+        void GenHierarchy(string name, ref VisualElement ptr, ref Stack<VisualElement> hier) {
+            var fold = new Foldout() { text = name };
+            ptr.Add(fold);
+            hier.Push(ptr);
+            ptr = fold;
         }
 
-        VisualElement GenerateWavePlateParam() {
-            VisualElement wavePlate = new VisualElement();
-
-            var title = new Label("Wave Plate");
-            wavePlate.Add(title);
-            title.AddToClassList("title");
-
-            var nameField = new TextField("Name");
-            wavePlate.Add(nameField);
-
-            var plateDegree = GenerateParameter("Plate Degree", "Deg", 0, 180, 90);
-            wavePlate.Add(plateDegree);
-
-            var axisDegree = GenerateParameter("Axis Diff Degree", "Deg", 0, 90, 90);
-            wavePlate.Add(axisDegree);
-
-            return wavePlate;
+        void GenHierarchyEnd(ref VisualElement ptr, ref Stack<VisualElement> hier) {
+            ptr = hier.Pop();
         }
 
-        VisualElement GenerateParameter(string label, string unit, int lowerBound, int upperBound, float defaultVal) {
+        void GenFloat(string name, string unit, float defaultVal, float lowerBound, float upperBound, in VisualElement ptr) {
             var param = new VisualElement();
-            param.AddToClassList("parameter__slider");
-            var slide = new Slider(label, lowerBound, upperBound) {
+            //param.AddToClassList("parameter__slider");
+            var slide = new Slider(name, lowerBound, upperBound) {
                 value = defaultVal
             };
             param.Add(slide);
 
             var field = new VisualElement();
-            field.AddToClassList("parameter__field");
+            //field.AddToClassList("parameter__field");
             var num = new FloatField() {
                 value = defaultVal
             };
@@ -187,12 +169,13 @@ namespace ControlPanel {
             var uni = new Label(unit);
             field.Add(uni);
             param.Add(field);
-            return param;
+
+            ptr.Add(param);
         }
 
-        VisualElement GenerateParameter(string label, string unit, float bound, float defaultVal) {
+        void GenFloat(string label, string unit, float bound, float defaultVal, in VisualElement ptr) {
             var param = new VisualElement();
-            param.AddToClassList("parameter__field");
+            //param.AddToClassList("parameter__field");
             var field = new FloatField() {
                 label = label,
                 value = defaultVal
@@ -201,23 +184,37 @@ namespace ControlPanel {
             param.Add(field);
             var uni = new Label(unit);
             param.Add(uni);
-            return param;
+            ptr.Add(param);
         }
 
-        VisualElement GenerateParameter(string label, string unit, float defaultVal) {
+        void GenFloat(string label, string unit, in VisualElement ptr) {
             var param = new VisualElement();
-            param.AddToClassList("parameter__field");
+            //param.AddToClassList("parameter__field");
+            var field = new FloatField() {
+                label = label,
+                value = 0
+            };
+            field.isReadOnly = true;
+
+            param.Add(field);
+            var uni = new Label(unit);
+            param.Add(uni);
+            ptr.Add(param);
+        }
+
+        void GenFloat(string label, string unit, float defaultVal, in VisualElement ptr) {
+            var param = new VisualElement();
+            //param.AddToClassList("parameter__field");
             var field = new FloatField() {
                 label = label,
                 value = defaultVal
             };
+
             param.Add(field);
             var uni = new Label(unit);
             param.Add(uni);
-            return param;
+            ptr.Add(param);
         }
-
-        
 
         void LowerBoundCheck(ChangeEvent<float> evt, float bound) {
             if (evt.newValue < bound) {

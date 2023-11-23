@@ -77,7 +77,6 @@ namespace ControlPanel {
         #endregion
 
         #region Side Bar
-
         ListView GenerateSideBar() {
             ListView sceneList = new ListView {
                 makeItem = MakeSideBarItem,

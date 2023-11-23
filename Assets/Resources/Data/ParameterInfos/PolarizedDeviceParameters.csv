@@ -1,0 +1,4 @@
+﻿Type,Permission,Name,Symbol,Unit,DefaultValue,UpperBound,LowerBound
+Int,RWEnum,DEVICETYPE,DeviceType,,0,,
+Float,RWSlider,,RotDeg,°,0,0,360
+Float,RWSlider,,AxisDiffDeg,°,0,0,360

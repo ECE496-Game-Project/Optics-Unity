@@ -27,7 +27,7 @@ namespace ParameterTransfer {
         public string Unit;
         public ParamType Type;
         public Permission Permit;
-
+       
         public ParameterInfoBase(
             string name, ParamType type) {
             Name = name;
@@ -42,6 +42,10 @@ namespace ParameterTransfer {
             Unit = unit;
             Type = type;
             Permit = permit;
+        }
+
+        public virtual string InfoToString() {
+            return "Name: " + Name + "Symbol: " + Symbol + "Unit: " + Unit + "Type: "+Type;
         }
     }
     public class ParameterInfo<T> : ParameterInfoBase {
@@ -100,8 +104,8 @@ namespace ParameterTransfer {
                     continue;
                 }
 
-                Permission permit;
-                if (Enum.TryParse(cols[1], out permit)) permit = Permission.Invalid;
+                Permission permit = Permission.Invalid;
+                Enum.TryParse(cols[1], out permit);
                 if (permit <= Permission.RW) {
                     switch (type) {
                         case ParamType.String:
@@ -129,6 +133,14 @@ namespace ParameterTransfer {
                             );
                     List.Add(pifs);
                     QuickAccess.Add(cols[3], pifs);
+                }
+
+                if (permit == Permission.RWEnum && type == ParamType.Int) {
+                    var piie = new ParameterInfo<int>(
+                                cols[2], cols[3], cols[4], type, permit, int.Parse(cols[5])
+                            );
+                    List.Add(piie);
+                    QuickAccess.Add(cols[3], piie);
                 }
             }
             return paramInfo;
