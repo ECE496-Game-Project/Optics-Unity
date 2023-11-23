@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UIElements;
 using UnityEngine;
+using GO_Device;
 
 namespace ParameterTransfer {
 
@@ -42,6 +43,10 @@ namespace ParameterTransfer {
             Unit = unit;
             Type = type;
             Permit = permit;
+        }
+        
+        public virtual string InfoToString() {
+            return "Name: " + Name + "Symbol: " + Symbol + "Unit: " + Unit + "Type: "+Type;
         }
     }
     public class ParameterInfo<T> : ParameterInfoBase {
@@ -100,8 +105,8 @@ namespace ParameterTransfer {
                     continue;
                 }
 
-                Permission permit;
-                if (Enum.TryParse(cols[1], out permit)) permit = Permission.Invalid;
+                Permission permit = Permission.Invalid;
+                Enum.TryParse(cols[1], out permit);
                 if (permit <= Permission.RW) {
                     switch (type) {
                         case ParamType.String:
@@ -129,6 +134,16 @@ namespace ParameterTransfer {
                             );
                     List.Add(pifs);
                     QuickAccess.Add(cols[3], pifs);
+                }
+
+                if (permit == Permission.RWEnum && type == ParamType.Int) {
+                    if (cols[2] == "DEVICETYPE") {
+                        var piie = new ParameterInfo<DEVICETYPE>(
+                                    cols[2], cols[3], cols[4], type, permit, (DEVICETYPE)int.Parse(cols[5])
+                                );
+                        List.Add(piie);
+                        QuickAccess.Add(cols[3], piie);
+                    }
                 }
             }
             return paramInfo;

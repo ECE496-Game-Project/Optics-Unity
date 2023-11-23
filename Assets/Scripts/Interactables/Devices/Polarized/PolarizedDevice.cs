@@ -46,6 +46,7 @@ namespace GO_Device {
         public override void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
             if(DeviceType != DEVICETYPE.WEAVEPLATE && DeviceType != DEVICETYPE.POLARIZER && 
                DeviceType != DEVICETYPE.HALFWAVEPLATE && DeviceType != DEVICETYPE.QUATERWAVEPLATE)
+
                 DebugLogger.Error(this.name, "DeviceType " + DeviceType + " Invalid!");
 
             var RotDegTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["RotDeg"];
@@ -53,12 +54,12 @@ namespace GO_Device {
             RotDegTuple.Default = RotDeg;
             RotDegTuple.Setter = (evt) => { RotDeg = evt.newValue; ParameterChangeTrigger(); };
 
-            if (DeviceType == DEVICETYPE.WEAVEPLATE || DeviceType == DEVICETYPE.HALFWAVEPLATE || DeviceType == DEVICETYPE.QUATERWAVEPLATE) {
-                var AxisDiffDegTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["AxisDiffDeg"];
-                AxisDiffDegTuple.Getter = () => { return AxisDiffDeg; };
-                AxisDiffDegTuple.Default = AxisDiffDeg;
-                AxisDiffDegTuple.Setter = (evt) => { AxisDiffDeg = evt.newValue; ParameterChangeTrigger(); };
-            }
+
+            var AxisDiffDegTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["AxisDiffDeg"];
+            AxisDiffDegTuple.Getter = () => { return AxisDiffDeg; };
+            AxisDiffDegTuple.Default = AxisDiffDeg;
+            AxisDiffDegTuple.Setter = (evt) => { AxisDiffDeg = evt.newValue; ParameterChangeTrigger(); };
+
         }
 
         public override void ParameterChangeTrigger() {

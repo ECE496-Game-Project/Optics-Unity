@@ -60,7 +60,7 @@ public class SceneSelectionMenu : MonoBehaviour
             
             Button thumbnail = new Button();
             thumbnail.AddToClassList("thumbnail");
-            thumbnail.style.backgroundImage = Resources.Load<Texture2D>($"Art/Images/placeholder{i+1}");
+            thumbnail.style.backgroundImage = Resources.Load<Texture2D>($"Art/Images/{_selectionList[i]}");
             thumbnail.RegisterCallback<ClickEvent, string>(LoadScene,  _selectionList[i]);
             scene.Add(thumbnail);
 

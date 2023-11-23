@@ -13,7 +13,7 @@ namespace GO_Wave {
         public I_WaveLogic WaveInteract;
         #endregion
 
-#region PRIVATE VARIABLES
+        #region PRIVATE VARIABLES
         [Header("DEBUG_WAVE")]
         [SerializeField] protected WaveParams m_params;
         // Current Section's Wave Distance

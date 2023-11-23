@@ -20,8 +20,13 @@ namespace GO_Device {
         public DEVICETYPE DeviceType = DEVICETYPE.INVALID;
         public virtual void WaveHit(in RaycastHit hit, WaveSource parentWS) { }
         public virtual void CleanDeviceHitTrace(WaveSource parentWS) { }
-        
-        public virtual void RegisterParametersCallback(ParameterInfoList ParameterInfos) { }
+
+        public virtual void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
+            var RotDegTuple = (ParameterInfo<DEVICETYPE>)ParameterInfos.SymbolQuickAccess["DeviceType"];
+            RotDegTuple.Getter = () => { return DeviceType; };
+            RotDegTuple.Default = DeviceType;
+            RotDegTuple.Setter = (evt) => { DeviceType = evt.newValue; ParameterChangeTrigger(); };
+        }
         public virtual void ParameterChangeTrigger() { }
         public virtual void OnMouseSelect() { OnDeviceSelected?.Invoke(); }
         public virtual void OnMouseUnselect() { OnDeviceUnselected?.Invoke(); }
