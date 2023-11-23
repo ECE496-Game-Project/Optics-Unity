@@ -110,12 +110,15 @@ namespace ControlPanel {
             /* Remove the previous showing Parameter View */
             if (_selectedParam != null) {
                 _content.Remove(_selectedParam);
+                _selectedParam = null;
             }
 
             RootWaveSource rws = obj.GetComponent<RootWaveSource>();
             if (rws != null) {
                 _content.Add(_rootWSParamView);
                 _selectedParam = _rootWSParamView;
+                rws.RegisterParametersCallback(_rootWSInfo);
+
                 return;
             }
 
@@ -123,6 +126,7 @@ namespace ControlPanel {
             if (ws != null) {
                 _content.Add(_WSParamView);
                 _selectedParam = _WSParamView;
+                ws.RegisterParametersCallback(_WSInfo);
                 return;
             }
 
@@ -130,6 +134,7 @@ namespace ControlPanel {
             if (pd != null) {
                 _content.Add(_PDParamView);
                 _selectedParam = _PDParamView;
+                pd.RegisterParametersCallback(_PDInfo);
             }
         }
 
