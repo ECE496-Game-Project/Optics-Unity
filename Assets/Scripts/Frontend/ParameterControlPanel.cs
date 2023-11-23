@@ -17,7 +17,7 @@ namespace ControlPanel {
         private VisualElement _WSParamView;
         private VisualElement _PDParamView;
         
-        private VisualElement _selectedParam;
+        private VisualElement _paramView;
 
         private ParameterInfoList _rootWSInfo;
         private ParameterInfoList _WSInfo;
@@ -35,25 +35,12 @@ namespace ControlPanel {
 
             if (_uiDocument == null)
                 _uiDocument = gameObject?.GetComponent<UIDocument>();
-
-            _rootWSParamView = GenVEFromPIL(_rootWSInfo);
-            //_rootWSParamView = GenRootWSParamView();
-            //_rootWSParamView.AddToClassList("paramView");
-            //_rootWSParamView.AddToClassList("container");
-
-            _WSParamView = GenVEFromPIL(_WSInfo);
-            //_WSParamView.AddToClassList("paramView");
-            //_WSParamView.AddToClassList("container");
-
-            _PDParamView = GenVEFromPIL(_PDInfo);
-            //_polarizerParamView.AddToClassList("paramView");
-            //_polarizerParamView.AddToClassList("container");
         }
         
         private VisualElement GenVEFromPIL(in ParameterInfoList infoList) {
             var ptr = new VisualElement();
             Stack<VisualElement> hier = new Stack<VisualElement>();
-
+            string name = "";
             foreach (var entry in infoList.List) {
                 switch (entry.Type) {
                     case ParamType.Hierarchy:
@@ -63,35 +50,47 @@ namespace ControlPanel {
                         GenHierarchyEnd(ref ptr, ref hier);
                         break;
                     case ParamType.String:
-                        GenText(entry.Name, (entry.Permit == Permission.RO), ptr);
+                        var stringF = GenText(entry.Name, (entry.Permit == Permission.RO));
+                        ptr.Add(stringF);
                         break;
                     case ParamType.Int:
                         if (entry.Permit == Permission.RWEnum) {
-                            ParameterInfo<int> intEntry = entry as ParameterInfo<int>;
-                            if (intEntry.Name == "DEVICETYPE") {
-                                ptr.Add(new EnumField(entry.Symbol, (DEVICETYPE)intEntry.Default));
+                            ParameterInfo<DEVICETYPE> devicetypeEntry = entry as ParameterInfo<DEVICETYPE>;
+                            if (devicetypeEntry.Name == "DEVICETYPE") {
+                                name = entry.Symbol;
+                                var enumF = new EnumField(name, devicetypeEntry.Default);
+                                enumF.value = devicetypeEntry.Getter();
+                                enumF.RegisterCallback(devicetypeEntry.Setter);
+                                ptr.Add(enumF);
                             }
                         }
                         break;
                     case ParamType.Float:
-                        string name = entry.Name + "(" + entry.Symbol + ")";
+                        name = entry.Name + "(" + entry.Symbol + ")";
                         ParameterInfo<float> floatEntry = entry as ParameterInfo<float>;
                         ParameterInfoBound<float> floatEntryBound = entry as ParameterInfoBound<float>;
 
+                        FloatField floatF;
                         switch (entry.Permit) {
                             case Permission.RO:
-                                GenFloat(name, entry.Unit, ptr);
+                                floatF = GenFloat(name, entry.Unit);
+                                ptr.Add(floatF);
                                 break;
                             case Permission.RW:
-                                GenFloat(name, entry.Unit, floatEntry.Default, ptr);
+                                floatF = GenFloat(name, entry.Unit, floatEntry.Default);
+                                floatF.value = floatEntry.Getter();
+                                floatF.RegisterCallback(floatEntry.Setter);
+                                ptr.Add(floatF);
                                 break;
                             case Permission.RWSlider:
-                                GenFloat(
+                                floatF = GenFloat(
                                     name, entry.Unit, 
                                     floatEntryBound.Default, 
                                     floatEntryBound.UpperBound, 
-                                    floatEntryBound.LowerBound, 
-                                    ptr);
+                                    floatEntryBound.LowerBound);
+                                floatF.value = floatEntryBound.Getter();
+                                floatF.RegisterCallback(floatEntryBound.Setter);
+                                ptr.Add(floatF);
                                 break;
                             default:
                                 DebugLogger.Error(this.name, "Unrecognized Info, break!");
@@ -107,41 +106,42 @@ namespace ControlPanel {
         }
         
         private void SelectParamView(GameObject obj) {
+            
             /* Remove the previous showing Parameter View */
-            if (_selectedParam != null) {
-                _content.Remove(_selectedParam);
-                _selectedParam = null;
+            if (_paramView != null) {
+                _content.Remove(_paramView);
+                _paramView = null;
             }
 
             RootWaveSource rws = obj.GetComponent<RootWaveSource>();
             if (rws != null) {
-                _content.Add(_rootWSParamView);
-                _selectedParam = _rootWSParamView;
                 rws.RegisterParametersCallback(_rootWSInfo);
-
+                _paramView = GenVEFromPIL(_rootWSInfo);
+                _content.Add(_paramView);
                 return;
             }
 
             WaveSource ws = obj.GetComponent<WaveSource>();
             if (ws != null) {
-                _content.Add(_WSParamView);
-                _selectedParam = _WSParamView;
                 ws.RegisterParametersCallback(_WSInfo);
+                _paramView = GenVEFromPIL(_WSInfo);
+                _content.Add(_paramView);
                 return;
             }
 
             PolarizedDevice pd = obj.GetComponent<PolarizedDevice>();
             if (pd != null) {
-                _content.Add(_PDParamView);
-                _selectedParam = _PDParamView;
                 pd.RegisterParametersCallback(_PDInfo);
+                _paramView = GenVEFromPIL(_PDInfo);
+                _content.Add(_paramView);
+                return;
             }
         }
 
-        void GenText(string name, bool isReadonly, in VisualElement ptr) {
+        VisualElement GenText(string name, bool isReadonly) {
             var text = new TextField(name);
             text.isReadOnly = isReadonly;
-            ptr.Add(text);
+            return text;
         }
 
         void GenHierarchy(string name, ref VisualElement ptr, ref Stack<VisualElement> hier) {
@@ -155,7 +155,7 @@ namespace ControlPanel {
             ptr = hier.Pop();
         }
 
-        void GenFloat(string name, string unit, float defaultVal, float lowerBound, float upperBound, in VisualElement ptr) {
+        FloatField GenFloat(string name, string unit, float defaultVal, float lowerBound, float upperBound) {
             var param = new VisualElement();
             //param.AddToClassList("parameter__slider");
             var slide = new Slider(name, lowerBound, upperBound) {
@@ -171,28 +171,15 @@ namespace ControlPanel {
             num.RegisterCallback<ChangeEvent<float>>(evt => LowerBoundCheck(evt, lowerBound));
             num.RegisterCallback<ChangeEvent<float>>(evt => UpperBoundCheck(evt, upperBound));
             field.Add(num);
+
             var uni = new Label(unit);
             field.Add(uni);
             param.Add(field);
 
-            ptr.Add(param);
+            return num;
         }
 
-        void GenFloat(string label, string unit, float bound, float defaultVal, in VisualElement ptr) {
-            var param = new VisualElement();
-            //param.AddToClassList("parameter__field");
-            var field = new FloatField() {
-                label = label,
-                value = defaultVal
-            };
-            field.RegisterCallback<ChangeEvent<float>>(evt => LowerBoundCheck(evt, bound));
-            param.Add(field);
-            var uni = new Label(unit);
-            param.Add(uni);
-            ptr.Add(param);
-        }
-
-        void GenFloat(string label, string unit, in VisualElement ptr) {
+        FloatField GenFloat(string label, string unit) {
             var param = new VisualElement();
             //param.AddToClassList("parameter__field");
             var field = new FloatField() {
@@ -204,10 +191,10 @@ namespace ControlPanel {
             param.Add(field);
             var uni = new Label(unit);
             param.Add(uni);
-            ptr.Add(param);
+            return field;
         }
 
-        void GenFloat(string label, string unit, float defaultVal, in VisualElement ptr) {
+        FloatField GenFloat(string label, string unit, float defaultVal) {
             var param = new VisualElement();
             //param.AddToClassList("parameter__field");
             var field = new FloatField() {
@@ -216,9 +203,10 @@ namespace ControlPanel {
             };
 
             param.Add(field);
+
             var uni = new Label(unit);
             param.Add(uni);
-            ptr.Add(param);
+            return field;
         }
 
         void LowerBoundCheck(ChangeEvent<float> evt, float bound) {

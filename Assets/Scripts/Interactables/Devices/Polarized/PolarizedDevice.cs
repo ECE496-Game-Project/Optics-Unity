@@ -53,12 +53,10 @@ namespace GO_Device {
             RotDegTuple.Default = RotDeg;
             RotDegTuple.Setter = (evt) => { RotDeg = evt.newValue; ParameterChangeTrigger(); };
 
-            if (DeviceType == DEVICETYPE.WEAVEPLATE) {
-                var AxisDiffDegTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["AxisDiffDeg"];
-                AxisDiffDegTuple.Getter = () => { return AxisDiffDeg; };
-                AxisDiffDegTuple.Default = AxisDiffDeg;
-                AxisDiffDegTuple.Setter = (evt) => { AxisDiffDeg = evt.newValue; ParameterChangeTrigger(); };
-            }
+            var AxisDiffDegTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["AxisDiffDeg"];
+            AxisDiffDegTuple.Getter = () => { return AxisDiffDeg; };
+            AxisDiffDegTuple.Default = AxisDiffDeg;
+            AxisDiffDegTuple.Setter = (evt) => { AxisDiffDeg = evt.newValue; ParameterChangeTrigger(); };
         }
 
         public override void ParameterChangeTrigger() {

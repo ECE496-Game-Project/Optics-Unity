@@ -16,10 +16,10 @@ namespace GO_Device {
         public virtual void CleanDeviceHitTrace(WaveSource parentWS) { }
 
         public virtual void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
-            var RotDegTuple = (ParameterInfo<int>)ParameterInfos.SymbolQuickAccess["DeviceType"];
-            RotDegTuple.Getter = () => { return (int)DeviceType; };
-            RotDegTuple.Default = (int)DeviceType;
-            RotDegTuple.Setter = (evt) => { DeviceType = (DEVICETYPE)evt.newValue; ParameterChangeTrigger(); };
+            var RotDegTuple = (ParameterInfo<DEVICETYPE>)ParameterInfos.SymbolQuickAccess["DeviceType"];
+            RotDegTuple.Getter = () => { return DeviceType; };
+            RotDegTuple.Default = DeviceType;
+            RotDegTuple.Setter = (evt) => { DeviceType = evt.newValue; ParameterChangeTrigger(); };
         }
         public virtual void ParameterChangeTrigger() { }
     }
