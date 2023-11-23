@@ -3,10 +3,13 @@
 using GO_Device;
 using GO_Wave;
 using Interfaces;
-using System;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
+using static Constraint.WaveDeviceOrder;
 
 namespace Constraint
 {
@@ -17,8 +20,12 @@ namespace Constraint
 
         WaveDeviceOrder m_waveDeviceOrder;
 
+        private DeviceDragController m_deviceDragController;
+
         private void Awake()
         {
+            
+
             m_waveDeviceOrder = new WaveDeviceOrder(MaxDeviceCount, DeviceSeperationDistance);
 
             // assume the first child is my wave source
@@ -35,10 +42,15 @@ namespace Constraint
                 Assert.IsNotNull(waveDevice);
 
                 m_waveDeviceOrder.AppendDevice(waveDevice);
+
+                RegisterClickEvent(m_waveDeviceOrder.GetDeviceOrderInfo(i - 1));
             }
 
             SetDevicePositions();
 
+            m_deviceDragController = GetComponent<DeviceDragController>();
+            Assert.IsNotNull(m_deviceDragController);
+            m_deviceDragController.Init(this, waveSource.transform.position, transform.position + new Vector3(0, 0, (MaxDeviceCount + 1) * DeviceSeperationDistance));
             WaitForOneFixedUpdateAndTrigger(waveSource, null);
         }
 
@@ -54,25 +66,28 @@ namespace Constraint
 
         public void SwapDeviceOrder(int firstDeviceIdx, int secondDeviceIdx)
         {
-            
-            int highestIdx = (firstDeviceIdx > secondDeviceIdx) ? firstDeviceIdx : secondDeviceIdx;
+            Assert.IsFalse(firstDeviceIdx == secondDeviceIdx);
 
-            var firstDevice = m_waveDeviceOrder.GetDevice(firstDeviceIdx);
+            int higherIdx = (firstDeviceIdx > secondDeviceIdx) ? firstDeviceIdx : secondDeviceIdx;
+            int lowerIdx = (firstDeviceIdx < secondDeviceIdx) ? firstDeviceIdx : secondDeviceIdx;
 
-            var secondDevice = m_waveDeviceOrder.GetDevice(secondDeviceIdx);
+            var higherIdxDevice = m_waveDeviceOrder.GetDeviceOrderInfo(higherIdx);
 
-            m_waveDeviceOrder.ReplaceDevice(firstDevice, secondDeviceIdx);
-            m_waveDeviceOrder.ReplaceDevice(secondDevice, firstDeviceIdx);
+            var lowerIdxDevice = m_waveDeviceOrder.GetDeviceOrderInfo(lowerIdx);
+
+            m_waveDeviceOrder.ReplaceDevice(higherIdxDevice, lowerIdx);
+            m_waveDeviceOrder.ReplaceDevice(lowerIdxDevice, higherIdx);
 
             SetDevicePositions();
 
             //might also need to update gameobject hierarchy
+            higherIdxDevice.device.transform.SetSiblingIndex(lowerIdx + 1);
+            lowerIdxDevice.device.transform.SetSiblingIndex(higherIdx + 1);
 
             // the device which is currently in has the lower hierarchy was the device that has the higher hierarchy
             // we need to notify this device's parent wave source that need to regenerate
-            var lowerHierarchyDevice = m_waveDeviceOrder.GetDevice(highestIdx);
 
-            var deviceParameterTransfer = (I_ParameterTransfer)lowerHierarchyDevice;
+            var deviceParameterTransfer = (I_ParameterTransfer)lowerIdxDevice;
 
             Assert.IsNotNull(deviceParameterTransfer);
 
@@ -81,14 +96,38 @@ namespace Constraint
 
         }
 
+        public void SwapDeviceOrderPlain(int firstDeviceIdx, int secondDeviceIdx)
+        {
+            Assert.IsFalse(firstDeviceIdx == secondDeviceIdx);
+
+            int higherIdx = (firstDeviceIdx > secondDeviceIdx) ? firstDeviceIdx : secondDeviceIdx;
+            int lowerIdx = (firstDeviceIdx < secondDeviceIdx) ? firstDeviceIdx : secondDeviceIdx;
+
+            var higherIdxDevice = m_waveDeviceOrder.GetDeviceOrderInfo(higherIdx);
+
+            var lowerIdxDevice = m_waveDeviceOrder.GetDeviceOrderInfo(lowerIdx);
+
+            m_waveDeviceOrder.ReplaceDevice(higherIdxDevice, lowerIdx);
+            m_waveDeviceOrder.ReplaceDevice(lowerIdxDevice, higherIdx);
+
+
+            //might also need to update gameobject hierarchy
+            higherIdxDevice.device.transform.SetSiblingIndex(lowerIdx + 1);
+            lowerIdxDevice.device.transform.SetSiblingIndex(higherIdx + 1);
+
+
+        }
+
         public void RemoveDevice(int deviceIdx)
         {
             var device = m_waveDeviceOrder.GetDevice(deviceIdx);
+            var deviceInfo = m_waveDeviceOrder.GetDeviceOrderInfo(deviceIdx);
             m_waveDeviceOrder.removeDevice(deviceIdx);
+            UnRegisterClickEvent(deviceInfo);
 
+            // disable the collider so that the wave source can pass through
             device.gameObject.GetComponent<Collider>().enabled = false;
-
-
+            DeviceOnUnClick(deviceIdx);
 
             SetDevicePositions();
 
@@ -101,19 +140,163 @@ namespace Constraint
         public void AddDevice(string deviceType)
         {
 
+            if (m_waveDeviceOrder.DeviceCount == MaxDeviceCount) return;
+            var newDevice = DevicePrefabLibrary.Instance.CreateDevice(deviceType);
+
+            // when we add a new device we assume its rotation is its default rotation
+            Quaternion newDeviceRotation = newDevice.transform.rotation;
+            newDevice.transform.parent = transform;
+
+            // in the wave track point of view, the new device is the default rotation
+            newDevice.transform.localRotation = newDeviceRotation;
+
+            var lastSecondDevice = m_waveDeviceOrder.GetDevice(m_waveDeviceOrder.DeviceCount - 2);
+            
+            m_waveDeviceOrder.AppendDevice(newDevice);
+            RegisterClickEvent(m_waveDeviceOrder.GetDeviceOrderInfo(m_waveDeviceOrder.DeviceCount - 1));
+            SetDevicePositions();
+            WaitForOneFixedUpdateAndTrigger((I_ParameterTransfer)lastSecondDevice, null);
         }
 
-        void WaitForOneFixedUpdateAndTrigger(I_ParameterTransfer i_ParameterTransfer, Action extraBehavior)
+        public void AddDevice(DEVICETYPE deviceType)
+        {
+            if (m_waveDeviceOrder.DeviceCount == MaxDeviceCount) return;
+            var newDevice = DevicePrefabLibrary.Instance.CreateDevice(deviceType);
+
+            // when we add a new device we assume its rotation is its default rotation
+            Quaternion newDeviceRotation = newDevice.transform.rotation;
+            newDevice.transform.parent = transform;
+
+            // in the wave track point of view, the new device is the default rotation
+            newDevice.transform.localRotation = newDeviceRotation;
+            m_waveDeviceOrder.AppendDevice(newDevice);
+            var lastSecondDevice = m_waveDeviceOrder.GetDevice(m_waveDeviceOrder.DeviceCount - 2);
+            
+            RegisterClickEvent(m_waveDeviceOrder.GetDeviceOrderInfo(m_waveDeviceOrder.DeviceCount - 1));
+            SetDevicePositions();
+            WaitForOneFixedUpdateAndTrigger((I_ParameterTransfer)lastSecondDevice, null);
+        }
+
+
+        void WaitForOneFixedUpdateAndTrigger(I_ParameterTransfer i_ParameterTransfer, UnityAction extraBehavior)
         {
             StartCoroutine(WaitForOneFixedUpdateAndTriggerCoroutine(i_ParameterTransfer, extraBehavior));
         }
 
-        IEnumerator WaitForOneFixedUpdateAndTriggerCoroutine(I_ParameterTransfer i_ParameterTransfer, Action extraBehavior)
+        IEnumerator WaitForOneFixedUpdateAndTriggerCoroutine(I_ParameterTransfer i_ParameterTransfer, UnityAction extraBehavior)
         {
             yield return new WaitForFixedUpdate();
 
             i_ParameterTransfer.ParameterChangeTrigger();
             extraBehavior?.Invoke();
+        }
+
+        private Dictionary<int, UnityAction> deviceClickActions = new Dictionary<int, UnityAction>();
+        private Dictionary<int, UnityAction> deviceUnclickAction = new Dictionary<int, UnityAction>();
+        void RegisterClickEvent(DeviceOrderInfo deviceOrderInfo)
+        {
+            UnityAction clickAction = () =>
+            {
+                DeviceOnClick(deviceOrderInfo.index);
+            };
+
+            UnityAction unclickAction = () =>
+            {
+                DeviceOnUnClick(deviceOrderInfo.index);
+            };
+
+            deviceOrderInfo.device.OnDeviceSelected.AddListener(clickAction);
+            deviceOrderInfo.device.OnDeviceUnselected.AddListener(unclickAction);
+            deviceClickActions.Add(deviceOrderInfo.device.gameObject.GetInstanceID(), clickAction);
+            deviceUnclickAction.Add(deviceOrderInfo.device.gameObject.GetInstanceID(), unclickAction);
+        }
+
+        void UnRegisterClickEvent(DeviceOrderInfo deviceOrderInfo)
+        {
+            Assert.IsNotNull(deviceOrderInfo.device);
+            Assert.IsNotNull(deviceOrderInfo.device);
+            int id = deviceOrderInfo.device.gameObject.GetInstanceID();
+            
+            Assert.IsTrue(deviceClickActions.ContainsKey(id));
+            Assert.IsTrue(deviceUnclickAction.ContainsKey(id));
+
+            
+            deviceOrderInfo.device.OnDeviceSelected.RemoveListener(deviceClickActions[id]);
+            deviceOrderInfo.device.OnDeviceUnselected.RemoveListener(deviceUnclickAction[id]);
+
+            deviceClickActions.Remove(id);
+            deviceUnclickAction.Remove(id);
+        }
+
+
+        private int m_selectedDeviceIdx = -1;
+        void DeviceOnClick(int idx)
+        {
+            m_selectedDeviceIdx = idx;
+            m_deviceDragController.SetTarget(m_waveDeviceOrder.GetDeviceOrderInfo(idx));
+
+        }
+
+        void DeviceOnUnClick(int idx)
+        {
+            m_selectedDeviceIdx = -1;
+            m_deviceDragController.Clear();
+        }
+
+        public void removeSelectedDevice()
+        {
+            if (m_selectedDeviceIdx == -1)
+            {
+                Debug.Log("no device selected");
+                return;
+            }
+            RemoveDevice(m_selectedDeviceIdx);
+
+            return;
+        }
+
+        public int GetNewIdx(Vector3 newPosition, int originalIdx)
+        {
+            return m_waveDeviceOrder.GetDevicePositionIndex(newPosition, originalIdx);
+        }
+
+        public void ChangeIdx(int oldIdx, int newIdx)
+        {
+            if (oldIdx == newIdx){
+                SetDevicePositions();
+                return;
+            }
+
+            if (oldIdx < newIdx)
+            {
+                for (int i = oldIdx; i < newIdx; i++)
+                {
+                    SwapDeviceOrderPlain(i, i + 1);
+                    
+
+                    
+                }
+                SetDevicePositions();
+                var deviceParameterTransfer = (I_ParameterTransfer)m_waveDeviceOrder.GetDevice(newIdx);
+                Assert.IsNotNull(deviceParameterTransfer);
+
+                WaitForOneFixedUpdateAndTrigger(deviceParameterTransfer, null);
+            }
+            else
+            {
+                for (int i = oldIdx; i > newIdx; i--)
+                {
+                    SwapDeviceOrderPlain(i, i - 1);
+                }
+
+                SetDevicePositions();
+                var deviceParameterTransfer = (I_ParameterTransfer)m_waveDeviceOrder.GetDevice(newIdx + 1);
+                Assert.IsNotNull(deviceParameterTransfer);
+
+                WaitForOneFixedUpdateAndTrigger(deviceParameterTransfer, null);
+            }
+
+
         }
     }
 }
