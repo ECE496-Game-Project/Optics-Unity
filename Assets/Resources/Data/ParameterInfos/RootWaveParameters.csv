@@ -1,5 +1,5 @@
 ﻿Type,Permission,Name,Symbol,Unit,DefaultValue,UpperBound,LowerBound
-String,RW,WaveName,name,,rootWave,,
+String,RW,,name,,rootWave,,
 Hierarchy,,Amplitude(Eo),,,,,
 Float,RW,Udir Amp,Eox,V/m,0,,
 Float,RW,Vdir Amp,Eoy,V/m,0,,
