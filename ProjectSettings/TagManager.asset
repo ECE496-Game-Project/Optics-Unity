@@ -36,7 +36,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Special Layer
   m_SortingLayers:
   - name: Default
     uniqueID: 0

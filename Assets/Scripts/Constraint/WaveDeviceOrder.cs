@@ -86,13 +86,15 @@ namespace Constraint
             return true;
         }
 
-        public bool ReplaceDevice(DeviceBase device, int index)
+        public bool ReplaceDevice(DeviceOrderInfo device, int index)
         {
             Assert.IsTrue(index >= 0 && index < m_devices.Count);
 
             Assert.IsNotNull(device);
 
-            m_devices[index].device = device;
+            m_devices[index] = device;
+            device.index = index;
+            
 
             return true;
         }
@@ -133,6 +135,38 @@ namespace Constraint
             return m_waveSource.transform.position + m_waveSource.transform.forward * DeviceSeperationDistance * (index + 1);
         }
 
+        public int GetDevicePositionIndex(Vector3 position, int originalIdx)
+        {
+            Assert.IsNotNull(m_waveSource);
+            var origPosition = GetDevicePosition(originalIdx);
+
+            
+
+            Vector3 sourcePosition = m_waveSource.transform.position;
+
+            
+
+            Vector3 direction = m_waveSource.transform.forward;
+
+            Vector3 relativePosition = position - sourcePosition;
+
+            float distance = Vector3.Dot(relativePosition, direction);
+            float origDistance = Vector3.Dot(origPosition - sourcePosition, direction);
+
+            int index;
+            if (distance > origDistance)
+            {
+                index = (int)Mathf.Floor(distance / DeviceSeperationDistance) - 1;
+            }
+            else
+            {
+                index = (int)Mathf.Ceil(distance / DeviceSeperationDistance) - 1;
+            }
+
+            if (index < 0) index = 0;
+
+            return index;
+        }
     }
 }
 
