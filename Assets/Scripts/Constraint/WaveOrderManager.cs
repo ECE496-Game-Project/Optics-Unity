@@ -142,6 +142,7 @@ namespace Constraint
             var lastSecondDevice = m_waveDeviceOrder.GetDevice(m_waveDeviceOrder.DeviceCount - 2);
 
             m_waveDeviceOrder.AppendDevice(newDevice);
+            RegisterClickEvent(m_waveDeviceOrder.GetDeviceOrderInfo(m_waveDeviceOrder.DeviceCount - 1));
             SetDevicePositions();
             WaitForOneFixedUpdateAndTrigger((I_ParameterTransfer)lastSecondDevice, null);
         }
@@ -209,13 +210,16 @@ namespace Constraint
             m_selectedDeviceIdx = -1;
         }
 
-        public bool removeSelectedDevice()
+        public void removeSelectedDevice()
         {
-            if (m_selectedDeviceIdx == - 1) return false;
-
+            if (m_selectedDeviceIdx == -1)
+            {
+                Debug.Log("no device selected");
+                return;
+            }
             RemoveDevice(m_selectedDeviceIdx);
 
-            return true;
+            return;
         }
     }
 }
