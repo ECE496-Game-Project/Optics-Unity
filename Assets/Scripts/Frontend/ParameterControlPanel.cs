@@ -80,6 +80,7 @@ namespace ControlPanel {
                             case Permission.RO:
                                 vE = GenFloat(name, entry.Unit);
                                 floatF = vE.Q<FloatField>();
+                                floatF.value = floatEntry.Getter();
                                 ptr.Add(vE);
                                 break;
                             case Permission.RW:
@@ -94,10 +95,16 @@ namespace ControlPanel {
                                     name, entry.Unit, 
                                     floatEntryBound.Default, 
                                     floatEntryBound.UpperBound, 
-                                    floatEntryBound.LowerBound);
+                                    floatEntryBound.LowerBound
+                                );
                                 floatF = vE.Q<FloatField>();
                                 floatF.value = floatEntryBound.Getter();
                                 floatF.RegisterCallback(floatEntryBound.Setter);
+                                Slider slider = vE.Q<Slider>();
+                                floatF.RegisterCallback<ChangeEvent<float>>((evt) => {slider.value = evt.newValue;});
+                                slider.value = floatEntryBound.Getter();
+                                slider.RegisterCallback(floatEntryBound.Setter);
+                                slider.RegisterCallback<ChangeEvent<float>>((evt) => {floatF.value = evt.newValue;});
                                 ptr.Add(vE);
                                 break;
                             default:
@@ -180,6 +187,7 @@ namespace ControlPanel {
             var num = new FloatField() {
                 value = defaultVal
             };
+
             num.RegisterCallback<ChangeEvent<float>>(evt => LowerBoundCheck(evt, lowerBound));
             num.RegisterCallback<ChangeEvent<float>>(evt => UpperBoundCheck(evt, upperBound));
             field.Add(num);
@@ -194,8 +202,9 @@ namespace ControlPanel {
         VisualElement GenFloat(string label, string unit) {
             var param = new VisualElement();
             param.AddToClassList("parameter__field");
+            var name = new Label(label);
+            param.Add(name);
             var field = new FloatField() {
-                label = label,
                 value = 0
             };
             field.isReadOnly = true;
@@ -209,11 +218,11 @@ namespace ControlPanel {
         VisualElement GenFloat(string label, string unit, float defaultVal) {
             var param = new VisualElement();
             param.AddToClassList("parameter__field");
+            var name = new Label(label);
+            param.Add(name);
             var field = new FloatField() {
-                label = label,
                 value = defaultVal
             };
-
             param.Add(field);
 
             var uni = new Label(unit);
