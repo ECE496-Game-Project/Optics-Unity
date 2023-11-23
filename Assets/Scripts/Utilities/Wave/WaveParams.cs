@@ -19,46 +19,43 @@ namespace WaveUtils {
 		public del_Vec3ParamVec3Getter VHat = Del_Default.DefaultVec3ParamVec3Getter;
 		public del_Vec3ParamVec3Getter KHat = Del_Default.DefaultVec3ParamVec3Getter;
 
-		[Header("Magnitude Settings")]
+		[Header("Amplitude Settings")]
 		public float Eox;
 		public float Eoy;
-
-		[Header("Frequency Settings")]
-		public float W;
-		public float K;
-		public float N;
-
-		[Header("Angle Settings in degree")]
 		[Range(0, 360)]
-        public float Theta;
+		public float theta;
+
+		[Header("Temporal Freq Settings")]
+		public float T;
+		public float mu;
+		public float w;
+
+		[Header("Spatial Freq Settings")]
+		public float lambda;
+		public float f;
+		public float k;
+
 		[Range(0, 360)]
-		public float Phi;
+		public float phi;
+		[Range(1, 5)]
+		public float n;
 
 		[Header("Dispersion Distance")]
 		public float RODistance;
         #endregion
 
         #region CONSTRUCTOR
-        public WaveParams(WAVETYPE type, float eox, float eoy, float w, float k, float n, float theta, float phi) {
-			this.Type = type;
-			this.Eox = eox;
-			this.Eoy = eoy;
-			this.W = w;
-			this.K = k;
-			this.N = n;
-			this.Theta = theta;
-			this.Phi = phi;
-		}
+		public WaveParams() { }
 		public WaveParams(WaveParams src) {
 			this.Type = src.Type;
 			this.Eox = src.Eox;
 			this.Eoy = src.Eoy;
-			this.W = src.W;
-			this.K = src.K;
-			this.N = src.N;
-			this.Theta = src.Theta;
-			this.Phi = src.Phi;
-        }
+			this.T = src.T;
+			this.n = src.n;
+			this.theta = src.theta;
+			this.phi = src.phi;
+			this.RODistance = src.RODistance;
+		}
         #endregion
     }
 }
