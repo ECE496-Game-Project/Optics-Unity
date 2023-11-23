@@ -3,7 +3,6 @@ using Complex = System.Numerics.Complex;
 
 using CommonUtils;
 using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
-using static UnityEngine.InputManagerEntry;
 using UnityEngine.UIElements;
 
 namespace WaveUtils {
