@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Parameters:
     Type: 1
-    Eox: 0
-    Eoy: 10
+    Eox: 10
+    Eoy: 0
     theta: 0
     T: 0.06283186
     mu: 0
