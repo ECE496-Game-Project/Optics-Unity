@@ -9,7 +9,7 @@ namespace GO_Wave {
 
         public void UpdateEVec(Vector3 vec) {
             this.transform.LookAt((this.transform.position + this.transform.forward), vec);
-            this.transform.localScale = new Vector3(1, vec.magnitude, 1);
+            this.transform.localScale = new Vector3(this.transform.localScale.x, vec.magnitude, this.transform.localScale.z);
         }
 
         private void Awake() {

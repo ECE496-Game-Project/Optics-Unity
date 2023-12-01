@@ -11,28 +11,24 @@ namespace GO_Wave {
         #endregion
 
         #region PRIVRATE VARIABLES
-#if DEBUG_WAVE
         [Header("DEBUG_WAVE")]
         [SerializeField] private DeviceBase m_hit_Device;
         [SerializeField] private WaveSource m_activeWS;
-#else
-        private DeviceBase m_hit_Device;
-        private WaveSource m_activeWS;
-#endif
         #endregion
 
         public void CleanInteract() {
             if (m_hit_Device != null)
-                m_hit_Device.WaveClean(m_activeWS);
+                m_hit_Device.CleanDeviceHitTrace(m_activeWS);
             m_hit_Device = null;
         }
 
         public void Interact() {
             /*Interact Device*/
             if(m_activeWS==null)Debug.Break();
+            float effDistance = m_activeWS.Params.RODistance;
             RaycastHit hit;
             if (
-                Physics.Raycast(transform.position, transform.forward, out hit, m_activeWS.EffectDistance, _interactMask)
+                Physics.Raycast(transform.position, transform.forward, out hit, effDistance, _interactMask)
                 && ((1 << hit.collider.gameObject.layer) & _interactMask) != 0
             ) {
                 m_hit_Device = hit.collider.gameObject.GetComponent<DeviceBase>();

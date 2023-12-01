@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5237302342889919751}
   - component: {fileID: 5237302342889919748}
   - component: {fileID: 5237302342889919749}
-  - component: {fileID: 8535428568456889454}
+  - component: {fileID: 8519113001558611321}
   - component: {fileID: 1884250489284423748}
   m_Layer: 6
   m_Name: Waveplate
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -0, z: 0}
-  m_LocalScale: {x: 1, y: 0.03, z: 1}
+  m_LocalScale: {x: 2, y: 0.1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 2c7d527ff804444f29d0861c60fca26e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,7 +85,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8535428568456889454
+--- !u!114 &8519113001558611321
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,12 +94,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5237302342889919736}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85dffe29cbfdfaf4a99e1fa195e8d562, type: 3}
+  m_Script: {fileID: 11500000, guid: f91d9d635803bbb44bc8ba6c974dfcb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
-  ThicknessOffset: 0.2
-  PlateDeg: 0
+  DeviceType: 2
+  ThicknessOffset: 0.005
+  RotDeg: 0
   AxisDiffDeg: 0
 --- !u!65 &1884250489284423748
 BoxCollider:

@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClickTest : MonoBehaviour, IClickable
+public class ClickTest : MonoBehaviour, ISelectable
 {
-    public void OnMouseClicked()
+    public void OnMouseSelect()
     {
         Debug.Log($"Clicked on {gameObject.name}");
     }
+
+    public void OnMouseUnselect()
+    {
+        throw new System.NotImplementedException();
+    }
+
 
     // Start is called before the first frame update
     void Start()

@@ -15,10 +15,14 @@ MonoBehaviour:
   Parameters:
     Type: 1
     Eox: 10
-    Eoy: 10
-    W: 100
-    K: 0.3
-    N: 1
-    Theta: 90
-    Phi: 0
-    RODistance: 100
+    Eoy: 0
+    theta: 0
+    T: 0.06283186
+    mu: 0
+    w: 0
+    lambda: 0
+    f: 0
+    k: 0
+    phi: 0
+    n: 1
+    RODistance: 50
