@@ -3,22 +3,25 @@
     --title-color: #CCD9FF; /* Title Font Color: A shade of blue */
     --font-color: #E6E6FF; /* Font Color: Light blue */
     --background-color: #0D0D1A; /* Background Color: Dark blue */
-    --field-color: #1A1A29; /* Field Color: Deeper blue */
     --border-color: #6699FF; /* Border Color: Accent shade of blue */
     --button-color: #335999; /* Button color (another shade of blue) */
 }
 
 /* Type Selectors */
-Label, 
-TextElement{
+Label{
     font-size: 14px;
     color: var(--font-color);
     -unity-font-definition: url('/Assets/Resources/Art/Font/Square-Black.ttf');
 }
 
+TextElement{
+    font-size: 14px;
+    color: var(--background-color);
+    -unity-font-definition: url('/Assets/Resources/Art/Font/Square-Black.ttf');
+}
+
 TextField,
 FloatField{
-    color: var(--field-color);
     width: 60px;
     height: 35px;
 }

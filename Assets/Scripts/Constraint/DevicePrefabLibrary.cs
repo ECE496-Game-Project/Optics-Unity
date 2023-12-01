@@ -13,7 +13,8 @@ public class DevicePrefabLibrary : MonoSingleton<DevicePrefabLibrary>
     private Dictionary<DEVICETYPE, DeviceBase> m_deviceEnumDic = new Dictionary<DEVICETYPE, DeviceBase>();
     private Dictionary<string, DEVICETYPE> m_deviceNameEnumDic = new Dictionary<string, DEVICETYPE>();
     private Dictionary<DEVICETYPE, string> m_deviceEnumNameDic = new Dictionary<DEVICETYPE, string>();
-
+    
+    private int counter = 0;
     protected override void Init()
     {
         Assert.IsTrue(m_deviceName.Count == m_devicePrefab.Count);
@@ -38,14 +39,21 @@ public class DevicePrefabLibrary : MonoSingleton<DevicePrefabLibrary>
     {
         Assert.IsTrue(m_deviceNameDict.ContainsKey(name));
 
-        return Instantiate(m_deviceNameDict[name]);
+        var device = Instantiate(m_deviceNameDict[name]);
+        device.gameObject.name = name + counter;
+        counter++;
+        return device;
     }
 
     public DeviceBase CreateDevice(DEVICETYPE type)
     {
         Assert.IsTrue(m_deviceEnumDic.ContainsKey(type));
+        
+        var device = Instantiate(m_deviceEnumDic[type]);
+        device.gameObject.name = m_deviceEnumNameDic[type] + counter;
+        counter++;
 
-        return Instantiate(m_deviceEnumDic[type]);
+        return device;
     }
 
     public DEVICETYPE GetDeviceType(string name)

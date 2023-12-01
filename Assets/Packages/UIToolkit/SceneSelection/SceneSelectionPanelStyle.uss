@@ -3,7 +3,6 @@
     --title-font-color: #9EF6FF; /* Title Font Color: A shade of blue */
     --font-color: #9bdaf0; /* Font Color: Light blue */
     --background-color: #12202d; /* Background Color: Dark blue */
-    --field-color: #0c1821; /* Field Color: Deeper blue */
     --border-color: #3f8fcf; /* Border Color: Accent shade of blue */
 }
 

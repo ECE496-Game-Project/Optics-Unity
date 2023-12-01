@@ -50,8 +50,12 @@ namespace ControlPanel {
                         GenHierarchyEnd(ref ptr, ref hier);
                         break;
                     case ParamType.String:
-                        var stringF = GenText(entry.Name, (entry.Permit == Permission.RO));
-                        ptr.Add(stringF);
+                        ParameterInfo<string> stringEntry = entry as ParameterInfo<string>;
+                        VisualElement ve = GenText(stringEntry.Name, (stringEntry.Permit == Permission.RO));
+                        TextField stringF = ve.Q<TextField>();
+                        stringF.value = stringEntry.Getter();
+                        stringF.RegisterCallback(stringEntry.Setter);
+                        ptr.Add(ve);
                         break;
                     case ParamType.Int:
                         if (entry.Permit == Permission.RWEnum) {
@@ -70,27 +74,38 @@ namespace ControlPanel {
                         ParameterInfo<float> floatEntry = entry as ParameterInfo<float>;
                         ParameterInfoBound<float> floatEntryBound = entry as ParameterInfoBound<float>;
 
+                        VisualElement vE;
                         FloatField floatF;
                         switch (entry.Permit) {
                             case Permission.RO:
-                                floatF = GenFloat(name, entry.Unit);
-                                ptr.Add(floatF);
+                                vE = GenFloat(name, entry.Unit);
+                                floatF = vE.Q<FloatField>();
+                                floatF.value = floatEntry.Getter();
+                                ptr.Add(vE);
                                 break;
                             case Permission.RW:
-                                floatF = GenFloat(name, entry.Unit, floatEntry.Default);
+                                vE = GenFloat(name, entry.Unit, floatEntry.Default);
+                                floatF = vE.Q<FloatField>();
                                 floatF.value = floatEntry.Getter();
                                 floatF.RegisterCallback(floatEntry.Setter);
-                                ptr.Add(floatF);
+                                ptr.Add(vE);
                                 break;
                             case Permission.RWSlider:
-                                floatF = GenFloat(
+                                vE = GenFloat(
                                     name, entry.Unit, 
                                     floatEntryBound.Default, 
                                     floatEntryBound.UpperBound, 
-                                    floatEntryBound.LowerBound);
+                                    floatEntryBound.LowerBound
+                                );
+                                floatF = vE.Q<FloatField>();
                                 floatF.value = floatEntryBound.Getter();
                                 floatF.RegisterCallback(floatEntryBound.Setter);
-                                ptr.Add(floatF);
+                                Slider slider = vE.Q<Slider>();
+                                floatF.RegisterCallback<ChangeEvent<float>>((evt) => {slider.value = evt.newValue;});
+                                slider.value = floatEntryBound.Getter();
+                                slider.RegisterCallback(floatEntryBound.Setter);
+                                slider.RegisterCallback<ChangeEvent<float>>((evt) => {floatF.value = evt.newValue;});
+                                ptr.Add(vE);
                                 break;
                             default:
                                 DebugLogger.Error(this.name, "Unrecognized Info, break!");
@@ -117,6 +132,7 @@ namespace ControlPanel {
             if (rws != null) {
                 rws.RegisterParametersCallback(_rootWSInfo);
                 _paramView = GenVEFromPIL(_rootWSInfo);
+                _paramView.AddToClassList("paramView");
                 _content.Add(_paramView);
                 return;
             }
@@ -125,6 +141,7 @@ namespace ControlPanel {
             if (ws != null) {
                 ws.RegisterParametersCallback(_WSInfo);
                 _paramView = GenVEFromPIL(_WSInfo);
+                _paramView.AddToClassList("paramView");
                 _content.Add(_paramView);
                 return;
             }
@@ -133,6 +150,7 @@ namespace ControlPanel {
             if (pd != null) {
                 pd.RegisterParametersCallback(_PDInfo);
                 _paramView = GenVEFromPIL(_PDInfo);
+                _paramView.AddToClassList("paramView");
                 _content.Add(_paramView);
                 return;
             }
@@ -155,19 +173,21 @@ namespace ControlPanel {
             ptr = hier.Pop();
         }
 
-        FloatField GenFloat(string name, string unit, float defaultVal, float lowerBound, float upperBound) {
+        VisualElement GenFloat(string name, string unit, float defaultVal, 
+                            float lowerBound, float upperBound) {
             var param = new VisualElement();
-            //param.AddToClassList("parameter__slider");
+            param.AddToClassList("parameter__slider");
             var slide = new Slider(name, lowerBound, upperBound) {
                 value = defaultVal
             };
             param.Add(slide);
 
             var field = new VisualElement();
-            //field.AddToClassList("parameter__field");
+            field.AddToClassList("parameter__field");
             var num = new FloatField() {
                 value = defaultVal
             };
+
             num.RegisterCallback<ChangeEvent<float>>(evt => LowerBoundCheck(evt, lowerBound));
             num.RegisterCallback<ChangeEvent<float>>(evt => UpperBoundCheck(evt, upperBound));
             field.Add(num);
@@ -176,14 +196,15 @@ namespace ControlPanel {
             field.Add(uni);
             param.Add(field);
 
-            return num;
+            return param;
         }
 
-        FloatField GenFloat(string label, string unit) {
+        VisualElement GenFloat(string label, string unit) {
             var param = new VisualElement();
-            //param.AddToClassList("parameter__field");
+            param.AddToClassList("parameter__field");
+            var name = new Label(label);
+            param.Add(name);
             var field = new FloatField() {
-                label = label,
                 value = 0
             };
             field.isReadOnly = true;
@@ -191,22 +212,22 @@ namespace ControlPanel {
             param.Add(field);
             var uni = new Label(unit);
             param.Add(uni);
-            return field;
+            return param;
         }
 
-        FloatField GenFloat(string label, string unit, float defaultVal) {
+        VisualElement GenFloat(string label, string unit, float defaultVal) {
             var param = new VisualElement();
-            //param.AddToClassList("parameter__field");
+            param.AddToClassList("parameter__field");
+            var name = new Label(label);
+            param.Add(name);
             var field = new FloatField() {
-                label = label,
                 value = defaultVal
             };
-
             param.Add(field);
 
             var uni = new Label(unit);
             param.Add(uni);
-            return field;
+            return param;
         }
 
         void LowerBoundCheck(ChangeEvent<float> evt, float bound) {
