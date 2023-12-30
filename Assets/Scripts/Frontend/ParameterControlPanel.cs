@@ -205,32 +205,6 @@ namespace ControlPanel {
             ptr = hier.Pop();
         }
 
-        VisualElement GenFloat(string name, string unit, float defaultVal, 
-                            float lowerBound, float upperBound) {
-            var param = new VisualElement();
-            param.AddToClassList("parameter__slider");
-            var slide = new Slider(name, lowerBound, upperBound) {
-                value = defaultVal
-            };
-            param.Add(slide);
-
-            var field = new VisualElement();
-            field.AddToClassList("parameter__field");
-            var num = new FloatField() {
-                value = defaultVal
-            };
-
-            num.RegisterCallback<ChangeEvent<float>>(evt => LowerBoundCheck(evt, lowerBound));
-            num.RegisterCallback<ChangeEvent<float>>(evt => UpperBoundCheck(evt, upperBound));
-            field.Add(num);
-
-            var uni = new Label(unit);
-            field.Add(uni);
-            param.Add(field);
-
-            return param;
-        }
-
         VisualElement GenFloat(string label, string unit) {
             var param = new VisualElement();
             param.AddToClassList("parameter__field");
