@@ -12,18 +12,21 @@ using CommonUtils;
  *
  */
 namespace ControlPanel {
-    public partial class ControlPanel : MonoBehaviour {
-        private VisualElement _rootWSParamView;
-        private VisualElement _WSParamView;
-        private VisualElement _PDParamView;
-        
+    public class ParamControlPanel : MonoSingleton<ParamControlPanel> {
+        [SerializeField] private UIDocument _uiDocument;
+        [SerializeField] private StyleSheet _styleSheet;
+
+        private VisualElement _root;
+
         private VisualElement _paramView;
 
         private ParameterInfoList _rootWSInfo;
         private ParameterInfoList _WSInfo;
         private ParameterInfoList _PDInfo;
 
-        private void EnableParamView() {
+
+# region ParamUI Information Preparation
+        private void Awake() {
             if (_rootWSInfo == null)
                 _rootWSInfo = CSVReader.ReadParametersCSV("Data/ParameterInfos/RootWaveParameters");
 
@@ -36,7 +39,71 @@ namespace ControlPanel {
             if (_uiDocument == null)
                 _uiDocument = gameObject?.GetComponent<UIDocument>();
         }
-        
+
+        private void OnEnable() {
+            Generate();
+            RegisterEvent();
+        }
+
+        void Generate() {
+            if (_uiDocument == null || _styleSheet == null) return;
+
+            _root = _uiDocument.rootVisualElement;
+            _root.styleSheets.Add(_styleSheet);
+            _root.AddToClassList("root");
+            _root.AddToClassList("container");
+        }
+
+        void RegisterEvent() {
+
+        }
+        #endregion
+
+
+#region ParamUI OnSelected
+        public void SelectParamView(GameObject obj) {
+            
+            /* Remove the previous showing Parameter View */
+            if (_paramView != null) {
+                _root.Remove(_paramView);
+                _paramView = null;
+            }
+
+            RootWaveSource rws = obj.GetComponent<RootWaveSource>();
+            if (rws != null) {
+                rws.RegisterParametersCallback(_rootWSInfo);
+                _paramView = GenVEFromPIL(_rootWSInfo);
+                goto complete;
+            }
+
+            WaveSource ws = obj.GetComponent<WaveSource>();
+            if (ws != null) {
+                ws.RegisterParametersCallback(_WSInfo);
+                _paramView = GenVEFromPIL(_WSInfo);
+                goto complete;
+            }
+
+            PolarizedDevice pd = obj.GetComponent<PolarizedDevice>();
+            if (pd != null) {
+                pd.RegisterParametersCallback(_PDInfo);
+                _paramView = GenVEFromPIL(_PDInfo);
+                goto complete;
+            }
+
+            DebugLogger.Warning(this.name, "Parameter of this object not defined, do nothing.");
+            complete:
+            _paramView.AddToClassList("paramView");
+            _root.Add(_paramView);
+        }
+
+        public void CleanParamView() {
+            /* Remove the previous showing Parameter View */
+            if (_paramView != null) {
+                _root.Remove(_paramView);
+                _paramView = null;
+            }
+        }
+
         private VisualElement GenVEFromPIL(in ParameterInfoList infoList) {
             var ptr = new VisualElement();
             Stack<VisualElement> hier = new Stack<VisualElement>();
@@ -91,9 +158,9 @@ namespace ControlPanel {
                                 break;
                             case Permission.RWSlider:
                                 vE = GenFloat(
-                                    name, entry.Unit, 
-                                    floatEntryBound.Default, 
-                                    floatEntryBound.UpperBound, 
+                                    name, entry.Unit,
+                                    floatEntryBound.Default,
+                                    floatEntryBound.UpperBound,
                                     floatEntryBound.LowerBound);
                                 floatF = vE.Q<FloatField>();
                                 floatF.value = floatEntryBound.Getter();
@@ -112,43 +179,9 @@ namespace ControlPanel {
             }
             return ptr;
         }
-        
-        private void SelectParamView(GameObject obj) {
-            
-            /* Remove the previous showing Parameter View */
-            if (_paramView != null) {
-                _content.Remove(_paramView);
-                _paramView = null;
-            }
+#endregion
 
-            RootWaveSource rws = obj.GetComponent<RootWaveSource>();
-            if (rws != null) {
-                rws.RegisterParametersCallback(_rootWSInfo);
-                _paramView = GenVEFromPIL(_rootWSInfo);
-                _paramView.AddToClassList("paramView");
-                _content.Add(_paramView);
-                return;
-            }
-
-            WaveSource ws = obj.GetComponent<WaveSource>();
-            if (ws != null) {
-                ws.RegisterParametersCallback(_WSInfo);
-                _paramView = GenVEFromPIL(_WSInfo);
-                _paramView.AddToClassList("paramView");
-                _content.Add(_paramView);
-                return;
-            }
-
-            PolarizedDevice pd = obj.GetComponent<PolarizedDevice>();
-            if (pd != null) {
-                pd.RegisterParametersCallback(_PDInfo);
-                _paramView = GenVEFromPIL(_PDInfo);
-                _paramView.AddToClassList("paramView");
-                _content.Add(_paramView);
-                return;
-            }
-        }
-
+#region ParamUI VisualElement Gen Helper Functions
         VisualElement GenText(string name, bool isReadonly) {
             var text = new TextField(name);
             text.isReadOnly = isReadonly;
@@ -164,31 +197,6 @@ namespace ControlPanel {
 
         void GenHierarchyEnd(ref VisualElement ptr, ref Stack<VisualElement> hier) {
             ptr = hier.Pop();
-        }
-
-        VisualElement GenFloat(string name, string unit, float defaultVal, 
-                            float lowerBound, float upperBound) {
-            var param = new VisualElement();
-            param.AddToClassList("parameter__slider");
-            var slide = new Slider(name, lowerBound, upperBound) {
-                value = defaultVal
-            };
-            param.Add(slide);
-
-            var field = new VisualElement();
-            field.AddToClassList("parameter__field");
-            var num = new FloatField() {
-                value = defaultVal
-            };
-            num.RegisterCallback<ChangeEvent<float>>(evt => LowerBoundCheck(evt, lowerBound));
-            num.RegisterCallback<ChangeEvent<float>>(evt => UpperBoundCheck(evt, upperBound));
-            field.Add(num);
-
-            var uni = new Label(unit);
-            field.Add(uni);
-            param.Add(field);
-
-            return param;
         }
 
         VisualElement GenFloat(string label, string unit) {
@@ -221,6 +229,31 @@ namespace ControlPanel {
             return param;
         }
 
+        VisualElement GenFloat(string name, string unit, float defaultVal,
+                            float lowerBound, float upperBound) {
+            var param = new VisualElement();
+            param.AddToClassList("parameter__slider");
+            var slide = new Slider(name, lowerBound, upperBound) {
+                value = defaultVal
+            };
+            param.Add(slide);
+
+            var field = new VisualElement();
+            field.AddToClassList("parameter__field");
+            var num = new FloatField() {
+                value = defaultVal
+            };
+            num.RegisterCallback<ChangeEvent<float>>(evt => LowerBoundCheck(evt, lowerBound));
+            num.RegisterCallback<ChangeEvent<float>>(evt => UpperBoundCheck(evt, upperBound));
+            field.Add(num);
+
+            var uni = new Label(unit);
+            field.Add(uni);
+            param.Add(field);
+
+            return param;
+        }
+
         void LowerBoundCheck(ChangeEvent<float> evt, float bound) {
             if (evt.newValue < bound) {
                 var field = evt.currentTarget as FloatField;
@@ -234,5 +267,6 @@ namespace ControlPanel {
                 field.SetValueWithoutNotify(bound);
             }
         }
+#endregion
     }
 }

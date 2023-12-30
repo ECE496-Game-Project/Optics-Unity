@@ -44,9 +44,10 @@ namespace GO_Device {
         }
 
         public override void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
+            base.RegisterParametersCallback(ParameterInfos);
+
             if(DeviceType != DEVICETYPE.WEAVEPLATE && DeviceType != DEVICETYPE.POLARIZER && 
                DeviceType != DEVICETYPE.HALFWAVEPLATE && DeviceType != DEVICETYPE.QUATERWAVEPLATE)
-
                 DebugLogger.Error(this.name, "DeviceType " + DeviceType + " Invalid!");
 
             var RotDegTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["RotDeg"];

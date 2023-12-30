@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 
+using ControlPanel;
+
 public class MouseSelect : MonoBehaviour
 {
     [SerializeField] private PlayerInput m_playerInput;
@@ -103,6 +105,8 @@ public class MouseSelect : MonoBehaviour
         // if mouse is not on anything
         if (!Physics.Raycast(ray, out hit))
         {
+            // Disable ParamController
+            ParamControlPanel.Instance.CleanParamView();
             return;
         }
 
@@ -120,5 +124,7 @@ public class MouseSelect : MonoBehaviour
 
         clickable.OnMouseSelect();
 
+        // Enable ParamController
+        ParamControlPanel.Instance.SelectParamView(go);
     }
 }
