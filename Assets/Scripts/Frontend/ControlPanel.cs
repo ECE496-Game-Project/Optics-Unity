@@ -114,7 +114,18 @@ namespace ControlPanel {
             List<GameObject> objList = new List<GameObject>();
 
             for (int i = 0; i < objs.Length; i++) {
-                objList.Add(objs[i]);
+                if (objs[i].gameObject.CompareTag("WaveTrack"))
+                {
+                    for (int j = 0; j < objs[i].transform.childCount; j++)
+                    {
+                        objList.Add(objs[i].transform.GetChild(j).gameObject);
+                    }
+                }
+                else
+                {
+                    objList.Add(objs[i]);
+                }
+                
             }
             listView.itemsSource = objList;
             return listView;
