@@ -26,7 +26,6 @@ FloatField{
     height: 35px;
 }
 
-/* Common Classes */
 .container {
     border-width: 1px;
     border-radius: 5px;
@@ -44,60 +43,38 @@ FloatField{
 /* Level 1 */
 .root{
     flex-direction: row;
-    width: 40%;
+    width: 310px;
+    height: 700px; /* Fixed height */
 }
 
-/* Level 2 */
-.sideBar{
-    width: 10%;
+.expand-panel {
+    height: 700px; /* Fixed height */
+    width: 0;
+    transition: width 0.3s ease-in-out;
+    overflow: hidden;
 }
 
-.currScene{
-    flex-direction: column;
-    width: 90%;
+.button {
+    width: 30px;
+    height: 30px;
+    background-color: orange;
+    border-width: var(--border-width);
+    border-color: white;
+    transition: 0.25s all;
+    color: white;
+    -unity-font-style: bold;
 }
 
-/* Level 3 */
-.sceneList{
-    flex-direction: column;
-    align-items: center;
-    padding: 5px;
+.button:hover {
+    background-color: #ff8c00;
+    border-radius: 10px;
+    scale: 1.1;
 }
 
-.content{
-    flex-direction: row;
-}
-
-/* Level 4.1 Side Bar */
-.sceneList__item{
-    margin-bottom: 5px;
-    align-self: center;
-    border-width: 1px;
-    border-radius: 5px;
-    border-color: var(--border-color);
-    background-color: var(--button-color);
-}
-
-.sceneList__item > Label{
-    font-size: 6px;
-}
-
-/* Level 4.2 List View */
-.objectList{
-    flex-direction: column;
-    width: 30%;
-}
-
-.objectList__item{
-
-}
-
-.objectList__item:hover{
-
-}
-
-.objectList__item--selected{
-
+.button:active {
+    /* Active State (when clicked) */
+    background-color: #004085; /* Even darker color */
+    /* Smaller shadow effect might need to be handled programmatically in Unity */
 }
 
 /* Level 4.3 ParamView */

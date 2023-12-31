@@ -17,13 +17,14 @@ namespace ControlPanel {
         [SerializeField] private StyleSheet _styleSheet;
 
         private VisualElement _root;
-
+        private VisualElement _expand_panel;
         private VisualElement _paramView;
 
         private ParameterInfoList _rootWSInfo;
         private ParameterInfoList _WSInfo;
         private ParameterInfoList _PDInfo;
 
+        bool isPanelExpanded = false;
 
 # region ParamUI Information Preparation
         private void Awake() {
@@ -32,7 +33,7 @@ namespace ControlPanel {
 
             if (_WSInfo == null)
                 _WSInfo = CSVReader.ReadParametersCSV("Data/ParameterInfos/ChildWaveParameters");
-            
+
             if (_PDInfo == null)
                 _PDInfo = CSVReader.ReadParametersCSV("Data/ParameterInfos/PolarizedDeviceParameters");
 
@@ -51,7 +52,22 @@ namespace ControlPanel {
             _root = _uiDocument.rootVisualElement;
             _root.styleSheets.Add(_styleSheet);
             _root.AddToClassList("root");
-            _root.AddToClassList("container");
+
+            _expand_panel = new VisualElement();
+            _expand_panel.AddToClassList("container");
+            _expand_panel.AddToClassList("expand-panel");
+            _root.Add(_expand_panel);
+
+            Button toggleButton = new Button() { text = ">" };
+            toggleButton.AddToClassList("button");
+
+            toggleButton.clicked += () => {
+                isPanelExpanded = !isPanelExpanded;
+                _expand_panel.style.width = isPanelExpanded ? 250f : 0f; // Adjust the width
+                toggleButton.text = isPanelExpanded ? "X" : ">";
+            };
+            _root.Add(toggleButton);
+
         }
 
         void RegisterEvent() {
@@ -60,12 +76,12 @@ namespace ControlPanel {
         #endregion
 
 
-#region ParamUI OnSelected
+        #region ParamUI OnSelected
         public void SelectParamView(GameObject obj) {
-            
+
             /* Remove the previous showing Parameter View */
             if (_paramView != null) {
-                _root.Remove(_paramView);
+                _expand_panel.Remove(_paramView);
                 _paramView = null;
             }
 
@@ -91,15 +107,15 @@ namespace ControlPanel {
             }
 
             DebugLogger.Warning(this.name, "Parameter of this object not defined, do nothing.");
-            complete:
+        complete:
             _paramView.AddToClassList("paramView");
-            _root.Add(_paramView);
+            _expand_panel.Add(_paramView);
         }
 
         public void CleanParamView() {
             /* Remove the previous showing Parameter View */
             if (_paramView != null) {
-                _root.Remove(_paramView);
+                _expand_panel.Remove(_paramView);
                 _paramView = null;
             }
         }
@@ -159,18 +175,18 @@ namespace ControlPanel {
                                 break;
                             case Permission.RWSlider:
                                 vE = GenFloat(
-                                    name, entry.Unit, 
-                                    floatEntryBound.Default, 
-                                    floatEntryBound.UpperBound, 
+                                    name, entry.Unit,
+                                    floatEntryBound.Default,
+                                    floatEntryBound.UpperBound,
                                     floatEntryBound.LowerBound);
                                 floatF = vE.Q<FloatField>();
                                 floatF.value = floatEntryBound.Getter();
                                 floatF.RegisterCallback(floatEntryBound.Setter);
                                 Slider slider = vE.Q<Slider>();
-                                floatF.RegisterCallback<ChangeEvent<float>>((evt) => {slider.value = evt.newValue;});
+                                floatF.RegisterCallback<ChangeEvent<float>>((evt) => { slider.value = evt.newValue; });
                                 slider.value = floatEntryBound.Getter();
                                 slider.RegisterCallback(floatEntryBound.Setter);
-                                slider.RegisterCallback<ChangeEvent<float>>((evt) => {floatF.value = evt.newValue;});
+                                slider.RegisterCallback<ChangeEvent<float>>((evt) => { floatF.value = evt.newValue; });
                                 ptr.Add(vE);
                                 break;
                             default:
@@ -185,9 +201,9 @@ namespace ControlPanel {
             }
             return ptr;
         }
-#endregion
+        #endregion
 
-#region ParamUI VisualElement Gen Helper Functions
+        #region ParamUI VisualElement Gen Helper Functions
         VisualElement GenText(string name, bool isReadonly) {
             var text = new TextField(name);
             text.isReadOnly = isReadonly;
@@ -274,6 +290,6 @@ namespace ControlPanel {
                 field.SetValueWithoutNotify(bound);
             }
         }
-#endregion
+        #endregion
     }
 }
