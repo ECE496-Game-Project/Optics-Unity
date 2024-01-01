@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 
-using ControlPanel;
+using Panel;
 
 public class MouseSelect : MonoBehaviour
 {

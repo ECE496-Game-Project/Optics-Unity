@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using System;
 using CommonUtils;
 
-namespace ControlPanel {
+namespace Panel {
     public class SelectPanel : MonoBehaviour {
         [SerializeField] private UIDocument _uiDocument;
         [SerializeField] private StyleSheet _styleSheet;

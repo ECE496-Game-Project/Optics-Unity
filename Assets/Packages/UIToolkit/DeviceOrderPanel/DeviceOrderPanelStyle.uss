@@ -43,8 +43,29 @@ FloatField{
 
 /* Level 1 */
 .root{
-    flex-direction: row;
-    width: 40%;
+    flex-direction: column;
+    width: 100%;
+    align-self: center; /* Centers the panel in the container */
+}
+
+.slot {
+    /* Sets the size of the element, adjust as needed */
+    width: 150px;
+    height: 150px;
+
+    /* Adds a border around the element */
+    border-width: 2px;
+    border-color: #000000; /* Black border */
+    border-radius: 0; /* Square corners */
+
+    /* Sets the background color of the element */
+    background-color: #C0C0C0; /* Light gray background */
+
+    /* Optional: Add some padding inside the element */
+    padding: 10px;
+
+    /* Optional: If there's a slight shadow or outline effect */
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
 }
 
 /* Level 2 */

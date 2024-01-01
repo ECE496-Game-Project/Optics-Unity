@@ -300,6 +300,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Polarizer2
       objectReference: {fileID: 0}
+    - target: {fileID: 5237302342889919736, guid: 41d44d652ec2ac645a757149e46cfefb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5237302342889919739, guid: 41d44d652ec2ac645a757149e46cfefb,
         type: 3}
       propertyPath: RotDeg
@@ -554,6 +559,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Polarizer4
       objectReference: {fileID: 0}
+    - target: {fileID: 5237302342889919736, guid: 41d44d652ec2ac645a757149e46cfefb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5237302342889919739, guid: 41d44d652ec2ac645a757149e46cfefb,
         type: 3}
       propertyPath: RotDeg
@@ -684,6 +694,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Polarizer3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237302342889919736, guid: 41d44d652ec2ac645a757149e46cfefb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5237302342889919739, guid: 41d44d652ec2ac645a757149e46cfefb,
         type: 3}
@@ -1157,6 +1172,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Polarizer1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5237302342889919736, guid: 41d44d652ec2ac645a757149e46cfefb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5237302342889919739, guid: 41d44d652ec2ac645a757149e46cfefb,
         type: 3}
