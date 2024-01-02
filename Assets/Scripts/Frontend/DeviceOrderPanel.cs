@@ -51,9 +51,9 @@ namespace Panel {
             image.RegisterCallback<PointerDownEvent>(evt =>
             {
                 isDragging = true;
-                image.style.position = Position.Absolute;
-                image.style.left = evt.position.x;
-                image.style.top = evt.position.y;
+                //image.style.position = Position.Absolute;
+                //image.style.left = evt.position.x;
+                //image.style.top = evt.position.y;
 
             });
 
@@ -64,8 +64,8 @@ namespace Panel {
                     Debug.Log("LocalPosition: " + evt.localPosition);
                     Debug.Log("DeltaPosition: " + evt.deltaPosition);
                     Debug.Log("\n\n");
-                    image.style.left = evt.position.x;
-                    image.style.top = evt.position.y;
+                    //image.style.left = evt.position.x;
+                    //image.style.top = evt.position.y;
                 }
             });
 
