@@ -11,13 +11,15 @@ TextElement{
 
 /* Level 1 */
 .root{
+    position: absolute;
+    left: 0.5%;
+    right: 80%;
+    top: 0.5%;
+    bottom: 0.5%;
     flex-direction: row;
-    width: 310px;
-    height: 700px; /* Fixed height */
 }
 
 .expand-panel {
-    height: 700px; /* Fixed height */
     width: 0;
     transition: width 0.3s ease-in-out;
     overflow: hidden;

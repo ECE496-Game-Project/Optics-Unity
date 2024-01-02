@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 
-using ControlPanel;
+using Panel;
 
 public class MouseSelect : MonoBehaviour
 {
@@ -106,7 +106,7 @@ public class MouseSelect : MonoBehaviour
         if (!Physics.Raycast(ray, out hit))
         {
             // Disable ParamController
-            // ParamControlPanel.Instance.CleanParamView();
+            //ParamControlPanel.Instance.CleanParamView();
             return;
         }
 
