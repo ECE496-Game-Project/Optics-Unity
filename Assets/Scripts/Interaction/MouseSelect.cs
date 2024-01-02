@@ -106,7 +106,7 @@ public class MouseSelect : MonoBehaviour
         if (!Physics.Raycast(ray, out hit))
         {
             // Disable ParamController
-            ParamControlPanel.Instance.CleanParamView();
+            // ParamControlPanel.Instance.CleanParamView();
             return;
         }
 

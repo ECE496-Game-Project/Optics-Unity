@@ -1,21 +1,8 @@
-/* Global */
-:root {
-    --title-font-color: #9EF6FF; /* Title Font Color: A shade of blue */
-    --font-color: #9bdaf0; /* Font Color: Light blue */
-    --background-color: #12202d; /* Background Color: Dark blue */
-    --border-color: #3f8fcf; /* Border Color: Accent shade of blue */
-}
+@import '../common.uss';
 
 /* Type Selectors */
 Label{
     padding: 4px;
-    color: var(--font-color);
-    -unity-font-definition: url('/Assets/Resources/Art/Font/Square-Black.ttf');
-}
-
-/* Common Classes */
-*{
-    margin: 4px;
 }
 
 /* Level 1 */
@@ -44,7 +31,7 @@ Label{
 .title{
     font-size: 100px;
     -unity-text-align: middle-center;
-    color: var(--title-font-color);
+    color: var(--title-color);
     align-self: center;
 }
 
