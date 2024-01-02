@@ -7,10 +7,9 @@ using System;
 using CommonUtils;
 
 namespace ControlPanel {
-    public partial class ControlPanel : MonoBehaviour {
+    public class SelectPanel : MonoBehaviour {
         [SerializeField] private UIDocument _uiDocument;
         [SerializeField] private StyleSheet _styleSheet;
-
 
         private VisualElement _root;
         private ListView _objectList;
@@ -20,8 +19,6 @@ namespace ControlPanel {
 
 
         private void OnEnable() {
-            EnableParamView();
-
             Generate();
             RegisterEvent();
         }
@@ -166,7 +163,7 @@ namespace ControlPanel {
                     DebugLogger.Warning(this.name, "Selecting Multiple Objects!");
                     break;
                 }
-                SelectParamView(obj as GameObject);
+                ParamControlPanel.Instance.SelectParamView(obj as GameObject);
                 counter++;
             }
         }
