@@ -1,6 +1,6 @@
 
 
-using ControlPanel;
+using Panel;
 using GO_Device;
 using GO_Wave;
 using Interfaces;
@@ -11,13 +11,18 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
 using static Constraint.WaveDeviceOrder;
+using CommonUtils;
 
 namespace Constraint
 {
-    public class WaveOrderManager : MonoBehaviour
+    public class WaveOrderManager : MonoSingleton<WaveOrderManager>
     {
         [SerializeField] private int MaxDeviceCount = 4;
         [SerializeField] private int DeviceSeperationDistance = 10;
+
+        public int DeviceCount {
+            get { return m_waveDeviceOrder.DeviceCount; }
+        }
 
         WaveDeviceOrder m_waveDeviceOrder;
 

@@ -11,7 +11,7 @@ using CommonUtils;
  * Parameter Portion of Control Pannel
  *
  */
-namespace ControlPanel {
+namespace Panel {
     public class ParamControlPanel : MonoSingleton<ParamControlPanel> {
         [SerializeField] private UIDocument _uiDocument;
         [SerializeField] private StyleSheet _styleSheet;
@@ -73,10 +73,9 @@ namespace ControlPanel {
         void RegisterEvent() {
 
         }
-        #endregion
+#endregion
 
-
-        #region ParamUI OnSelected
+#region ParamUI OnSelected (Callable)
         public void SelectParamView(GameObject obj) {
 
             /* Remove the previous showing Parameter View */
@@ -203,7 +202,7 @@ namespace ControlPanel {
         }
         #endregion
 
-        #region ParamUI VisualElement Gen Helper Functions
+#region ParamUI VisualElement Gen Helper Functions
         VisualElement GenText(string name, bool isReadonly) {
             var text = new TextField(name);
             text.isReadOnly = isReadonly;
@@ -290,6 +289,8 @@ namespace ControlPanel {
                 field.SetValueWithoutNotify(bound);
             }
         }
-        #endregion
+#endregion
+
+
     }
 }
