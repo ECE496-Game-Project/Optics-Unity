@@ -7,51 +7,20 @@
     --button-color: #335999; /* Button color (another shade of blue) */
 }
 
-/* Type Selectors */
-Label{
-    font-size: 14px;
-    color: var(--font-color);
-    -unity-font-definition: url('/Assets/Resources/Art/Font/Square-Black.ttf');
-}
-
-TextElement{
-    font-size: 14px;
-    color: var(--background-color);
-    -unity-font-definition: url('/Assets/Resources/Art/Font/Square-Black.ttf');
-}
-
-TextField,
-FloatField{
-    width: 60px;
-    height: 35px;
-}
-
-/* Common Classes */
-.container {
-    border-width: 1px;
-    border-radius: 5px;
-    border-color: var(--border-color);
-    padding: 1px;
-    margin: 1px;
-    background-color: var(--background-color);
-}
-
-.title{
-    font-size: 20px;
-    color: var(--title-color);
-}
-
 /* Level 1 */
 .root{
-    flex-direction: column;
-    width: 100%;
-    align-self: center; /* Centers the panel in the container */
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    top: 80%;
+    bottom: 0.5%;
+    flex-direction: row;
 }
 
 .slot {
     /* Sets the size of the element, adjust as needed */
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
 
     /* Adds a border around the element */
     border-width: 2px;
@@ -63,50 +32,6 @@ FloatField{
 
     /* Optional: Add some padding inside the element */
     padding: 10px;
-
-    /* Optional: If there's a slight shadow or outline effect */
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
-}
-
-/* Level 2 */
-.sideBar{
-    width: 10%;
-}
-
-.currScene{
-    flex-direction: column;
-    width: 90%;
-}
-
-/* Level 3 */
-.sceneList{
-    flex-direction: column;
-    align-items: center;
-    padding: 5px;
-}
-
-.content{
-    flex-direction: row;
-}
-
-/* Level 4.1 Side Bar */
-.sceneList__item{
-    margin-bottom: 5px;
-    align-self: center;
-    border-width: 1px;
-    border-radius: 5px;
-    border-color: var(--border-color);
-    background-color: var(--button-color);
-}
-
-.sceneList__item > Label{
-    font-size: 6px;
-}
-
-/* Level 4.2 List View */
-.objectList{
-    flex-direction: column;
-    width: 30%;
 }
 
 .objectList__item{
@@ -119,20 +44,4 @@ FloatField{
 
 .objectList__item--selected{
 
-}
-
-/* Level 4.3 ParamView */
-.paramView{
-    flex-direction: column;
-    width: 70%;
-}
-
-.parameter__field{
-    flex-direction: row;
-    width: 90%;
-}
-
-.parameter__slider{
-    flex-direction: column;
-    width: 90%;
 }
