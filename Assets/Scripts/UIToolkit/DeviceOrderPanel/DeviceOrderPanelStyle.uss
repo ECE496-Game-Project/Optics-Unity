@@ -10,14 +10,19 @@
 /* Level 1 */
 .root{
     position: absolute;
-    left: 20%;
-    right: 20%;
-    top: 80%;
-    bottom: 0.5%;
     flex-direction: row;
 }
 
+.progress-container {
+    height: 10px;
+    background-color: var(--border-color);
+    border-radius: 10px;
+}
+
+
 .slot {
+    position : absolute;
+    
     /* Sets the size of the element, adjust as needed */
     width: 100px;
     height: 100px;
