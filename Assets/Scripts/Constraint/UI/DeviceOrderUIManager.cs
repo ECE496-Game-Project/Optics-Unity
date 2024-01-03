@@ -21,7 +21,7 @@ namespace Constraint.UI
 
         private List<RectTransform> m_corners = new List<RectTransform>();
 
-        private MouseSelect m_mouseSelect;
+        private SelectionController m_selectionController;
 
         private bool m_isMouseInside = false;
         // Start is called before the first frame update
@@ -61,8 +61,13 @@ namespace Constraint.UI
             m_corners.Add(bottomLeft);
             m_corners.Add(bottomRight);
             
-            m_mouseSelect = FindAnyObjectByType<MouseSelect>();
-            Assert.IsNotNull(m_mouseSelect);
+            
+        }
+
+        private void Start()
+        {
+            m_selectionController = TempSingletonManager.Instance.m_selectionController;
+            Assert.IsNotNull(m_selectionController);
         }
 
         private void OnEnable()
@@ -98,12 +103,12 @@ namespace Constraint.UI
             if (!m_isMouseInside && isInside(mousePosition))
             {
                 m_isMouseInside = true;
-                m_mouseSelect.TurnOff();
+                m_selectionController.TurnOff();
             }
             else if (m_isMouseInside && !isInside(mousePosition))
             {
                 m_isMouseInside = false;
-                m_mouseSelect.TurnOn();
+                m_selectionController.TurnOn();
             }
             
         }
