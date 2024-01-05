@@ -300,6 +300,10 @@ PrefabInstance:
       propertyPath: m_BackGroundColor.r
       value: 0.1792453
       objectReference: {fileID: 0}
+    - target: {fileID: 1028210982, guid: d7b07370d2c584fd2b6fcffcec839d18, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 6901406372233256961, guid: d7b07370d2c584fd2b6fcffcec839d18,
         type: 3}
       propertyPath: m_Name
@@ -542,7 +546,7 @@ GameObject:
   - component: {fileID: 1991059586}
   - component: {fileID: 1991059587}
   m_Layer: 5
-  m_Name: SceneSelectionUI
+  m_Name: MenuUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
