@@ -63,8 +63,8 @@ namespace Panel {
 
             toggleButton.clicked += () => {
                 isPanelExpanded = !isPanelExpanded;
-                _expand_panel.style.width = isPanelExpanded ? 250f : 0f; // Adjust the width
-                toggleButton.text = isPanelExpanded ? "X" : ">";
+                _expand_panel.style.width = isPanelExpanded ? 400f : 0f; // Adjust the width
+                toggleButton.text = isPanelExpanded ? "<" : ">";
             };
             _root.Add(toggleButton);
 
@@ -85,28 +85,27 @@ namespace Panel {
             }
 
             RootWaveSource rws = obj.GetComponent<RootWaveSource>();
+            WaveSource ws = obj.GetComponent<WaveSource>();
+            PolarizedDevice pd = obj.GetComponent<PolarizedDevice>();
             if (rws != null) {
                 rws.RegisterParametersCallback(_rootWSInfo);
                 _paramView = GenVEFromPIL(_rootWSInfo);
-                goto complete;
+                // goto complete;
             }
-
-            WaveSource ws = obj.GetComponent<WaveSource>();
-            if (ws != null) {
+            else if (ws != null) {
                 ws.RegisterParametersCallback(_WSInfo);
                 _paramView = GenVEFromPIL(_WSInfo);
-                goto complete;
+                // goto complete;
             }
-
-            PolarizedDevice pd = obj.GetComponent<PolarizedDevice>();
-            if (pd != null) {
+            else if (pd != null) {
                 pd.RegisterParametersCallback(_PDInfo);
                 _paramView = GenVEFromPIL(_PDInfo);
-                goto complete;
+                // goto complete;
             }
-
-            DebugLogger.Warning(this.name, "Parameter of this object not defined, do nothing.");
-        complete:
+            else{
+                DebugLogger.Warning(this.name, "Parameter of this object not defined, do nothing.");
+            }
+        // complete:
             _paramView.AddToClassList("paramView");
             _expand_panel.Add(_paramView);
         }
