@@ -1,1 +1,3 @@
+@import "../PanelStyle.uss";
+
 VisualElement {}

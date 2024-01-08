@@ -28,17 +28,3 @@ FloatField{
 *{
     margin: 4px;
 }
-
-.container {
-    border-width: 1px;
-    border-radius: 5px;
-    border-color: var(--border-color);
-    padding: 1px;
-    margin: 1px;
-    background-color: var(--background-color);
-}
-
-.title{
-    font-size: 20px;
-    color: var(--title-color);
-}
