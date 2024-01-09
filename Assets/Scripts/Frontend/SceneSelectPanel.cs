@@ -53,7 +53,10 @@ namespace Panel
         }
 
         private void GenerateSceneList(){
-            _scene_list = new ListView();
+            _scene_list = new ListView{
+                makeItem = MakeSceneListItem,
+                bindItem = BindSceneListItem
+            };
             int count = SceneManager.sceneCountInBuildSettings;
             string[] sceneNames = new string[count];
             for (int i = 0; i < count; i++) {
@@ -88,6 +91,27 @@ namespace Panel
         #region Switch a Scene 
 
         // click scene button
+        VisualElement MakeSceneListItem(){
+            var button = new Button();
+            button.styleSheets.Add(_styleSheet);
+            button.AddToClassList("sceneList__item");
+            return button;
+        }
+        void BindSceneListItem(VisualElement ve, int idx){
+            Button button = ve as Button;
+            Label text = new Label(_scene_list.itemsSource[idx] as String);
+            button.Add(text);
+            button.RegisterCallback<ClickEvent, int>(LoadScene, idx);
+        }
+
+        void LoadScene(ClickEvent evt, int idx) {
+            try {
+                SceneManager.LoadScene(idx);
+            }
+            catch {
+                Debug.LogWarning("Scene " + idx + " does not exist.");
+            }
+        }
 
         // switch scene, show the scene title in the screen
 
