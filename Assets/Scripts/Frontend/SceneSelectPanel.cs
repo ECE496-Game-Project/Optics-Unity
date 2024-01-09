@@ -24,26 +24,19 @@ namespace Panel
         }
 
         private void OnEnable(){
-            Generate();
-            RegisterEvent();
-        }
-
-        private void OnDisable() {
-            UnregisterEvent();
-        } 
-
-        private void Generate(){
-            #region level 1: container
             if (_uiDocument == null || _styleSheet == null) return;
             _root = _uiDocument.rootVisualElement;
             _root.styleSheets.Add(_styleSheet);
             _root.AddToClassList("root");
+            GenerateContainer();
+            GenerateSceneList();
+        }
 
-            _expand_panel = new VisualElement();
-            _expand_panel.AddToClassList("container");
-            _expand_panel.AddToClassList("expand-panel");
-            _root.Add(_expand_panel);
+        private void OnDisable() {
 
+        } 
+
+        private void GenerateContainer(){
             Button toggleButton = new Button() { text = "<" };
             toggleButton.AddToClassList("button");
             toggleButton.clicked += () => {
@@ -52,9 +45,14 @@ namespace Panel
                 toggleButton.text = isPanelExpanded ? ">" : "<";
             };
             _root.Add(toggleButton);
-            #endregion
 
-            #region level 2: scene list view
+            _expand_panel = new VisualElement();
+            _expand_panel.AddToClassList("container");
+            _expand_panel.AddToClassList("expand-panel");
+            _root.Add(_expand_panel);
+        }
+
+        private void GenerateSceneList(){
             _scene_list = new ListView();
             int count = SceneManager.sceneCountInBuildSettings;
             string[] sceneNames = new string[count];
@@ -63,7 +61,7 @@ namespace Panel
             }
             _scene_list.itemsSource = sceneNames;
             _expand_panel.Add(_scene_list);
-            
+
             Button addSceneButton = new Button() {text = "+"};
             addSceneButton.AddToClassList("button");
             addSceneButton.clicked += () => {
@@ -73,18 +71,52 @@ namespace Panel
                 else Debug.LogError("Failed to create a new scene");
             };
             _expand_panel.Add(addSceneButton);
-            #endregion
         }
 
-        private void RegisterEvent(){
-
-        }
-
-        private void UnregisterEvent(){
-
-        }
         #endregion
 
+        #region Scene State and List
+        
+        // scene state
 
+        // show scene list
+
+        // update scene list
+
+        #endregion
+
+        #region Switch a Scene 
+
+        // click scene button
+
+        // switch scene, show the scene title in the screen
+
+        // the color of the current scene is different
+
+        #endregion
+
+        #region Create a Scene
+
+        // click + button
+
+        // create a new scene
+
+        // add it to the build setting
+
+        // add it to the scene list
+
+        #endregion
+
+        #region Delete a Scene
+
+        // click x button
+
+        // pop-up the window, cancel or confirm
+
+        // delete it from the build setting
+
+        // delete it from the scene list
+
+        #endregion
     }
 }

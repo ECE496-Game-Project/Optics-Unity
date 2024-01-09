@@ -26,8 +26,6 @@ TextElement{
 /* Level 1 */
 .root{
     position: absolute;
-    left: 0.5%;
-    right: 80%;
     top: 0.5%;
     bottom: 0.5%;
     flex-direction: row;

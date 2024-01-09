@@ -1,5 +1,11 @@
 @import "../PanelStyle.uss";
 
-.expand-panel {
+.root{
+    left: 80%;
+    right: 0.5%;
+}
+
+.expand-panel,
+.button {
     margin-left: auto;
 }

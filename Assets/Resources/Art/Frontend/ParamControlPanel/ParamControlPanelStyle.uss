@@ -1,5 +1,10 @@
 @import "../PanelStyle.uss";
 
+.root{
+    left: 0.5%;
+    right: 80%;
+}
+
 /* Level 4.3 ParamView */
 .paramView{
     flex-direction: column;
