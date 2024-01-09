@@ -1,3 +1,5 @@
 @import "../PanelStyle.uss";
 
-VisualElement {}
+.expand-panel {
+    margin-left: auto;
+}

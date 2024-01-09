@@ -1,4 +1,4 @@
-@import "../PanelStyle.uss";
+@import "../CommonStyle.uss";
 
 /* Level 1 */
 .root{

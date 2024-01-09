@@ -1,4 +1,4 @@
-@import "../PanelStyle.uss";
+@import "../CommonStyle.uss";
 
 /* Type Selectors */
 Label{

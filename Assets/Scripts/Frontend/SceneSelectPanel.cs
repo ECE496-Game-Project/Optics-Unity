@@ -62,7 +62,7 @@ namespace Panel
                 sceneNames[i] = SceneManager.GetSceneByBuildIndex(i).name;
             }
             _scene_list.itemsSource = sceneNames;
-            _root.Add(_scene_list);
+            _expand_panel.Add(_scene_list);
             
             Button addSceneButton = new Button() {text = "+"};
             addSceneButton.AddToClassList("button");
@@ -72,7 +72,7 @@ namespace Panel
                 if(newScene.IsValid()) SceneManager.LoadScene(newSceneName);
                 else Debug.LogError("Failed to create a new scene");
             };
-            _root.Add(addSceneButton);
+            _expand_panel.Add(addSceneButton);
             #endregion
         }
 
