@@ -1,0 +1,44 @@
+/* Color Definition */
+:root {
+    --title-color: #CCD9FF; /* Title Font Color: A shade of blue */
+    --font-color: #E6E6FF; /* Font Color: Light blue */
+    --background-color: #0D0D1A; /* Background Color: Dark blue */
+    --border-color: #6699FF; /* Border Color: Accent shade of blue */
+    --button-color: #335999; /* Button color (another shade of blue) */
+}
+
+/* Type */
+Label{
+    color: var(--font-color);
+    -unity-font-definition: url('/Assets/Resources/Art/Font/Square-Black.ttf');
+}
+
+TextElement{
+    color: var(--background-color);
+    -unity-font-definition: url('/Assets/Resources/Art/Font/Square-Black.ttf');
+}
+
+TextField,
+FloatField{
+    width: 60px;
+    height: 35px;
+}
+
+/* Common Classes */
+*{
+    margin: 4px;
+}
+
+.container {
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: var(--border-color);
+    padding: 1px;
+    margin: 1px;
+    background-color: var(--background-color);
+}
+
+.title{
+    font-size: 20px;
+    color: var(--title-color);
+}

@@ -1,0 +1,65 @@
+@import '../common.uss';
+
+/* Type Selectors */
+Label{
+    font-size: 14px;
+}
+
+TextElement{
+    font-size: 14px;
+}
+
+/* Level 1 */
+.root{
+    position: absolute;
+    left: 0.5%;
+    right: 80%;
+    top: 0.5%;
+    bottom: 0.5%;
+    flex-direction: row;
+}
+
+.expand-panel {
+    width: 0;
+    transition: width 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.button {
+    width: 30px;
+    height: 30px;
+    background-color: orange;
+    border-width: var(--border-width);
+    border-color: white;
+    transition: 0.25s all;
+    color: white;
+    -unity-font-style: bold;
+}
+
+.button:hover {
+    background-color: #ff8c00;
+    border-radius: 10px;
+    scale: 1.1;
+}
+
+.button:active {
+    /* Active State (when clicked) */
+    background-color: #004085; /* Even darker color */
+    /* Smaller shadow effect might need to be handled programmatically in Unity */
+}
+
+/* Level 4.3 ParamView */
+.paramView{
+    flex-direction: column;
+    width: 70%;
+}
+
+.parameter__field{
+    flex-direction: row;
+    width: 90%;
+}
+
+.parameter__slider{
+    flex-direction: column;
+    width: 90%;
+}

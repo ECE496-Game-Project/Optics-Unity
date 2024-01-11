@@ -1,8 +1,0 @@
-/* Global */
-:root {
-    --title-color: #CCD9FF; /* Title Font Color: A shade of blue */
-    --font-color: #E6E6FF; /* Font Color: Light blue */
-    --background-color: #0D0D1A; /* Background Color: Dark blue */
-    --border-color: #6699FF; /* Border Color: Accent shade of blue */
-    --button-color: #335999; /* Button color (another shade of blue) */
-}
