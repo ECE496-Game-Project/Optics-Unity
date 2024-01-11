@@ -33,6 +33,7 @@ public class MouseSelect : MonoBehaviour
     {
         m_playerInput.actions["MouseClicked"].performed += OnMouseClicked;
         m_playerInput.actions["MouseMovement"].performed += onMouseMoved;
+        
     }
 
     private void onMouseMoved(InputAction.CallbackContext context)

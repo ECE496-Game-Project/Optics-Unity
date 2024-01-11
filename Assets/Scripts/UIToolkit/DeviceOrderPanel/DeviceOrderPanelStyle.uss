@@ -6,47 +6,83 @@
     --border-color: #6699FF; /* Border Color: Accent shade of blue */
     --button-color: #335999; /* Button color (another shade of blue) */
 }
+.container{
+    border-width: 4px;
+    border-radius: 5px;
+    border-color: var(--border-color);
+    padding: 1px;
+    margin: 1px;
+    background-color: var(--background-color);
+    border-radius: 15px;
+}
 
 /* Level 1 */
 .root{
-    position: absolute;
+    left : 20%;
+    width : 60%;
+    bottom : 1%;
+    top : 79%;
     flex-direction: row;
+    max-height: 400px;
 }
 
-.progress-container {
-    height: 10px;
-    background-color: var(--border-color);
-    border-radius: 10px;
-}
+.panel {
+    flex-direction: column;
 
-
-.slot {
-    position : absolute;
-    
-    /* Sets the size of the element, adjust as needed */
-    width: 100px;
-    height: 100px;
-
-    /* Adds a border around the element */
-    border-width: 2px;
-    border-color: #000000; /* Black border */
-    border-radius: 0; /* Square corners */
-
-    /* Sets the background color of the element */
-    background-color: #C0C0C0; /* Light gray background */
-
-    /* Optional: Add some padding inside the element */
+    margin-top: 10px;
+    width: 100%;
     padding: 10px;
 }
 
-.objectList__item{
-
+.slot {
+    flex-direction: row;
+    height : 50px;
 }
 
-.objectList__item:hover{
-
+.panel Button {
+    width: 30px;
+    height: 60%;
+    background-color: orange;
+    border-width: var(--border-width);
+    border-color: white;
+    transition: 0.25s all;
+    color: white;
+    -unity-font-style: bold;
 }
 
-.objectList__item--selected{
+.panel Button:hover {
+    background-color: red;
+    border-radius: 10px;
+    scale: 1.1;
+}
 
+.panel Slider {
+    flex-grow: 1;
+}
+
+.unity-base-slider__dragger {
+    height: 30px;
+    width: 30px;
+    border-radius: 50px;
+    background-color: orange;
+    border-width: var(--border-width);
+    border-color: white;
+    margin-top: -16px;
+}
+
+.addSlotButton {
+    width: 30px;
+    height: 60%;
+    background-color: orange;
+    border-width: var(--border-width);
+    border-color: white;
+    transition: 0.25s all;
+    color: white;
+    -unity-font-style: bold;
+}
+
+.addSlotButton:hover {
+    background-color: red;
+    border-radius: 10px;
+    scale: 1.1;
 }
