@@ -39,17 +39,18 @@ namespace Panel
         private void GenerateContainer(){
             Button toggleButton = new Button() { text = "<" };
             toggleButton.AddToClassList("button");
-            toggleButton.clicked += () => {
-                isPanelExpanded = !isPanelExpanded;
-                _expand_panel.style.width = isPanelExpanded ? 100f : 0f; // Adjust the width
-                toggleButton.text = isPanelExpanded ? ">" : "<";
-            };
             _root.Add(toggleButton);
 
             _expand_panel = new VisualElement();
             _expand_panel.AddToClassList("container");
             _expand_panel.AddToClassList("expand-panel");
             _root.Add(_expand_panel);
+
+            toggleButton.clicked += () => {
+                isPanelExpanded = !isPanelExpanded;
+                _expand_panel.style.width = isPanelExpanded ? 100f : 0f; // Adjust the width
+                toggleButton.text = isPanelExpanded ? ">" : "<";
+            };
         }
 
         private void GenerateSceneList(){
@@ -94,7 +95,7 @@ namespace Panel
         VisualElement MakeSceneListItem(){
             var button = new Button();
             button.styleSheets.Add(_styleSheet);
-            button.AddToClassList("sceneList__item");
+            button.AddToClassList("scene-list-item");
             return button;
         }
         void BindSceneListItem(VisualElement ve, int idx){
