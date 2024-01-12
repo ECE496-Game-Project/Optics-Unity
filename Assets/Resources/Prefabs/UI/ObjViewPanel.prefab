@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4322422503199134946}
   - component: {fileID: 1994433164476054396}
-  - component: {fileID: 3593191381344626587}
   m_Layer: 5
   m_Name: ObjViewPanel
   m_TagString: Untagged
@@ -50,19 +49,3 @@ MonoBehaviour:
   sourceAsset: {fileID: 9197481963319205126, guid: 95bd0a11c7b0e4d4e83493b962dc8e03,
     type: 3}
   m_SortingOrder: 0
---- !u!114 &3593191381344626587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3221472990836386486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b9e8bb29b98ef048ac885cce99cc92a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _uiDocument: {fileID: 1994433164476054396}
-  _styleSheet: {fileID: 7433441132597879392, guid: d01e613455817314181c1fda07dedf15,
-    type: 3}
-  SlotNum: 8

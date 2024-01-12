@@ -1159,7 +1159,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: ParamsControlPanel
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1269,7 +1270,7 @@ PrefabInstance:
     - target: {fileID: 3030377352803079861, guid: b0ce392f1965745dabc4a26ebe4ebf34,
         type: 3}
       propertyPath: m_Name
-      value: SceneSelectPanel
+      value: TutorialPanel
       objectReference: {fileID: 0}
     - target: {fileID: 3296895966016067754, guid: b0ce392f1965745dabc4a26ebe4ebf34,
         type: 3}
@@ -1323,6 +1324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 590959171023245464, guid: b0ce392f1965745dabc4a26ebe4ebf34, type: 3}
+    - {fileID: 5289574303587857593, guid: b0ce392f1965745dabc4a26ebe4ebf34, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1390,7 +1392,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3593191381344626587, guid: a97b8e4006bd23c4d9841589668b21c9, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Demo/Menu.unity
+    path: Assets/Scenes/Demo/Home.unity
     guid: db0e984323b724510adf3060ac329d89
   - enabled: 1
     path: Assets/Scenes/Demo/Polarizer.unity

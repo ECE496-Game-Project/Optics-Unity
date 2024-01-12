@@ -1173,7 +1173,7 @@ GameObject:
   - component: {fileID: 7513473849574354619}
   - component: {fileID: 3460419036390581599}
   m_Layer: 5
-  m_Name: DeviceOrderBtnPanel
+  m_Name: DeviceOrderBtnPanel_depr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

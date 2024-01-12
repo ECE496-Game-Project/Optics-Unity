@@ -1,2 +1,30 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="container" style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="side-bar" style="flex-grow: 1; width: 30%; height: 100%; background-color: rgba(108, 190, 222, 0.39);">
+            <ui:Button text="Optics" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title" style="color: rgb(0, 197, 197); background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); height: 5%; font-size: 50px;" />
+            <ui:VisualElement name="page-list" style="flex-grow: 1; height: 15%;">
+                <ui:Button text="Home" parse-escape-sequences="true" display-tooltip-when-elided="true" name="page-button" />
+                <ui:Button text="My Scenes" parse-escape-sequences="true" display-tooltip-when-elided="true" name="page-button" />
+                <ui:Button text="Tutorial" parse-escape-sequences="true" display-tooltip-when-elided="true" name="page-button" />
+            </ui:VisualElement>
+            <ui:VisualElement name="account" style="flex-grow: 1; height: 65%;">
+                <ui:VisualElement name="profile" style="flex-grow: 1; height: 10%; flex-direction: row;">
+                    <ui:VisualElement style="flex-grow: 1; width: 162px;" />
+                    <ui:Label tabindex="-1" text="User Name" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 70%; font-size: 30px; -unity-text-align: middle-left;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="empty" style="flex-grow: 1; height: 90%;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="feedback" style="flex-grow: 1; height: 15%;">
+                <ui:Label tabindex="-1" text="Help &amp; Feedback" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 30px;" />
+                <ui:Label tabindex="-1" text="Chuyue Zhang (irondumpling010@gmail.com)&#10;Yang Chen ()&#10;Leo Hanxu ()" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 20px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="body" style="flex-grow: 1; width: 70%;">
+            <ui:VisualElement name="header" style="flex-grow: 1; height: 5%; flex-direction: row; background-color: rgba(121, 244, 255, 0.39);">
+                <ui:VisualElement style="flex-grow: 1; width: 70%;" />
+                <ui:TextField picking-mode="Ignore" label="Text Field" value="filler text" name="TextField" style="width: 30%; height: 70%; align-self: center; font-size: 20px;" />
+            </ui:VisualElement>
+            <ui:ScrollView name="body" style="height: 95%;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
 </ui:UXML>

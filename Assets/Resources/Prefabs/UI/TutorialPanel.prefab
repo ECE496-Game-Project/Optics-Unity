@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 656388438554220710}
   - component: {fileID: 5289574303587857593}
   m_Layer: 5
-  m_Name: SceneSelectPanel
+  m_Name: TutorialPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
