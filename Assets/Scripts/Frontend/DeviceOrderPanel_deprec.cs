@@ -2,27 +2,86 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
-using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 using CommonUtils;
 using Constraint;
 
 namespace Panel {
+
+    public static class VEHelper {
+        public static VisualElement GenVE(params string[] classNames) {
+            return GenVE<VisualElement>(classNames);
+        }
+
+        public static T GenVE<T>(params string[] classNames) where T : VisualElement, new() {
+            var ele = new T();
+            foreach (var className in classNames) {
+                ele.AddToClassList(className);
+            }
+
+            return ele;
+        }
+    }
+
+    public class Slot{
+        Button deleteButton;
+        Slider precSlider;
+        FloatField floatInput;
+        public VisualElement slot;
+
+
+
+        public Slot(float initLoc, float slotMin, float slotMax, 
+            UnityAction<float> ValueChangeAct, UnityAction<float> DeleteAct) 
+        {
+            precSlider = VEHelper.GenVE<Slider>();
+            precSlider.value = initLoc;
+            precSlider.lowValue = slotMin;
+            precSlider.highValue = slotMax;
+
+            deleteButton = VEHelper.GenVE<Button>();
+            deleteButton.text = "x";
+
+            floatInput = VEHelper.GenVE<FloatField>();
+            floatInput.value = precSlider.value;
+
+            /* Callback Register Section */
+            precSlider.RegisterValueChangedCallback(evt =>
+            {
+                floatInput.value = evt.newValue;
+                ValueChangeAct?.Invoke(evt.newValue);
+            });
+
+            floatInput.RegisterValueChangedCallback(evt =>
+            {
+                precSlider.value = evt.newValue;
+                ValueChangeAct?.Invoke(evt.newValue);
+            });
+
+            slot = VEHelper.GenVE("slot");
+            slot.Add(precSlider);
+            slot.Add(deleteButton);
+            slot.Add(floatInput);
+        }
+    }
+    
     public class DeviceOrderPanel : MonoSingleton<DeviceOrderPanel>{
         [SerializeField] private UIDocument _uiDocument;
         [SerializeField] private StyleSheet _styleSheet;
 
         private VisualElement _root;
-        private List<Image> _img_list;
+        private VisualElement _panel;
 
-        [SerializeField] private int SlotNum = 8;
-
-        bool isDragging = false;
-        Vector2 startMousePosition;
-        Vector2 startImagePosition;
+        /* Slot informations */
+        List<Slot> _slotsList;
 
         private void Awake() {
-            _img_list = new List<Image>();
+        }
+
+        private void OnValidate() {
+            if (Application.isPlaying) return;
+            Generate();
         }
 
         private void OnEnable() {
@@ -30,78 +89,45 @@ namespace Panel {
         }
 
         void Generate() {
-            if (_uiDocument == null || _styleSheet == null) return;
 
+            if (_uiDocument == null || _styleSheet == null) return;
             _root = _uiDocument.rootVisualElement;
+
             _root.styleSheets.Add(_styleSheet);
             _root.AddToClassList("root");
 
-            for (int i = 0; i < SlotNum; i++) {
-                Image img = new Image();
-                img.AddToClassList("slot");
-                _root.Add(img);
-                _img_list.Add(img);
+            _panel = VEHelper.GenVE("panel", "container");
+            _root.Add(_panel);
+
+            // Testing Propose
+            //Slot slt = new Slot(0, 0, 1, (x) => { });
+            //_panel.Add(slt.slot);
+            InitSlots(new List<float> { 0f, 0f, 0f, 0f});
+
+            // UI Add Device 
+            //Button addSlotButton = VEHelper.GenVE<Button>();
+            //addSlotButton.text = "+";
+            //_panel.Add(addSlotButton);
+            // Call Add Deivce Lower level(distance in float)
+        }
+
+
+        private void AddDeivceButtonPress() {
+            // WaveDeviceOrder.AddDevice(); return class contains,
+            // {minValue, maxValue, valueChangeRC, deviceRemoveRC}
+            // 1. track minValue maxValue, default Deivce position at maxValue
+            // 2. RegisterCallback function(float) on valueChange
+            // 3. RegisterCallback function() on deviceRemove
+        }
+
+        // Devices already in Scene
+        public List<Slot> InitSlots(List<float> positionList) {
+            foreach (float prec in positionList) {
+                //Slot slt = new Slot(prec, 0, 1, (x) => { });
+                //_panel.Add(slt.slot);
             }
 
-        }
-
-        public void DraggableElement() {
-            var image = _img_list[0];
-
-            image.RegisterCallback<PointerDownEvent>(evt =>
-            {
-                isDragging = true;
-                //image.style.position = Position.Absolute;
-                //image.style.left = evt.position.x;
-                //image.style.top = evt.position.y;
-
-            });
-
-            image.RegisterCallback<PointerMoveEvent>(evt =>
-            {
-                if (isDragging) {
-                    Debug.Log("Position: " + evt.position);
-                    Debug.Log("LocalPosition: " + evt.localPosition);
-                    Debug.Log("DeltaPosition: " + evt.deltaPosition);
-                    Debug.Log("\n\n");
-                    //image.style.left = evt.position.x;
-                    //image.style.top = evt.position.y;
-                }
-            });
-
-            image.RegisterCallback<PointerUpEvent>(evt =>
-            {
-                isDragging = false;
-            });
-        }
-
-        private void BeginDrag(PointerDownEvent evt) {
-            isDragging = true;
-            startMousePosition = evt.localPosition;
-            //startImagePosition = image.transform.position;
-            evt.StopPropagation();
-        }
-
-        private void Dragging(PointerMoveEvent evt) {
-            //evt.
-            if (evt.pressedButtons == 1) // Left mouse button (change to evt.button if available)
-            {
-                Debug.Log("Dragging");
-            }
-        }
-
-        private void EndDrag(PointerUpEvent evt) {
-            // Handle end of drag here
-            Debug.Log("EndDrag");
-        }
-
-        void Start() {
-            DraggableElement();
-        }
-
-        // Update is called once per frame
-        void Update() {
-
+            return _slotsList;
         }
     }
 }
