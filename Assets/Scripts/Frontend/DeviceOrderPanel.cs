@@ -30,7 +30,11 @@ namespace Panel {
         FloatField floatInput;
         public VisualElement slot;
 
-        public Slot(float initLoc, float slotMin, float slotMax, UnityAction<float> ValueChangeAct) {
+
+
+        public Slot(float initLoc, float slotMin, float slotMax, 
+            UnityAction<float> ValueChangeAct, UnityAction<float> DeleteAct) 
+        {
             precSlider = VEHelper.GenVE<Slider>();
             precSlider.value = initLoc;
             precSlider.lowValue = slotMin;
@@ -42,6 +46,7 @@ namespace Panel {
             floatInput = VEHelper.GenVE<FloatField>();
             floatInput.value = precSlider.value;
 
+            /* Callback Register Section */
             precSlider.RegisterValueChangedCallback(evt =>
             {
                 floatInput.value = evt.newValue;
@@ -74,6 +79,11 @@ namespace Panel {
         private void Awake() {
         }
 
+        private void OnValidate() {
+            if (Application.isPlaying) return;
+            Generate();
+        }
+
         private void OnEnable() {
             Generate();
         }
@@ -90,7 +100,9 @@ namespace Panel {
             _root.Add(_panel);
 
             // Testing Propose
-            InitSlots(new List<float> {0f, 0f, 0f, 0f});
+            //Slot slt = new Slot(0, 0, 1, (x) => { });
+            //_panel.Add(slt.slot);
+            InitSlots(new List<float> { 0f, 0f, 0f, 0f});
 
             // UI Add Device 
             //Button addSlotButton = VEHelper.GenVE<Button>();
@@ -111,27 +123,11 @@ namespace Panel {
         // Devices already in Scene
         public List<Slot> InitSlots(List<float> positionList) {
             foreach (float prec in positionList) {
-                Slot slt = GenSlot(prec);
-
-                _slotsList.Add(slt);
-                _panel.Add(slt.slot);
+                //Slot slt = new Slot(prec, 0, 1, (x) => { });
+                //_panel.Add(slt.slot);
             }
 
             return _slotsList;
-        }
-
-        public Slot GenSlot(float prec) {
-            Slot newslt = new Slot(prec, 0, 1, (x) => { Debug.Log(x); });
-            _slotsList.Add(newslt);
-            return newslt;
-        }
-
-        
-        void Start() {
-        }
-
-        // Update is called once per frame
-        void Update() {
         }
     }
 }
