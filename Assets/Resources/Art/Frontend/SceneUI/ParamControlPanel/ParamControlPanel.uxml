@@ -2,7 +2,7 @@
     <ui:VisualElement name="VisualElement" style="flex-grow: 1; max-height: 75%; height: 75%; width: 30%; max-width: 30%; flex-direction: row; align-self: auto; -unity-text-align: upper-left; background-color: rgba(255, 255, 255, 0.39); top: 4%;">
         <ui:VisualElement style="flex-grow: 1; width: 95%;">
             <ui:TextField picking-mode="Ignore" value="Object Name" style="height: 10%;" />
-            <ui:VisualElement name="wave" style="flex-grow: 1; height: 90%;">
+            <ui:VisualElement name="wave" style="flex-grow: 1; height: 90%; display: flex;">
                 <ui:Foldout text="Amplitude">
                     <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
                         <ui:FloatField label="Udir Amp(Eox)" value="42.2" name="FloatField" style="width: 252px;">
@@ -50,6 +50,21 @@
                 <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
                     <ui:FloatField label="Refractive Index (n)" value="42.2" name="FloatField" style="width: 285px;">
                         <ui:Label tabindex="-1" text="const" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+                    </ui:FloatField>
+                    <ui:Slider picking-mode="Ignore" value="42" high-value="100" style="width: 135px;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="devices" style="flex-grow: 1; display: none;">
+                <ui:EnumField label="Device Type" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" value="Center" include-obsolete-values="false" />
+                <ui:VisualElement name="VisualElement" style="flex-grow: 1; flex-direction: row;">
+                    <ui:FloatField label="Rotation Degree" value="42.2" name="FloatField" is-delayed="false" style="width: 252px;">
+                        <ui:Label tabindex="-1" text="&apos;" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
+                    </ui:FloatField>
+                    <ui:Slider picking-mode="Ignore" value="42" high-value="100" style="width: 135px;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="VisualElement" style="flex-grow: 1; flex-direction: row;">
+                    <ui:FloatField label="Axis Diff Degree" value="42.2" name="FloatField" readonly="false" style="width: 252px;">
+                        <ui:Label tabindex="-1" text="&apos;" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                     </ui:FloatField>
                     <ui:Slider picking-mode="Ignore" value="42" high-value="100" style="width: 135px;" />
                 </ui:VisualElement>
