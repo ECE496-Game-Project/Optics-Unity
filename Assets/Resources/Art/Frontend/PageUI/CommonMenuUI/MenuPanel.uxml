@@ -22,7 +22,7 @@
         <ui:VisualElement name="body" style="flex-grow: 1; width: 70%;">
             <ui:VisualElement name="header" style="flex-grow: 1; height: 5%; flex-direction: row; background-color: rgba(121, 244, 255, 0.39);">
                 <ui:VisualElement style="flex-grow: 1; width: 70%;" />
-                <ui:TextField picking-mode="Ignore" label="Text Field" value="filler text" name="TextField" style="width: 30%; height: 70%; align-self: center; font-size: 20px;" />
+                <ui:TextField picking-mode="Ignore" label="Search" value="name" name="TextField" style="width: 30%; height: 70%; align-self: center; font-size: 20px;" />
             </ui:VisualElement>
             <ui:ScrollView name="body" style="height: 95%;" />
         </ui:VisualElement>
