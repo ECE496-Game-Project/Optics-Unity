@@ -22,7 +22,7 @@ namespace GO_Wave {
         }
 
         public override void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
-            var NameTuple = (ParameterInfo<string>)ParameterInfos.SymbolQuickAccess["name"];
+            var NameTuple = (ParameterInfo<string>)ParameterInfos.SymbolQuickAccess["WaveName"];
             var EoxTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["Eox"];
             var EoyTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["Eoy"];
             var thetaTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["theta"];
@@ -48,19 +48,6 @@ namespace GO_Wave {
             phiTuple.Getter     = () => { return m_params.phi; };
             nTuple.Getter       = () => { return m_params.n; };
 
-            NameTuple.Default = this.name;
-            EoxTuple.Default = m_params.Eox;
-            EoyTuple.Default = m_params.Eoy;
-            thetaTuple.Default = m_params.theta;
-            TTuple.Default = m_params.T;
-            muTuple.Default = m_params.mu;
-            wTuple.Default = m_params.w;
-            lambdaTuple.Default = m_params.lambda;
-            fTuple.Default = m_params.f;
-            kTuple.Default = m_params.k;
-            phiTuple.Default = m_params.phi;
-            nTuple.Default = m_params.n;
-
             NameTuple.Setter    = (evt) => { this.name = evt.newValue; };
             EoxTuple.Setter     = (evt) => { m_params.Eox = evt.newValue; ParameterChangeTrigger(); };
             EoyTuple.Setter     = (evt) => { m_params.Eoy = evt.newValue; ParameterChangeTrigger(); };
@@ -72,13 +59,5 @@ namespace GO_Wave {
             nTuple.Setter       = (evt) => { m_params.n = evt.newValue; WaveAlgorithm.changeN(m_params); ParameterChangeTrigger(); };
             phiTuple.Setter     = (evt) => { m_params.phi = evt.newValue; ParameterChangeTrigger(); };
         }
-
-        ///// <summary>
-        ///// Need Manual Reset Effective Distance since Distance Modified during Interaction.
-        ///// </summary>
-        //public override void ParameterChangeTrigger() {
-            
-        //    base.ParameterChangeTrigger();
-        //}
     }
 }

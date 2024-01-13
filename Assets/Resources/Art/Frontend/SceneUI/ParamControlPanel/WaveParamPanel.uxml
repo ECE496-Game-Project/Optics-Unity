@@ -16,11 +16,15 @@
                         </ui:FloatField>
                         <ui:Slider picking-mode="Ignore" value="42" high-value="100" style="width: 137px;" />
                     </ui:VisualElement>
-                    <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                    <ui:VisualElement name="Theta" style="flex-grow: 1; flex-direction: row;">
                         <ui:FloatField label="Phase Diff(Theta)" value="42.2" name="FloatField" style="width: 232px;">
                             <ui:Label tabindex="-1" text="&apos;" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                         </ui:FloatField>
-                        <ui:Slider picking-mode="Ignore" value="42" high-value="100" style="width: 156px;" />
+                        <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
+                            <ui:Label tabindex="-1" text="0°" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Min" focusable="true" style="flex-wrap: nowrap;" />
+                            <ui:Slider picking-mode="Ignore" value="42" high-value="100" style="width: 156px;" />
+                            <ui:Label tabindex="-1" text="360°" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Max" focusable="true" style="flex-wrap: nowrap;" />
+                        </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:Foldout>
                 <ui:Foldout text="Temperal Properties">

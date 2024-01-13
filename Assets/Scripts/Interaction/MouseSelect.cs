@@ -126,6 +126,6 @@ public class MouseSelect : MonoBehaviour
         clickable.OnMouseSelect();
 
         // Enable ParamController
-        ParamControlPanel.Instance.SelectParamView(go);
+        //ParamControlPanel.Instance.SelectParamView(go);
     }
 }
