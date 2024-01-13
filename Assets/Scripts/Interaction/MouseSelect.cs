@@ -33,6 +33,7 @@ public class MouseSelect : MonoBehaviour
     {
         m_playerInput.actions["MouseClicked"].performed += OnMouseClicked;
         m_playerInput.actions["MouseMovement"].performed += onMouseMoved;
+        
     }
 
     private void onMouseMoved(InputAction.CallbackContext context)
@@ -125,6 +126,6 @@ public class MouseSelect : MonoBehaviour
         clickable.OnMouseSelect();
 
         // Enable ParamController
-        ParamControlPanel.Instance.SelectParamView(go);
+        //ParamControlPanel.Instance.SelectParamView(go);
     }
 }
