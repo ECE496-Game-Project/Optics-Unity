@@ -22,10 +22,10 @@ namespace GO_Device {
         public virtual void CleanDeviceHitTrace(WaveSource parentWS) { }
 
         public virtual void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
-            var DeviceTypeTuple = (ParameterInfo<DEVICETYPE>)ParameterInfos.SymbolQuickAccess["DeviceType"];
-            DeviceTypeTuple.Getter = () => { return DeviceType; };
-            DeviceTypeTuple.Default = DeviceType;
-            DeviceTypeTuple.Setter = (evt) => { DeviceType = evt.newValue; ParameterChangeTrigger(); };
+            //var DeviceTypeTuple = (ParameterInfo<DEVICETYPE>)ParameterInfos.SymbolQuickAccess["DeviceType"];
+            //DeviceTypeTuple.Getter = () => { return DeviceType; };
+            //DeviceTypeTuple.Default = DeviceType;
+            //DeviceTypeTuple.Setter = (evt) => { DeviceType = evt.newValue; ParameterChangeTrigger(); };
         }
         public virtual void ParameterChangeTrigger() { }
         public virtual void OnMouseSelect() { OnDeviceSelected?.Invoke(); }

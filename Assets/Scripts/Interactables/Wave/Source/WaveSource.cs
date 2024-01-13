@@ -80,46 +80,46 @@ namespace GO_Wave {
         }
         public virtual void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
             // Child Wave Parameter Registration
-            var NameTuple = (ParameterInfo<string>)ParameterInfos.SymbolQuickAccess["name"];
-            var EoxTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["Eox"];
-            var EoyTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["Eoy"];
-            var thetaTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["theta"];
-            var TTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["T"];
-            var muTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["mu"];
-            var wTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["w"];
-            var lambdaTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["lambda"];
-            var fTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["f"];
-            var kTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["k"];
-            var phiTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["phi"];
-            var nTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["n"];
+            //var NameTuple = (ParameterInfo<string>)ParameterInfos.SymbolQuickAccess["name"];
+            //var EoxTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["Eox"];
+            //var EoyTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["Eoy"];
+            //var thetaTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["theta"];
+            //var TTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["T"];
+            //var muTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["mu"];
+            //var wTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["w"];
+            //var lambdaTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["lambda"];
+            //var fTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["f"];
+            //var kTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["k"];
+            //var phiTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["phi"];
+            //var nTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["n"];
 
-            NameTuple.Getter = () => { return this.name; };
-            EoxTuple.Getter = () => { return m_params.Eox; };
-            EoyTuple.Getter = () => { return m_params.Eoy; };
-            thetaTuple.Getter = () => { return m_params.theta; };
-            TTuple.Getter = () => { return m_params.T; };
-            muTuple.Getter = () => { return m_params.mu; };
-            wTuple.Getter = () => { return m_params.w; };
-            lambdaTuple.Getter = () => { return m_params.lambda; };
-            fTuple.Getter = () => { return m_params.f; };
-            kTuple.Getter = () => { return m_params.k; };
-            phiTuple.Getter = () => { return m_params.phi; };
-            nTuple.Getter = () => { return m_params.n; };
+            //NameTuple.Getter = () => { return this.name; };
+            //EoxTuple.Getter = () => { return m_params.Eox; };
+            //EoyTuple.Getter = () => { return m_params.Eoy; };
+            //thetaTuple.Getter = () => { return m_params.theta; };
+            //TTuple.Getter = () => { return m_params.T; };
+            //muTuple.Getter = () => { return m_params.mu; };
+            //wTuple.Getter = () => { return m_params.w; };
+            //lambdaTuple.Getter = () => { return m_params.lambda; };
+            //fTuple.Getter = () => { return m_params.f; };
+            //kTuple.Getter = () => { return m_params.k; };
+            //phiTuple.Getter = () => { return m_params.phi; };
+            //nTuple.Getter = () => { return m_params.n; };
 
-            NameTuple.Default = this.name;
-            EoxTuple.Default = m_params.Eox;
-            EoyTuple.Default = m_params.Eoy;
-            thetaTuple.Default = m_params.theta;
-            TTuple.Default = m_params.T;
-            muTuple.Default = m_params.mu;
-            wTuple.Default = m_params.w;
-            lambdaTuple.Default = m_params.lambda;
-            fTuple.Default = m_params.f;
-            kTuple.Default = m_params.k;
-            phiTuple.Default = m_params.phi;
-            nTuple.Default = m_params.n;
+            //NameTuple.Default = this.name;
+            //EoxTuple.Default = m_params.Eox;
+            //EoyTuple.Default = m_params.Eoy;
+            //thetaTuple.Default = m_params.theta;
+            //TTuple.Default = m_params.T;
+            //muTuple.Default = m_params.mu;
+            //wTuple.Default = m_params.w;
+            //lambdaTuple.Default = m_params.lambda;
+            //fTuple.Default = m_params.f;
+            //kTuple.Default = m_params.k;
+            //phiTuple.Default = m_params.phi;
+            //nTuple.Default = m_params.n;
 
-            NameTuple.Setter = (evt) => { this.name = evt.newValue; };
+            //NameTuple.Setter = (evt) => { this.name = evt.newValue; };
         }
         /// <summary>
         /// Script-Generated-WaveSource Requires to Call ManualAwake.
