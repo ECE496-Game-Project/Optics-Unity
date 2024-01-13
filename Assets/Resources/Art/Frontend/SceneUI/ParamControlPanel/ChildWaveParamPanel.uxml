@@ -7,7 +7,7 @@
             <ui:VisualElement name="wave" style="flex-grow: 1; height: 90%; display: flex;">
                 <ui:Foldout text="Amplitude" name="Amplitude">
                     <ui:VisualElement name="UdirAmp" style="flex-grow: 1; flex-direction: row;">
-                        <ui:FloatField label="Udir Amp(Eox)" value="1" name="FloatField" style="width: 252px;">
+                        <ui:FloatField label="Udir Amp(Eox)" value="1" name="FloatField" readonly="true" style="width: 252px;">
                             <ui:Label tabindex="-1" text="V/m" parse-escape-sequences="true" display-tooltip-when-elided="true" />
                         </ui:FloatField>
                         <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
@@ -17,7 +17,7 @@
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="VdirAmp" style="flex-grow: 1; flex-direction: row;">
-                        <ui:FloatField label="Vdir Amp(Eoy)" value="1" name="FloatField" style="width: 252px;">
+                        <ui:FloatField label="Vdir Amp(Eoy)" value="1" name="FloatField" readonly="true" style="width: 252px;">
                             <ui:Label tabindex="-1" text="V/m" parse-escape-sequences="true" display-tooltip-when-elided="true" />
                         </ui:FloatField>
                         <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
@@ -44,7 +44,7 @@
                         </ui:FloatField>
                     </ui:VisualElement>
                     <ui:VisualElement name="TemperalFreq" style="flex-grow: 1;">
-                        <ui:FloatField label="Frequency (mu)" value="42.2" readonly="false" name="FloatField">
+                        <ui:FloatField label="Frequency (mu)" value="42.2" readonly="true" name="FloatField">
                             <ui:Label tabindex="-1" text="THz" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                         </ui:FloatField>
                     </ui:VisualElement>
@@ -56,7 +56,7 @@
                 </ui:Foldout>
                 <ui:Foldout text="Spatial Properties" name="Spatial">
                     <ui:VisualElement name="SpatialPeriod" style="flex-grow: 1;">
-                        <ui:FloatField label="Period (lambda)" value="42.2" readonly="false" name="FloatField" is-delayed="false">
+                        <ui:FloatField label="Period (lambda)" value="42.2" readonly="true" name="FloatField" is-delayed="false">
                             <ui:Label tabindex="-1" text="nm" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                         </ui:FloatField>
                     </ui:VisualElement>
@@ -72,7 +72,7 @@
                     </ui:VisualElement>
                 </ui:Foldout>
                 <ui:VisualElement name="Phi" style="flex-grow: 1; flex-direction: row;">
-                    <ui:FloatField label="Initial Phase (Phi)" value="42" name="FloatField" style="width: 252px;">
+                    <ui:FloatField label="Initial Phase (Phi)" value="42" name="FloatField" readonly="true" style="width: 252px;">
                         <ui:Label tabindex="-1" text="°" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                     </ui:FloatField>
                     <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
@@ -82,7 +82,7 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement name="N" style="flex-grow: 1; flex-direction: row;">
-                    <ui:FloatField label="Refractive Index (n)" value="1" name="FloatField" style="width: 285px;">
+                    <ui:FloatField label="Refractive Index (n)" value="1" name="FloatField" readonly="true" style="width: 285px;">
                         <ui:Label tabindex="-1" text="const" parse-escape-sequences="true" display-tooltip-when-elided="true" />
                     </ui:FloatField>
                     <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
