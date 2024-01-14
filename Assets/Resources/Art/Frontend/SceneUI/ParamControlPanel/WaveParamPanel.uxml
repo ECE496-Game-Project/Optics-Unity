@@ -1,99 +1,100 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement name="VisualElement" style="flex-grow: 1; max-height: 75%; height: 75%; width: 30%; max-width: 30%; flex-direction: row; align-self: auto; -unity-text-align: upper-left; background-color: rgba(255, 255, 255, 0.39); top: 4%;">
-        <ui:VisualElement style="flex-grow: 1; width: 95%;">
-            <ui:VisualElement name="Name" style="flex-grow: 1; height: 10%;">
-                <ui:TextField picking-mode="Ignore" value="Object Name" style="height: 100%;" />
+        <ui:VisualElement name="body" style="flex-grow: 1; width: 95%;">
+            <ui:VisualElement name="Name" style="flex-grow: 1; height: 10%; justify-content: center;">
+                <ui:TextField picking-mode="Ignore" value="Object Name" style="height: 100%; -unity-text-align: middle-left; align-self: auto; align-items: center;" />
             </ui:VisualElement>
             <ui:VisualElement name="wave" style="flex-grow: 1; height: 90%; display: flex;">
-                <ui:Foldout text="Amplitude" name="Amplitude">
+                <ui:Foldout text="Amplitude" name="Amplitude" style="height: 20%;">
                     <ui:VisualElement name="UdirAmp" style="flex-grow: 1; flex-direction: row;">
-                        <ui:FloatField label="Udir Amp(Eox)" value="1" name="FloatField" style="width: 252px;">
+                        <ui:FloatField label="Udir Amp(Eox)" value="1" name="FloatField" style="width: 252px; align-items: center;">
                             <ui:Label tabindex="-1" text="V/m" parse-escape-sequences="true" display-tooltip-when-elided="true" />
                         </ui:FloatField>
                         <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
-                            <ui:Label tabindex="-1" text="-5" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Min" />
+                            <ui:Label tabindex="-1" text="-5" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Min" style="align-self: center;" />
                             <ui:Slider picking-mode="Ignore" value="1" high-value="5" name="Slider" low-value="-5" style="width: 135px;" />
-                            <ui:Label tabindex="-1" text="5" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Max" />
+                            <ui:Label tabindex="-1" text="5" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Max" style="align-self: center;" />
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="VdirAmp" style="flex-grow: 1; flex-direction: row;">
-                        <ui:FloatField label="Vdir Amp(Eoy)" value="1" name="FloatField" style="width: 252px;">
+                        <ui:FloatField label="Vdir Amp(Eoy)" value="1" name="FloatField" style="width: 252px; align-items: center;">
                             <ui:Label tabindex="-1" text="V/m" parse-escape-sequences="true" display-tooltip-when-elided="true" />
                         </ui:FloatField>
                         <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
-                            <ui:Label tabindex="-1" text="-5" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Min" />
+                            <ui:Label tabindex="-1" text="-5" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Min" style="align-self: center;" />
                             <ui:Slider picking-mode="Ignore" value="1" high-value="5" name="Slider" low-value="-5" style="width: 135px;" />
-                            <ui:Label tabindex="-1" text="5" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Max" />
+                            <ui:Label tabindex="-1" text="5" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Max" style="align-self: center;" />
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="Theta" style="flex-grow: 1; flex-direction: row;">
-                        <ui:FloatField label="Phase Diff(Theta)" value="42" name="FloatField" style="width: 232px;">
+                        <ui:FloatField label="Phase Diff(Theta)" value="42" name="FloatField" style="width: 232px; align-items: center;">
                             <ui:Label tabindex="-1" text="°" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                         </ui:FloatField>
                         <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
-                            <ui:Label tabindex="-1" text="0°" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Min" focusable="true" style="flex-wrap: nowrap;" />
+                            <ui:Label tabindex="-1" text="0°" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Min" focusable="true" style="flex-wrap: nowrap; justify-content: flex-start; align-items: auto; align-self: center;" />
                             <ui:Slider picking-mode="Ignore" value="42" high-value="360" style="width: 156px;" />
-                            <ui:Label tabindex="-1" text="360°" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Max" focusable="true" style="flex-wrap: nowrap;" />
+                            <ui:Label tabindex="-1" text="360°" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Max" focusable="true" style="flex-wrap: nowrap; align-self: center;" />
                         </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:Foldout>
-                <ui:Foldout text="Temperal Properties" name="Temperal">
+                <ui:Foldout text="Temperal Properties" name="Temperal" style="height: 20%;">
                     <ui:VisualElement name="TemperalPeriod" style="flex-grow: 1;">
-                        <ui:FloatField label="Period (T)" value="42.2" readonly="true" name="FloatField">
+                        <ui:FloatField label="Period (T)" value="42.2" readonly="true" name="FloatField" style="align-items: center;">
                             <ui:Label tabindex="-1" text="fs" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                         </ui:FloatField>
                     </ui:VisualElement>
                     <ui:VisualElement name="TemperalFreq" style="flex-grow: 1;">
-                        <ui:FloatField label="Frequency (mu)" value="42.2" readonly="false" name="FloatField">
+                        <ui:FloatField label="Frequency (mu)" value="42.2" readonly="false" name="FloatField" style="align-items: center;">
                             <ui:Label tabindex="-1" text="THz" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                         </ui:FloatField>
                     </ui:VisualElement>
                     <ui:VisualElement name="TemperalAngularFreq" style="flex-grow: 1;">
-                        <ui:FloatField label="Angular Frequency (w)" value="42.2" readonly="true" name="FloatField">
+                        <ui:FloatField label="Angular Frequency (w)" value="42.2" readonly="true" name="FloatField" style="align-items: center;">
                             <ui:Label tabindex="-1" text="rad/fs" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="true" />
                         </ui:FloatField>
                     </ui:VisualElement>
                 </ui:Foldout>
-                <ui:Foldout text="Spatial Properties" name="Spatial">
+                <ui:Foldout text="Spatial Properties" name="Spatial" style="height: 20%;">
                     <ui:VisualElement name="SpatialPeriod" style="flex-grow: 1;">
-                        <ui:FloatField label="Period (lambda)" value="42.2" readonly="false" name="FloatField" is-delayed="false">
+                        <ui:FloatField label="Period (lambda)" value="42.2" readonly="false" name="FloatField" is-delayed="false" style="align-self: auto; align-items: center;">
                             <ui:Label tabindex="-1" text="nm" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                         </ui:FloatField>
                     </ui:VisualElement>
                     <ui:VisualElement name="SpatialFreq" style="flex-grow: 1;">
-                        <ui:FloatField label="Frequency (f)" value="42.2" readonly="true" name="FloatField" is-delayed="false">
+                        <ui:FloatField label="Frequency (f)" value="42.2" readonly="true" name="FloatField" is-delayed="false" style="align-items: center; justify-content: flex-start;">
                             <ui:Label tabindex="-1" text="1/nm" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                         </ui:FloatField>
                     </ui:VisualElement>
                     <ui:VisualElement name="SpatialAngularFreq" style="flex-grow: 1;">
-                        <ui:FloatField label="Angular Frequency (k) " value="42.2" readonly="true" name="FloatField" is-delayed="false">
+                        <ui:FloatField label="Angular Frequency (k) " value="42.2" readonly="true" name="FloatField" is-delayed="false" style="justify-content: flex-start; align-items: center; align-self: auto;">
                             <ui:Label tabindex="-1" text="rad/nm" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                         </ui:FloatField>
                     </ui:VisualElement>
                 </ui:Foldout>
-                <ui:VisualElement name="Phi" style="flex-grow: 1; flex-direction: row;">
-                    <ui:FloatField label="Initial Phase (Phi)" value="42" name="FloatField" style="width: 252px;">
+                <ui:VisualElement name="Phi" style="flex-grow: 1; flex-direction: row; height: 3%;">
+                    <ui:FloatField label="Initial Phase (Phi)" value="42" name="FloatField" style="width: 252px; align-items: center; justify-content: flex-start;">
                         <ui:Label tabindex="-1" text="°" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                     </ui:FloatField>
                     <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
-                        <ui:Label tabindex="-1" text="0°" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Min" />
+                        <ui:Label tabindex="-1" text="0°" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Min" style="align-items: stretch; justify-content: flex-start; align-self: center;" />
                         <ui:Slider picking-mode="Ignore" value="42" high-value="360" name="Slider" style="width: 135px;" />
-                        <ui:Label tabindex="-1" text="360°" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Max" enable-rich-text="false" />
+                        <ui:Label tabindex="-1" text="360°" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Max" enable-rich-text="false" style="align-self: center;" />
                     </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:VisualElement name="N" style="flex-grow: 1; flex-direction: row;">
-                    <ui:FloatField label="Refractive Index (n)" value="1" name="FloatField" style="width: 285px;">
+                <ui:VisualElement name="N" style="flex-grow: 1; flex-direction: row; height: 3%;">
+                    <ui:FloatField label="Refractive Index (n)" value="1" name="FloatField" style="width: 285px; align-items: center;">
                         <ui:Label tabindex="-1" text="const" parse-escape-sequences="true" display-tooltip-when-elided="true" />
                     </ui:FloatField>
                     <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
-                        <ui:Label tabindex="-1" text="0" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Min" focusable="true" style="flex-wrap: nowrap;" />
+                        <ui:Label tabindex="-1" text="0" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Min" focusable="true" style="flex-wrap: nowrap; align-self: center;" />
                         <ui:Slider picking-mode="Ignore" value="1" high-value="5" style="width: 156px;" />
-                        <ui:Label tabindex="-1" text="5" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Max" focusable="true" enable-rich-text="false" style="flex-wrap: nowrap;" />
+                        <ui:Label tabindex="-1" text="5" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Max" focusable="true" enable-rich-text="false" style="flex-wrap: nowrap; align-self: center;" />
                     </ui:VisualElement>
                 </ui:VisualElement>
+                <ui:VisualElement name="EmptySpace" style="flex-grow: 1; height: 20%;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement style="flex-grow: 1; width: 5%;">
+        <ui:VisualElement name="sidebar" style="flex-grow: 1; width: 5%;">
             <ui:Button text="&lt;" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Button" style="width: 30px; max-width: 30px; max-height: 30px; height: 30px; align-items: center; align-self: center;" />
         </ui:VisualElement>
     </ui:VisualElement>
