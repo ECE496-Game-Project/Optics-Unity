@@ -75,10 +75,10 @@ namespace Panel {
 
         public void PreRegisterCallback(VisualElement root) {
             Button expButton = root.Q<Button>(name: "ExpandButton");
-            _expand_panel = root.Q<Button>(name: "ExpandPanel");
+            //_expand_panel = root.Q<Button>(name: "ExpandPanel");
             expButton.clicked += () => {
                 isPanelExpanded = !isPanelExpanded;
-                _expand_panel.style.width = isPanelExpanded ? PANEL_WIDTH : 0f;
+                //_expand_panel.style.width = isPanelExpanded ? PANEL_WIDTH : 0f;
                 expButton.text = isPanelExpanded ? "<" : ">";
             };
 
