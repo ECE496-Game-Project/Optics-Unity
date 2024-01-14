@@ -329,6 +329,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playerInput: {fileID: 411873645}
+  m_lineWaveSampleMaterialController:
+    m_positiveMaterial: {fileID: 2100000, guid: 610953865cd47e64280bc5b628f5c482,
+      type: 2}
+    m_negativeMaterial: {fileID: 2100000, guid: 7e3edfc48f2476941ac1214b65a4973a,
+      type: 2}
+    m_positiveRangeMin: -90
+    m_positiveRangeMax: 90
 --- !u!4 &605630648
 Transform:
   m_ObjectHideFlags: 0
