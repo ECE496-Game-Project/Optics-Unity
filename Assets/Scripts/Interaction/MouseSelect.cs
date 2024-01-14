@@ -107,7 +107,7 @@ public class MouseSelect : MonoBehaviour
         if (!Physics.Raycast(ray, out hit))
         {
             // Disable ParamController
-            //ParamControlPanel.Instance.CleanParamView();
+            //ParamPanelManager.Instance.CleanParamView();
             return;
         }
 
@@ -126,6 +126,6 @@ public class MouseSelect : MonoBehaviour
         clickable.OnMouseSelect();
 
         // Enable ParamController
-        //ParamControlPanel.Instance.SelectParamView(go);
+        ParamPanelManager.Instance.SelectParamView(go);
     }
 }

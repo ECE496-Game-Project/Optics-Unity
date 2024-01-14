@@ -61,7 +61,7 @@
 //            Button toggleButton = new Button() { text = ">" };
 //            toggleButton.AddToClassList("button");
 
-//            toggleButton.clicked += () => {
+//            ToggleButton.clicked += () => {
 //                isPanelExpanded = !isPanelExpanded;
 //                _expand_panel.style.width = isPanelExpanded ? 400f : 0f; // Adjust the width
 //                toggleButton.text = isPanelExpanded ? "<" : ">";
