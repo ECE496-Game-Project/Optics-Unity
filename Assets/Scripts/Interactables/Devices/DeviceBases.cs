@@ -14,8 +14,8 @@ namespace GO_Device {
     }
 
 	public class DeviceBase : MonoBehaviour, I_ParameterTransfer, ISelectable {
-        public UnityEvent OnDeviceSelected;
-        public UnityEvent OnDeviceUnselected;
+        //public UnityEvent OnDeviceSelected;
+        //public UnityEvent OnDeviceUnselected;
 
         public DEVICETYPE DeviceType = DEVICETYPE.INVALID;
         public virtual void WaveHit(in RaycastHit hit, WaveSource parentWS) { }
@@ -28,7 +28,13 @@ namespace GO_Device {
             //DeviceTypeTuple.Setter = (evt) => { DeviceType = evt.newValue; ParameterChangeTrigger(); };
         }
         public virtual void ParameterChangeTrigger() { }
-        public virtual void OnMouseSelect() { OnDeviceSelected?.Invoke(); }
-        public virtual void OnMouseUnselect() { OnDeviceUnselected?.Invoke(); }
+        
+        // For Highlight Propose
+        public virtual void OnMouseSelect() { 
+            //OnDeviceSelected?.Invoke(); 
+        }
+        public virtual void OnMouseUnselect() { 
+            //OnDeviceUnselected?.Invoke(); 
+        }
     }
 }

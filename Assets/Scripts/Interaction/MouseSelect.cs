@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
-
+using Interfaces;
 using Panel;
 
 public class MouseSelect : MonoBehaviour
@@ -106,26 +106,25 @@ public class MouseSelect : MonoBehaviour
         // if mouse is not on anything
         if (!Physics.Raycast(ray, out hit))
         {
-            // Disable ParamController
-            //ParamPanelManager.Instance.CleanParamView();
             return;
         }
 
         GameObject go = hit.collider.gameObject;
 
         ISelectable clickable = go.GetComponent<ISelectable>();
-        if (clickable == null)
+        if (clickable != null)
         {
-            return;
+            OutlineManager.Instance.Highlight(go);
+            m_highlight = go;
+            m_select = go;
+
+            clickable.OnMouseSelect();
         }
 
-        OutlineManager.Instance.Highlight(go);
-        m_highlight = go;
-        m_select = go;
-
-        clickable.OnMouseSelect();
-
-        // Enable ParamController
-        ParamPanelManager.Instance.SelectParamView(go);
+        // Announce ParamManager to show the corresponding panel
+        I_ParameterTransfer paramUI = go.GetComponent<I_ParameterTransfer>();
+        if (paramUI != null) {
+            ParamPanelManager.Instance.SelectParamView(go);
+        }
     }
 }
