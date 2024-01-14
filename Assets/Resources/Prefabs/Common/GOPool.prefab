@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5168877649676424121}
   - component: {fileID: 8877234193257371041}
   m_Layer: 0
-  m_Name: GO_Pool
+  m_Name: GOPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
