@@ -29,9 +29,10 @@ namespace Panel {
 
         private Dictionary<string, ParameterInfoList> paramInfoDict = new Dictionary<string, ParameterInfoList>();
 
-        // [TODO]: ExpandPanel
+
+        VisualElement _expand_panel;
         bool isPanelExpanded = false;
-        float PanelWidth = 0;
+        const float PANEL_WIDTH = 400f;
 
         private void Awake() {
             foreach(var UI in UIInfo) {
@@ -39,7 +40,6 @@ namespace Panel {
                 paramInfoDict.Add(UI.doc.gameObject.name, pil);
 
                 PreRegisterCallback(pil);
-                // [TODO]: ExpandPanel Starting Point
                 PreRegisterCallback(UI.doc.rootVisualElement);
             }
         }
@@ -70,14 +70,13 @@ namespace Panel {
         }
 
         public void PreRegisterCallback(VisualElement root) {
-            // [TODO]: ExpandPanel
-            //Button expButton = root.Q<Button>(name: "ExpandButton");
-            //expButton.clicked += () => {
-            //    isPanelExpanded = !isPanelExpanded;
-            //    _expand_panel.style.width = isPanelExpanded ? 400f : 0f; // Adjust the width
-            //    expButton.text = isPanelExpanded ? "<" : ">";
-            //};
-
+            Button expButton = root.Q<Button>(name: "ExpandButton");
+            _expand_panel = root.Q<Button>(name: "ExpandPanel");
+            expButton.clicked += () => {
+               isPanelExpanded = !isPanelExpanded;
+               _expand_panel.style.width = isPanelExpanded ? PANEL_WIDTH : 0f; 
+               expButton.text = isPanelExpanded ? "<" : ">";
+            };
         }
 
         public void SelectParamView(GameObject obj) {
