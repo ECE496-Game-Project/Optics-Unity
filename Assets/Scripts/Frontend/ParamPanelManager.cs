@@ -74,28 +74,14 @@ namespace Panel {
         }
 
         public void PreRegisterCallback(VisualElement root) {
-            // [TODO]: ExpandPanel
-            //Button expButton = root.Q<Button>(name: "ExpandButton");
-            //expButton.clicked += () => {
-            //    isPanelExpanded = !isPanelExpanded;
-            //    _expand_panel.style.width = isPanelExpanded ? 400f : 0f; // Adjust the width
-            //    expButton.text = isPanelExpanded ? "<" : ">";
-            //};
+            Button expButton = root.Q<Button>(name: "ExpandButton");
+            _expand_panel = root.Q<Button>(name: "ExpandPanel");
+            expButton.clicked += () => {
+                isPanelExpanded = !isPanelExpanded;
+                _expand_panel.style.width = isPanelExpanded ? PANEL_WIDTH : 0f;
+                expButton.text = isPanelExpanded ? "<" : ">";
+            };
 
-        }
-
-        private void Awake() {
-            foreach(var UI in UIInfoTransfer) {
-                ParameterInfoList pil = new ParameterInfoList(UI.paramTrans.List, UI.doc.rootVisualElement);
-                // VisualElement expandPanel = UI.doc.rootVisualElement.Q(name: "ExpandPanel");
-                // float panelWidth = expandPanel.style.width;
-
-                paramInfoDict.Add(UI.name, new UIInfo(pil, UI.doc.gameObject));
-
-                PreRegisterCallback(pil);
-                // [TODO]: ExpandPanel Starting Point
-                PreRegisterCallback(UI.doc.rootVisualElement);
-            }
         }
         #endregion
 
