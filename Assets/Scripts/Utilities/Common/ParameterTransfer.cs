@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UIElements;
 using GO_Device;
 using CommonUtils;
+using UnityEngine.Assertions;
 
 namespace ParameterTransfer {
 
@@ -54,14 +55,14 @@ namespace ParameterTransfer {
     }
    
     public class ParameterInfoList {
-        public Dictionary<string, ParameterInfoBase> SymbolQuickAccess;
+        public Dictionary<string, ParameterInfoBase> SymbolQuickAccess = new Dictionary<string, ParameterInfoBase>();
 
         public ParameterInfoList(List<ParameterInfoBase> list, VisualElement root) {
-            SymbolQuickAccess = new Dictionary<string, ParameterInfoBase>();
-
+            Assert.IsNotNull(list);
+            Assert.IsNotNull(root);
             foreach (ParameterInfoBase p in list) {
-                VisualElement ve = root.Q(name: p.Name);
-                if(ve == null) {
+                VisualElement ve = root.Q(p.Name);
+                if (ve == null) {
                     DebugLogger.Warning("ParameterInfoList Casting", "Cannot Find: " + p.Name);
                     continue;
                 }

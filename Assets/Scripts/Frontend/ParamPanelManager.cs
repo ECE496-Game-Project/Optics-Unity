@@ -8,6 +8,7 @@ using CommonUtils;
 using Profiles;
 using System;
 using Interfaces;
+using UnityEngine.Assertions;
 
 namespace Panel {
     public class ParamPanelManager : MonoSingleton<ParamPanelManager> {
@@ -32,20 +33,22 @@ namespace Panel {
         public class UIInfo {
             public ParameterInfoList List;
             public GameObject GOUI;
-            //public VisualElement ExpandPanel;
-            //public float PanelWidth;
+            public VisualElement ExpandPanel;
+            public VisualElement Body;
 
-            public UIInfo(ParameterInfoList list, GameObject goui/*, VisualElement expPanel*/) {
+            public UIInfo(ParameterInfoList list, GameObject goui, VisualElement expPanel, VisualElement body) {
                 List = list;
                 GOUI = goui;
-                //ExpandPanel = expPanel;
+                ExpandPanel = expPanel;
+                Body = body;
             }
         }
         /* For Runtime Information Propose */
         private Dictionary<string, UIInfo> paramInfoDict = new Dictionary<string, UIInfo>();
-        private string selectedUI;
 
         // [TODO]: ExpandPanel
+        private string selectedUI;
+        public float PANEL_WIDTH;
         bool isPanelExpanded = false;
 
         #region Preprocess
@@ -75,7 +78,7 @@ namespace Panel {
 
         public void PreRegisterCallback(VisualElement root) {
             Button expButton = root.Q<Button>(name: "ExpandButton");
-            //_expand_panel = root.Q<Button>(name: "ExpandPanel");
+            VisualElement _expand_panel = root.Q<Button>(name: "ExpandPanel");
             expButton.clicked += () => {
                 isPanelExpanded = !isPanelExpanded;
                 //_expand_panel.style.width = isPanelExpanded ? PANEL_WIDTH : 0f;
@@ -83,10 +86,24 @@ namespace Panel {
             };
 
         }
+
+        private void Awake() {
+            foreach (var UI in UIInfoTransfer) {
+                VisualElement root = UI.doc.rootVisualElement;
+                ParameterInfoList pil = new ParameterInfoList(UI.paramTrans.List, root);
+                VisualElement expandPanel = root.Q("ExpandPanel");
+                VisualElement body = root.Q("Body");
+
+                paramInfoDict.Add(UI.name, new UIInfo(pil, UI.doc.gameObject, expandPanel, body));
+
+                PreRegisterCallback(pil);
+                PreRegisterCallback(UI.doc.rootVisualElement);
+            }
+        }
         #endregion
 
         #region Runtime Update
-        
+
 
         private void CleanSetter(string UIName) {
             ParameterInfoList list = paramInfoDict[UIName].List;
@@ -95,14 +112,35 @@ namespace Panel {
                 switch (pi.Type) {
                     case ParamType.String:
                         var picastStr = pi as ParameterInfo<string>;
-                        picastStr.Root.Q<TextField>().UnregisterValueChangedCallback(picastStr.Setter);
+                        if(picastStr.Setter != null) picastStr.Root.Q<TextField>().UnregisterValueChangedCallback(picastStr.Setter);
+                        picastStr.Setter = null;
                         break;
                     case ParamType.Float:
                         var picastF = pi as ParameterInfo<float>;
-                        picastF.Root.Q<FloatField>().UnregisterValueChangedCallback(picastF.Setter);
+                        if (picastF.Setter != null) picastF.Root.Q<FloatField>().UnregisterValueChangedCallback(picastF.Setter);
+                        picastF.Setter = null;
                         break;
                     default:
                         DebugLogger.Error(this.name, "CleanSetter Not Defined, Panic!");
+                        break;
+                }
+            }
+        }
+        private void RegisterSetter(string UIName) {
+            ParameterInfoList list = paramInfoDict[UIName].List;
+            foreach (var entry in list.SymbolQuickAccess) {
+                var pi = entry.Value;
+                switch (pi.Type) {
+                    case ParamType.String:
+                        var picastStr = pi as ParameterInfo<string>;
+                        picastStr.Root.Q<TextField>().RegisterValueChangedCallback(picastStr.Setter);
+                        break;
+                    case ParamType.Float:
+                        var picastF = pi as ParameterInfo<float>;
+                        picastF.Root.Q<FloatField>().RegisterValueChangedCallback(picastF.Setter);
+                        break;
+                    default:
+                        DebugLogger.Error(this.name, "RegisterSetter Not Defined, Panic!");
                         break;
                 }
             }
@@ -139,6 +177,7 @@ namespace Panel {
         private void UISetupPipeline(I_ParameterTransfer pt, string UIName) {
             CleanSetter(UIName);
             pt.RegisterParametersCallback(paramInfoDict[UIName].List);
+            RegisterSetter(UIName);
             CallGetter(UIName);
             EnableUI(UIName);
         }

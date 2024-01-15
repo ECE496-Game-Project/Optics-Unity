@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RootWave
   m_EditorClassIdentifier: 
   List:
-  - Name: Name
+  - Name: RootWaveName
     Type: 0
     Permit: 1
   - Name: UdirAmp
@@ -36,7 +36,7 @@ MonoBehaviour:
     Permit: 0
   - Name: SpatialPeriod
     Type: 2
-    Permit: 1
+    Permit: 3
   - Name: SpatialFreq
     Type: 2
     Permit: 0
