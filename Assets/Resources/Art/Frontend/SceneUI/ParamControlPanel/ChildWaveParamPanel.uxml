@@ -59,7 +59,7 @@
                         <ui:FloatField label="Period (lambda)" value="42.2" readonly="true" name="FloatField" is-delayed="false" style="align-self: auto; align-items: center; width: 245px;">
                             <ui:Label tabindex="-1" text="nm" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                         </ui:FloatField>
-                        <ui:Slider picking-mode="Ignore" value="42" high-value="100" name="Slider" style="background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;Art/Images/wavelength-spectrum&apos;); width: 267px; align-self: center; align-items: auto; height: 79px;" />
+                        <ui:Slider picking-mode="Ignore" value="42" high-value="1E+09" name="Slider" low-value="1E-15" style="background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;Art/Images/wavelength-spectrum&apos;); width: 267px; align-self: center; align-items: auto; height: 79px;" />
                     </ui:VisualElement>
                     <ui:VisualElement name="SpatialFreq" style="flex-grow: 1; height: auto;">
                         <ui:FloatField label="Frequency (f)" value="42.2" readonly="true" name="FloatField" is-delayed="false" style="align-items: center; justify-content: flex-start; width: 504px;">
