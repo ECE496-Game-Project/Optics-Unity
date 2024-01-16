@@ -103,8 +103,6 @@ namespace Panel {
         #endregion
 
         #region Runtime Update
-
-
         private void CleanSetter(string UIName) {
             ParameterInfoList list = paramInfoDict[UIName].List;
             foreach (var entry in list.SymbolQuickAccess) {
