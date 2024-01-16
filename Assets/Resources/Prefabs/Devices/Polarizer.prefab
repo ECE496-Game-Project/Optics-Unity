@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5409787213953694411}
   - component: {fileID: 7322507878371563533}
-  m_Layer: 0
+  - component: {fileID: 2679604782596750386}
+  m_Layer: 6
   m_Name: Polarizer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,6 +51,27 @@ MonoBehaviour:
   ThicknessOffset: 0.005
   RotDeg: 30
   AxisDiffDeg: 0
+--- !u!65 &2679604782596750386
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4096693397236163748}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 2, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &260413877666592973
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -128,14 +150,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: device_edge
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0587081033c09493589a2691f85d13b0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0587081033c09493589a2691f85d13b0,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5521313797350909209}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0587081033c09493589a2691f85d13b0, type: 3}
 --- !u!4 &294867542631735078 stripped
 Transform:
@@ -143,33 +166,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 260413877666592973}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1106835316434208156 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0587081033c09493589a2691f85d13b0,
-    type: 3}
-  m_PrefabInstance: {fileID: 260413877666592973}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &5521313797350909209
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1106835316434208156}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.021618037, y: 0.0019021143, z: 0.021618046}
-  m_Center: {x: 9.313226e-10, y: 2.9103836e-10, z: -0.0000000018626456}
 --- !u!1001 &2683069966187369569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -247,6 +243,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: device_lens
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2d6d3cb284f23449fa362b9e320adf07,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
