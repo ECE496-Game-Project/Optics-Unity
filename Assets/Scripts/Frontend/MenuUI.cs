@@ -8,13 +8,15 @@ using CommonUtils;
 
 public class MenuUI : MonoBehaviour
 {
-    [SerializeField] private enum pageName {
+    public enum PAGENAME {
         Home = 1,
         Free_Scene = 2,
         Tutorial = 3
     }
 
     public UIDocument doc;
+
+    public PAGENAME page_name = PAGENAME.Home;
 
     public void PreRegisterCallback(VisualElement root) {
         Button homeButton = root.Q<Button>(name: "home");
@@ -35,6 +37,33 @@ public class MenuUI : MonoBehaviour
     {
         VisualElement root = doc.rootVisualElement;
         PreRegisterCallback(root);
+
+        if(page_name == PAGENAME.Home) RenderHome();
+        else if(page_name == PAGENAME.Free_Scene) RenderFreeScene();
+        else if(page_name == PAGENAME.Tutorial) RenderTutorial();
     }
 
+    #region Home Page
+
+    public void RenderHome(){
+
+    }
+
+    #endregion
+
+    #region Free Scene Page
+
+    public void RenderFreeScene(){
+        
+    }
+
+    #endregion
+
+    #region Tutorial Page
+
+    public void RenderTutorial(){
+        
+    }
+
+    #endregion
 }
