@@ -24,7 +24,7 @@
                 <ui:VisualElement name="empty-space" style="flex-grow: 1; width: 70%;" />
                 <ui:TextField picking-mode="Ignore" label="Search" value="name" name="search" style="width: 30%; height: 70%; align-self: center; font-size: 25px; -unity-font-style: bold; -unity-text-align: middle-center;" />
             </ui:VisualElement>
-            <ui:ScrollView name="body" style="height: 95%;" />
+            <ui:ScrollView name="content" style="height: 95%; background-color: rgba(255, 255, 255, 0.39);" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
