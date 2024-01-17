@@ -15,11 +15,12 @@ namespace Panel {
 
         // ParameterTransfer as a ScriptableObject Combine with a UIDocument
         /* 
-         * 1. Initalize a ParameterInfoList using SO_ParamTransfer, List<ParameterInfoBase> => List<ParameterInfo>
+         * 1. Initalize a ParameterInfoList using SO_ParamTransfer, 
+         * List<ParameterInfoBase> => List<ParameterInfo>
          * (Cannot create List of ParamInfo<T> Directly because of General Type) 
+         * 2. Get this Root VisualElement from the UI Document
+         * 3. When GameObject Selected, find the corresponding UI and Register its Getter & Setter 
          */
-        /* 2. Get this Root VisualElement from the UI Document */
-        /* 3. When GameObject Selected, find the corresponding UI and Register its Getter & Setter */
         
         [Serializable] 
         public class UIPair {
@@ -43,12 +44,12 @@ namespace Panel {
                 Body = body;
             }
         }
-        /* For Runtime Information Propose */
+
+        /* For Runtime Information Purpose */
         private Dictionary<string, UIInfo> paramInfoDict = new Dictionary<string, UIInfo>();
 
-        // [TODO]: ExpandPanel
         private string selectedUI;
-        public float PANEL_WIDTH;
+        public int PANEL_WIDTH = 30;
         bool isPanelExpanded = false;
 
         #region Preprocess
@@ -78,13 +79,10 @@ namespace Panel {
 
         public void PreRegisterCallback(VisualElement root) {
             Button expButton = root.Q<Button>(name: "ExpandButton");
-            VisualElement _expand_panel = root.Q<Button>(name: "ExpandPanel");
             expButton.clicked += () => {
-                isPanelExpanded = !isPanelExpanded;
-                //_expand_panel.style.width = isPanelExpanded ? PANEL_WIDTH : 0f;
-                expButton.text = isPanelExpanded ? "<" : ">";
+                if(isPanelExpanded) CloseExpandPanel(root);
+                else OpenExpandPanel(root);
             };
-
         }
 
         private void Awake() {
@@ -96,8 +94,9 @@ namespace Panel {
 
                 paramInfoDict.Add(UI.name, new UIInfo(pil, UI.doc.gameObject, expandPanel, body));
 
+                CloseExpandPanel(root);
                 PreRegisterCallback(pil);
-                PreRegisterCallback(UI.doc.rootVisualElement);
+                PreRegisterCallback(root);
             }
         }
         #endregion
@@ -165,7 +164,8 @@ namespace Panel {
         }
 
         private void EnableUI(string UIName) {
-            //[TODO]: ExpandPanel, add the Expand Animation here to close current Panel, open selected Panel
+            // [TODO]: ExpandPanel 
+            // add the Expand Animation here to close current Panel, open selected Panel
             foreach (var UI in paramInfoDict) {
                 if (UI.Key == UIName) UI.Value.GOUI.SetActive(true);
                 else UI.Value.GOUI.SetActive(false);
@@ -181,8 +181,6 @@ namespace Panel {
         }
 
         public void SelectParamView(GameObject obj) {
-            
-            
             RootWaveSource rws = obj.GetComponent<RootWaveSource>();
             WaveSource ws = obj.GetComponent<WaveSource>();
             PolarizedDevice pd = obj.GetComponent<PolarizedDevice>();
@@ -197,9 +195,36 @@ namespace Panel {
             }
             else {
                 DebugLogger.Warning(this.name, "Parameter of this object not defined, do nothing.");
-                return;
             }
         }
+        #endregion
+
+        #region Panel Animation
+        public void CloseExpandPanel(VisualElement root){
+            VisualElement expPanel = root.Q<VisualElement>(name: "ExpandPanel");
+            VisualElement expBody = root.Q<VisualElement>(name: "Body");
+            Button expButton = root.Q<Button>(name: "ExpandButton");
+
+            expBody.style.display = DisplayStyle.None;
+            expPanel.style.width = PANEL_WIDTH;
+            expButton.text = ">";
+
+            isPanelExpanded = false;
+        }
+
+        public void OpenExpandPanel(VisualElement root){
+            VisualElement expPanel = root.Q<VisualElement>(name: "ExpandPanel");
+            VisualElement expBody = root.Q<VisualElement>(name: "Body");
+            Button expButton = root.Q<Button>(name: "ExpandButton");
+
+            Length width = new Length(PANEL_WIDTH, LengthUnit.Percent);
+            expPanel.style.width = new StyleLength(width);
+            expBody.style.display = DisplayStyle.Flex;
+            expButton.text = "<";
+
+            isPanelExpanded = true;
+        }
+        #endregion
     }
-    #endregion
+    
 }

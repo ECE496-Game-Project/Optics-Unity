@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement name="ExpandPanel" style="flex-grow: 1; max-height: 75%; height: 75%; width: 30%; max-width: 30%; flex-direction: row; align-self: auto; -unity-text-align: upper-left; background-color: rgba(255, 255, 255, 0.39); top: 4%;">
-        <ui:VisualElement name="Body" style="flex-grow: 1; width: 95%;">
+        <ui:VisualElement name="Body" style="flex-grow: 1; width: 95%; display: flex; visibility: visible;">
             <ui:VisualElement name="RootWaveName" style="flex-grow: 1; height: 10%; justify-content: center;">
                 <ui:TextField picking-mode="Ignore" value="Object Name" style="height: 100%; -unity-text-align: middle-left; align-self: auto; align-items: center;" />
             </ui:VisualElement>
