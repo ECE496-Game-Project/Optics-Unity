@@ -40,9 +40,16 @@ public class MenuUI : MonoBehaviour
         VisualElement root = doc.rootVisualElement;
         PreRegisterCallback(root);
 
-        if(page_name == PAGENAME.Home) RenderHome(root);
-        else if(page_name == PAGENAME.Free_Scene) RenderFreeScene(root);
-        else if(page_name == PAGENAME.Tutorial) RenderTutorial(root);
+        if(page_name == PAGENAME.Home){
+            RenderHome(root);
+        } 
+        else if(page_name == PAGENAME.Free_Scene){
+            RenderFreeScene(root);
+        } 
+        else if(page_name == PAGENAME.Tutorial){
+            RenderTutorial(root);
+            TutorialRegisterCallback(root);
+        } 
     }
 
     #endregion
@@ -86,6 +93,16 @@ public class MenuUI : MonoBehaviour
         {"Polarization", new List<string> {"Polarizer", "Waveplate"}}
     };
 
+    public void TutorialRegisterCallback(VisualElement root){
+
+    }
+
+    public void crsRegisterCallback(Button crs, string name){
+        crs.clicked += () => {
+            SceneManagementUtil.LoadScene(name);
+        };
+    }
+
     public void RenderTutorial(VisualElement root){
         VisualElement content = root.Q("content");
         if(content == null){
@@ -104,8 +121,7 @@ public class MenuUI : MonoBehaviour
         var courseButton = Resources.Load<VisualTreeAsset>("Art/Frontend/PageUI/TutorialPage/CourseButtonUI");
 
         foreach(var section in tutDict){
-            // header.Add(sectionButton.Instantiate());
-
+            // TODO: header.Add(sectionButton.Instantiate());
             VisualElement secUI = sectionUI.Instantiate();
             Label sectionName = secUI.Q<Label>("name");
             sectionName.text = section.Key;
@@ -114,13 +130,13 @@ public class MenuUI : MonoBehaviour
             VisualElement sectionContent = secUI.Q("sectionContent");
             
             foreach(var course in section.Value){
-                VisualElement crsButton = courseButton.Instantiate();
-                Label courseName = crsButton.Q<Label>("name");
+                VisualElement crs = courseButton.Instantiate();
+                Label courseName = crs.Q<Label>("Name");
                 courseName.text = course;
-                VisualElement courseThumbnail = crsButton.Q("Thumbnail");
-                courseThumbnail.style.backgroundImage = Resources.Load<Texture2D>($"Art/Images/Tutorial/{course}");
-                // TODO: Register event to load corresponding scene
-                sectionContent.Add(crsButton);
+                Button crsButton = crs.Q<Button>("Thumbnail");
+                crsButton.style.backgroundImage = Resources.Load<Texture2D>($"Art/Images/Tutorial/{course}");
+                crsRegisterCallback(crsButton, course);
+                sectionContent.Add(crs);
             }
          }
     }
