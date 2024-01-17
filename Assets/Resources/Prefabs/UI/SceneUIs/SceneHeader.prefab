@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8072188835514643495}
   - component: {fileID: 6156756806300948720}
+  - component: {fileID: 5258544498237766121}
   m_Layer: 5
   m_Name: SceneHeader
   m_TagString: Untagged
@@ -49,3 +50,16 @@ MonoBehaviour:
   sourceAsset: {fileID: 9197481963319205126, guid: a7130b574ad0845fbb2cffd54ffd4961,
     type: 3}
   m_SortingOrder: 0
+--- !u!114 &5258544498237766121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6663537540174448186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bfa3b8c2a2804bf39a9b28c534d7a6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doc: {fileID: 6156756806300948720}

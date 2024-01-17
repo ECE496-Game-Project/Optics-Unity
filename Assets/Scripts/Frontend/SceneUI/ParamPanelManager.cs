@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 using UnityEngine.UIElements;
+using UnityEngine.Assertions;
+
+using System;
+using System.Collections.Generic;
+
 using ParameterTransfer;
 using GO_Device;
 using GO_Wave;
 using CommonUtils;
 using Profiles;
-using System;
 using Interfaces;
-using UnityEngine.Assertions;
+
 
 namespace Panel {
     public class ParamPanelManager : MonoSingleton<ParamPanelManager> {
