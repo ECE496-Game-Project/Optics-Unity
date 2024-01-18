@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="ExpandPanel" style="flex-grow: 1; max-height: 75%; height: 75%; width: 30%; max-width: 30%; flex-direction: row; align-self: auto; -unity-text-align: upper-left; background-color: rgba(255, 255, 255, 0.39); top: 4%;">
-        <ui:VisualElement name="Body" style="flex-grow: 1; width: 95%;">
-            <ui:VisualElement name="Name" style="flex-grow: 1; height: 10%; justify-content: center;">
+    <ui:VisualElement name="ExpandPanel" style="flex-grow: 1; max-height: 75%; height: 75%; width: 30%; max-width: 30%; flex-direction: row; align-self: auto; -unity-text-align: upper-left; background-color: rgba(23, 74, 94, 0.59); top: 4%;">
+        <ui:VisualElement name="Body" style="flex-grow: 1; width: 95%; -unity-font-style: bold; color: rgb(255, 255, 255); -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(23, 74, 94);">
+            <ui:VisualElement name="Name" style="flex-grow: 1; height: 10%; justify-content: center; -unity-text-outline-width: 0; color: rgb(0, 0, 0); font-size: 20px;">
                 <ui:TextField picking-mode="Ignore" value="Object Name" style="height: 100%; -unity-text-align: middle-left; align-self: auto; align-items: center;" />
             </ui:VisualElement>
             <ui:VisualElement name="Parameter" style="flex-grow: 1; height: 90%; display: flex;">
@@ -59,7 +59,7 @@
                         <ui:FloatField label="Period (lambda)" value="42.2" readonly="true" name="FloatField" is-delayed="false" style="align-self: auto; align-items: center; width: 245px;">
                             <ui:Label tabindex="-1" text="nm" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                         </ui:FloatField>
-                        <ui:Slider picking-mode="Ignore" value="42" high-value="100" name="Slider" style="background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;Art/Images/wavelength-spectrum&apos;); width: 267px; align-self: center; align-items: auto; height: 79px;" />
+                        <ui:Slider picking-mode="Ignore" value="42" high-value="1E+09" name="Slider" low-value="1E-15" style="background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;Art/Images/wavelength-spectrum&apos;); width: 267px; align-self: center; align-items: auto; height: 79px;" />
                     </ui:VisualElement>
                     <ui:VisualElement name="SpatialFreq" style="flex-grow: 1; height: auto;">
                         <ui:FloatField label="Frequency (f)" value="42.2" readonly="true" name="FloatField" is-delayed="false" style="align-items: center; justify-content: flex-start; width: 504px;">
@@ -72,8 +72,8 @@
                         </ui:FloatField>
                     </ui:VisualElement>
                 </ui:Foldout>
-                <ui:VisualElement name="Phi" style="flex-grow: 1; flex-direction: row; height: 5%;">
-                    <ui:FloatField label="Initial Phase (Phi)" value="42" name="FloatField" readonly="true" style="width: 252px; align-items: center; justify-content: flex-start;">
+                <ui:VisualElement name="Phi" style="flex-grow: 1; flex-direction: row; height: 6%;">
+                    <ui:FloatField label="Initial Phase (Phi)" value="42" name="FloatField" readonly="true" style="width: 252px; align-items: center; justify-content: flex-start; -unity-font-style: bold;">
                         <ui:Label tabindex="-1" text="°" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                     </ui:FloatField>
                     <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
@@ -82,8 +82,8 @@
                         <ui:Label tabindex="-1" text="360°" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Max" enable-rich-text="false" style="align-self: center;" />
                     </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:VisualElement name="N" style="flex-grow: 1; flex-direction: row; height: 5%;">
-                    <ui:FloatField label="Refractive Index (n)" value="1" name="FloatField" readonly="true" style="width: 282px; align-items: center;">
+                <ui:VisualElement name="N" style="flex-grow: 1; flex-direction: row; height: 6%;">
+                    <ui:FloatField label="Refractive Index (n)" value="1" name="FloatField" readonly="true" style="width: 282px; align-items: center; -unity-font-style: bold;">
                         <ui:Label tabindex="-1" text="const" parse-escape-sequences="true" display-tooltip-when-elided="true" />
                     </ui:FloatField>
                     <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
@@ -92,11 +92,11 @@
                         <ui:Label tabindex="-1" text="5" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Max" focusable="true" enable-rich-text="false" style="flex-wrap: nowrap; align-self: center;" />
                     </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:VisualElement name="EmptySpace" style="flex-grow: 1; height: 20%;" />
+                <ui:VisualElement name="EmptySpace" style="flex-grow: 1; height: 15%;" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="SideBar" style="flex-grow: 1; width: 5%;">
-            <ui:Button text="&lt;" parse-escape-sequences="false" display-tooltip-when-elided="true" name="ExpandButton" style="width: 30px; max-width: 30px; max-height: 30px; height: 30px; align-items: center; align-self: center;" />
+            <ui:Button text="&lt;" parse-escape-sequences="false" display-tooltip-when-elided="true" name="ExpandButton" style="width: 30px; max-width: 30px; max-height: 30px; height: 30px; align-items: center; align-self: center; background-color: rgb(241, 170, 87); -unity-font-style: bold; color: rgb(255, 255, 255); font-size: 15px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Demo/Menu/Home.unity
     guid: db0e984323b724510adf3060ac329d89
   - enabled: 1
+    path: Assets/Scenes/Demo/Menu/FreeScene.unity
+    guid: aa35a577ea33b4b9592b60ef58f7a4a3
+  - enabled: 1
+    path: Assets/Scenes/Demo/Menu/Tutorial.unity
+    guid: 452eebaf14b704e6b875574da95c2435
+  - enabled: 1
     path: Assets/Scenes/Demo/Scenes/Polarizer.unity
     guid: 9921e8f6f7d11a446a684ebdea345181
   - enabled: 1
