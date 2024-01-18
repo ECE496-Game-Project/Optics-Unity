@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="Header" style="flex-grow: 1; max-height: 30px; height: 30px; flex-direction: row; background-color: rgb(74, 195, 191);">
-        <ui:Button text="&lt;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="EscButton" style="background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0);" />
+    <ui:VisualElement name="Header" style="flex-grow: 1; max-height: 30px; height: 30px; flex-direction: row; background-color: rgba(23, 74, 94, 0.59);">
+        <ui:Button text="&lt;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="EscButton" style="background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); font-size: 15px; color: rgb(255, 255, 255); -unity-font-style: bold;" />
         <ui:VisualElement name="EmptySpace" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
-        <ui:Label tabindex="-1" text="Scene Name" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" name="Title" style="-unity-font-style: bold; font-size: 20px;" />
+        <ui:Label tabindex="-1" text="Scene Name" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" name="Title" style="-unity-font-style: bold; font-size: 20px; color: rgb(255, 255, 255);" />
     </ui:VisualElement>
 </ui:UXML>
