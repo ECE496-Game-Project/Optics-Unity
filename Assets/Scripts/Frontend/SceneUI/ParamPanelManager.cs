@@ -31,18 +31,18 @@ namespace Panel {
             public SO_ParamTransfer paramTrans;
             public UIDocument doc;
         }
-        /* For Inspector Registration Propose */
-        public List<UIPair> UIInfoTransfer;
+        
+        public List<UIPair> UIInfoTransfer; // For Inspector Registration Purpose
 
         public class UIInfo {
             public ParameterInfoList List;
-            public GameObject GOUI;
+            public GameObject UIGameObj;
             public VisualElement ExpandPanel;
             public VisualElement Body;
 
-            public UIInfo(ParameterInfoList list, GameObject goui, VisualElement expPanel, VisualElement body) {
+            public UIInfo(ParameterInfoList list, GameObject UIGameObj, VisualElement expPanel, VisualElement body) {
                 List = list;
-                GOUI = goui;
+                UIGameObj = UIGameObj;
                 ExpandPanel = expPanel;
                 Body = body;
             }
@@ -166,13 +166,17 @@ namespace Panel {
             }
         }
 
-        private void EnableUI(string UIName) {
+        private void EnableParamUI(string UIName) {
             // [TODO]: ExpandPanel 
             // add the Expand Animation here to close current Panel, open selected Panel
             foreach (var UI in paramInfoDict) {
-                if (UI.Key == UIName) UI.Value.GOUI.SetActive(true);
-                else UI.Value.GOUI.SetActive(false);
+                if (UI.Key == UIName) UI.Value.UIGameObj.SetActive(true);
+                else UI.Value.UIGameObj.SetActive(false);
             }
+        }
+
+        private void DisableParamUI() {
+            
         }
 
         private void UISetupPipeline(I_ParameterTransfer pt, string UIName) {
@@ -180,7 +184,7 @@ namespace Panel {
             pt.RegisterParametersCallback(paramInfoDict[UIName].List);
             RegisterSetter(UIName);
             CallGetter(UIName);
-            EnableUI(UIName);
+            EnableParamUI(UIName);
         }
 
         public void SelectParamView(GameObject obj) {
@@ -200,9 +204,7 @@ namespace Panel {
                 DebugLogger.Warning(this.name, "Parameter of this object not defined, do nothing.");
             }
         }
-        #endregion
 
-        #region Panel Animation
         public void CloseExpandPanel(VisualElement root){
             VisualElement expPanel = root.Q<VisualElement>(name: "ExpandPanel");
             VisualElement expBody = root.Q<VisualElement>(name: "Body");

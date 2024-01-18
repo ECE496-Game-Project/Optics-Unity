@@ -2,10 +2,10 @@
     <ui:VisualElement name="ExpandPanel" style="flex-grow: 1; max-height: 75%; height: 75%; width: 30%; max-width: 30%; flex-direction: row; align-self: auto; -unity-text-align: upper-left; background-color: rgba(23, 74, 94, 0.59); top: 4%;">
         <ui:VisualElement name="Body" style="flex-grow: 1; width: 95%;">
             <ui:VisualElement name="Name" style="flex-grow: 1; height: 10%; -unity-font-style: bold; font-size: 20px;">
-                <ui:TextField picking-mode="Ignore" value="Object Name" style="height: 100%; align-self: auto; align-items: center;" />
+                <ui:TextField picking-mode="Ignore" value="Object Name" style="height: 100%; align-self: auto; align-items: center; width: 70%;" />
             </ui:VisualElement>
             <ui:VisualElement name="Parameter" style="flex-grow: 1; display: flex; height: 90%;">
-                <ui:VisualElement name="DeviceType" style="flex-grow: 1; height: 10%; color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 15px;">
+                <ui:VisualElement name="DeviceType" style="flex-grow: 1; height: 10%; color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 15px; width: 70%;">
                     <ui:EnumField label="Device Type" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" value="Center" include-obsolete-values="false" />
                 </ui:VisualElement>
                 <ui:VisualElement name="RotDeg" style="flex-grow: 1; flex-direction: row; height: 20%; font-size: 15px; -unity-font-style: bold; color: rgb(255, 255, 255); -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(23, 74, 94);">

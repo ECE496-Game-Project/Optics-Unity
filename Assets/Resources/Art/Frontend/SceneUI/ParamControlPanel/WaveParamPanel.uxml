@@ -2,7 +2,7 @@
     <ui:VisualElement name="ExpandPanel" style="flex-grow: 1; max-height: 75%; height: 75%; width: 30%; max-width: 30%; flex-direction: row; align-self: auto; -unity-text-align: upper-left; background-color: rgba(23, 74, 94, 0.59); top: 4%;">
         <ui:VisualElement name="Body" style="flex-grow: 1; width: 95%; display: flex; visibility: visible;">
             <ui:VisualElement name="RootWaveName" style="flex-grow: 1; height: 10%; justify-content: center;">
-                <ui:TextField picking-mode="Ignore" value="Object Name" style="height: 100%; -unity-text-align: middle-left; align-self: auto; align-items: center; -unity-font-style: bold; font-size: 15px;" />
+                <ui:TextField picking-mode="Ignore" value="Object Name" style="height: 100%; -unity-text-align: middle-left; align-self: auto; align-items: center; -unity-font-style: bold; font-size: 20px; width: 70%;" />
             </ui:VisualElement>
             <ui:VisualElement name="Parameter" style="flex-grow: 1; height: 90%; display: flex; -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(23, 74, 94);">
                 <ui:Foldout text="Amplitude" name="Amplitude" style="height: 20%; color: rgb(255, 255, 255); -unity-font-style: bold;">
@@ -39,17 +39,17 @@
                 </ui:Foldout>
                 <ui:Foldout text="Temperal Properties" name="Temperal" style="height: 20%; color: rgb(255, 255, 255); -unity-font-style: bold;">
                     <ui:VisualElement name="TemperalPeriod" style="flex-grow: 1;">
-                        <ui:FloatField label="Period (T)" value="42.2" readonly="true" name="FloatField" style="align-items: center; width: 494px;">
+                        <ui:FloatField label="Period (T)" value="42.2" readonly="true" name="FloatField" style="align-items: center; width: 70%;">
                             <ui:Label tabindex="-1" text="fs" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                         </ui:FloatField>
                     </ui:VisualElement>
                     <ui:VisualElement name="TemperalFreq" style="flex-grow: 1;">
-                        <ui:FloatField label="Frequency (mu)" value="42.2" readonly="false" name="FloatField" style="align-items: center; width: 508px;">
+                        <ui:FloatField label="Frequency (mu)" value="42.2" readonly="false" name="FloatField" style="align-items: center; width: 70%;">
                             <ui:Label tabindex="-1" text="THz" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                         </ui:FloatField>
                     </ui:VisualElement>
                     <ui:VisualElement name="TemperalAngularFreq" style="flex-grow: 1;">
-                        <ui:FloatField label="Angular Frequency (w)" value="42.2" readonly="true" name="FloatField" style="align-items: center;">
+                        <ui:FloatField label="Angular Frequency (w)" value="42.2" readonly="true" name="FloatField" style="align-items: center; width: 70%;">
                             <ui:Label tabindex="-1" text="rad/fs" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="true" />
                         </ui:FloatField>
                     </ui:VisualElement>
@@ -62,12 +62,12 @@
                         <ui:Slider picking-mode="Ignore" value="42" high-value="1E+09" name="Slider" low-value="1E-15" style="background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;Art/Images/wavelength-spectrum&apos;); width: 267px; align-self: center; align-items: auto; height: 79px;" />
                     </ui:VisualElement>
                     <ui:VisualElement name="SpatialFreq" style="flex-grow: 1; height: auto;">
-                        <ui:FloatField label="Frequency (f)" value="42.2" readonly="true" name="FloatField" is-delayed="false" style="align-items: center; justify-content: flex-start; width: 504px;">
+                        <ui:FloatField label="Frequency (f)" value="42.2" readonly="true" name="FloatField" is-delayed="false" style="align-items: center; justify-content: flex-start; width: 70%;">
                             <ui:Label tabindex="-1" text="1/nm" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                         </ui:FloatField>
                     </ui:VisualElement>
                     <ui:VisualElement name="SpatialAngularFreq" style="flex-grow: 1; height: auto; width: 529px;">
-                        <ui:FloatField label="Angular Frequency (k) " value="42.2" readonly="true" name="FloatField" is-delayed="false" style="justify-content: flex-start; align-items: center; align-self: auto;">
+                        <ui:FloatField label="Angular Frequency (k) " value="42.2" readonly="true" name="FloatField" is-delayed="false" style="justify-content: flex-start; align-items: center; align-self: auto; width: 70%;">
                             <ui:Label tabindex="-1" text="rad/nm" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                         </ui:FloatField>
                     </ui:VisualElement>
