@@ -40,9 +40,9 @@ namespace Panel {
             public VisualElement ExpandPanel;
             public VisualElement Body;
 
-            public UIInfo(ParameterInfoList list, GameObject UIGameObj, VisualElement expPanel, VisualElement body) {
+            public UIInfo(ParameterInfoList list, GameObject UIGObj, VisualElement expPanel, VisualElement body) {
                 List = list;
-                UIGameObj = UIGameObj;
+                UIGameObj = UIGObj;
                 ExpandPanel = expPanel;
                 Body = body;
             }
@@ -231,5 +231,4 @@ namespace Panel {
         }
         #endregion
     }
-    
 }
