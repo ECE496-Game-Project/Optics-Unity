@@ -5,14 +5,18 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 using CommonUtils;
+using Profiles;
 
 public class SceneHeaderUI : MonoBehaviour
 {
     public UIDocument doc;
+    public SO_GameInfo gameInfo;
+
     public void PreRegisterCallback(VisualElement root) {
         Button escButton = root.Q<Button>(name: "EscButton");
         escButton.clicked += () => {
-            SceneManagementUtil.LoadScene("Tutorial");
+            gameInfo.currPage = SO_GameInfo.PAGENAME.Tutorial;
+            SceneManagementUtil.LoadScene("Menu");
         };
     }
 

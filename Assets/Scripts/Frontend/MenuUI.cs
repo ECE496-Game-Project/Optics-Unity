@@ -5,33 +5,31 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 using CommonUtils;
+using Profiles;
 
 public class MenuUI : MonoBehaviour
 {
     #region Common Page
 
-    public enum PAGENAME {
-        Home = 1,
-        Free_Scene = 2,
-        Tutorial = 3
-    }
-
     public UIDocument doc;
 
-    public PAGENAME page_name = PAGENAME.Home;
+    public SO_GameInfo gameInfo;
 
     public void PreRegisterCallback(VisualElement root) {
         Button homeButton = root.Q<Button>(name: "home");
         homeButton.clicked += () => {
-            SceneManagementUtil.LoadScene("Home");
+            gameInfo.currPage = SO_GameInfo.PAGENAME.Home;
+            RenderPage(root);
         };
         Button sceneButton = root.Q<Button>(name: "free-scenes");
         sceneButton.clicked += () => {
-            SceneManagementUtil.LoadScene("FreeScene");
+            gameInfo.currPage = SO_GameInfo.PAGENAME.Free_Scene;
+            RenderPage(root);
         };
         Button tutButton = root.Q<Button>(name: "tutorial");
         tutButton.clicked += () => {
-            SceneManagementUtil.LoadScene("Tutorial");
+            gameInfo.currPage = SO_GameInfo.PAGENAME.Tutorial;
+            RenderPage(root);
         };
     }
     
@@ -39,17 +37,33 @@ public class MenuUI : MonoBehaviour
     {
         VisualElement root = doc.rootVisualElement;
         PreRegisterCallback(root);
+        RenderPage(root);
+    }
 
-        if(page_name == PAGENAME.Home){
+    #endregion
+
+    #region Page Switch
+
+    void ClearContent(VisualElement root){
+        VisualElement content = root.Q("content");
+        content.Clear();
+    }
+
+    void RenderContent(VisualElement root){
+        if(gameInfo.currPage == SO_GameInfo.PAGENAME.Home){
             RenderHome(root);
         } 
-        else if(page_name == PAGENAME.Free_Scene){
+        else if(gameInfo.currPage == SO_GameInfo.PAGENAME.Free_Scene){
             RenderFreeScene(root);
         } 
-        else if(page_name == PAGENAME.Tutorial){
+        else if(gameInfo.currPage == SO_GameInfo.PAGENAME.Tutorial){
             RenderTutorial(root);
-            TutorialRegisterCallback(root);
         } 
+    }
+
+    void RenderPage(VisualElement root){
+        ClearContent(root);
+        RenderContent(root);
     }
 
     #endregion
@@ -92,10 +106,6 @@ public class MenuUI : MonoBehaviour
         {"Wave", new List<string> {"Basics"}},
         {"Polarization", new List<string> {"Polarizer", "Waveplate"}}
     };
-
-    public void TutorialRegisterCallback(VisualElement root){
-
-    }
 
     public void crsRegisterCallback(Button crs, string name){
         crs.clicked += () => {

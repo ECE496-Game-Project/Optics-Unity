@@ -1179,6 +1179,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ParamPanelManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4928851785155556720, guid: f631ce02cc07042d18db5e012495c7eb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6890741125703157423, guid: f631ce02cc07042d18db5e012495c7eb,
         type: 3}
       propertyPath: m_Pivot.x

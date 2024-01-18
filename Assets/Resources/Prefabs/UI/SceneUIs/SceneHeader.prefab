@@ -63,3 +63,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doc: {fileID: 6156756806300948720}
+  gameInfo: {fileID: 11400000, guid: ac076236c0c704e399b78addc7c112fc, type: 2}
