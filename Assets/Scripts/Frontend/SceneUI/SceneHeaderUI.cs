@@ -11,11 +11,12 @@ public class SceneHeaderUI : MonoBehaviour
 {
     public UIDocument doc;
     public SO_GameInfo gameInfo;
+    public SO_GameInfo.PAGENAME escPage = SO_GameInfo.PAGENAME.Tutorial;
 
     public void PreRegisterCallback(VisualElement root) {
         Button escButton = root.Q<Button>(name: "EscButton");
         escButton.clicked += () => {
-            gameInfo.currPage = SO_GameInfo.PAGENAME.Tutorial;
+            gameInfo.currPage = escPage;
             SceneManagementUtil.LoadScene("Menu");
         };
     }
