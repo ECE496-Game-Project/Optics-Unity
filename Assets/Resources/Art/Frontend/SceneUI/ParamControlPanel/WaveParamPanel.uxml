@@ -72,7 +72,7 @@
                         </ui:FloatField>
                     </ui:VisualElement>
                 </ui:Foldout>
-                <ui:VisualElement name="Phi" style="flex-grow: 1; flex-direction: row; height: 5%; color: rgb(255, 255, 255); -unity-font-style: bold;">
+                <ui:VisualElement name="Phi" style="flex-grow: 1; flex-direction: row; height: 6%; color: rgb(255, 255, 255); -unity-font-style: bold;">
                     <ui:FloatField label="Initial Phase (Phi)" value="42" name="FloatField" style="width: 252px; align-items: center; justify-content: flex-start;">
                         <ui:Label tabindex="-1" text="°" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                     </ui:FloatField>
@@ -82,7 +82,7 @@
                         <ui:Label tabindex="-1" text="360°" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Max" enable-rich-text="false" style="align-self: center;" />
                     </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:VisualElement name="N" style="flex-grow: 1; flex-direction: row; height: 5%; color: rgb(255, 255, 255); -unity-font-style: bold;">
+                <ui:VisualElement name="N" style="flex-grow: 1; flex-direction: row; height: 6%; color: rgb(255, 255, 255); -unity-font-style: bold;">
                     <ui:FloatField label="Refractive Index (n)" value="1" name="FloatField" style="width: 282px; align-items: center;">
                         <ui:Label tabindex="-1" text="const" parse-escape-sequences="true" display-tooltip-when-elided="true" />
                     </ui:FloatField>
@@ -92,7 +92,7 @@
                         <ui:Label tabindex="-1" text="5" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Max" focusable="true" enable-rich-text="false" style="flex-wrap: nowrap; align-self: center;" />
                     </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:VisualElement name="EmptySpace" style="flex-grow: 1; height: 20%;" />
+                <ui:VisualElement name="EmptySpace" style="flex-grow: 1; height: 15%;" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="SideBar" style="flex-grow: 1; width: 5%;">
