@@ -30,31 +30,31 @@ namespace CommonUtils
 
         public static void CreateScene(){
             // The name of the new scene
-            string sceneName = "MyCustomScene";
+            // string sceneName = "MyCustomScene";
 
             // The path to the template scene
-            string templateScenePath = "Assets/Scenes/Demo/FreeScenes/Template.unity";
+            // string templateScenePath = "Assets/Scenes/Demo/FreeScenes/Template.unity";
 
             // Create a new scene
-            Scene newScene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            // Scene newScene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
             // Load the template scene
-            EditorSceneManager.OpenScene(templateScenePath, OpenSceneMode.Additive);
+            // EditorSceneManager.OpenScene(templateScenePath, OpenSceneMode.Additive);
 
             // Save the new scene with the desired name
-            string newScenePath = "Assets/Scenes/Demo/FreeScenes/" + sceneName + ".unity";
-            EditorSceneManager.SaveScene(newScene, newScenePath);
+            // string newScenePath = "Assets/Scenes/Demo/FreeScenes/" + sceneName + ".unity";
+            // EditorSceneManager.SaveScene(newScene, newScenePath);
 
             // Close the template scene
-            EditorSceneManager.CloseScene(EditorSceneManager.GetSceneByPath(templateScenePath), true);
+            // EditorSceneManager.CloseScene(EditorSceneManager.GetSceneByPath(templateScenePath), true);
 
             // Add the new scene to the build settings
-            int newSceneIndex = EditorBuildSettings.scenes.Length;
-            ArrayUtility.Add(ref EditorBuildSettings.scenes, new EditorBuildSettingsScene(newScenePath, true));
+            // int newSceneIndex = EditorBuildSettings.scenes.Length;
+            // ArrayUtility.Add(ref EditorBuildSettings.scenes, new EditorBuildSettingsScene(newScenePath, true));
 
             // Save the changes to the build settings
-            EditorBuildSettings.scenes[newSceneIndex].enabled = true;
-            EditorSceneManager.SaveOpenScenes();
+            // EditorBuildSettings.scenes[newSceneIndex].enabled = true;
+            // EditorSceneManager.SaveOpenScenes();
         }
 
         public static void DeleteScene(){
