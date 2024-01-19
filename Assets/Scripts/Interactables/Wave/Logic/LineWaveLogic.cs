@@ -27,6 +27,7 @@ namespace GO_Wave {
             if(m_activeWS==null)Debug.Break();
             float effDistance = m_activeWS.Params.RODistance;
             RaycastHit hit;
+            
             if (
                 Physics.Raycast(transform.position, transform.forward, out hit, effDistance, _interactMask)
                 && ((1 << hit.collider.gameObject.layer) & _interactMask) != 0

@@ -1,0 +1,61 @@
+@import "CommonStyle.uss";
+
+.container {
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: var(--border-color);
+    padding: 1px;
+    margin: 1px;
+    background-color: var(--background-color);
+}
+
+.title{
+    font-size: 20px;
+    color: var(--title-color);
+}
+
+/* Type Selectors */
+Label{
+    font-size: 14px;
+}
+
+TextElement{
+    font-size: 14px;
+}
+
+/* Level 1 */
+.root{
+    position: absolute;
+    top: 0.5%;
+    bottom: 0.5%;
+    flex-direction: row;
+}
+
+.expand-panel {
+    width: 0;
+    transition: width 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.button {
+    width: 30px;
+    height: 30px;
+    background-color: orange;
+    border-width: var(--border-width);
+    border-color: white;
+    transition: 0.25s all;
+    color: white;
+    -unity-font-style: bold;
+}
+
+.button:hover {
+    background-color: #ff8c00;
+    border-radius: 10px;
+    scale: 1.1;
+}
+
+.button:active {
+    /* Active State (when clicked) */
+    background-color: #004085; /* Even darker color */
+    /* Smaller shadow effect might need to be handled programmatically in Unity */
+}

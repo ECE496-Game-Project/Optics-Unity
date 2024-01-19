@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="ExpandPanel" style="flex-grow: 1; height: 20%; max-height: 20%; top: 80%; background-color: rgba(23, 74, 94, 0.59); flex-direction: column;">
+        <ui:VisualElement name="SideBar" style="flex-grow: 1; width: auto; height: 15%;">
+            <ui:Button text="&gt;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ExpandButton" style="width: 30px; height: 30px; font-size: 15px; -unity-font-style: bold; background-color: rgb(241, 170, 87); color: rgb(255, 255, 255);" />
+        </ui:VisualElement>
+        <ui:ScrollView name="Body" style="height: 85%; display: flex;" />
+    </ui:VisualElement>
+</ui:UXML>

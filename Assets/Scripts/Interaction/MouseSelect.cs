@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
+using Interfaces;
+using Panel;
+using UnityEngine.UIElements;
+using System.Linq;
 
 public class MouseSelect : MonoBehaviour
 {
@@ -12,6 +16,9 @@ public class MouseSelect : MonoBehaviour
     private GameObject m_highlight, m_select;
 
     private bool m_selectChangeOn = true;
+
+    /* Check if MouseClick on UI */
+    private List<VisualElement> m_expandPanels = new List<VisualElement>();
 
     public void TurnOn()
     {
@@ -31,6 +38,11 @@ public class MouseSelect : MonoBehaviour
     {
         m_playerInput.actions["MouseClicked"].performed += OnMouseClicked;
         m_playerInput.actions["MouseMovement"].performed += onMouseMoved;
+
+        //[TOOD]: UI Click Preparation
+        foreach (var uidoc in FindObjectsOfType<UIDocument>()) {
+            m_expandPanels.Add(uidoc.rootVisualElement.Q("ExpandPanel"));
+        }
     }
 
     private void onMouseMoved(InputAction.CallbackContext context)
@@ -100,6 +112,19 @@ public class MouseSelect : MonoBehaviour
 
         RaycastHit hit;
 
+        //// [TODO]: Check if Mouse Click UI
+        //foreach (VisualElement expP in m_expandPanels) {
+        //    VisualElement elementUnderMouse = expP.panel.Pick(Mouse.current.position.ReadValue());
+
+        //    if (elementUnderMouse != null) {
+        //        // Handle the click for the element
+        //        Debug.Log("Clicked on element: " + elementUnderMouse.name);
+        //        // Further processing...
+
+        //        return;
+        //    }
+        //}
+
         // if mouse is not on anything
         if (!Physics.Raycast(ray, out hit))
         {
@@ -109,16 +134,19 @@ public class MouseSelect : MonoBehaviour
         GameObject go = hit.collider.gameObject;
 
         ISelectable clickable = go.GetComponent<ISelectable>();
-        if (clickable == null)
+        if (clickable != null)
         {
-            return;
+            OutlineManager.Instance.Highlight(go);
+            m_highlight = go;
+            m_select = go;
+
+            clickable.OnMouseSelect();
         }
 
-        OutlineManager.Instance.Highlight(go);
-        m_highlight = go;
-        m_select = go;
-
-        clickable.OnMouseSelect();
-
+        // Announce ParamManager to show the corresponding panel
+        I_ParameterTransfer paramUI = go.GetComponent<I_ParameterTransfer>();
+        if (paramUI != null) {
+            ParamPanelManager.Instance.SelectParamView(go);
+        }
     }
 }
