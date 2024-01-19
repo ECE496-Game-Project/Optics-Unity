@@ -1,11 +1,8 @@
-using Panel;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.InputSystem;
 using Interfaces;
-using Panel;
 
-public class MouseSelect : MonoBehaviour
+public class SelectionController
 {
     private GameObject m_highlight, m_select;
 
@@ -124,7 +121,5 @@ public class MouseSelect : MonoBehaviour
 
         OutlineManager.Instance.Highlight(go);
         m_highlight = go;
-
-        ParamControlPanel.Instance.SelectParamView(go);
     }
 }

@@ -4,6 +4,7 @@ using CommonUtils;
 using WaveUtils;
 using Interfaces;
 using ObjectPool;
+using UnityEditor.PackageManager.UI;
 
 namespace GO_Wave {
     public class LineWaveRender : MonoBehaviour, I_WaveRender {
@@ -42,6 +43,7 @@ namespace GO_Wave {
             int diff = m_SampleCount - _samplePointList.Count;
             while (diff > 0) {
                 LineWaveSample sample = LineWaveSamplePool.Instance.Pool.Get();
+                
                 sample.transform.rotation = Quaternion.LookRotation(this.transform.forward, this.transform.up);
                 sample.transform.parent = this.transform;
                 _samplePointList.Push(sample);
