@@ -28,6 +28,11 @@ namespace CommonUtils
             }
         }
 
+        public static string GetCurrSceneName(){
+            string currSceneName = SceneManager.GetActiveScene().name;
+            return currSceneName;
+        }
+
         public static void CreateScene(){
             // The name of the new scene
             // string sceneName = "MyCustomScene";

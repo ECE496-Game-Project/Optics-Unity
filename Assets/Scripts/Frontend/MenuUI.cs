@@ -113,6 +113,18 @@ public class MenuUI : MonoBehaviour
         };
     }
 
+    public void secRegisterCallback(Button sec, VisualElement content){
+        sec.clicked += () => {
+            if(content.style.display == DisplayStyle.Flex){
+                content.style.display = DisplayStyle.None;
+                sec.text = "<";
+            }else{
+                content.style.display = DisplayStyle.Flex;
+                sec.text = ">";
+            }
+        };
+    }
+
     public void RenderTutorial(VisualElement root){
         VisualElement content = root.Q("content");
         if(content == null){
@@ -137,7 +149,9 @@ public class MenuUI : MonoBehaviour
             sectionName.text = section.Key;
             content.Add(secUI);
 
+            Button sectionToggle = secUI.Q<Button>("toggleButton");
             VisualElement sectionContent = secUI.Q("sectionContent");
+            secRegisterCallback(sectionToggle, sectionContent);
             
             foreach(var course in section.Value){
                 VisualElement crs = courseButton.Instantiate();
@@ -148,7 +162,7 @@ public class MenuUI : MonoBehaviour
                 crsRegisterCallback(crsButton, course);
                 sectionContent.Add(crs);
             }
-         }
+        }
     }
 
     #endregion

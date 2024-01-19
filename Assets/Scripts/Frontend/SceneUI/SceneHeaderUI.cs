@@ -13,7 +13,7 @@ public class SceneHeaderUI : MonoBehaviour
     public SO_GameInfo gameInfo;
     public SO_GameInfo.PAGENAME escPage = SO_GameInfo.PAGENAME.Tutorial;
 
-    public void PreRegisterCallback(VisualElement root) {
+    private void PreRegisterCallback(VisualElement root) {
         Button escButton = root.Q<Button>(name: "EscButton");
         escButton.clicked += () => {
             gameInfo.currPage = escPage;
@@ -21,9 +21,15 @@ public class SceneHeaderUI : MonoBehaviour
         };
     }
 
+    private void RenderHeader(VisualElement root){
+        Label title = root.Q<Label>(name: "Title");
+        title.text = SceneManagementUtil.GetCurrSceneName();
+    }
+
     void Awake()
     {
         VisualElement root = doc.rootVisualElement;
+        RenderHeader(root);
         PreRegisterCallback(root);
     }
 }
