@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.Assertions;
 
 using System;
 using System.Collections.Generic;
@@ -27,11 +26,14 @@ namespace Panel {
 
         // Parameter UI Container
         public UIDocument doc;
-        public VisualElement Body;
+        private VisualElement Body;
+        private VisualElement ExpandPanel;
+        private Button ExpandButton;
 
         [Serializable] 
         public class UIPair {
-            public string name;
+            [Tooltip("nameOfGO must be same as the GameObject that have a Parameter UI")]
+            public string nameOfGO;
             public SO_ParamTransfer paramTrans;
             public VisualTreeAsset paramUIAsset;
         }
@@ -40,16 +42,16 @@ namespace Panel {
 
         public class UIInfo {
             public ParameterInfoList List;
-            public VisualTreeAsset ParamUIAsset;
+            public VisualElement VEOfGO;
 
-            public UIInfo(ParameterInfoList list, VisualTreeAsset paramUIAsset) {
+            public UIInfo(ParameterInfoList list, VisualElement paramOfGO) {
                 List = list;
-                ParamUIAsset = paramUIAsset;
+                VEOfGO = paramOfGO;
             }
         }
 
         /* For Runtime Information Purpose */
-        private Dictionary<string, UIInfo> paramInfoDict = new Dictionary<string, UIInfo>();
+        private Dictionary<string, UIInfo> m_paramInfoDict = new Dictionary<string, UIInfo>();
 
         private string selectedUI;
         public int PANEL_WIDTH = 30;
@@ -83,19 +85,39 @@ namespace Panel {
         public void PreRegisterCallback(VisualElement root) {
             Button expButton = root.Q<Button>(name: "ExpandButton");
             expButton.clicked += () => {
-                if(isPanelExpanded) CloseExpandPanel(root);
-                else OpenExpandPanel(root);
+                if(isPanelExpanded) CloseExpandPanel();
+                else OpenExpandPanel();
             };
         }
 
         private void Awake() {
+            Body = doc.rootVisualElement.Q("Body");
+            ExpandPanel = doc.rootVisualElement.Q("ExpandPanel");
+            ExpandButton = doc.rootVisualElement.Q<Button>("ExpandButton");
+            
             foreach (var UIInfo in UIInfoTransfer) {
-                VisualElement root = UIInfo.doc.rootVisualElement;
+                VisualElement Container = UIInfo.paramUIAsset.Instantiate();
+                Container.name = UIInfo.nameOfGO;
+                Body.Add(Container);
+                Container.style.height = new StyleLength(new Length(100, LengthUnit.Percent));
+
+                // Manually Set ParamContainer's Display to None
+                Container.style.display = DisplayStyle.None;
+            }
+            
+            CloseExpandPanel();
+        }
+
+        private void Start() {
+            // PreRegistration
+            foreach (var UIInfo in UIInfoTransfer) {
+                var root = doc.rootVisualElement;
+                var paramOfGO = root.Q(UIInfo.nameOfGO);
+
                 ParameterInfoList pil = new ParameterInfoList(UIInfo.paramTrans.List, root);
 
-                paramInfoDict.Add(UIInfo.name, new UIInfo(pil, UIInfo.paramUIAsset));
+                m_paramInfoDict.Add(UIInfo.nameOfGO, new UIInfo(pil, paramOfGO));
 
-                CloseExpandPanel(root);
                 PreRegisterCallback(pil);
                 PreRegisterCallback(root);
             }
@@ -104,7 +126,7 @@ namespace Panel {
 
         #region Runtime Update
         private void CleanSetter(string UIName) {
-            ParameterInfoList list = paramInfoDict[UIName].List;
+            ParameterInfoList list = m_paramInfoDict[UIName].List;
             foreach (var entry in list.SymbolQuickAccess) {
                 var pi = entry.Value;
                 switch (pi.Type) {
@@ -118,14 +140,20 @@ namespace Panel {
                         if (picastF.Setter != null) picastF.Root.Q<FloatField>().UnregisterValueChangedCallback(picastF.Setter);
                         picastF.Setter = null;
                         break;
+                    case ParamType.Enum:
+                        var picastEPD = pi as ParameterInfo<Enum>;
+                        if (picastEPD.Setter != null) picastEPD.Root.Q<EnumField>().UnregisterValueChangedCallback(picastEPD.Setter);
+                        picastEPD.Setter = null;
+                        break;
                     default:
                         DebugLogger.Error(this.name, "CleanSetter Not Defined, Panic!");
                         break;
                 }
             }
         }
+        
         private void RegisterSetter(string UIName) {
-            ParameterInfoList list = paramInfoDict[UIName].List;
+            ParameterInfoList list = m_paramInfoDict[UIName].List;
             foreach (var entry in list.SymbolQuickAccess) {
                 var pi = entry.Value;
                 switch (pi.Type) {
@@ -137,6 +165,11 @@ namespace Panel {
                         var picastF = pi as ParameterInfo<float>;
                         picastF.Root.Q<FloatField>().RegisterValueChangedCallback(picastF.Setter);
                         break;
+                    case ParamType.Enum:
+                        var picastEPD = pi as ParameterInfo<Enum>;
+                        picastEPD.Root.Q<EnumField>().RegisterValueChangedCallback(picastEPD.Setter);
+                        picastEPD.Setter = null;
+                        break;
                     default:
                         DebugLogger.Error(this.name, "RegisterSetter Not Defined, Panic!");
                         break;
@@ -145,7 +178,7 @@ namespace Panel {
         }
 
         private void CallGetter(string UIName) {
-            ParameterInfoList list = paramInfoDict[UIName].List;
+            ParameterInfoList list = m_paramInfoDict[UIName].List;
             foreach (var entry in list.SymbolQuickAccess) {
                 var pi = entry.Value;
                 switch (pi.Type) {
@@ -157,6 +190,10 @@ namespace Panel {
                         var picastF = pi as ParameterInfo<float>;
                         picastF.Root.Q<FloatField>().value = picastF.Getter.Invoke();
                         break;
+                    case ParamType.Enum:
+                        var picastE = pi as ParameterInfo<Enum>;
+                        picastE.Root.Q<EnumField>().value = picastE.Getter.Invoke();
+                        break;
                     default:
                         DebugLogger.Error(this.name, "CallGetter Not Defined, Panic!");
                         break;
@@ -164,25 +201,11 @@ namespace Panel {
             }
         }
 
-        private void EnableParamUI(string UIName) {
-            // [TODO]: ExpandPanel 
-            // add the Expand Animation here to close current Panel, open selected Panel
-            //foreach (var UI in paramInfoDict) {
-            //    if (UI.Key == UIName) UI.Value.UIGameObj.SetActive(true);
-            //    else UI.Value.UIGameObj.SetActive(false);
-            //}
-        }
-
-        private void DisableParamUI() {
-            
-        }
-
         private void UISetupPipeline(I_ParameterTransfer pt, string UIName) {
             CleanSetter(UIName);
-            pt.RegisterParametersCallback(paramInfoDict[UIName].List);
+            pt.RegisterParametersCallback(m_paramInfoDict[UIName].List);
             RegisterSetter(UIName);
             CallGetter(UIName);
-            EnableParamUI(UIName);
         }
 
         public void SelectParamView(GameObject obj) {
@@ -190,42 +213,52 @@ namespace Panel {
             WaveSource ws = obj.GetComponent<WaveSource>();
             PolarizedDevice pd = obj.GetComponent<PolarizedDevice>();
             if (rws != null) {
-                UISetupPipeline(rws, "RootWaveSource");
+                UISetupPipeline(rws, "RootWave");
+                OpenParamUIDisplay("RootWave");
             }
             else if (ws != null) {
-                UISetupPipeline(ws, "WaveSource");
+                UISetupPipeline(ws, "ChildWave");
+                OpenParamUIDisplay("ChildWave");
             }
             else if (pd != null) {
                 UISetupPipeline(pd, "PolarizedDevice");
+                OpenParamUIDisplay("PolarizedDevice");
             }
             else {
                 DebugLogger.Warning(this.name, "Parameter of this object not defined, do nothing.");
             }
+            OpenExpandPanel();
         }
 
-        public void CloseExpandPanel(VisualElement root){
-            VisualElement expPanel = root.Q<VisualElement>(name: "ExpandPanel");
-            VisualElement expBody = root.Q<VisualElement>(name: "Body");
-            Button expButton = root.Q<Button>(name: "ExpandButton");
-
-            expBody.style.display = DisplayStyle.None;
-            expPanel.style.width = PANEL_WIDTH;
-            expButton.text = ">";
+        public void CloseExpandPanel(){
+            Body.style.display = DisplayStyle.None;
+            ExpandPanel.style.width = PANEL_WIDTH;
+            ExpandButton.text = ">";
 
             isPanelExpanded = false;
         }
 
-        public void OpenExpandPanel(VisualElement root){
-            VisualElement expPanel = root.Q<VisualElement>(name: "ExpandPanel");
-            VisualElement expBody = root.Q<VisualElement>(name: "Body");
-            Button expButton = root.Q<Button>(name: "ExpandButton");
-
+        public void OpenExpandPanel(){
             Length width = new Length(PANEL_WIDTH, LengthUnit.Percent);
-            expPanel.style.width = new StyleLength(width);
-            expBody.style.display = DisplayStyle.Flex;
-            expButton.text = "<";
+            ExpandPanel.style.width = new StyleLength(width);
+            Body.style.display = DisplayStyle.Flex;
+            ExpandButton.text = "<";
 
             isPanelExpanded = true;
+        }
+
+        public void OpenParamUIDisplay(string paramName) {
+            foreach(var UIInfo in m_paramInfoDict) {
+                if(UIInfo.Key == paramName) {
+                    UIInfo.Value.VEOfGO.style.display = DisplayStyle.Flex;
+                }
+                else UIInfo.Value.VEOfGO.style.display = DisplayStyle.None;
+            }
+        }
+
+        public void CloseAllParamUIDisplay() {
+            foreach (var UIInfo in m_paramInfoDict)
+                UIInfo.Value.VEOfGO.style.display = DisplayStyle.None;
         }
         #endregion
     }

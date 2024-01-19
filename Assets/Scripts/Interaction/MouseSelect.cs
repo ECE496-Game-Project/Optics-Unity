@@ -112,18 +112,18 @@ public class MouseSelect : MonoBehaviour
 
         RaycastHit hit;
 
-        // [TODO]: Check if Mouse Click UI
-        foreach (VisualElement expP in m_expandPanels) {
-            VisualElement elementUnderMouse = expP.panel.Pick(Mouse.current.position.ReadValue());
+        //// [TODO]: Check if Mouse Click UI
+        //foreach (VisualElement expP in m_expandPanels) {
+        //    VisualElement elementUnderMouse = expP.panel.Pick(Mouse.current.position.ReadValue());
 
-            if (elementUnderMouse != null) {
-                // Handle the click for the element
-                Debug.Log("Clicked on element: " + elementUnderMouse.name);
-                // Further processing...
+        //    if (elementUnderMouse != null) {
+        //        // Handle the click for the element
+        //        Debug.Log("Clicked on element: " + elementUnderMouse.name);
+        //        // Further processing...
 
-                return;
-            }
-        }
+        //        return;
+        //    }
+        //}
 
         // if mouse is not on anything
         if (!Physics.Raycast(ray, out hit))

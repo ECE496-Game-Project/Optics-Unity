@@ -1,14 +1,19 @@
+using System;
 using UnityEngine;
 using GO_Wave;
 using WaveUtils;
-using Interfaces;
 using ParameterTransfer;
 using CommonUtils;
 using Complex = System.Numerics.Complex;
 
 namespace GO_Device {
+    public enum DEVICETYPE {
+        POLARIZER,
+        WEAVEPLATE,
+    }
 
     public class PolarizedDevice : DeviceBase {
+        [SerializeField] protected DEVICETYPE DeviceType;
         [SerializeField] private float ThicknessOffset;
         [SerializeField] private float RotDeg;
         [SerializeField] private float AxisDiffDeg;
@@ -44,21 +49,20 @@ namespace GO_Device {
         }
 
         public override void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
-            base.RegisterParametersCallback(ParameterInfos);
-
-            if (DeviceType != DEVICETYPE.WEAVEPLATE && DeviceType != DEVICETYPE.POLARIZER &&
-               DeviceType != DEVICETYPE.HALFWAVEPLATE && DeviceType != DEVICETYPE.QUATERWAVEPLATE)
-                DebugLogger.Error(this.name, "DeviceType " + DeviceType + " Invalid!");
-
+            var NameTuple = (ParameterInfo<string>)ParameterInfos.SymbolQuickAccess["Name"];
+            var DeviceTypeTuple = (ParameterInfo<Enum>)ParameterInfos.SymbolQuickAccess["DeviceType"];
             var RotDegTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["RotDeg"];
-            RotDegTuple.Getter = () => { return RotDeg; };
-            RotDegTuple.Setter = (evt) => { RotDeg = evt.newValue; ParameterChangeTrigger(); };
-
-
             var AxisDiffDegTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["AxisDiffDeg"];
-            AxisDiffDegTuple.Getter = () => { return AxisDiffDeg; };
-            AxisDiffDegTuple.Setter = (evt) => { AxisDiffDeg = evt.newValue; ParameterChangeTrigger(); };
 
+            NameTuple.Getter = () => { return this.name; };
+            DeviceTypeTuple.Getter = () => { return DeviceType; };
+            RotDegTuple.Getter = () => { return RotDeg; };
+            AxisDiffDegTuple.Getter = () => { return AxisDiffDeg; };
+
+            NameTuple.Setter = (evt) => { this.name = evt.newValue; };
+            DeviceTypeTuple.Setter = (evt) => { DeviceType = (DEVICETYPE)evt.newValue; ParameterChangeTrigger(); };
+            RotDegTuple.Setter = (evt) => { RotDeg = evt.newValue; ParameterChangeTrigger(); };
+            AxisDiffDegTuple.Setter = (evt) => { AxisDiffDeg = evt.newValue; ParameterChangeTrigger(); };
         }
 
         public override void ParameterChangeTrigger() {
@@ -82,17 +86,10 @@ namespace GO_Device {
             
             if(DeviceType == DEVICETYPE.POLARIZER)
                 resVec = PolarizerMatrix() * resVec;
-            else if(DeviceType == DEVICETYPE.WEAVEPLATE ||
-                DeviceType == DEVICETYPE.QUATERWAVEPLATE || DeviceType == DEVICETYPE.HALFWAVEPLATE)
+            else if(DeviceType == DEVICETYPE.WEAVEPLATE)
             {
-                var tmp = WaveplateMatrix().Value[0,0];
                 resVec = WaveplateMatrix() * resVec;
             }
-                
-            else
-                DebugLogger.Error(this.name, "DeviceType " + DeviceType + " Invalid!");
-
-           
 
             /* Calculate ReadOnly Effective Distance*/
             float tmpDistance = parentWS.EffectDistance;

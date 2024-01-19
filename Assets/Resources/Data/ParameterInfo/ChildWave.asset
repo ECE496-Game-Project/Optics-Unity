@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ChildWave
   m_EditorClassIdentifier: 
   List:
-  - Name: RootWaveName
+  - Name: Name
     Type: 0
     Permit: 1
   - Name: UdirAmp

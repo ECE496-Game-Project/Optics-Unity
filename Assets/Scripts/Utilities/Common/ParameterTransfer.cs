@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine.UIElements;
-using GO_Device;
 using CommonUtils;
 using UnityEngine.Assertions;
 
@@ -17,7 +16,8 @@ namespace ParameterTransfer {
         String,
         Int,
         Float,
-        Vector3
+        Vector3,
+        Enum
     }
 
     [Serializable] 
@@ -53,7 +53,7 @@ namespace ParameterTransfer {
             Root = root;
         }
     }
-   
+
     public class ParameterInfoList {
         public Dictionary<string, ParameterInfoBase> SymbolQuickAccess = new Dictionary<string, ParameterInfoBase>();
 
@@ -75,6 +75,12 @@ namespace ParameterTransfer {
                         break;
                     case ParamType.Float:
                         SymbolQuickAccess.Add(p.Name, new ParameterInfo<float>(p, ve));
+                        break;
+                    case ParamType.Enum:
+                        SymbolQuickAccess.Add(p.Name, new ParameterInfo<Enum>(p, ve));
+                        break;
+                    default:
+                        DebugLogger.Error("ParameterTransfer", "Cannot find Corresponding type:" + p.Type.ToString());
                         break;
                 }
             }
