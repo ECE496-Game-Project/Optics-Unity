@@ -1,13 +1,17 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 using Interfaces;
+using Panel;
+using UnityEngine.UIElements;
+using System.Linq;
 
 public class SelectionController
 {
     private GameObject m_highlight, m_select;
 
     private bool m_selectChangeOn = true;
-
+    /* Check if MouseClick on UI */
+    private List<VisualElement> m_expandPanels = new List<VisualElement>();
     private MouseInput m_mouseInput;
 
     public SelectionController(MouseInput mouseInput)
@@ -59,6 +63,19 @@ public class SelectionController
         Ray ray = Camera.main.ScreenPointToRay(mousePos);
 
         RaycastHit hit;
+
+        //// [TODO]: Check if Mouse Click UI
+        //foreach (VisualElement expP in m_expandPanels) {
+        //    VisualElement elementUnderMouse = expP.panel.Pick(Mouse.current.position.ReadValue());
+
+        //    if (elementUnderMouse != null) {
+        //        // Handle the click for the element
+        //        Debug.Log("Clicked on element: " + elementUnderMouse.name);
+        //        // Further processing...
+
+        //        return;
+        //    }
+        //}
 
         // if mouse is not on anything
         if (!Physics.Raycast(ray, out hit))

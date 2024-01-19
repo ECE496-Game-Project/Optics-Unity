@@ -3,7 +3,7 @@
         <ui:TextField picking-mode="Ignore" value="Object Name" style="height: 100%; -unity-text-align: middle-left; align-self: auto; align-items: center; -unity-font-style: bold; font-size: 20px; width: 70%;" />
     </ui:VisualElement>
     <ui:VisualElement name="Parameter" style="flex-grow: 1; height: 90%; display: flex; -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(23, 74, 94);">
-        <ui:Foldout text="Amplitude" name="Amplitude" style="height: 20%; color: rgb(255, 255, 255); -unity-font-style: bold;">
+        <ui:Foldout text="Amplitude" name="Amplitude" style="height: 25%; color: rgb(255, 255, 255); -unity-font-style: bold;">
             <ui:VisualElement name="UdirAmp" style="flex-grow: 1; flex-direction: row;">
                 <ui:FloatField label="Udir Amp(Eox)" value="1" name="FloatField" style="width: 252px; align-items: center; color: rgb(255, 255, 255); -unity-text-align: middle-left; -unity-text-outline-color: rgb(23, 74, 94); -unity-text-outline-width: 1px;">
                     <ui:Label tabindex="-1" text="V/m" parse-escape-sequences="true" display-tooltip-when-elided="true" />
@@ -35,7 +35,7 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:Foldout>
-        <ui:Foldout text="Temperal Properties" name="Temperal" style="height: 20%; color: rgb(255, 255, 255); -unity-font-style: bold;">
+        <ui:Foldout text="Temperal Properties" name="Temperal" style="height: 25%; color: rgb(255, 255, 255); -unity-font-style: bold;">
             <ui:VisualElement name="TemperalPeriod" style="flex-grow: 1;">
                 <ui:FloatField label="Period (T)" value="42.2" readonly="true" name="FloatField" style="align-items: center; width: 70%;">
                     <ui:Label tabindex="-1" text="fs" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
@@ -90,6 +90,6 @@
                 <ui:Label tabindex="-1" text="5" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Max" focusable="true" enable-rich-text="false" style="flex-wrap: nowrap; align-self: center;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="EmptySpace" style="flex-grow: 1; height: 15%;" />
+        <ui:VisualElement name="EmptySpace" style="flex-grow: 1; height: 5%;" />
     </ui:VisualElement>
 </ui:UXML>

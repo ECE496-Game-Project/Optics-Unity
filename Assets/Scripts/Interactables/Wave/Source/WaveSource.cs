@@ -14,8 +14,7 @@ namespace GO_Wave {
         #endregion
 
         #region PRIVATE VARIABLES
-        [Header("DEBUG_WAVE")]
-        [SerializeField] protected WaveParams m_params;
+        protected WaveParams m_params;
         // Current Section's Wave Distance
         [SerializeField] protected float m_effectDistance;
         protected ParameterInfoList m_paramInfoList;
@@ -79,7 +78,7 @@ namespace GO_Wave {
             }
         }
         public virtual void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
-            var NameTuple = (ParameterInfo<string>)ParameterInfos.SymbolQuickAccess["RootWaveName"];
+            var NameTuple = (ParameterInfo<string>)ParameterInfos.SymbolQuickAccess["Name"];
             var EoxTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["UdirAmp"];
             var EoyTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["VdirAmp"];
             var thetaTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["Theta"];
