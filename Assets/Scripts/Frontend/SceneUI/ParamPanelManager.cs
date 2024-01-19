@@ -24,27 +24,27 @@ namespace Panel {
          * 2. Get this Root VisualElement from the UI Document
          * 3. When GameObject Selected, find the corresponding UI and Register its Getter & Setter 
          */
-        
+
+        // Parameter UI Container
+        public UIDocument doc;
+        public VisualElement Body;
+
         [Serializable] 
         public class UIPair {
             public string name;
             public SO_ParamTransfer paramTrans;
-            public UIDocument doc;
+            public VisualTreeAsset paramUIAsset;
         }
         
         public List<UIPair> UIInfoTransfer; // For Inspector Registration Purpose
 
         public class UIInfo {
             public ParameterInfoList List;
-            public GameObject UIGameObj;
-            public VisualElement ExpandPanel;
-            public VisualElement Body;
+            public VisualTreeAsset ParamUIAsset;
 
-            public UIInfo(ParameterInfoList list, GameObject UIGameObj, VisualElement expPanel, VisualElement body) {
+            public UIInfo(ParameterInfoList list, VisualTreeAsset paramUIAsset) {
                 List = list;
-                UIGameObj = UIGameObj;
-                ExpandPanel = expPanel;
-                Body = body;
+                ParamUIAsset = paramUIAsset;
             }
         }
 
@@ -89,13 +89,11 @@ namespace Panel {
         }
 
         private void Awake() {
-            foreach (var UI in UIInfoTransfer) {
-                VisualElement root = UI.doc.rootVisualElement;
-                ParameterInfoList pil = new ParameterInfoList(UI.paramTrans.List, root);
-                VisualElement expandPanel = root.Q("ExpandPanel");
-                VisualElement body = root.Q("Body");
+            foreach (var UIInfo in UIInfoTransfer) {
+                VisualElement root = UIInfo.doc.rootVisualElement;
+                ParameterInfoList pil = new ParameterInfoList(UIInfo.paramTrans.List, root);
 
-                paramInfoDict.Add(UI.name, new UIInfo(pil, UI.doc.gameObject, expandPanel, body));
+                paramInfoDict.Add(UIInfo.name, new UIInfo(pil, UIInfo.paramUIAsset));
 
                 CloseExpandPanel(root);
                 PreRegisterCallback(pil);
@@ -169,10 +167,10 @@ namespace Panel {
         private void EnableParamUI(string UIName) {
             // [TODO]: ExpandPanel 
             // add the Expand Animation here to close current Panel, open selected Panel
-            foreach (var UI in paramInfoDict) {
-                if (UI.Key == UIName) UI.Value.UIGameObj.SetActive(true);
-                else UI.Value.UIGameObj.SetActive(false);
-            }
+            //foreach (var UI in paramInfoDict) {
+            //    if (UI.Key == UIName) UI.Value.UIGameObj.SetActive(true);
+            //    else UI.Value.UIGameObj.SetActive(false);
+            //}
         }
 
         private void DisableParamUI() {

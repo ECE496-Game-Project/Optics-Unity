@@ -14,8 +14,7 @@ namespace GO_Wave {
         #endregion
 
         #region PRIVATE VARIABLES
-        [Header("DEBUG_WAVE")]
-        [SerializeField] protected WaveParams m_params;
+        protected WaveParams m_params;
         // Current Section's Wave Distance
         [SerializeField] protected float m_effectDistance;
         protected ParameterInfoList m_paramInfoList;

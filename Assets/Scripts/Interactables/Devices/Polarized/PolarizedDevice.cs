@@ -9,9 +9,9 @@ using Complex = System.Numerics.Complex;
 namespace GO_Device {
 
     public class PolarizedDevice : DeviceBase {
-        public float ThicknessOffset;
-        public float RotDeg;
-        public float AxisDiffDeg;
+        [SerializeField] private float ThicknessOffset;
+        [SerializeField] private float RotDeg;
+        [SerializeField] private float AxisDiffDeg;
 
         private WaveSource m_parent;
         private WaveSource m_child;
@@ -44,22 +44,20 @@ namespace GO_Device {
         }
 
         public override void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
-            //base.RegisterParametersCallback(ParameterInfos);
+            base.RegisterParametersCallback(ParameterInfos);
 
-            //if(DeviceType != DEVICETYPE.WEAVEPLATE && DeviceType != DEVICETYPE.POLARIZER && 
-            //   DeviceType != DEVICETYPE.HALFWAVEPLATE && DeviceType != DEVICETYPE.QUATERWAVEPLATE)
-            //    DebugLogger.Error(this.name, "DeviceType " + DeviceType + " Invalid!");
+            if (DeviceType != DEVICETYPE.WEAVEPLATE && DeviceType != DEVICETYPE.POLARIZER &&
+               DeviceType != DEVICETYPE.HALFWAVEPLATE && DeviceType != DEVICETYPE.QUATERWAVEPLATE)
+                DebugLogger.Error(this.name, "DeviceType " + DeviceType + " Invalid!");
 
-            //var RotDegTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["RotDeg"];
-            //RotDegTuple.Getter = () => { return RotDeg; };
-            //RotDegTuple.Default = RotDeg;
-            //RotDegTuple.Setter = (evt) => { RotDeg = evt.newValue; ParameterChangeTrigger(); };
+            var RotDegTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["RotDeg"];
+            RotDegTuple.Getter = () => { return RotDeg; };
+            RotDegTuple.Setter = (evt) => { RotDeg = evt.newValue; ParameterChangeTrigger(); };
 
 
-            //var AxisDiffDegTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["AxisDiffDeg"];
-            //AxisDiffDegTuple.Getter = () => { return AxisDiffDeg; };
-            //AxisDiffDegTuple.Default = AxisDiffDeg;
-            //AxisDiffDegTuple.Setter = (evt) => { AxisDiffDeg = evt.newValue; ParameterChangeTrigger(); };
+            var AxisDiffDegTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["AxisDiffDeg"];
+            AxisDiffDegTuple.Getter = () => { return AxisDiffDeg; };
+            AxisDiffDegTuple.Setter = (evt) => { AxisDiffDeg = evt.newValue; ParameterChangeTrigger(); };
 
         }
 
