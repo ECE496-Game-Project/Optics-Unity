@@ -1,0 +1,31 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="Name" style="flex-grow: 1; height: 10%; -unity-font-style: bold; font-size: 20px;">
+        <ui:TextField picking-mode="Ignore" value="Object Name" style="height: 100%; align-self: auto; align-items: center; width: 70%;" />
+    </ui:VisualElement>
+    <ui:VisualElement name="Parameter" style="flex-grow: 1; display: flex; height: 90%;">
+        <ui:VisualElement name="DeviceType" style="flex-grow: 1; height: 10%; color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 15px; width: 70%;">
+            <ui:EnumField label="Device Type" type="UnityEngine.TextAlignment, UnityEngine.TextRenderingModule" value="Center" include-obsolete-values="false" />
+        </ui:VisualElement>
+        <ui:VisualElement name="RotDeg" style="flex-grow: 1; flex-direction: row; height: 20%; font-size: 15px; -unity-font-style: bold; color: rgb(255, 255, 255); -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(23, 74, 94);">
+            <ui:FloatField label="Rotation Degree" value="42.2" name="FloatField" is-delayed="false" style="width: 252px; align-items: center;">
+                <ui:Label tabindex="-1" text="°" parse-escape-sequences="false" display-tooltip-when-elided="true" enable-rich-text="false" />
+            </ui:FloatField>
+            <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
+                <ui:Label tabindex="-1" text="0°" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Min" style="align-self: center;" />
+                <ui:Slider picking-mode="Ignore" value="42" high-value="100" style="width: 135px;" />
+                <ui:Label tabindex="-1" text="360°" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Max" style="align-self: center;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="AxisDiffDeg" style="flex-grow: 1; flex-direction: row; height: 20%; font-size: 15px; -unity-font-style: bold; color: rgb(255, 255, 255); -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(23, 74, 94);">
+            <ui:FloatField label="Axis Diff Degree" value="42.2" name="FloatField" readonly="false" style="width: 252px; align-items: center;">
+                <ui:Label tabindex="-1" text="°" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
+            </ui:FloatField>
+            <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
+                <ui:Label tabindex="-1" text="0°" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Min" style="align-self: center;" />
+                <ui:Slider picking-mode="Ignore" value="42" high-value="100" style="width: 135px;" />
+                <ui:Label tabindex="-1" text="360°" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Max" style="align-self: center;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="EmptySpace" style="flex-grow: 1; height: 50%;" />
+    </ui:VisualElement>
+</ui:UXML>

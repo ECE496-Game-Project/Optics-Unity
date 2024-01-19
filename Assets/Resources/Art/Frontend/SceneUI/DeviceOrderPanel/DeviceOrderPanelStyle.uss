@@ -1,0 +1,40 @@
+@import "../CommonStyle.uss";
+
+/* Level 1 */
+.root{
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    top: 80%;
+    bottom: 0.5%;
+    flex-direction: row;
+}
+
+.slot {
+    /* Sets the size of the element, adjust as needed */
+    width: 100px;
+    height: 100px;
+
+    /* Adds a border around the element */
+    border-width: 2px;
+    border-color: #000000; /* Black border */
+    border-radius: 0; /* Square corners */
+
+    /* Sets the background color of the element */
+    background-color: #C0C0C0; /* Light gray background */
+
+    /* Optional: Add some padding inside the element */
+    padding: 10px;
+}
+
+.objectList__item{
+
+}
+
+.objectList__item:hover{
+
+}
+
+.objectList__item--selected{
+
+}

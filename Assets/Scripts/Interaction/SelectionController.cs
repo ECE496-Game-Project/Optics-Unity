@@ -2,8 +2,10 @@ using Panel;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
+using Interfaces;
+using Panel;
 
-public class SelectionController
+public class MouseSelect : MonoBehaviour
 {
     private GameObject m_highlight, m_select;
 
@@ -13,7 +15,7 @@ public class SelectionController
 
     public SelectionController(MouseInput mouseInput)
     {
-        
+
         m_mouseInput = mouseInput;
         m_mouseInput.onMouseClicked.AddListener(OnMouseClicked);
         m_mouseInput.onMouseMoved.AddListener(OnMouseMoved);
@@ -64,17 +66,19 @@ public class SelectionController
         // if mouse is not on anything
         if (!Physics.Raycast(ray, out hit))
         {
-            // Disable ParamController
-            //ParamControlPanel.Instance.CleanParamView();
             return;
         }
 
         GameObject go = hit.collider.gameObject;
 
         ISelectable clickable = go.GetComponent<ISelectable>();
-        if (clickable == null)
+        if (clickable != null)
         {
-            return;
+            OutlineManager.Instance.Highlight(go);
+            m_highlight = go;
+            m_select = go;
+
+            clickable.OnMouseSelect();
         }
 
         OutlineManager.Instance.Highlight(go);

@@ -79,19 +79,18 @@ namespace GO_Wave {
             }
         }
         public virtual void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
-            // Child Wave Parameter Registration
-            var NameTuple = (ParameterInfo<string>)ParameterInfos.SymbolQuickAccess["name"];
-            var EoxTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["Eox"];
-            var EoyTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["Eoy"];
-            var thetaTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["theta"];
-            var TTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["T"];
-            var muTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["mu"];
-            var wTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["w"];
-            var lambdaTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["lambda"];
-            var fTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["f"];
-            var kTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["k"];
-            var phiTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["phi"];
-            var nTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["n"];
+            var NameTuple = (ParameterInfo<string>)ParameterInfos.SymbolQuickAccess["RootWaveName"];
+            var EoxTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["UdirAmp"];
+            var EoyTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["VdirAmp"];
+            var thetaTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["Theta"];
+            var TTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["TemperalPeriod"];
+            var muTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["TemperalFreq"];
+            var wTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["TemperalAngularFreq"];
+            var lambdaTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["SpatialPeriod"];
+            var fTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["SpatialFreq"];
+            var kTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["SpatialAngularFreq"];
+            var phiTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["Phi"];
+            var nTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["N"];
 
             NameTuple.Getter = () => { return this.name; };
             EoxTuple.Getter = () => { return m_params.Eox; };
@@ -106,21 +105,20 @@ namespace GO_Wave {
             phiTuple.Getter = () => { return m_params.phi; };
             nTuple.Getter = () => { return m_params.n; };
 
-            NameTuple.Default = this.name;
-            EoxTuple.Default = m_params.Eox;
-            EoyTuple.Default = m_params.Eoy;
-            thetaTuple.Default = m_params.theta;
-            TTuple.Default = m_params.T;
-            muTuple.Default = m_params.mu;
-            wTuple.Default = m_params.w;
-            lambdaTuple.Default = m_params.lambda;
-            fTuple.Default = m_params.f;
-            kTuple.Default = m_params.k;
-            phiTuple.Default = m_params.phi;
-            nTuple.Default = m_params.n;
-
             NameTuple.Setter = (evt) => { this.name = evt.newValue; };
+            EoxTuple.Setter = (evt) => { m_params.Eox = evt.newValue; ParameterChangeTrigger(); };
+            EoyTuple.Setter = (evt) => { m_params.Eoy = evt.newValue; ParameterChangeTrigger(); };
+            thetaTuple.Setter = (evt) => { m_params.theta = evt.newValue; ParameterChangeTrigger(); };
+            TTuple.Setter = (evt) => { m_params.T = evt.newValue; WaveAlgorithm.changeT(m_params); ParameterChangeTrigger(); };
+            muTuple.Setter = (evt) => { DebugLogger.Warning(this.name, "mu Setter should not be use, something wrong."); };
+            wTuple.Setter = (evt) => { m_params.w = evt.newValue; WaveAlgorithm.changeW(m_params); ParameterChangeTrigger(); };
+            lambdaTuple.Setter = (evt) => { m_params.lambda = evt.newValue; WaveAlgorithm.changeLambda(m_params); ParameterChangeTrigger(); };
+            fTuple.Setter = (evt) => { DebugLogger.Warning(this.name, "f Setter should not be use, something wrong."); };
+            kTuple.Setter = (evt) => { m_params.k = evt.newValue; WaveAlgorithm.changeK(m_params); ParameterChangeTrigger(); };
+            nTuple.Setter = (evt) => { m_params.n = evt.newValue; WaveAlgorithm.changeN(m_params); ParameterChangeTrigger(); };
+            phiTuple.Setter = (evt) => { m_params.phi = evt.newValue; ParameterChangeTrigger(); };
         }
+
         /// <summary>
         /// Script-Generated-WaveSource Requires to Call ManualAwake.
         /// </summary>

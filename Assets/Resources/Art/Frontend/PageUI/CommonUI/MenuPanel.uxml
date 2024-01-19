@@ -1,0 +1,30 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="container" style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="side-bar" style="flex-grow: 1; width: 30%; height: 100%; background-color: rgb(22, 74, 94); padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; border-left-color: rgb(241, 170, 87); border-right-color: rgb(241, 170, 87); border-top-color: rgb(241, 170, 87); border-bottom-color: rgb(241, 170, 87); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;">
+            <ui:Button text="OPTICS" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title" enable-rich-text="false" style="color: rgb(254, 255, 255); background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); height: 5%; font-size: 50px; -unity-font-style: bold;" />
+            <ui:VisualElement name="page-list" style="flex-grow: 1; height: 15%;">
+                <ui:Button text="Home" parse-escape-sequences="true" display-tooltip-when-elided="true" name="home" style="-unity-font-style: bold; font-size: 20px; justify-content: flex-start; align-self: auto; background-color: rgb(241, 170, 87); color: rgb(255, 255, 255);" />
+                <ui:Button text="My Scenes" parse-escape-sequences="true" display-tooltip-when-elided="true" name="free-scenes" style="-unity-font-style: bold; font-size: 20px; background-color: rgb(241, 170, 87); color: rgb(255, 255, 255);" />
+                <ui:Button text="Tutorial" parse-escape-sequences="true" display-tooltip-when-elided="true" name="tutorial" style="-unity-font-style: bold; font-size: 20px; background-color: rgb(241, 170, 87); color: rgb(255, 255, 255);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="account" style="flex-grow: 1; height: 65%;">
+                <ui:VisualElement name="profile" style="flex-grow: 1; height: 10%; flex-direction: row; border-left-color: rgb(241, 170, 87); border-right-color: rgb(241, 170, 87); border-top-color: rgb(241, 170, 87); border-bottom-color: rgb(241, 170, 87); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px;">
+                    <ui:VisualElement name="avatar" style="flex-grow: 1; width: 162px; border-left-color: rgb(97, 192, 255); border-right-color: rgb(97, 192, 255); border-top-color: rgb(97, 192, 255); border-bottom-color: rgb(97, 192, 255);" />
+                    <ui:Label tabindex="-1" text="User Name" parse-escape-sequences="true" display-tooltip-when-elided="true" name="name" style="width: 70%; font-size: 30px; -unity-text-align: middle-left; -unity-font-style: bold; color: rgb(255, 251, 251);" />
+                </ui:VisualElement>
+                <ui:VisualElement name="empty" style="flex-grow: 1; height: 90%;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="feedback" style="flex-grow: 1; height: 15%;">
+                <ui:Label tabindex="-1" text="Help &amp; Feedback" parse-escape-sequences="true" display-tooltip-when-elided="true" name="help" style="font-size: 30px; color: rgb(255, 255, 255);" />
+                <ui:Label tabindex="-1" text="Chuyue Zhang (irondumpling010@gmail.com)&#10;Yang Chen (jackchen.chen@mail.utoronto.ca)&#10;Leo Hanxu (winnerxu233@gmail.com)" parse-escape-sequences="true" display-tooltip-when-elided="true" name="email" style="font-size: 20px; color: rgb(255, 255, 255);" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="body" style="flex-grow: 1; width: 70%;">
+            <ui:VisualElement name="header" style="flex-grow: 1; height: 5%; flex-direction: row; background-color: rgb(23, 74, 94); padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; border-left-color: rgb(241, 170, 87); border-right-color: rgb(241, 170, 87); border-top-color: rgb(241, 170, 87); border-bottom-color: rgb(241, 170, 87); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;">
+                <ui:VisualElement name="empty-space" style="flex-grow: 1; width: 70%;" />
+                <ui:TextField picking-mode="Ignore" label="Search" value="name" name="search" style="width: 30%; height: 70%; align-self: center; font-size: 20px; -unity-font-style: bold; -unity-text-align: middle-center; color: rgb(255, 255, 255); -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(23, 74, 94);" />
+            </ui:VisualElement>
+            <ui:ScrollView name="content" style="height: 95%; background-color: rgb(212, 230, 233); padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; border-left-color: rgb(241, 170, 87); border-right-color: rgb(241, 170, 87); border-top-color: rgb(241, 170, 87); border-bottom-color: rgb(241, 170, 87); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
