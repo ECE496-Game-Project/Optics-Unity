@@ -1,0 +1,22 @@
+@import "../PanelStyle.uss";
+
+.root{
+    left: 0.5%;
+    right: 80%;
+}
+
+/* Level 4.3 ParamView */
+.paramView{
+    flex-direction: column;
+    width: 70%;
+}
+
+.parameter__field{
+    flex-direction: row;
+    width: 90%;
+}
+
+.parameter__slider{
+    flex-direction: column;
+    width: 90%;
+}

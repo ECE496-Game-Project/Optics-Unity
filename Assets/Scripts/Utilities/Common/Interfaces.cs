@@ -16,4 +16,8 @@ namespace Interfaces {
         public void RegisterParametersCallback(ParameterInfoList ParameterInfos);
         public void ParameterChangeTrigger();
     }
+    public interface ISelectable {
+        public void OnMouseSelect();
+        public void OnMouseUnselect();
+    }
 }
