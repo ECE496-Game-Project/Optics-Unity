@@ -71,7 +71,7 @@ namespace GO_Device {
 
         public override void WaveHit(in RaycastHit hit, WaveSource parentWS) {
             /*GO Setup*/
-            GameObject new_GO = new GameObject(parentWS.name + "_Child", typeof(WaveSource), typeof(LineWaveRender), typeof(LineWaveLogic));
+            GameObject new_GO = new GameObject(parentWS.name + "_Child", typeof(WaveSource), typeof(LineWaveRender), typeof(LineWaveLogic)/*, typeof(BoxCollider)*/);
             new_GO.transform.position = hit.point + Vector3.Normalize(hit.point - parentWS.transform.position) * ThicknessOffset;
             new_GO.transform.rotation = parentWS.transform.rotation;
 
@@ -79,8 +79,9 @@ namespace GO_Device {
             WaveSource childWS = new_GO.GetComponent<WaveSource>();
             LineWaveRender lwd = new_GO.GetComponent<LineWaveRender>();
             LineWaveLogic lwi = new_GO.GetComponent<LineWaveLogic>();
+            //BoxCollider colld = new_GO.GetComponent<BoxCollider>();
+
             WaveParams childWP = new WaveParams();
-            
             /* Calculate Eox, Eoy, Theta*/
             ComplexVector2 resVec = WaveAlgorithm.WaveToJohnsVector(parentWS.Params);
             
@@ -96,6 +97,9 @@ namespace GO_Device {
             parentWS.EffectDistance = hit.distance;
             childWP.RODistance = tmpDistance - hit.distance;
 
+            /* Modify Collider Position & scale */
+            //colld.center = hit.point + Vector3.Normalize(parentWS.transform.position - hit.point) * hit.distance / 2;
+            
             /* Copy Parent's t & n, then compute rest*/
             childWP.T = parentWS.Params.T;
             childWP.n = parentWS.Params.n;
