@@ -22,7 +22,7 @@ namespace Constraint.UI
        private List<RectTransform> m_corners = new List<RectTransform>();
 
 
-       private MouseSelect m_mouseSelect;
+       //private MouseSelect m_mouseSelect;
 
        private bool m_isMouseInside = false;
        // Start is called before the first frame update
@@ -64,7 +64,7 @@ namespace Constraint.UI
 
 
        }
-
+       SelectionController m_selectionController;
        private void Start()
        {
            m_selectionController = TempSingletonManager.Instance.m_selectionController;
@@ -75,8 +75,8 @@ namespace Constraint.UI
        {
            m_removeButton.onClick.AddListener(m_waveOrderManager.removeSelectedDevice);
            m_addPolarizerButton.onClick.AddListener(() => { m_waveOrderManager.AddDevice(GO_Device.DEVICETYPE.POLARIZER); });
-           m_addQWPButton.onClick.AddListener(() => { m_waveOrderManager.AddDevice(GO_Device.DEVICETYPE.QUATERWAVEPLATE); });
-           m_addHWPButton.onClick.AddListener(() => { m_waveOrderManager.AddDevice(GO_Device.DEVICETYPE.HALFWAVEPLATE); });
+           //m_addQWPButton.onClick.AddListener(() => { m_waveOrderManager.AddDevice(GO_Device.DEVICETYPE.QUATERWAVEPLATE); });
+           //m_addHWPButton.onClick.AddListener(() => { m_waveOrderManager.AddDevice(GO_Device.DEVICETYPE.HALFWAVEPLATE); });
 
            m_playerInput.actions["MouseMovement"].performed += OnMouseMove;
        }
