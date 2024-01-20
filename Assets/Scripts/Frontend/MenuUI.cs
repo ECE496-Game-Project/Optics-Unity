@@ -92,7 +92,7 @@ public class MenuUI : MonoBehaviour
             return;
         }
 
-        var addSceneUI = Resources.Load<VisualTreeAsset>("Art/Frontend/PageUI/FreeScenePage/AddSceneButtonUI");
+        var addSceneUI = Resources.Load<VisualTreeAsset>("Art/Frontend/PageUI/FreeScenePage/AddSceneUI");
         content.Add(addSceneUI.Instantiate());
 
         // TODO: register an event, click add scene ui to create a new scene ui & create a new scene
@@ -139,11 +139,9 @@ public class MenuUI : MonoBehaviour
         }        
 
         var sectionUI = Resources.Load<VisualTreeAsset>("Art/Frontend/PageUI/TutorialPage/SectionUI");
-        var sectionButton = Resources.Load<VisualTreeAsset>("Art/Frontend/PageUI/TutorialPage/SectionButtonUI");
-        var courseButton = Resources.Load<VisualTreeAsset>("Art/Frontend/PageUI/TutorialPage/CourseButtonUI");
+        var courseButton = Resources.Load<VisualTreeAsset>("Art/Frontend/PageUI/TutorialPage/CourseUI");
 
         foreach(var section in tutDict){
-            // TODO: header.Add(sectionButton.Instantiate());
             VisualElement secUI = sectionUI.Instantiate();
             Label sectionName = secUI.Q<Label>("name");
             sectionName.text = section.Key;
