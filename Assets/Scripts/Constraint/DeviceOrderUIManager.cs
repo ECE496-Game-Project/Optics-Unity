@@ -21,6 +21,7 @@
 
 //        private List<RectTransform> m_corners = new List<RectTransform>();
 
+
 //        private MouseSelect m_mouseSelect;
 
 //        private bool m_isMouseInside = false;
@@ -38,7 +39,7 @@
 //            Assert.IsNotNull(m_addHWPButton);
 
 
-            
+
 
 //            m_waveOrderManager = GameObject.Find("WaveTrack").GetComponent<WaveOrderManager>();
 
@@ -60,9 +61,14 @@
 //            m_corners.Add(topRight);
 //            m_corners.Add(bottomLeft);
 //            m_corners.Add(bottomRight);
-            
-//            m_mouseSelect = FindAnyObjectByType<MouseSelect>();
-//            Assert.IsNotNull(m_mouseSelect);
+
+
+//        }
+
+//        private void Start()
+//        {
+//            m_selectionController = TempSingletonManager.Instance.m_selectionController;
+//            Assert.IsNotNull(m_selectionController);
 //        }
 
 //        private void OnEnable()
@@ -76,7 +82,7 @@
 //        }
 
 //        private void OnDisable()
-//        {   
+//        {
 
 //            m_removeButton?.onClick.RemoveAllListeners();
 //            m_addPolarizerButton?.onClick.RemoveAllListeners();
@@ -87,25 +93,25 @@
 //            {
 //                m_playerInput.actions["MouseMovement"].performed -= OnMouseMove;
 //            }
-                
+
 //        }
 
 
 //        public void OnMouseMove(InputAction.CallbackContext context)
 //        {
 //            Vector3 mousePosition = context.ReadValue<Vector2>();
-            
+
 //            if (!m_isMouseInside && isInside(mousePosition))
 //            {
 //                m_isMouseInside = true;
-//                m_mouseSelect.TurnOff();
+//                m_selectionController.TurnOff();
 //            }
 //            else if (m_isMouseInside && !isInside(mousePosition))
 //            {
 //                m_isMouseInside = false;
-//                m_mouseSelect.TurnOn();
+//                m_selectionController.TurnOn();
 //            }
-            
+
 //        }
 
 //        bool isInside(Vector3 point)
@@ -126,7 +132,6 @@
 //            }
 
 
-//        }   
+//        }
 //    }
 //}
-

@@ -119,7 +119,7 @@
                 {
                     "name": "modifier",
                     "id": "b5279b50-b643-4f41-8aab-09ea4e0fb821",
-                    "path": "<Mouse>/middleButton",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

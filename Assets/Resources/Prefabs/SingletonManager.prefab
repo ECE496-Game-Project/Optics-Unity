@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8776742092659487047
+--- !u!1 &7961788794737899505
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9131518043450434036}
-  - component: {fileID: 302600268979597663}
+  - component: {fileID: 8240394215935269690}
+  - component: {fileID: 4852830905293874778}
   m_Layer: 0
-  m_Name: DevicesLib
+  m_Name: SingletonManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9131518043450434036
+--- !u!4 &8240394215935269690
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8776742092659487047}
+  m_GameObject: {fileID: 7961788794737899505}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.2853875, y: 0.014, z: 1.5815728}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &302600268979597663
+--- !u!114 &4852830905293874778
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8776742092659487047}
+  m_GameObject: {fileID: 7961788794737899505}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebeab7ac717c2be47a74f723509096fa, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ed6fb0861a9815419a956929d774db7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_deviceName:
-  - Polarizer
-  - QuaterWavePlate
-  - HalfWavePlate
-  m_devicePrefab:
-  - {fileID: 7576343308639130988, guid: 41d44d652ec2ac645a757149e46cfefb, type: 3}
-  - {fileID: 8519113001558611321, guid: 710696b01c5de904dab87e475c0d4265, type: 3}
-  - {fileID: 8519113001558611321, guid: f8fc00a628175d945bf1e278e4d8b1d2, type: 3}
+  m_playerInput: {fileID: 0}
+  m_lineWaveSampleMaterialController:
+    m_positiveMaterial: {fileID: 2100000, guid: 610953865cd47e64280bc5b628f5c482,
+      type: 2}
+    m_negativeMaterial: {fileID: 2100000, guid: 7e3edfc48f2476941ac1214b65a4973a,
+      type: 2}
+    m_positiveRangeMin: -90
+    m_positiveRangeMax: 90
