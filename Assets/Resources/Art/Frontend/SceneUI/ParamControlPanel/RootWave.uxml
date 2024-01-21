@@ -42,7 +42,7 @@
                 </ui:FloatField>
             </ui:VisualElement>
             <ui:VisualElement name="TemperalFreq" style="flex-grow: 1;">
-                <ui:FloatField label="Frequency (mu)" value="42.2" readonly="false" name="FloatField" style="align-items: center; width: 70%;">
+                <ui:FloatField label="Frequency (mu)" value="750" readonly="false" name="FloatField" style="align-items: center; width: 70%;">
                     <ui:Label tabindex="-1" text="THz" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                 </ui:FloatField>
             </ui:VisualElement>
