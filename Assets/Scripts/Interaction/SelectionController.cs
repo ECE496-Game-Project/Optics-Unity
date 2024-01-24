@@ -50,7 +50,7 @@ public class SelectionController
         if (m_select != null)
         {
             OutlineManager.Instance.UnHighlight(m_select);
-            m_select.GetComponent<ISelectable>().OnMouseUnselect();
+            m_select.GetComponent<Selectable>().OnMouseUnselect();
             m_select = null;
         }
 
@@ -58,6 +58,7 @@ public class SelectionController
         if (m_highlight != null)
         {
             OutlineManager.Instance.UnHighlight(m_highlight);
+            m_highlight.GetComponent<Selectable>().OnMouseUnhover();
             m_highlight = null;
         }
 
@@ -86,7 +87,7 @@ public class SelectionController
 
         GameObject go = hit.collider.gameObject;
 
-        ISelectable clickable = go.GetComponent<ISelectable>();
+        Selectable clickable = go.GetComponent<Selectable>();
         if (clickable != null)
         {
             OutlineManager.Instance.Highlight(go);
@@ -114,6 +115,7 @@ public class SelectionController
         if (m_highlight != null)
         {
             OutlineManager.Instance.UnHighlight(m_highlight.gameObject);
+            m_highlight.GetComponent<Selectable>().OnMouseUnhover();
             m_highlight = null;
         }
 
@@ -131,13 +133,15 @@ public class SelectionController
         GameObject go = hit.collider.gameObject;
 
         // it is not a selectable object
-        ISelectable clickable = go.GetComponent<ISelectable>();
+        Selectable clickable = go.GetComponent<Selectable>();
         if (clickable == null)
         {
             return;
         }
 
+
         OutlineManager.Instance.Highlight(go);
         m_highlight = go;
+        m_highlight.GetComponent<Selectable>().OnMouseHover();
     }
 }

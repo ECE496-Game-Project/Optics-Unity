@@ -7,7 +7,7 @@ using UnityEngine.Events;
 namespace GO_Device {
     
 
-	public class DeviceBase : MonoBehaviour, I_ParameterTransfer, ISelectable {
+	public class DeviceBase : MonoBehaviour, I_ParameterTransfer {
         //public UnityEvent OnDeviceSelected;
         //public UnityEvent OnDeviceUnselected;
 
@@ -17,12 +17,12 @@ namespace GO_Device {
         public virtual void RegisterParametersCallback(ParameterInfoList ParameterInfos) { }
         public virtual void ParameterChangeTrigger() { }
         
-        // For Highlight Propose
-        public virtual void OnMouseSelect() { 
-            //OnDeviceSelected?.Invoke(); 
-        }
-        public virtual void OnMouseUnselect() { 
-            //OnDeviceUnselected?.Invoke(); 
-        }
+        //// For Highlight Propose
+        //public virtual void OnMouseSelect() { 
+        //    //OnDeviceSelected?.Invoke(); 
+        //}
+        //public virtual void OnMouseUnselect() { 
+        //    //OnDeviceUnselected?.Invoke(); 
+        //}
     }
 }
