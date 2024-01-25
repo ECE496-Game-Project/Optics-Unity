@@ -20,7 +20,7 @@ namespace SelectItems {
         }
 
         private void Awake() {
-            Name = "RootWave";
+            if(Name == null) Name = "RootWave";
         }
     }
 }

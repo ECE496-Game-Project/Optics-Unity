@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3765932580777478754}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -960, y: -540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -64,15 +64,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doc: {fileID: 4472339981327606014}
   UIInfoTransfer:
-  - nameOfGO: RootWave
+  - paramTransferName: RootWave
     paramTrans: {fileID: 11400000, guid: 26f04dcbe22adcd42bbd133090131a13, type: 2}
     paramUIAsset: {fileID: 9197481963319205126, guid: 4a4eafd2907ae4158a11b7907aa178e4,
       type: 3}
-  - nameOfGO: ChildWave
+  - paramTransferName: ChildWave
     paramTrans: {fileID: 11400000, guid: 5587e33a7fa44d648bc4832abcec6a45, type: 2}
     paramUIAsset: {fileID: 9197481963319205126, guid: 71249d8a454fb4d93af050a09405f37e,
       type: 3}
-  - nameOfGO: PolarizedDevice
+  - paramTransferName: PolarizedDevice
     paramTrans: {fileID: 11400000, guid: 9477a03bd3f8f43448bd97cd24dfcf3b, type: 2}
     paramUIAsset: {fileID: 9197481963319205126, guid: f72d97f5444b14fd8bcf596e984e77fa,
       type: 3}

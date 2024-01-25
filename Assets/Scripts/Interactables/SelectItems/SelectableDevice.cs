@@ -20,7 +20,7 @@ namespace SelectItems {
         }
 
         private void Awake() {
-            Name = "PolarizedDevice";
+            if(Name == null) Name = "PolarizedDevice";
         }
     }
 }
