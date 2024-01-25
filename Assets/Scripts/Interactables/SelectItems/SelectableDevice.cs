@@ -1,24 +1,25 @@
 using UnityEngine;
+using Panel;
 
 public class SelectableDevice : Selectable
 {
     public override void OnMouseHover()
     {
-        Debug.Log(gameObject.name + " is hovered");
+        //Debug.Log(gameObject.name + " is hovered");
     }
 
     public override void OnMouseSelect()
     {
-        Debug.Log(gameObject.name + " is Select");
+        ParamPanelManager.Instance.SelectParamView(this.gameObject);
     }
 
     public override void OnMouseUnhover()
     {
-        Debug.Log(gameObject.name + " is Unhover");
+        //Debug.Log(gameObject.name + " is Unhover");
     }
 
     public override void OnMouseUnselect()
     {
-        Debug.Log(gameObject.name + " is Unselect");
+        //Debug.Log(gameObject.name + " is Unselect");
     }
 }
