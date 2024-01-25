@@ -13,6 +13,8 @@ namespace GO_Device {
     }
 
     public class PolarizedDevice : DeviceBase {
+        public override string ParamTransferName { get { return "PolarizedDevice"; } }
+
         [SerializeField] protected DEVICETYPE DeviceType;
         [SerializeField] private float ThicknessOffset;
         [SerializeField] private float RotDeg;

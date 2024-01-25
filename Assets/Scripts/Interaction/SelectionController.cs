@@ -5,7 +5,7 @@ using Panel;
 using UnityEngine.UIElements;
 using System.Linq;
 using System.Collections.Generic;
-
+using SelectItems;
 public class SelectionController
 {
     private GameObject m_highlight, m_select;
@@ -50,7 +50,7 @@ public class SelectionController
         if (m_select != null)
         {
             OutlineManager.Instance.UnHighlight(m_select);
-            m_select.GetComponent<Selectable>().OnMouseUnselect();
+            m_select.GetComponent<Selectable>()?.OnMouseUnselect();
             m_select = null;
         }
 
@@ -58,7 +58,7 @@ public class SelectionController
         if (m_highlight != null)
         {
             OutlineManager.Instance.UnHighlight(m_highlight);
-            m_highlight.GetComponent<Selectable>().OnMouseUnhover();
+            m_highlight.GetComponent<Selectable>()?.OnMouseUnhover();
             m_highlight = null;
         }
 
@@ -83,12 +83,6 @@ public class SelectionController
 
             clickable.OnMouseSelect();
         }
-
-        OutlineManager.Instance.Highlight(go);
-        m_highlight = go;
-        m_select = go;
-
-        clickable.OnMouseSelect();
     }
 
     private void OnMouseMoved(Vector2 mousePos)

@@ -2,7 +2,7 @@ using UnityEngine;
 using Panel;
 
 namespace SelectItems {
-    public class SelectableDevice : Selectable {
+    public class SelectableChildWave : Selectable {
         public override void OnMouseHover() {
             //Debug.Log(gameObject.name + " is hovered");
         }
@@ -19,8 +19,8 @@ namespace SelectItems {
             //Debug.Log(gameObject.name + " is Unselect");
         }
 
-        private void Awake() {
-            Name = "PolarizedDevice";
+        public void Awake() {
+            Name = "ChildWave";
         }
     }
 }

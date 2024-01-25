@@ -13,11 +13,8 @@ namespace Interfaces {
         public void SyncRootParam(I_WaveLogic srcWI);
     }
     public interface I_ParameterTransfer {
+        public string ParamTransferName { get; }
         public void RegisterParametersCallback(ParameterInfoList ParameterInfos);
         public void ParameterChangeTrigger();
     }
-    //public interface ISelectable {
-    //    public void OnMouseSelect();
-    //    public void OnMouseUnselect();
-    //}
 }

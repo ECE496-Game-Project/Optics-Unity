@@ -11,6 +11,7 @@ namespace GO_Device {
         public virtual void WaveHit(in RaycastHit hit, WaveSource parentWS) { }
         public virtual void CleanDeviceHitTrace(WaveSource parentWS) { }
 
+        public virtual string ParamTransferName { get; }
         public virtual void RegisterParametersCallback(ParameterInfoList ParameterInfos) { }
         public virtual void ParameterChangeTrigger() { }
     }
