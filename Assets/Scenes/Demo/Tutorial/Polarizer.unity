@@ -325,33 +325,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
---- !u!1 &625168198 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 467164277421919784, guid: 530e718f8a5e10248bfa147bc2973c57,
-    type: 3}
-  m_PrefabInstance: {fileID: 467164277606410622}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &625168203
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 625168198}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 6.1950107}
-  m_Center: {x: 0, y: 0, z: 2.5975053}
 --- !u!1001 &776866133
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1156,6 +1129,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1796758694}
     m_Modifications:
+    - target: {fileID: 3503431383972000120, guid: 04b842efcef35744ba58c9b5210ed837,
+        type: 3}
+      propertyPath: UIInfoTransfer.Array.data[0].paramTransferName
+      value: RootWave
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503431383972000120, guid: 04b842efcef35744ba58c9b5210ed837,
+        type: 3}
+      propertyPath: UIInfoTransfer.Array.data[1].paramTransferName
+      value: ChildWave
+      objectReference: {fileID: 0}
+    - target: {fileID: 3503431383972000120, guid: 04b842efcef35744ba58c9b5210ed837,
+        type: 3}
+      propertyPath: UIInfoTransfer.Array.data[2].paramTransferName
+      value: PolarizedDevice
+      objectReference: {fileID: 0}
     - target: {fileID: 3765932580777478754, guid: 04b842efcef35744ba58c9b5210ed837,
         type: 3}
       propertyPath: m_Name
@@ -1226,11 +1214,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 467164277421919780, guid: 530e718f8a5e10248bfa147bc2973c57,
         type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 467164277421919780, guid: 530e718f8a5e10248bfa147bc2973c57,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1284,25 +1267,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wave
       objectReference: {fileID: 0}
-    - target: {fileID: 467164277421919784, guid: 530e718f8a5e10248bfa147bc2973c57,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 467164277421919785, guid: 530e718f8a5e10248bfa147bc2973c57,
-        type: 3}
-      propertyPath: _samplePointPrefab
-      value: 
-      objectReference: {fileID: 4017245597611873883, guid: 028a95b19f29a114080dcc94054eb866,
-        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 467164277421919784, guid: 530e718f8a5e10248bfa147bc2973c57,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 625168203}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 530e718f8a5e10248bfa147bc2973c57, type: 3}
 --- !u!1001 &3697451314577852695
 PrefabInstance:
@@ -1367,12 +1335,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7322507878371563533, guid: 283d78a58921b4c8e96cf2be87c730b0,
-        type: 3}
-      propertyPath: DeviceType
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -7063194613018510819, guid: 283d78a58921b4c8e96cf2be87c730b0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
