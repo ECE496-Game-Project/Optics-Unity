@@ -14,8 +14,8 @@ namespace GO_Wave
         [SerializeField]
         private Material m_negativeMaterial;
 
-        [SerializeField]
-        private float m_positiveRangeMin = -90f, m_positiveRangeMax = 90f;
+        //[SerializeField]
+        //private float m_positiveRangeMin = -90f, m_positiveRangeMax = 90f;
 
 
 
@@ -26,26 +26,27 @@ namespace GO_Wave
         // if return null, it means keep the old material
         public Material GetMaterial(float oldAngle, float newAngle)
         {
-            float deltaAngle = Mathf.Abs(Mathf.DeltaAngle(oldAngle, newAngle));
+            return m_positiveMaterial;
+            //float deltaAngle = Mathf.Abs(Mathf.DeltaAngle(oldAngle, newAngle));
 
 
-            // if the deltaAngle is not 180, it means the polarization is spherical
-            if (!Mathf.Approximately(deltaAngle, 180f))
-            {
-                return null;
-            }
+            //// if the deltaAngle is not 180, it means the polarization is spherical
+            //if (!Mathf.Approximately(deltaAngle, 180f))
+            //{
+            //    return null;
+            //}
 
 
-            float normalizedAngle = Mathf.DeltaAngle(newAngle, 0);
+            //float normalizedAngle = Mathf.DeltaAngle(newAngle, 0);
 
-            if (normalizedAngle >= m_positiveRangeMin && normalizedAngle < m_positiveRangeMax)
-            {
-                return m_positiveMaterial;
-            }
-            else
-            {
-                return m_negativeMaterial;
-            }
+            //if (normalizedAngle >= m_positiveRangeMin && normalizedAngle < m_positiveRangeMax)
+            //{
+            //    return m_positiveMaterial;
+            //}
+            //else
+            //{
+            //    return m_negativeMaterial;
+            //}
         }
         public Material SwapMaterial(Material material)
         {
