@@ -49,7 +49,7 @@ public class SelectionController
         // turn off previous select
         if (m_select != null)
         {
-            OutlineManager.Instance.UnHighlight(m_select);
+            //OutlineManager.Instance.UnHighlight(m_select);
             m_select.GetComponent<Selectable>()?.OnMouseUnselect();
             m_select = null;
         }
@@ -57,7 +57,7 @@ public class SelectionController
         // turn off previous select
         if (m_highlight != null)
         {
-            OutlineManager.Instance.UnHighlight(m_highlight);
+            //OutlineManager.Instance.UnHighlight(m_highlight);
             m_highlight.GetComponent<Selectable>()?.OnMouseUnhover();
             m_highlight = null;
         }
@@ -77,7 +77,7 @@ public class SelectionController
         Selectable clickable = go.GetComponent<Selectable>();
         if (clickable != null)
         {
-            OutlineManager.Instance.Highlight(go);
+            //OutlineManager.Instance.Highlight(go);
             m_highlight = go;
             m_select = go;
 
@@ -95,7 +95,7 @@ public class SelectionController
         // disable the previous highlight
         if (m_highlight != null)
         {
-            OutlineManager.Instance.UnHighlight(m_highlight.gameObject);
+            //OutlineManager.Instance.UnHighlight(m_highlight.gameObject);
             m_highlight.GetComponent<Selectable>().OnMouseUnhover();
             m_highlight = null;
         }
@@ -121,7 +121,7 @@ public class SelectionController
         }
 
 
-        OutlineManager.Instance.Highlight(go);
+        //OutlineManager.Instance.Highlight(go);
         m_highlight = go;
         m_highlight.GetComponent<Selectable>().OnMouseHover();
     }
