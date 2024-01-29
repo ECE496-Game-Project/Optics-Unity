@@ -210,6 +210,7 @@ namespace Panel {
         }
 
         public void SelectParamView(GameObject obj) {
+            Debug.Log(obj.name);
             var objts = obj.GetComponent<I_ParameterTransfer>();
             if (objts == null)
                 DebugLogger.Error(this.name, "Pass in GameObject does not have Component I_ParamTrans, Panic!");

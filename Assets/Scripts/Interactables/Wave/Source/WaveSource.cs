@@ -84,7 +84,7 @@ namespace GO_Wave {
             var nTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["N"];
 
             NameTuple.Getter = () => { return this.name; };
-            EoxTuple.Getter = () => { return m_params.Eox; };
+            EoxTuple.Getter = () => { Debug.Log(m_params.Eox); return m_params.Eox; };
             EoyTuple.Getter = () => { return m_params.Eoy; };
             thetaTuple.Getter = () => { return m_params.theta; };
             

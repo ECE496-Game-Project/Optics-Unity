@@ -4,19 +4,20 @@ using Panel;
 namespace SelectItems {
     public class SelectableDevice : Selectable {
         public override void OnMouseHover() {
-            //Debug.Log(gameObject.name + " is hovered");
+            OutlineManager.Instance.Highlight(this.gameObject);
         }
 
         public override void OnMouseSelect() {
+            OutlineManager.Instance.Highlight(this.gameObject);
             ParamPanelManager.Instance.SelectParamView(this.gameObject);
         }
 
         public override void OnMouseUnhover() {
-            //Debug.Log(gameObject.name + " is Unhover");
+            OutlineManager.Instance.UnHighlight(this.gameObject);
         }
 
         public override void OnMouseUnselect() {
-            //Debug.Log(gameObject.name + " is Unselect");
+            OutlineManager.Instance.UnHighlight(this.gameObject);
         }
     }
 }
