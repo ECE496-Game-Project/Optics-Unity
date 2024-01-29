@@ -39,8 +39,16 @@ namespace Panel {
         public List<UIPair> UIInfoTransfer; // For Inspector Registration Purpose
 
         public class UIInfo {
-            public ParameterInfoList List;
+            /// <summary>
+            /// Initalize in Awake
+            /// </summary>
             public VisualElement VEOfGO;
+            /// <summary>
+            /// Initalize in Start
+            /// </summary>
+            public ParameterInfoList List;
+
+            public UIInfo() { }
 
             public UIInfo(ParameterInfoList list, VisualElement paramOfGO) {
                 List = list;
@@ -80,9 +88,8 @@ namespace Panel {
             }
         }
 
-        public void PreRegisterCallback(VisualElement root) {
-            Button expButton = root.Q<Button>(name: "ExpandButton");
-            expButton.clicked += () => {
+        public void PreRegisterCallback() {
+            ExpandButton.clicked += () => {
                 if(isPanelExpanded) CloseExpandPanel();
                 else OpenExpandPanel();
             };
@@ -92,7 +99,7 @@ namespace Panel {
             Body = doc.rootVisualElement.Q("Body");
             ExpandPanel = doc.rootVisualElement.Q("ExpandPanel");
             ExpandButton = doc.rootVisualElement.Q<Button>("ExpandButton");
-            
+
             foreach (var UIInfo in UIInfoTransfer) {
                 VisualElement Container = UIInfo.paramUIAsset.Instantiate();
                 Container.name = UIInfo.paramTransferName;
@@ -114,13 +121,14 @@ namespace Panel {
                 var paramOfGO = root.Q(UIInfo.paramTransferName);
                 Assert.IsNotNull(paramOfGO);
 
-                ParameterInfoList pil = new ParameterInfoList(UIInfo.paramTrans.List, root);
+                ParameterInfoList pil = new ParameterInfoList(UIInfo.paramTrans.List, paramOfGO);
 
                 m_paramInfoDict.Add(UIInfo.paramTransferName, new UIInfo(pil, paramOfGO));
 
                 PreRegisterCallback(pil);
-                PreRegisterCallback(root);
             }
+
+            PreRegisterCallback();
         }
         #endregion
 
@@ -210,7 +218,6 @@ namespace Panel {
         }
 
         public void SelectParamView(GameObject obj) {
-            Debug.Log(obj.name);
             var objts = obj.GetComponent<I_ParameterTransfer>();
             if (objts == null)
                 DebugLogger.Error(this.name, "Pass in GameObject does not have Component I_ParamTrans, Panic!");
