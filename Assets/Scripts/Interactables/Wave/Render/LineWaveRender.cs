@@ -5,10 +5,6 @@ using WaveUtils;
 using Interfaces;
 using ObjectPool;
 
-#if UnityEditor
-using UnityEditor.PackageManager.UI;
-#endif
-
 namespace GO_Wave {
     public class LineWaveRender : MonoBehaviour, I_WaveRender {
 

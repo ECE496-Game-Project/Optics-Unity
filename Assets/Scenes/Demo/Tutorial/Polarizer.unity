@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.23236361, g: 0.23479086, b: 0.27237764, a: 1}
+  m_IndirectSpecularColor: {r: 0.23237315, g: 0.23476109, b: 0.27237305, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -609,8 +609,6 @@ MonoBehaviour:
       type: 2}
     m_negativeMaterial: {fileID: 2100000, guid: 7e3edfc48f2476941ac1214b65a4973a,
       type: 2}
-    m_positiveRangeMin: -90
-    m_positiveRangeMax: 90
 --- !u!4 &1206682434
 Transform:
   m_ObjectHideFlags: 0
@@ -1144,6 +1142,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1796758694}
     m_Modifications:
+    - target: {fileID: 3503431383972000120, guid: 04b842efcef35744ba58c9b5210ed837,
+        type: 3}
+      propertyPath: UIInfoTransfer.Array.data[1].paramUIAsset
+      value: 
+      objectReference: {fileID: 9197481963319205126, guid: c2f36e37ef252394f8443414d663389a,
+        type: 3}
     - target: {fileID: 3765932580777478754, guid: 04b842efcef35744ba58c9b5210ed837,
         type: 3}
       propertyPath: m_Name
@@ -1359,6 +1363,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Name
       value: Polarizer1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322507878371563533, guid: 283d78a58921b4c8e96cf2be87c730b0,
+        type: 3}
+      propertyPath: DeviceType
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -7063194613018510819, guid: 283d78a58921b4c8e96cf2be87c730b0, type: 3}

@@ -39,8 +39,16 @@ namespace Panel {
         public List<UIPair> UIInfoTransfer; // For Inspector Registration Purpose
 
         public class UIInfo {
-            public ParameterInfoList List;
+            /// <summary>
+            /// Initalize in Awake
+            /// </summary>
             public VisualElement VEOfGO;
+            /// <summary>
+            /// Initalize in Start
+            /// </summary>
+            public ParameterInfoList List;
+
+            public UIInfo() { }
 
             public UIInfo(ParameterInfoList list, VisualElement paramOfGO) {
                 List = list;
@@ -80,9 +88,8 @@ namespace Panel {
             }
         }
 
-        public void PreRegisterCallback(VisualElement root) {
-            Button expButton = root.Q<Button>(name: "ExpandButton");
-            expButton.clicked += () => {
+        public void PreRegisterCallback() {
+            ExpandButton.clicked += () => {
                 if(isPanelExpanded) CloseExpandPanel();
                 else OpenExpandPanel();
             };
@@ -92,7 +99,7 @@ namespace Panel {
             Body = doc.rootVisualElement.Q("Body");
             ExpandPanel = doc.rootVisualElement.Q("ExpandPanel");
             ExpandButton = doc.rootVisualElement.Q<Button>("ExpandButton");
-            
+
             foreach (var UIInfo in UIInfoTransfer) {
                 VisualElement Container = UIInfo.paramUIAsset.Instantiate();
                 Container.name = UIInfo.paramTransferName;
@@ -114,19 +121,19 @@ namespace Panel {
                 var paramOfGO = root.Q(UIInfo.paramTransferName);
                 Assert.IsNotNull(paramOfGO);
 
-                ParameterInfoList pil = new ParameterInfoList(UIInfo.paramTrans.List, root);
+                ParameterInfoList pil = new ParameterInfoList(UIInfo.paramTrans.List, paramOfGO);
 
                 m_paramInfoDict.Add(UIInfo.paramTransferName, new UIInfo(pil, paramOfGO));
 
                 PreRegisterCallback(pil);
-                PreRegisterCallback(root);
             }
+
+            PreRegisterCallback();
         }
         #endregion
 
         #region Runtime Update
-        private void CleanSetter() {
-            ParameterInfoList list = m_paramInfoDict[m_selectedUI].List;
+        private void CleanSetter(ParameterInfoList list) {
             foreach (var entry in list.SymbolQuickAccess) {
                 var pi = entry.Value;
                 switch (pi.Type) {
@@ -202,8 +209,9 @@ namespace Panel {
             }
         }
 
-        private void UISetupPipeline(I_ParameterTransfer pt) {
-            CleanSetter();
+        private void UISetupPipeline(I_ParameterTransfer pt, string newlySelect) {
+            if(m_selectedUI != "") CleanSetter(m_paramInfoDict[m_selectedUI].List);
+            m_selectedUI = newlySelect;
             pt.RegisterParametersCallback(m_paramInfoDict[m_selectedUI].List);
             CallGetter();
             RegisterSetter();
@@ -214,10 +222,8 @@ namespace Panel {
             if (objts == null)
                 DebugLogger.Error(this.name, "Pass in GameObject does not have Component I_ParamTrans, Panic!");
 
-            m_selectedUI = objts.ParamTransferName;
-
             // All functionality operates with string m_selectedUI
-            UISetupPipeline(objts);
+            UISetupPipeline(objts, objts.ParamTransferName);
             OpenParamUIDisplay();
             OpenExpandPanel();
         }
