@@ -70,7 +70,7 @@ MonoBehaviour:
       type: 3}
   - paramTransferName: ChildWave
     paramTrans: {fileID: 11400000, guid: 5587e33a7fa44d648bc4832abcec6a45, type: 2}
-    paramUIAsset: {fileID: 9197481963319205126, guid: 71249d8a454fb4d93af050a09405f37e,
+    paramUIAsset: {fileID: 9197481963319205126, guid: c2f36e37ef252394f8443414d663389a,
       type: 3}
   - paramTransferName: PolarizedDevice
     paramTrans: {fileID: 11400000, guid: 9477a03bd3f8f43448bd97cd24dfcf3b, type: 2}
