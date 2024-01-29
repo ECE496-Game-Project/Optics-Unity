@@ -125,8 +125,7 @@ namespace Panel {
         #endregion
 
         #region Runtime Update
-        private void CleanSetter() {
-            ParameterInfoList list = m_paramInfoDict[m_selectedUI].List;
+        private void CleanSetter(ParameterInfoList list) {
             foreach (var entry in list.SymbolQuickAccess) {
                 var pi = entry.Value;
                 switch (pi.Type) {
@@ -202,8 +201,9 @@ namespace Panel {
             }
         }
 
-        private void UISetupPipeline(I_ParameterTransfer pt) {
-            CleanSetter();
+        private void UISetupPipeline(I_ParameterTransfer pt, string newlySelect) {
+            if(m_selectedUI != "") CleanSetter(m_paramInfoDict[m_selectedUI].List);
+            m_selectedUI = newlySelect;
             pt.RegisterParametersCallback(m_paramInfoDict[m_selectedUI].List);
             CallGetter();
             RegisterSetter();
@@ -214,10 +214,8 @@ namespace Panel {
             if (objts == null)
                 DebugLogger.Error(this.name, "Pass in GameObject does not have Component I_ParamTrans, Panic!");
 
-            m_selectedUI = objts.ParamTransferName;
-
             // All functionality operates with string m_selectedUI
-            UISetupPipeline(objts);
+            UISetupPipeline(objts, objts.ParamTransferName);
             OpenParamUIDisplay();
             OpenExpandPanel();
         }

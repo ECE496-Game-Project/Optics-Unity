@@ -50,17 +50,6 @@ namespace GO_Wave {
             WaveInteract.CleanInteract();
             WaveDisplay.CleanDisplay();
         }
-
-        public void WaveParameterGetAll(out WAVETYPE type, out float eox, out float eoy, out float w, out float k, out float n, out float theta, out float phi) {
-            type = m_params.Type;
-            eox = m_params.Eox;
-            eoy = m_params.Eoy;
-            w = m_params.w; 
-            k = m_params.k;
-            n = m_params.n;
-            theta = m_params.theta;
-            phi = m_params.phi;
-        }
         #endregion
 
         protected void RegisterDirCallback() {
@@ -111,7 +100,7 @@ namespace GO_Wave {
             nTuple.Getter = () => { return m_params.n; };
 
 
-            NameTuple.Setter = (evt) => { this.name = evt.newValue; };
+            NameTuple.Setter = (evt) => { /*this.name = evt.newValue;*/ };
             EoxTuple.Setter = (evt) => { m_params.Eox = evt.newValue; ParameterChangeTrigger(); };
             EoyTuple.Setter = (evt) => { m_params.Eoy = evt.newValue; ParameterChangeTrigger(); };
             thetaTuple.Setter = (evt) => { m_params.theta = evt.newValue; ParameterChangeTrigger(); };
@@ -155,12 +144,13 @@ namespace GO_Wave {
 
             /*init ActiveWaveParams*/
             m_params = srcWP;
+            EffectDistance = srcWP.RODistance;
             RegisterDirCallback();
         }
-        
+
+        // for child-wave Trigger have to wait for Logic & Render initalized, thus in Start
         public void Start() {
             ParameterChangeTrigger();
         }
-
     }
 }

@@ -18,9 +18,5 @@ namespace SelectItems {
         public override void OnMouseUnselect() {
             //Debug.Log(gameObject.name + " is Unselect");
         }
-
-        public void Awake() {
-            Name = "ChildWave";
-        }
     }
 }
