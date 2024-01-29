@@ -220,6 +220,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Waveplate4
       objectReference: {fileID: 0}
+    - target: {fileID: 3149516648487083916, guid: 7478b4cbb76314a13b9f7ecdaa7ad630,
+        type: 3}
+      propertyPath: Name
+      value: Waveplate4
+      objectReference: {fileID: 0}
     - target: {fileID: 5942861067040670341, guid: 7478b4cbb76314a13b9f7ecdaa7ad630,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -604,6 +609,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Waveplate3
       objectReference: {fileID: 0}
+    - target: {fileID: 3149516648487083916, guid: 7478b4cbb76314a13b9f7ecdaa7ad630,
+        type: 3}
+      propertyPath: Name
+      value: Waveplate3
+      objectReference: {fileID: 0}
     - target: {fileID: 5942861067040670341, guid: 7478b4cbb76314a13b9f7ecdaa7ad630,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -835,6 +845,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Waveplate2
       objectReference: {fileID: 0}
+    - target: {fileID: 3149516648487083916, guid: 7478b4cbb76314a13b9f7ecdaa7ad630,
+        type: 3}
+      propertyPath: Name
+      value: Waveplate2
+      objectReference: {fileID: 0}
     - target: {fileID: 5942861067040670341, guid: 7478b4cbb76314a13b9f7ecdaa7ad630,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1002,6 +1017,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 31605911179392699, guid: 530e718f8a5e10248bfa147bc2973c57,
+        type: 3}
+      propertyPath: Name
+      value: RootWave
+      objectReference: {fileID: 0}
     - target: {fileID: 467164277421919780, guid: 530e718f8a5e10248bfa147bc2973c57,
         type: 3}
       propertyPath: m_RootOrder
@@ -1076,12 +1096,12 @@ PrefabInstance:
     - target: {fileID: 3960445924953743084, guid: 530e718f8a5e10248bfa147bc2973c57,
         type: 3}
       propertyPath: m_Size.z
-      value: 6.09
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3960445924953743084, guid: 530e718f8a5e10248bfa147bc2973c57,
         type: 3}
       propertyPath: m_Center.z
-      value: 2.95
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1352,6 +1372,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Waveplate
+      objectReference: {fileID: 0}
+    - target: {fileID: 3149516648487083916, guid: 7478b4cbb76314a13b9f7ecdaa7ad630,
+        type: 3}
+      propertyPath: Name
+      value: Waveplate1
       objectReference: {fileID: 0}
     - target: {fileID: 5942861067040670341, guid: 7478b4cbb76314a13b9f7ecdaa7ad630,
         type: 3}

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.23237315, g: 0.23476109, b: 0.27237305, a: 1}
+  m_IndirectSpecularColor: {r: 0.23236361, g: 0.23479086, b: 0.27237764, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -191,6 +191,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242572386131563101, guid: 283d78a58921b4c8e96cf2be87c730b0,
+        type: 3}
+      propertyPath: Name
+      value: Polarizer2
       objectReference: {fileID: 0}
     - target: {fileID: 7322507878371563533, guid: 283d78a58921b4c8e96cf2be87c730b0,
         type: 3}
@@ -455,6 +460,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242572386131563101, guid: 283d78a58921b4c8e96cf2be87c730b0,
+        type: 3}
+      propertyPath: Name
+      value: Polarizer3
       objectReference: {fileID: 0}
     - target: {fileID: 7322507878371563533, guid: 283d78a58921b4c8e96cf2be87c730b0,
         type: 3}
@@ -906,6 +916,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6242572386131563101, guid: 283d78a58921b4c8e96cf2be87c730b0,
+        type: 3}
+      propertyPath: Name
+      value: Polarizer4
+      objectReference: {fileID: 0}
     - target: {fileID: 7322507878371563533, guid: 283d78a58921b4c8e96cf2be87c730b0,
         type: 3}
       propertyPath: RotDeg
@@ -1129,21 +1144,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1796758694}
     m_Modifications:
-    - target: {fileID: 3503431383972000120, guid: 04b842efcef35744ba58c9b5210ed837,
-        type: 3}
-      propertyPath: UIInfoTransfer.Array.data[0].paramTransferName
-      value: RootWave
-      objectReference: {fileID: 0}
-    - target: {fileID: 3503431383972000120, guid: 04b842efcef35744ba58c9b5210ed837,
-        type: 3}
-      propertyPath: UIInfoTransfer.Array.data[1].paramTransferName
-      value: ChildWave
-      objectReference: {fileID: 0}
-    - target: {fileID: 3503431383972000120, guid: 04b842efcef35744ba58c9b5210ed837,
-        type: 3}
-      propertyPath: UIInfoTransfer.Array.data[2].paramTransferName
-      value: PolarizedDevice
-      objectReference: {fileID: 0}
     - target: {fileID: 3765932580777478754, guid: 04b842efcef35744ba58c9b5210ed837,
         type: 3}
       propertyPath: m_Name
@@ -1212,6 +1212,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 31605911179392699, guid: 530e718f8a5e10248bfa147bc2973c57,
+        type: 3}
+      propertyPath: Name
+      value: RootWave
+      objectReference: {fileID: 0}
+    - target: {fileID: 467164277421919780, guid: 530e718f8a5e10248bfa147bc2973c57,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 467164277421919780, guid: 530e718f8a5e10248bfa147bc2973c57,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1266,6 +1276,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wave
+      objectReference: {fileID: 0}
+    - target: {fileID: 3960445924953743084, guid: 530e718f8a5e10248bfa147bc2973c57,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3960445924953743084, guid: 530e718f8a5e10248bfa147bc2973c57,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1335,10 +1355,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7322507878371563533, guid: 283d78a58921b4c8e96cf2be87c730b0,
+    - target: {fileID: 6242572386131563101, guid: 283d78a58921b4c8e96cf2be87c730b0,
         type: 3}
-      propertyPath: DeviceType
-      value: 0
+      propertyPath: Name
+      value: Polarizer1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -7063194613018510819, guid: 283d78a58921b4c8e96cf2be87c730b0, type: 3}
