@@ -69,7 +69,7 @@ namespace GO_Wave {
                     break;
             }
         }
-        public virtual void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
+        public void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
             var NameTuple = (ParameterInfo<string>)ParameterInfos.SymbolQuickAccess["Name"];
             var EoxTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["UdirAmp"];
             var EoyTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["VdirAmp"];
