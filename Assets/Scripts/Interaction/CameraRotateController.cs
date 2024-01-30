@@ -1,23 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Rotate : MonoBehaviour
+[System.Serializable]
+public class CameraRotateController
 {
 
-    [SerializeField]
     private Transform m_lookingObject;
 
-    [SerializeField]
     private PlayerInput m_playerInput;
 
     [SerializeField]
     private float m_degreePerUnit = 10f;
 
-    // Start is called before the first frame update
-    void Start()
+
+    public CameraRotateController(Transform lookingObject, PlayerInput playerInput)
     {
+        m_lookingObject = lookingObject;
+        m_playerInput = playerInput;
         m_playerInput.actions["Rotate"].performed += OnRotatePerformed;
     }
 
@@ -36,9 +35,4 @@ public class Rotate : MonoBehaviour
         m_lookingObject.Rotate(Vector3.right, -delta.y, Space.Self);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
