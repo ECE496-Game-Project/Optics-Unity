@@ -18,34 +18,34 @@ MonoBehaviour:
     Permit: 1
   - Name: UdirAmp
     Type: 2
-    Permit: 3
+    Permit: 0
   - Name: VdirAmp
     Type: 2
-    Permit: 3
+    Permit: 0
   - Name: Theta
     Type: 2
-    Permit: 3
-  - Name: TemperalPeriod
+    Permit: 0
+  - Name: T
     Type: 2
     Permit: 0
-  - Name: TemperalFreq
-    Type: 2
-    Permit: 1
-  - Name: TemperalAngularFreq
+  - Name: mu
     Type: 2
     Permit: 0
-  - Name: SpatialPeriod
-    Type: 2
-    Permit: 3
-  - Name: SpatialFreq
+  - Name: w
     Type: 2
     Permit: 0
-  - Name: SpatialAngularFreq
+  - Name: lambda
+    Type: 2
+    Permit: 0
+  - Name: f
+    Type: 2
+    Permit: 0
+  - Name: k
     Type: 2
     Permit: 0
   - Name: Phi
     Type: 2
-    Permit: 3
+    Permit: 0
   - Name: N
     Type: 2
-    Permit: 3
+    Permit: 0

@@ -4,6 +4,7 @@ using GO_Wave;
 using WaveUtils;
 using ParameterTransfer;
 using CommonUtils;
+using SelectItems;
 using Complex = System.Numerics.Complex;
 
 namespace GO_Device {
@@ -13,6 +14,8 @@ namespace GO_Device {
     }
 
     public class PolarizedDevice : DeviceBase {
+        public override string ParamTransferName { get { return "PolarizedDevice"; } }
+
         [SerializeField] protected DEVICETYPE DeviceType;
         [SerializeField] private float ThicknessOffset;
         [SerializeField] private float RotDeg;
@@ -59,7 +62,7 @@ namespace GO_Device {
             RotDegTuple.Getter = () => { return RotDeg; };
             AxisDiffDegTuple.Getter = () => { return AxisDiffDeg; };
 
-            NameTuple.Setter = (evt) => { this.name = evt.newValue; };
+            NameTuple.Setter = (evt) => { /*this.name = evt.newValue;*/ };
             DeviceTypeTuple.Setter = (evt) => { DeviceType = (DEVICETYPE)evt.newValue; ParameterChangeTrigger(); };
             RotDegTuple.Setter = (evt) => { RotDeg = evt.newValue; ParameterChangeTrigger(); };
             AxisDiffDegTuple.Setter = (evt) => { AxisDiffDeg = evt.newValue; ParameterChangeTrigger(); };
@@ -71,7 +74,16 @@ namespace GO_Device {
 
         public override void WaveHit(in RaycastHit hit, WaveSource parentWS) {
             /*GO Setup*/
-            GameObject new_GO = new GameObject(parentWS.name + "_Child", typeof(WaveSource), typeof(LineWaveRender), typeof(LineWaveLogic)/*, typeof(BoxCollider)*/);
+            // Awake function in scripts will be called in the order of,
+            // WaveSource -> LineWaveRender -> BoxCollider -> LineWaveLogic
+            GameObject new_GO = new GameObject(
+                parentWS.name + "_Child", 
+                typeof(WaveSource), 
+                typeof(LineWaveRender), 
+                typeof(BoxCollider), 
+                typeof(LineWaveLogic),
+                typeof(SelectableChildWave)
+            );
             new_GO.transform.position = hit.point + Vector3.Normalize(hit.point - parentWS.transform.position) * ThicknessOffset;
             new_GO.transform.rotation = parentWS.transform.rotation;
 
@@ -79,7 +91,6 @@ namespace GO_Device {
             WaveSource childWS = new_GO.GetComponent<WaveSource>();
             LineWaveRender lwd = new_GO.GetComponent<LineWaveRender>();
             LineWaveLogic lwi = new_GO.GetComponent<LineWaveLogic>();
-            //BoxCollider colld = new_GO.GetComponent<BoxCollider>();
 
             WaveParams childWP = new WaveParams();
             /* Calculate Eox, Eoy, Theta*/
@@ -97,9 +108,6 @@ namespace GO_Device {
             parentWS.EffectDistance = hit.distance;
             childWP.RODistance = tmpDistance - hit.distance;
 
-            /* Modify Collider Position & scale */
-            //colld.center = hit.point + Vector3.Normalize(parentWS.transform.position - hit.point) * hit.distance / 2;
-            
             /* Copy Parent's t & n, then compute rest*/
             childWP.T = parentWS.Params.T;
             childWP.n = parentWS.Params.n;

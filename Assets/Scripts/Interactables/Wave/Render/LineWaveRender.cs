@@ -42,6 +42,7 @@ namespace GO_Wave {
             int diff = m_SampleCount - _samplePointList.Count;
             while (diff > 0) {
                 LineWaveSample sample = LineWaveSamplePool.Instance.Pool.Get();
+                
                 sample.transform.rotation = Quaternion.LookRotation(this.transform.forward, this.transform.up);
                 sample.transform.parent = this.transform;
                 _samplePointList.Push(sample);

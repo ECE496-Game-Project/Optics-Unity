@@ -25,22 +25,22 @@ MonoBehaviour:
   - Name: Theta
     Type: 2
     Permit: 3
-  - Name: TemperalPeriod
+  - Name: T
     Type: 2
     Permit: 0
-  - Name: TemperalFreq
+  - Name: mu
     Type: 2
     Permit: 1
-  - Name: TemperalAngularFreq
+  - Name: w
     Type: 2
     Permit: 0
-  - Name: SpatialPeriod
+  - Name: lambda
     Type: 2
     Permit: 3
-  - Name: SpatialFreq
+  - Name: f
     Type: 2
     Permit: 0
-  - Name: SpatialAngularFreq
+  - Name: k
     Type: 2
     Permit: 0
   - Name: Phi

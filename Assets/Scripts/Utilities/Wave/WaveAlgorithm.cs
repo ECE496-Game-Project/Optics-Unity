@@ -22,6 +22,13 @@ namespace WaveUtils {
 			param.f = param.k / (2 * Mathf.PI);
 			param.lambda = 1 / param.f;
 		}
+		public static void changeMu(WaveParams param) {
+			param.w = param.mu * 2 * Mathf.PI;
+			param.T = 1 / param.mu;
+			param.k = param.w * param.n / C;
+			param.f = param.k / (2 * Mathf.PI);
+			param.lambda = 1 / param.f;
+		}
 		public static void changeLambda(WaveParams param) {
 			param.f = 1 / param.lambda;
 			param.k = 2 * Mathf.PI * param.f;

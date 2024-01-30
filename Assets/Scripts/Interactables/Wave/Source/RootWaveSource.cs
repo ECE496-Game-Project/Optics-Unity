@@ -7,6 +7,8 @@ using ParameterTransfer;
 
 namespace GO_Wave {
     public class RootWaveSource : WaveSource {
+        public override string ParamTransferName { get { return "RootWave"; } }
+
         #region INSPECTOR SETTINGS
         [SerializeField] private SO_WaveParams _profile;
         #endregion
