@@ -9,9 +9,9 @@
                     <ui:Label tabindex="-1" text="V/m" parse-escape-sequences="true" display-tooltip-when-elided="true" />
                 </ui:FloatField>
                 <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
-                    <ui:Label tabindex="-1" text="-5" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Min" style="align-self: center;" />
-                    <ui:Slider picking-mode="Ignore" value="1" high-value="5" name="Slider" low-value="-5" style="width: 135px;" />
-                    <ui:Label tabindex="-1" text="5" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Max" style="align-self: center;" />
+                    <ui:Label tabindex="-1" text="-2" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Min" style="align-self: center;" />
+                    <ui:Slider picking-mode="Ignore" value="1" high-value="2" name="Slider" low-value="-2" style="width: 135px;" />
+                    <ui:Label tabindex="-1" text="2" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Max" style="align-self: center;" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="VdirAmp" style="flex-grow: 1; flex-direction: row;">
@@ -19,9 +19,9 @@
                     <ui:Label tabindex="-1" text="V/m" parse-escape-sequences="true" display-tooltip-when-elided="true" />
                 </ui:FloatField>
                 <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
-                    <ui:Label tabindex="-1" text="-5" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Min" style="align-self: center;" />
-                    <ui:Slider picking-mode="Ignore" value="1" high-value="5" name="Slider" low-value="-5" style="width: 135px;" />
-                    <ui:Label tabindex="-1" text="5" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Max" style="align-self: center;" />
+                    <ui:Label tabindex="-1" text="-2" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Min" style="align-self: center;" />
+                    <ui:Slider picking-mode="Ignore" value="1" high-value="2" name="Slider" low-value="-2" style="width: 135px;" />
+                    <ui:Label tabindex="-1" text="2" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Max" style="align-self: center;" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="Theta" style="flex-grow: 1; flex-direction: row;">
