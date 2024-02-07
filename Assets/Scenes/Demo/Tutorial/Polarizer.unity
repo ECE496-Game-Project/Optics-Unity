@@ -603,7 +603,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed6fb0861a9815419a956929d774db7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_zoomController:
+    m_zoomDelta: 1.5
+  m_cameraRotateController:
+    m_degreePerUnit: 10
   m_playerInput: {fileID: 1233328264}
+  m_vcam: {fileID: 1233328265}
+  m_lookingObject: {fileID: 1568142789}
   m_lineWaveSampleMaterialController:
     m_positiveMaterial: {fileID: 2100000, guid: 610953865cd47e64280bc5b628f5c482,
       type: 2}
@@ -851,7 +857,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1252805850
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -924,7 +929,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f3d0e3e04a7f4c31b77f05ceae92fe6, type: 3}
---- !u!1001 &1273524759
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1096,6 +1100,12 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!4 &1568142789 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6901406372120178830, guid: d7b07370d2c584fd2b6fcffcec839d18,
+    type: 3}
+  m_PrefabInstance: {fileID: 1233328263}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1796758690
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,16 +1,15 @@
 using Cinemachine;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Zoom : MonoBehaviour
+[System.Serializable]
+public class ZoomController
 {
-    [SerializeField]
+
     private PlayerInput m_playerInput;
 
-    [SerializeField]
+
     private CinemachineVirtualCamera m_vcam;
     private CinemachineTransposer m_transposer;
 
@@ -19,13 +18,22 @@ public class Zoom : MonoBehaviour
 
     public float CameraDepth => -m_transposer.m_FollowOffset.z;
 
-    // Start is called before the first frame update
-    void Start()
+    public ZoomController(PlayerInput playerInput, CinemachineVirtualCamera vcam)
     {
-        m_playerInput.actions["Zoom"].performed += OnZoomPerformed;
+        m_playerInput = playerInput;
+        m_vcam = vcam;
 
+        m_playerInput.actions["Zoom"].performed += OnZoomPerformed;
         m_transposer = m_vcam.GetCinemachineComponent(CinemachineCore.Stage.Body) as CinemachineTransposer;
     }
+
+    // Start is called before the first frame update
+    //void Start()
+    //{
+    //    m_playerInput.actions["ZoomController"].performed += OnZoomPerformed;
+
+    //    m_transposer = m_vcam.GetCinemachineComponent(CinemachineCore.Stage.Body) as CinemachineTransposer;
+    //}
 
     private void OnZoomPerformed(InputAction.CallbackContext context)
     {
@@ -46,9 +54,4 @@ public class Zoom : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

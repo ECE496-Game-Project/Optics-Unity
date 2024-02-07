@@ -1,24 +1,23 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class DragMove : MonoBehaviour
+public class DragMoveController
 {
 
-    [SerializeField]
     private Transform m_lookingObject;
 
-    [SerializeField]
     private PlayerInput m_playerInput;
 
-    [SerializeField]
-    private Zoom m_zoomComponent;
+    private ZoomController m_zoomComponent;
 
     private Vector2 m_previousMousePosition;
-    // Start is called before the first frame update
-    void Start()
+
+    public DragMoveController(PlayerInput playerInput, ZoomController zoomController, Transform reference)
     {
-        m_zoomComponent = transform.GetComponent<Zoom>();
+        m_playerInput = playerInput;
+        m_zoomComponent = zoomController;
+        m_lookingObject = reference;
+
         m_playerInput.actions["Translation"].performed += OnMouseMove;
         m_playerInput.actions["Translation"].started += OnMousePrep;
     }
