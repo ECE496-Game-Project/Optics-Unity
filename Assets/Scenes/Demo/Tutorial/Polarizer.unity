@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2331076, g: 0.23627803, b: 0.27289605, a: 1}
+  m_IndirectSpecularColor: {r: 0.23236361, g: 0.23479086, b: 0.27237764, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -129,6 +129,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 274313587098046999}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &56830974 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6901406372872370138, guid: d7b07370d2c584fd2b6fcffcec839d18,
+    type: 3}
+  m_PrefabInstance: {fileID: 1233328263}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &241232797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -330,12 +342,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
---- !u!4 &584432283 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6901406372120178830, guid: d7b07370d2c584fd2b6fcffcec839d18,
-    type: 3}
-  m_PrefabInstance: {fileID: 1233328263}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &776866133
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -614,8 +620,8 @@ MonoBehaviour:
   m_cameraRotateController:
     m_degreePerUnit: 0
   m_playerInput: {fileID: 1233328264}
-  m_vcam: {fileID: 1834058984}
-  m_lookingObject: {fileID: 584432283}
+  m_vcam: {fileID: 56830974}
+  m_lookingObject: {fileID: 0}
   m_lineWaveSampleMaterialController:
     m_positiveMaterial: {fileID: 2100000, guid: 610953865cd47e64280bc5b628f5c482,
       type: 2}
@@ -630,7 +636,7 @@ Transform:
   m_GameObject: {fileID: 1206682432}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.064602, y: -31.911587, z: 45.9285}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1014,7 +1020,8 @@ PrefabInstance:
       propertyPath: DeviceType
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6084953587058452338, guid: 283d78a58921b4c8e96cf2be87c730b0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1213,18 +1220,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1834058984 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6901406372872370138, guid: d7b07370d2c584fd2b6fcffcec839d18,
-    type: 3}
-  m_PrefabInstance: {fileID: 1233328263}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1981990861 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4322422503199134946, guid: a97b8e4006bd23c4d9841589668b21c9,
@@ -1378,7 +1373,7 @@ PrefabInstance:
     - target: {fileID: 4096693397236163748, guid: 283d78a58921b4c8e96cf2be87c730b0,
         type: 3}
       propertyPath: m_Name
-      value: Polarizer
+      value: Polarizer1
       objectReference: {fileID: 0}
     - target: {fileID: 5409787213953694411, guid: 283d78a58921b4c8e96cf2be87c730b0,
         type: 3}
