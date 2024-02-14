@@ -50,13 +50,13 @@ namespace WaveUtils {
 		}
 
 		public static Vector3 CalcIrradiance(Vector3 r, float t, WaveParams param) {
-			float kdotr = Vector3.Dot(param.KHat(Vector3.zero), r) * param.k;
+			float kdotr = Vector3.Dot(param.KHat, r) * param.k;
 			float expCommon = kdotr - Mathf.Deg2Rad * param.w * t + Mathf.Deg2Rad * param.phi;
 
 			float uMag = param.Eox * Mathf.Cos(expCommon);
 			float vMag = param.Eoy * Mathf.Cos(expCommon + Mathf.Deg2Rad * param.theta);
 			
-			return uMag * param.UHat(Vector3.zero) + vMag * param.VHat(Vector3.zero);
+			return uMag * param.UHat + vMag * param.VHat;
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace WaveUtils {
         public static float CalculateTravelAccumulatedPhase(
             Vector3 r, WaveParams InputParam, WaveParams outputParam)
         {
-            float kdotr = Vector3.Dot(InputParam.KHat(Vector3.zero), r) * InputParam.k;
+            float kdotr = Vector3.Dot(InputParam.KHat, r) * InputParam.k;
             float expCommon = kdotr + Mathf.Deg2Rad * InputParam.phi;
 
             float degree = Mathf.Rad2Deg * expCommon;

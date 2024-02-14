@@ -7,7 +7,7 @@ using UnityEngine.Events;
 namespace GO_Device {
     
 
-	public class DeviceBase : MonoBehaviour, I_ParameterTransfer {
+	public class DeviceBase : MonoBehaviour, I_ParameterPanel {
         public virtual void WaveHit(in RaycastHit hit, WaveSource parentWS) { }
         public virtual void CleanDeviceHitTrace(WaveSource parentWS) { }
 

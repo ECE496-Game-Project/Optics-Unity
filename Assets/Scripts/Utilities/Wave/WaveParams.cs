@@ -15,9 +15,11 @@ namespace WaveUtils {
 		#region GLOBAL VAR
 		public WAVETYPE Type;
 
-        public del_Vec3ParamVec3Getter UHat = Del_Default.DefaultVec3ParamVec3Getter;
-		public del_Vec3ParamVec3Getter VHat = Del_Default.DefaultVec3ParamVec3Getter;
-		public del_Vec3ParamVec3Getter KHat = Del_Default.DefaultVec3ParamVec3Getter;
+		// Preset Base on the Orientation of WaveSource
+		public Vector3 Origin;
+        public Vector3 UHat;
+		public Vector3 VHat;
+		public Vector3 KHat;
 
 		[Header("Amplitude Settings")]
 		public float Eox;

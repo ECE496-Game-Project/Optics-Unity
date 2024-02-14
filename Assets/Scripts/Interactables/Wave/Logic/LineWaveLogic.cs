@@ -14,8 +14,16 @@ namespace GO_Wave {
         #region PRIVRATE VARIABLES
         private DeviceBase m_hit_Device;
         private WaveSource m_activeWS;
+        private float m_effDistance;
+
+        //[TODO]: move to ParamWaveChange Class
         private BoxCollider m_collider;
         #endregion
+
+        public float EffectDistance { 
+            get { return m_effDistance; } 
+            set { m_effDistance = value; }
+        }
 
         public void CleanInteract() {
             if (m_hit_Device != null)
@@ -25,13 +33,12 @@ namespace GO_Wave {
 
         public void Interact() {
             /*Interact Device*/
-            if(m_activeWS==null)Debug.Break();
-            float effDistance = m_activeWS.Params.RODistance;
+            m_effDistance = m_activeWS.Params.RODistance;
             RaycastHit hit;
 
             Assert.IsNotNull(transform);
             if (
-                Physics.Raycast(transform.position, transform.forward, out hit, effDistance, _interactMask)
+                Physics.Raycast(transform.position, transform.forward, out hit, m_effDistance, _interactMask)
                 && ((1 << hit.collider.gameObject.layer) & _interactMask) != 0
             ) {
                 m_hit_Device = hit.collider.gameObject.GetComponent<DeviceBase>();
@@ -41,6 +48,7 @@ namespace GO_Wave {
             }
         }
 
+        //[TODO]: move to ParamWaveChange Class
         private void ColliderRescale(float effDistance) {
             float scale = effDistance / 2;
             m_collider.center = transform.forward * scale;
@@ -48,9 +56,10 @@ namespace GO_Wave {
         }
 
         // Called after manual awake
-        public void SyncRootParam(I_WaveLogic srcWI) {
+        public void init(I_WaveLogic srcWI) {
             this._interactMask = ((LineWaveLogic)srcWI)._interactMask;
-            ColliderRescale(m_activeWS.EffectDistance);
+            //[TODO]: move to ParamWaveChange Class
+            ColliderRescale(m_effDistance);
         }
 
         public void Awake() {

@@ -104,8 +104,9 @@ namespace GO_Device {
             }
 
             /* Calculate ReadOnly Effective Distance*/
-            float tmpDistance = parentWS.EffectDistance;
-            parentWS.EffectDistance = hit.distance;
+            LineWaveLogic parentLWL = (LineWaveLogic)parentWS.WaveLogic;
+            float tmpDistance = parentLWL.EffectDistance;
+            parentLWL.EffectDistance = hit.distance;
             childWP.RODistance = tmpDistance - hit.distance;
 
             /* Copy Parent's t & n, then compute rest*/
@@ -121,8 +122,8 @@ namespace GO_Device {
             WaveAlgorithm.CalculateTravelAccumulatedPhase(hit.point - parentWS.transform.position, parentWS.Params, childWS.Params);
             WaveAlgorithm.JohnsVectorToWave(resVec, childWP);
 
-            lwd.SyncRootParam(parentWS.WaveDisplay);
-            lwi.SyncRootParam(parentWS.WaveInteract);
+            lwd.init(parentWS.WaveDisplay);
+            lwi.init(parentWS.WaveLogic);
 
             
             /*Store Pair*/

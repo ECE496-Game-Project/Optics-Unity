@@ -89,7 +89,7 @@ namespace Constraint {
             // the device which is currently in has the lower hierarchy was the device that has the higher hierarchy
             // we need to notify this device's parent wave source that need to regenerate
 
-            var deviceParameterTransfer = (I_ParameterTransfer)lowerIdxDevice;
+            var deviceParameterTransfer = (I_ParameterPanel)lowerIdxDevice;
 
             Assert.IsNotNull(deviceParameterTransfer);
 
@@ -134,7 +134,7 @@ namespace Constraint {
 
             m_uiManager.SetActive(false);
             // Destroy the object after param is trigger
-            WaitForOneFixedUpdateAndTrigger((I_ParameterTransfer)device,
+            WaitForOneFixedUpdateAndTrigger((I_ParameterPanel)device,
                 () => {
                     Destroy(device.gameObject);
                     m_uiManager.SetActive(true);
@@ -158,7 +158,7 @@ namespace Constraint {
                 RegisterClickEvent(m_waveDeviceOrder.GetDeviceOrderInfo(m_waveDeviceOrder.DeviceCount - 1));
                 SetDevicePositions();
                 m_uiManager.SetActive(false);
-                WaitForOneFixedUpdateAndTrigger((I_ParameterTransfer)gameObject.transform.GetChild(0).GetComponent<WaveSource>(), () => { m_uiManager.SetActive(true); });
+                WaitForOneFixedUpdateAndTrigger((I_ParameterPanel)gameObject.transform.GetChild(0).GetComponent<WaveSource>(), () => { m_uiManager.SetActive(true); });
 
                 return;
             }
@@ -169,7 +169,7 @@ namespace Constraint {
             SetDevicePositions();
 
             m_uiManager.SetActive(false);
-            WaitForOneFixedUpdateAndTrigger((I_ParameterTransfer)lastSecondDevice, () => { m_uiManager.SetActive(true); });
+            WaitForOneFixedUpdateAndTrigger((I_ParameterPanel)lastSecondDevice, () => { m_uiManager.SetActive(true); });
         }
 
         public void AddDevice(DEVICETYPE deviceType) {
@@ -188,7 +188,7 @@ namespace Constraint {
                 RegisterClickEvent(m_waveDeviceOrder.GetDeviceOrderInfo(m_waveDeviceOrder.DeviceCount - 1));
                 SetDevicePositions();
                 m_uiManager.SetActive(false);
-                WaitForOneFixedUpdateAndTrigger((I_ParameterTransfer)gameObject.transform.GetChild(0).GetComponent<WaveSource>(), () => { m_uiManager.SetActive(true); });
+                WaitForOneFixedUpdateAndTrigger((I_ParameterPanel)gameObject.transform.GetChild(0).GetComponent<WaveSource>(), () => { m_uiManager.SetActive(true); });
 
                 return;
             }
@@ -200,15 +200,15 @@ namespace Constraint {
             m_uiManager.SetActive(false);
             RegisterClickEvent(m_waveDeviceOrder.GetDeviceOrderInfo(m_waveDeviceOrder.DeviceCount - 1));
             SetDevicePositions();
-            WaitForOneFixedUpdateAndTrigger((I_ParameterTransfer)lastSecondDevice, () => { m_uiManager.SetActive(true); });
+            WaitForOneFixedUpdateAndTrigger((I_ParameterPanel)lastSecondDevice, () => { m_uiManager.SetActive(true); });
         }
 
 
-        void WaitForOneFixedUpdateAndTrigger(I_ParameterTransfer i_ParameterTransfer, UnityAction extraBehavior) {
+        void WaitForOneFixedUpdateAndTrigger(I_ParameterPanel i_ParameterTransfer, UnityAction extraBehavior) {
             StartCoroutine(WaitForOneFixedUpdateAndTriggerCoroutine(i_ParameterTransfer, extraBehavior));
         }
 
-        IEnumerator WaitForOneFixedUpdateAndTriggerCoroutine(I_ParameterTransfer i_ParameterTransfer, UnityAction extraBehavior) {
+        IEnumerator WaitForOneFixedUpdateAndTriggerCoroutine(I_ParameterPanel i_ParameterTransfer, UnityAction extraBehavior) {
             yield return new WaitForFixedUpdate();
 
             i_ParameterTransfer.ParameterChangeTrigger();
@@ -289,7 +289,7 @@ namespace Constraint {
 
                 }
                 SetDevicePositions();
-                var deviceParameterTransfer = (I_ParameterTransfer)m_waveDeviceOrder.GetDevice(newIdx);
+                var deviceParameterTransfer = (I_ParameterPanel)m_waveDeviceOrder.GetDevice(newIdx);
                 Assert.IsNotNull(deviceParameterTransfer);
 
                 m_uiManager.SetActive(false);
@@ -302,7 +302,7 @@ namespace Constraint {
                 }
 
                 SetDevicePositions();
-                var deviceParameterTransfer = (I_ParameterTransfer)m_waveDeviceOrder.GetDevice(newIdx + 1);
+                var deviceParameterTransfer = (I_ParameterPanel)m_waveDeviceOrder.GetDevice(newIdx + 1);
                 Assert.IsNotNull(deviceParameterTransfer);
 
                 m_uiManager.SetActive(false);

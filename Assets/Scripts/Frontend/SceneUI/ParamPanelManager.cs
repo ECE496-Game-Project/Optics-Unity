@@ -209,7 +209,7 @@ namespace Panel {
             }
         }
 
-        private void UISetupPipeline(I_ParameterTransfer pt, string newlySelect) {
+        private void UISetupPipeline(I_ParameterPanel pt, string newlySelect) {
             if(m_selectedUI != "") CleanSetter(m_paramInfoDict[m_selectedUI].List);
             m_selectedUI = newlySelect;
             pt.RegisterParametersCallback(m_paramInfoDict[m_selectedUI].List);
@@ -218,7 +218,7 @@ namespace Panel {
         }
 
         public void SelectParamView(GameObject obj) {
-            var objts = obj.GetComponent<I_ParameterTransfer>();
+            var objts = obj.GetComponent<I_ParameterPanel>();
             if (objts == null)
                 DebugLogger.Error(this.name, "Pass in GameObject does not have Component I_ParamTrans, Panic!");
 

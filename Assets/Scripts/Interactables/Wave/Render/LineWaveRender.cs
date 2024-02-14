@@ -34,7 +34,7 @@ namespace GO_Wave {
         }
         public void RefreshDisplay() {
             /*Reposition All Sample Points base on WaveSource*/
-            int sampleCount = Mathf.FloorToInt(_activeWS.EffectDistance / _perSampleSpaceLength);
+            int sampleCount = Mathf.FloorToInt(((LineWaveLogic)_activeWS.WaveLogic).EffectDistance / _perSampleSpaceLength);
             
             int diff = sampleCount - m_samplePointList.Count;
             while (diff > 0) {
@@ -74,7 +74,7 @@ namespace GO_Wave {
             }
         }
 
-        public void SyncRootParam(I_WaveRender rootWD) {
+        public void init(I_WaveRender rootWD) {
             this._perSampleSpaceLength = ((LineWaveRender)rootWD)._perSampleSpaceLength;
             this._timeScale = ((LineWaveRender)rootWD)._timeScale;
         }

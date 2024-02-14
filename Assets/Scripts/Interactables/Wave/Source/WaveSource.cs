@@ -7,19 +7,16 @@ using ParameterTransfer;
 using Panel;
 
 namespace GO_Wave {
-    public class WaveSource : MonoBehaviour, I_ParameterTransfer {
+    public class WaveSource : MonoBehaviour, I_ParameterPanel {
         public virtual string ParamTransferName { get { return "ChildWave";} }
 
         #region GLOBAL VARIABLES
         public I_WaveRender WaveDisplay;
-        public I_WaveLogic WaveInteract;
+        public I_WaveLogic WaveLogic;
         #endregion
 
         #region PRIVATE VARIABLES
         protected WaveParams m_params;
-        // Current Section's Wave Distance
-        [SerializeField] protected float m_effectDistance;
-        protected ParameterInfoList m_paramInfoList;
         #endregion
 
         #region GLOBAL METHODS
@@ -31,44 +28,28 @@ namespace GO_Wave {
                 m_params = value;
             }
         }
-        public float EffectDistance {
-            get { return m_effectDistance; }
-            set { m_effectDistance = value; }
-        }
-
 
         public virtual void ParameterChangeTrigger() {
             // Refresh EffectDistance from ReadOnly Value
-            EffectDistance = m_params.RODistance;
-
-            WaveInteract.CleanInteract();
-            WaveInteract.Interact();
+            WaveLogic.CleanInteract();
+            WaveLogic.Interact();
             WaveDisplay.RefreshDisplay();
         }
 
         public void WaveClean() {
-            WaveInteract.CleanInteract();
+            WaveLogic.CleanInteract();
             WaveDisplay.CleanDisplay();
         }
         #endregion
 
+        // store Orientation of WaveSource into WaveParam
         protected void RegisterDirCallback() {
-            switch (m_params.Type) {
-                case WAVETYPE.PLANE:
-                    m_params.UHat = (in Vector3 r) => { return this.transform.right; };
-                    m_params.VHat = (in Vector3 r) => { return this.transform.up; };
-                    m_params.KHat = (in Vector3 r) => { return this.transform.forward; };
-                    break;
-                case WAVETYPE.SPHERE:
-                    // [TODO][PointWave]: PointWave UVK direction Function
-                    m_params.UHat = (in Vector3 r) => { return Vector3.zero; };
-                    m_params.VHat = (in Vector3 r) => { return Vector3.zero; };
-                    m_params.KHat = (in Vector3 r) => { return Vector3.zero; };
-                    break;
-                default:
-                    break;
-            }
+            m_params.UHat = this.transform.right;
+            m_params.VHat = this.transform.up;
+            m_params.KHat = this.transform.forward;
+            m_params.Origin = this.transform.position;
         }
+
         public void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
             var NameTuple = (ParameterInfo<string>)ParameterInfos.SymbolQuickAccess["Name"];
             var EoxTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["UdirAmp"];
@@ -138,13 +119,12 @@ namespace GO_Wave {
             WaveDisplay = GetComponent<I_WaveRender>();
             if (WaveDisplay == null)
                 DebugLogger.Error(this.name, "GameObject Does not contain WaveDisplay! Stop Executing.");
-            WaveInteract = GetComponent<I_WaveLogic>();
-            if (WaveInteract == null)
+            WaveLogic = GetComponent<I_WaveLogic>();
+            if (WaveLogic == null)
                 DebugLogger.Error(this.name, "GameObject Does not contain WaveInteract! Stop Executing.");
 
             /*init ActiveWaveParams*/
             m_params = srcWP;
-            EffectDistance = srcWP.RODistance;
             RegisterDirCallback();
         }
 
