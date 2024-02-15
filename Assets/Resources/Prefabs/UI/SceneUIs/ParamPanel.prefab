@@ -64,11 +64,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doc: {fileID: 4472339981327606014}
   UIInfoTransfer:
-  - paramTransferName: RootWave
+  - paramTransferName: WaveSource
     paramTrans: {fileID: 11400000, guid: 26f04dcbe22adcd42bbd133090131a13, type: 2}
     paramUIAsset: {fileID: 9197481963319205126, guid: 4a4eafd2907ae4158a11b7907aa178e4,
       type: 3}
-  - paramTransferName: ChildWave
+  - paramTransferName: Wave
     paramTrans: {fileID: 11400000, guid: 5587e33a7fa44d648bc4832abcec6a45, type: 2}
     paramUIAsset: {fileID: 9197481963319205126, guid: c2f36e37ef252394f8443414d663389a,
       type: 3}

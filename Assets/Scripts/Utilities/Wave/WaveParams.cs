@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
-using CommonUtils;
 
 namespace WaveUtils {
 	public enum WAVETYPE {
@@ -9,15 +7,15 @@ namespace WaveUtils {
 		SPHERE = 2,
         INVALID = 0,
     }
-
-	[System.Serializable]
-	public class WaveParams {
+    [Serializable]
+	public class WaveSourceParam {
 		#region GLOBAL VAR
 		public WAVETYPE Type;
 
-        public del_Vec3ParamVec3Getter UHat = Del_Default.DefaultVec3ParamVec3Getter;
-		public del_Vec3ParamVec3Getter VHat = Del_Default.DefaultVec3ParamVec3Getter;
-		public del_Vec3ParamVec3Getter KHat = Del_Default.DefaultVec3ParamVec3Getter;
+		[HideInInspector] public Vector3 Origin;
+		[HideInInspector] public Vector3 UHat;
+		[HideInInspector] public Vector3 VHat;
+		[HideInInspector] public Vector3 KHat;
 
 		[Header("Amplitude Settings")]
 		public float Eox;
@@ -25,37 +23,103 @@ namespace WaveUtils {
 		[Range(0, 360)]
 		public float theta;
 
-		[Header("Temporal Freq Settings")]
-		public float T;
-		public float mu;
-		public float w;
-
-		[Header("Spatial Freq Settings")]
+		[Header("Vacuum Wavelength (nm)")]
 		public float lambda;
-		public float f;
-		public float k;
 
-		[Range(0, 360)]
-		public float phi;
+		[Header("Light Transimitting Material's Refractive Index")]
 		[Range(1, 5)]
 		public float n;
 
 		[Header("Dispersion Distance")]
 		public float RODistance;
-        #endregion
+		#endregion
 
-        #region CONSTRUCTOR
-		public WaveParams() { }
-		public WaveParams(WaveParams src) {
-			this.Type = src.Type;
-			this.Eox = src.Eox;
-			this.Eoy = src.Eoy;
-			this.T = src.T;
-			this.n = src.n;
-			this.theta = src.theta;
-			this.phi = src.phi;
-			this.RODistance = src.RODistance;
+		public WaveSourceParam(WaveSourceParam param) {
+			Type = param.Type;
+			Origin = param.Origin;
+			UHat = param.UHat;
+			VHat = param.VHat;
+			KHat = param.KHat;
+			Eox = param.Eox;
+			Eoy = param.Eoy;
+			theta = param.theta;
+			lambda = param.lambda;
+			n = param.n;
+			RODistance = param.RODistance;
+        }
+	}
+	public class WaveParam {
+		private bool roflag;
+		public WAVETYPE Type { get; }
+
+		public Vector3 Origin { get; }
+        public Vector3 UHat { get; }
+		public Vector3 VHat { get; }
+		public Vector3 KHat { get; }
+
+		public float Eox { get; }
+		public float Eoy { get; }
+		public float theta { get; }
+
+		public float T;
+		public float mu;
+		public float w;
+
+		public float lambda;
+		public float f;
+		public float k;
+
+		public float phi;
+		public float n;
+
+		public float RODistance;
+
+		public WaveParam() { }
+		public WaveParam(WaveSourceParam wsParam) {
+			Type = wsParam.Type;
+
+			Origin = wsParam.Origin;
+			UHat = wsParam.UHat;
+			VHat = wsParam.VHat;
+			KHat = wsParam.KHat;
+
+			Eox = wsParam.Eox;
+			Eoy = wsParam.Eoy;
+			theta = wsParam.theta;
+
+			lambda = wsParam.lambda;
+			n = wsParam.n;
+			RODistance = wsParam.RODistance;
+
+			modifyLambda(); 
+			phi = 0; 
 		}
-        #endregion
-    }
+		public WaveParam(WAVETYPE type, Vector3 origin, Vector3 uHat, Vector3 vHat, Vector3 kHat, float eox, float eoy, float theta, float t, float mu, float w, float lambda, float f, float k, float phi, float n, float roDistance) {
+			Type = type;
+			Origin = origin;
+			UHat = uHat;
+			VHat = vHat;
+			KHat = kHat;
+			Eox = eox;
+			Eoy = eoy;
+			this.theta = theta;
+			T = t;
+			this.mu = mu;
+			this.w = w;
+			this.lambda = lambda;
+			this.f = f;
+			this.k = k;
+			this.phi = phi;
+			this.n = n;
+			RODistance = roDistance;
+		}
+
+		public void modifyLambda() {
+			f = 1 / lambda;
+			k = 2 * Mathf.PI * f;
+			w = WaveAlgorithm.C * k / n;
+			T = 2 * Mathf.PI / w;
+			mu = 1 / T;
+		}
+	}
 }
