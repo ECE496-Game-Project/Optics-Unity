@@ -5,49 +5,49 @@ using CommonUtils;
 namespace WaveUtils {
     public static class WaveAlgorithm {
         public static float C = 299.792458f; // Unit is nm/fs
-        public static void changeT(WaveParam param) {
-            param.mu = 1 / param.T;
-            param.w = 2 * Mathf.PI * param.mu;
-            param.k = param.w * param.n / C;
-            param.f = param.k / (2 * Mathf.PI);
-            param.lambda = 1 / param.f;
-        }
-        public static void changeW(WaveParam param) {
-            param.mu = param.w / (2 * Mathf.PI);
-            param.T = 1 / param.mu;
-            param.k = param.w * param.n / C;
-            param.f = param.k / (2 * Mathf.PI);
-            param.lambda = 1 / param.f;
-        }
-        public static void changeMu(WaveParam param) {
-            param.w = param.mu * 2 * Mathf.PI;
-            param.T = 1 / param.mu;
-            param.k = param.w * param.n / C;
-            param.f = param.k / (2 * Mathf.PI);
-            param.lambda = 1 / param.f;
-        }
-        public static void changeLambda(WaveParam param) {
-            param.f = 1 / param.lambda;
-            param.k = 2 * Mathf.PI * param.f;
-            param.w = C * param.k / param.n;
-            param.T = 2 * Mathf.PI / param.w;
-            param.mu = 1 / param.T;
-        }
-        public static void changeK(WaveParam param) {
-            param.lambda = (2 * Mathf.PI) / param.k;
-            param.f = 1 / param.lambda;
-            param.w = C * param.k / param.n;
-            param.T = 2 * Mathf.PI / param.w;
-            param.mu = 1 / param.T;
-        }
-        public static void changeN(WaveParam param) {
-            param.k = param.w * param.n / C;
-            param.f = param.k / (2 * Mathf.PI);
-            param.lambda = 1 / param.f;
-        }
+        //public static void changeT(WaveParam param) {
+        //    param.mu = 1 / param.T;
+        //    param.w = 2 * Mathf.PI * param.mu;
+        //    param.k = param.w * param.n / C;
+        //    param.f = param.k / (2 * Mathf.PI);
+        //    param.lambda = 1 / param.f;
+        //}
+        //public static void changeW(WaveParam param) {
+        //    param.mu = param.w / (2 * Mathf.PI);
+        //    param.T = 1 / param.mu;
+        //    param.k = param.w * param.n / C;
+        //    param.f = param.k / (2 * Mathf.PI);
+        //    param.lambda = 1 / param.f;
+        //}
+        //public static void changeMu(WaveParam param) {
+        //    param.w = param.mu * 2 * Mathf.PI;
+        //    param.T = 1 / param.mu;
+        //    param.k = param.w * param.n / C;
+        //    param.f = param.k / (2 * Mathf.PI);
+        //    param.lambda = 1 / param.f;
+        //}
+        //public static void changeLambda(WaveParam param) {
+        //    param.f = 1 / param.lambda;
+        //    param.k = 2 * Mathf.PI * param.f;
+        //    param.w = C * param.k / param.n;
+        //    param.T = 2 * Mathf.PI / param.w;
+        //    param.mu = 1 / param.T;
+        //}
+        //public static void changeK(WaveParam param) {
+        //    param.lambda = (2 * Mathf.PI) / param.k;
+        //    param.f = 1 / param.lambda;
+        //    param.w = C * param.k / param.n;
+        //    param.T = 2 * Mathf.PI / param.w;
+        //    param.mu = 1 / param.T;
+        //}
+        //public static void changeN(WaveParam param) {
+        //    param.k = param.w * param.n / C;
+        //    param.f = param.k / (2 * Mathf.PI);
+        //    param.lambda = 1 / param.f;
+        //}
 
         public static Vector3 CalcIrradiance(Vector3 currPos, float t, WaveParam param) {
-            Vector3 r = param.Origin - currPos;
+            Vector3 r = currPos - param.Origin;
 			float kdotr = Vector3.Dot(param.KHat, r) * param.k;
 			float expCommon = kdotr - Mathf.Deg2Rad * param.w * t + Mathf.Deg2Rad * param.phi;
 
@@ -66,19 +66,19 @@ namespace WaveUtils {
         /// <param name="Phi"></param>
         /// <param name="KHat"></param>
         /// <returns>The accumulated phase in degree [0, 360)</returns>
-        public static float CalculateTravelAccumulatedPhase(
-            Vector3 r, WaveParam InputParam, WaveParam outputParam)
-        {
-            float kdotr = Vector3.Dot(InputParam.KHat, r) * InputParam.k;
-            float expCommon = kdotr + Mathf.Deg2Rad * InputParam.phi;
+        //public static float CalculateTravelAccumulatedPhase(
+        //    Vector3 r, WaveParam InputParam, WaveParam outputParam)
+        //{
+        //    float kdotr = Vector3.Dot(InputParam.KHat, r) * InputParam.k;
+        //    float expCommon = kdotr + Mathf.Deg2Rad * InputParam.phi;
 
-            float degree = Mathf.Rad2Deg * expCommon;
+        //    float degree = Mathf.Rad2Deg * expCommon;
 
-            while (degree >= 360) degree -= 360;
+        //    while (degree >= 360) degree -= 360;
 
-            outputParam.phi = degree;
-            return degree;
-        }
+        //    outputParam.phi = degree;
+        //    return degree;
+        //}
 
         public static ComplexVector2 WaveToJohnsVector(WaveParam param) {
 			return new ComplexVector2(

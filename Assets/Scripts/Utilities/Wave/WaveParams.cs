@@ -49,16 +49,17 @@ namespace WaveUtils {
         }
 	}
 	public class WaveParam {
-		public WAVETYPE Type;
+		private bool roflag;
+		public WAVETYPE Type { get; }
 
-		public Vector3 Origin;
-        public Vector3 UHat;
-		public Vector3 VHat;
-		public Vector3 KHat;
+		public Vector3 Origin { get; }
+        public Vector3 UHat { get; }
+		public Vector3 VHat { get; }
+		public Vector3 KHat { get; }
 
-		public float Eox;
-		public float Eoy;
-		public float theta;
+		public float Eox { get; }
+		public float Eoy { get; }
+		public float theta { get; }
 
 		public float T;
 		public float mu;
