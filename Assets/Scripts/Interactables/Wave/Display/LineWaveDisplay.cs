@@ -7,16 +7,11 @@ using ObjectPool;
 
 namespace GO_Wave {
     public class LineWaveDisplay : MonoBehaviour, I_WaveDisplay {
-
-        #region INSPECTOR SETTINGS
-        [Header("Line Wave Display Settings")]
-        public float SampleResolution;
-        #endregion
-
         #region PRIVRATE VARIABLES
-        [Header("DEBUG_WAVE")]
-        [SerializeField] private Stack<LineWaveSample> m_samplePointList;
-        [SerializeField] private Wave _activeWS;
+        private float m_sampleResolution;
+        public float SampleResolution { get { return m_sampleResolution; } }
+        private Stack<LineWaveSample> m_samplePointList;
+        private Wave m_wave;
         #endregion
 
         #region GLOBAL METHOD
@@ -29,7 +24,7 @@ namespace GO_Wave {
         }
         public void RefreshDisplay() {
             /*Reposition All Sample Points base on WaveSource*/
-            int sampleCount = Mathf.FloorToInt(((LineWaveLogic)_activeWS.WaveLogic).EffectDistance / SampleResolution);
+            int sampleCount = Mathf.FloorToInt(((LineWaveLogic)m_wave.WaveLogic).EffectDistance / m_sampleResolution);
             
             int diff = sampleCount - m_samplePointList.Count;
             while (diff > 0) {
@@ -54,36 +49,30 @@ namespace GO_Wave {
             int i = 0;
             foreach(var item in m_samplePointList) {
                 i++;
-                item.transform.position = this.transform.position + i * SampleResolution * this.transform.forward;
+                item.transform.position = this.transform.position + i * m_sampleResolution * this.transform.forward;
             }
         }
-
-        public void UpdateDisplay() {
-            foreach (var item in m_samplePointList) {
-                Vector3 vec = WaveAlgorithm.CalcIrradiance(
-                    item.transform.position - this.transform.position,
-                    Time.time,
-                    _activeWS.Params
-                );
-                item.UpdateEVec(vec);
-            }
-        }
-
         public void Init(float sampleResolution) {
-            this.SampleResolution = sampleResolution;
+            this.m_sampleResolution = sampleResolution;
+
+            m_wave = GetComponent<Wave>();
+            if (m_wave == null) {
+                DebugLogger.Error(this.name, "GameObject Doesn't contains WaveSource Script, Stop Executing.");
+            }
+
+            m_samplePointList = new Stack<LineWaveSample>();
         }
         #endregion
 
-        private void Awake() {
-            m_samplePointList = new Stack<LineWaveSample>();
-
-            _activeWS = this.transform.GetComponent<Wave>();
-            if (_activeWS == null) {
-                DebugLogger.Error(this.name, "GameObject Doesn't contains WaveSource Script, Stop Executing.");
-            }
-        }
         private void Update() {
-            UpdateDisplay();
+            foreach (var item in m_samplePointList) {
+                Vector3 vec = WaveAlgorithm.CalcIrradiance(
+                    item.transform.position,
+                    Time.time,
+                    m_wave.Params
+                );
+                item.UpdateEVec(vec);
+            }
         }
     }
 }

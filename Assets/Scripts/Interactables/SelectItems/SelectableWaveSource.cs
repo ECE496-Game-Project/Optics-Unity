@@ -2,7 +2,7 @@ using UnityEngine;
 using Panel;
 
 namespace SelectItems {
-    public class SelectableRootWave : Selectable {
+    public class SelectableWaveSource : Selectable {
         public override void OnMouseHover() {
             OutlineManager.Instance.Highlight(this.gameObject);
         }

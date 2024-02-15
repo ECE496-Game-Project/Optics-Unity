@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
-using CommonUtils;
 
 namespace WaveUtils {
 	public enum WAVETYPE {
@@ -9,7 +7,7 @@ namespace WaveUtils {
 		SPHERE = 2,
         INVALID = 0,
     }
-
+    [Serializable]
 	public class WaveSourceParam {
 		#region GLOBAL VAR
 		public WAVETYPE Type;
@@ -25,8 +23,8 @@ namespace WaveUtils {
 		[Range(0, 360)]
 		public float theta;
 
-		[Header("Temporial Frequency(THz)")]
-		public float mu;
+		[Header("Vacuum Wavelength (nm)")]
+		public float lambda;
 
 		[Header("Light Transimitting Material's Refractive Index")]
 		[Range(1, 5)]
@@ -35,6 +33,20 @@ namespace WaveUtils {
 		[Header("Dispersion Distance")]
 		public float RODistance;
 		#endregion
+
+		public WaveSourceParam(WaveSourceParam param) {
+			Type = param.Type;
+			Origin = param.Origin;
+			UHat = param.UHat;
+			VHat = param.VHat;
+			KHat = param.KHat;
+			Eox = param.Eox;
+			Eoy = param.Eoy;
+			theta = param.theta;
+			lambda = param.lambda;
+			n = param.n;
+			RODistance = param.RODistance;
+        }
 	}
 	public class WaveParam {
 		public WAVETYPE Type;
@@ -74,16 +86,12 @@ namespace WaveUtils {
 			Eoy = wsParam.Eoy;
 			theta = wsParam.theta;
 
-			mu = wsParam.mu;
+			lambda = wsParam.lambda;
 			n = wsParam.n;
 			RODistance = wsParam.RODistance;
 
-			// For fields without direct equivalents in WaveSourceParam, we need to initialize them.
-			// Here, I'm calling modifyMu() as an example to calculate related fields based on mu and n,
-			// assuming mu is a defining property. Adjust based on your application's logic.
-			modifyMu(); // This sets T, w, k, f, lambda based on mu and n. Adjust as necessary.
-
-			phi = 0; // Assuming a default value for phi if it's not provided by WaveSourceParam
+			modifyLambda(); 
+			phi = 0; 
 		}
 		public WaveParam(WAVETYPE type, Vector3 origin, Vector3 uHat, Vector3 vHat, Vector3 kHat, float eox, float eoy, float theta, float t, float mu, float w, float lambda, float f, float k, float phi, float n, float roDistance) {
 			Type = type;
@@ -105,46 +113,12 @@ namespace WaveUtils {
 			RODistance = roDistance;
 		}
 
-		public static float C = 299.792458f; // Unit is nm/fs
-		public void modifyT() {
-			mu = 1 / T;
-			w = 2 * Mathf.PI * mu;
-			k = w * n / C;
-			f = k / (2 * Mathf.PI);
-			lambda = 1 / f;
-		}
-		public void modifyW() {
-			mu = w / (2 * Mathf.PI);
-			T = 1 / mu;
-			k = w * n / C;
-			f = k / (2 * Mathf.PI);
-			lambda = 1 / f;
-		}
-		public void modifyMu() {
-			w = mu * 2 * Mathf.PI;
-			T = 1 / mu;
-			k = w * n / C;
-			f = k / (2 * Mathf.PI);
-			lambda = 1 / f;
-		}
 		public void modifyLambda() {
 			f = 1 / lambda;
 			k = 2 * Mathf.PI * f;
-			w = C * k / n;
+			w = WaveAlgorithm.C * k / n;
 			T = 2 * Mathf.PI / w;
 			mu = 1 / T;
-		}
-		public void modifyK() {
-			lambda = (2 * Mathf.PI) / k;
-			f = 1 / lambda;
-			w = C * k / n;
-			T = 2 * Mathf.PI / w;
-			mu = 1 / T;
-		}
-		public void modifyN() {
-			k = w * n / C;
-			f = k / (2 * Mathf.PI);
-			lambda = 1 / f;
 		}
 	}
 }

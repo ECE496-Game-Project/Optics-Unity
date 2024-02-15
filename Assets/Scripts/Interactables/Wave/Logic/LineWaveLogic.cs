@@ -6,26 +6,24 @@ using UnityEngine.Assertions;
 using UnityEngine.Events;
 namespace GO_Wave {
     public class LineWaveLogic : MonoBehaviour, I_WaveLogic {
-
-        #region INSPECTOR SETTINGS
-        public LayerMask InteractMask;
-        #endregion
-
         #region PRIVRATE VARIABLES
         private DeviceBase m_hitDevice;
+        private BoxCollider m_collider;
         private Wave m_wave;
-
-        public UnityEvent<float> m_effDistanceChangeTrigger;
+        private LayerMask m_interactMask;
         private float m_effDistance;
+        #endregion
+
+        #region PUBLIC VARIABLES
+        [HideInInspector] public UnityEvent<float> m_effDistanceChangeTrigger;
         public float EffectDistance {
             get { return m_effDistance; }
             set { m_effDistance = value; m_effDistanceChangeTrigger?.Invoke(m_effDistance); }
         }
-        //[TODO]: move to ParamWaveChange Class
-        //private BoxCollider m_collider;
+        public LayerMask InteractMask { get { return m_interactMask; } }
         #endregion
 
-
+        #region GLOBAL METHOD
         public void CleanInteract() {
             if (m_hitDevice != null)
                 m_hitDevice.CleanDeviceHitTrace(m_wave);
@@ -33,46 +31,44 @@ namespace GO_Wave {
         }
 
         public void Interact() {
-            /*Interact Device*/
             m_effDistance = m_wave.Params.RODistance;
             RaycastHit hit;
 
             if (
-                Physics.Raycast(transform.position, transform.forward, out hit, m_effDistance, InteractMask)
-                && ((1 << hit.collider.gameObject.layer) & InteractMask) != 0
+                Physics.Raycast(transform.position, transform.forward, out hit, m_effDistance, m_interactMask)
+                && ((1 << hit.collider.gameObject.layer) & m_interactMask) != 0
             ) {
                 m_hitDevice = hit.collider.gameObject.GetComponent<DeviceBase>();
                 m_hitDevice.WaveHit(hit, m_wave);
 
-                //ColliderRescale(hit.distance);
+                ColliderRescale(hit.distance);
             }
         }
 
-        //[TODO]: move to ParamWaveChange Class
-        //private void ColliderRescale(float effDistance) {
-        //    float scale = effDistance / 2;
-        //    m_collider.center = transform.forward * scale;
-        //    m_collider.size = new Vector3(1, 1, scale);
-        //}
-
-        // Called after manual awake
         public void Init(LayerMask interactMask) {
-            InteractMask = interactMask;
+            m_interactMask = interactMask;
 
-            //[TODO]: move to ParamWaveChange Class
-            //ColliderRescale(m_effDistance);
-        }
-
-        public void Awake() {
             m_wave = GetComponent<Wave>();
-            if (m_wave == null) {
-                DebugLogger.Error(this.name, "GameObject Doesn't contains WaveSource Script, Stop Executing.");
-            }
+            if (m_wave == null)
+                DebugLogger.Error(this.name, "GameObject Doesn't contains Wave Script, Stop Executing.");
+            m_effDistance = m_wave.Params.RODistance;
 
-            //m_collider = GetComponent<BoxCollider>();
-            //if (m_collider == null) {
-            //    DebugLogger.Error(this.name, "GameObject Doesn't contains Collider, Stop Executing.");
-            //}
+            m_collider = GetComponent<BoxCollider>();
+            if (m_collider == null)
+                DebugLogger.Error(this.name, "GameObject Doesn't contains BoxCollider, Stop Executing.");
+            m_collider.isTrigger = true;
+            ColliderRescale(m_effDistance);
         }
+        #endregion
+
+        #region HELPER METHOD
+        private void ColliderRescale(float effDistance) {
+            float scale = effDistance / 2;
+            // offset Collider to not fully cover wave
+            float offset = 1f;
+            m_collider.center = transform.forward * scale;
+            m_collider.size = new Vector3(1, 1, effDistance - offset);
+        }
+        #endregion
     }
 }

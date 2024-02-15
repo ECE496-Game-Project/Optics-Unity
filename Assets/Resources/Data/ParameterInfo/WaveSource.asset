@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbca15a9b2ed8d740be800c8cda142bf, type: 3}
-  m_Name: ChildWave
+  m_Name: WaveSource
   m_EditorClassIdentifier: 
   List:
   - Name: Name
@@ -18,34 +18,16 @@ MonoBehaviour:
     Permit: 1
   - Name: UdirAmp
     Type: 2
-    Permit: 0
+    Permit: 3
   - Name: VdirAmp
     Type: 2
-    Permit: 0
+    Permit: 3
   - Name: Theta
     Type: 2
-    Permit: 0
-  - Name: T
-    Type: 2
-    Permit: 0
-  - Name: mu
-    Type: 2
-    Permit: 0
-  - Name: w
-    Type: 2
-    Permit: 0
+    Permit: 3
   - Name: lambda
     Type: 2
-    Permit: 0
-  - Name: f
-    Type: 2
-    Permit: 0
-  - Name: k
-    Type: 2
-    Permit: 0
-  - Name: Phi
-    Type: 2
-    Permit: 0
+    Permit: 3
   - Name: N
     Type: 2
-    Permit: 0
+    Permit: 3

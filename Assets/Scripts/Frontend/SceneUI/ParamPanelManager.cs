@@ -35,7 +35,7 @@ namespace Panel {
             public SO_ParamTransfer paramTrans;
             public VisualTreeAsset paramUIAsset;
         }
-        
+        [Tooltip("Name Of ParamTransfer must match CorrespondingUIInfoName who interits I_ParameterPanel")]
         public List<UIPair> UIInfoTransfer; // For Inspector Registration Purpose
 
         public class UIInfo {
@@ -162,6 +162,7 @@ namespace Panel {
         private void RegisterSetter() {
             ParameterInfoList list = m_paramInfoDict[m_selectedUI].List;
             foreach (var entry in list.SymbolQuickAccess) {
+                if (entry.Value.Permit == Permission.RO) continue;
                 var pi = entry.Value;
                 switch (pi.Type) {
                     case ParamType.String:
@@ -223,7 +224,7 @@ namespace Panel {
                 DebugLogger.Error(this.name, "Pass in GameObject does not have Component I_ParamTrans, Panic!");
 
             // All functionality operates with string m_selectedUI
-            UISetupPipeline(objts, objts.ParamTransferName);
+            UISetupPipeline(objts, objts.CorrespondingUIInfoName);
             OpenParamUIDisplay();
             OpenExpandPanel();
         }

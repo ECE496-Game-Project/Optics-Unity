@@ -5,7 +5,6 @@ namespace Interfaces {
     public interface I_WaveDisplay {
         public void CleanDisplay();
         public void RefreshDisplay();
-        public void UpdateDisplay();
         public void Init(float sampleResolution);
     }
     public interface I_WaveLogic {
@@ -14,7 +13,7 @@ namespace Interfaces {
         public void Init(LayerMask interactMask);
     }
     public interface I_ParameterPanel {
-        public string ParamTransferName { get; }
+        public string CorrespondingUIInfoName { get; }
         public void RegisterParametersCallback(ParameterInfoList ParameterInfos);
         public void ParameterChangeTrigger();
     }
