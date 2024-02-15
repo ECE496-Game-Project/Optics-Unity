@@ -1,16 +1,17 @@
 ﻿using ParameterTransfer;
+using UnityEngine;
 
 namespace Interfaces {
-    public interface I_WaveRender {
+    public interface I_WaveDisplay {
         public void CleanDisplay();
         public void RefreshDisplay();
         public void UpdateDisplay();
-        public void init(I_WaveRender srcWD);
+        public void Init(float sampleResolution);
     }
     public interface I_WaveLogic {
         public void CleanInteract();
         public void Interact();
-        public void init(I_WaveLogic srcWI);
+        public void Init(LayerMask interactMask);
     }
     public interface I_ParameterPanel {
         public string ParamTransferName { get; }

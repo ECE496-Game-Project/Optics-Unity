@@ -6,22 +6,17 @@ using Interfaces;
 using ObjectPool;
 
 namespace GO_Wave {
-    public class LineWaveRender : MonoBehaviour, I_WaveRender {
+    public class LineWaveDisplay : MonoBehaviour, I_WaveDisplay {
 
         #region INSPECTOR SETTINGS
         [Header("Line Wave Display Settings")]
-        [SerializeField] private float _perSampleSpaceLength;
-        
-        [Header("Timescale Display Settings")]
-        // 感觉这样控制效果不太好,需要找其他方法
-        [Range(0.0f, 5.0f)]
-        [SerializeField] private float _timeScale = 1.0f;
+        public float SampleResolution;
         #endregion
 
         #region PRIVRATE VARIABLES
         [Header("DEBUG_WAVE")]
         [SerializeField] private Stack<LineWaveSample> m_samplePointList;
-        [SerializeField] private WaveSource _activeWS;
+        [SerializeField] private Wave _activeWS;
         #endregion
 
         #region GLOBAL METHOD
@@ -34,7 +29,7 @@ namespace GO_Wave {
         }
         public void RefreshDisplay() {
             /*Reposition All Sample Points base on WaveSource*/
-            int sampleCount = Mathf.FloorToInt(((LineWaveLogic)_activeWS.WaveLogic).EffectDistance / _perSampleSpaceLength);
+            int sampleCount = Mathf.FloorToInt(((LineWaveLogic)_activeWS.WaveLogic).EffectDistance / SampleResolution);
             
             int diff = sampleCount - m_samplePointList.Count;
             while (diff > 0) {
@@ -59,7 +54,7 @@ namespace GO_Wave {
             int i = 0;
             foreach(var item in m_samplePointList) {
                 i++;
-                item.transform.position = this.transform.position + i * _perSampleSpaceLength * this.transform.forward;
+                item.transform.position = this.transform.position + i * SampleResolution * this.transform.forward;
             }
         }
 
@@ -67,23 +62,22 @@ namespace GO_Wave {
             foreach (var item in m_samplePointList) {
                 Vector3 vec = WaveAlgorithm.CalcIrradiance(
                     item.transform.position - this.transform.position,
-                    Time.time * _timeScale,
+                    Time.time,
                     _activeWS.Params
                 );
                 item.UpdateEVec(vec);
             }
         }
 
-        public void init(I_WaveRender rootWD) {
-            this._perSampleSpaceLength = ((LineWaveRender)rootWD)._perSampleSpaceLength;
-            this._timeScale = ((LineWaveRender)rootWD)._timeScale;
+        public void Init(float sampleResolution) {
+            this.SampleResolution = sampleResolution;
         }
         #endregion
 
         private void Awake() {
             m_samplePointList = new Stack<LineWaveSample>();
 
-            _activeWS = this.transform.GetComponent<WaveSource>();
+            _activeWS = this.transform.GetComponent<Wave>();
             if (_activeWS == null) {
                 DebugLogger.Error(this.name, "GameObject Doesn't contains WaveSource Script, Stop Executing.");
             }

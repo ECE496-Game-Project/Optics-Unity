@@ -21,8 +21,8 @@ namespace GO_Device {
         [SerializeField] private float RotDeg;
         [SerializeField] private float AxisDiffDeg;
 
-        private WaveSource m_parent;
-        private WaveSource m_child;
+        private Wave m_parent;
+        private Wave m_child;
 
         public ComplexMatrix2X2 PolarizerMatrix() {
             if(AxisDiffDeg != 0)
@@ -72,27 +72,27 @@ namespace GO_Device {
             m_parent.ParameterChangeTrigger();
         }
 
-        public override void WaveHit(in RaycastHit hit, WaveSource parentWS) {
+        public override void WaveHit(in RaycastHit hit, Wave parentWS) {
             /*GO Setup*/
             // Awake function in scripts will be called in the order of,
             // WaveSource -> LineWaveRender -> BoxCollider -> LineWaveLogic
             GameObject new_GO = new GameObject(
                 parentWS.name + "_Child", 
-                typeof(WaveSource), 
-                typeof(LineWaveRender), 
+                typeof(Wave), 
+                typeof(LineWaveDisplay), 
                 typeof(BoxCollider), 
                 typeof(LineWaveLogic),
-                typeof(SelectableChildWave)
+                typeof(SelectableWave)
             );
             new_GO.transform.position = hit.point + Vector3.Normalize(hit.point - parentWS.transform.position) * ThicknessOffset;
             new_GO.transform.rotation = parentWS.transform.rotation;
 
             /*Wave Source, Display, Interact Setup*/
-            WaveSource childWS = new_GO.GetComponent<WaveSource>();
-            LineWaveRender lwd = new_GO.GetComponent<LineWaveRender>();
+            Wave childWS = new_GO.GetComponent<Wave>();
+            LineWaveDisplay lwd = new_GO.GetComponent<LineWaveDisplay>();
             LineWaveLogic lwi = new_GO.GetComponent<LineWaveLogic>();
 
-            WaveParams childWP = new WaveParams();
+            WaveParam childWP = new WaveParam();
             /* Calculate Eox, Eoy, Theta*/
             ComplexVector2 resVec = WaveAlgorithm.WaveToJohnsVector(parentWS.Params);
             
@@ -116,14 +116,14 @@ namespace GO_Device {
             /* childWS type must be Plane*/
             childWP.Type = WAVETYPE.PLANE;
 
-            childWS._awake(childWP);
+            childWS.Init(childWP);
             
 
             WaveAlgorithm.CalculateTravelAccumulatedPhase(hit.point - parentWS.transform.position, parentWS.Params, childWS.Params);
             WaveAlgorithm.JohnsVectorToWave(resVec, childWP);
 
-            lwd.init(parentWS.WaveDisplay);
-            lwi.init(parentWS.WaveLogic);
+            lwd.Init(((LineWaveDisplay)parentWS.WaveDisplay).SampleResolution);
+            lwi.Init(((LineWaveLogic)parentWS.WaveLogic).InteractMask);
 
             
             /*Store Pair*/
@@ -131,7 +131,7 @@ namespace GO_Device {
             m_child = childWS;
         }
 
-        public override void CleanDeviceHitTrace(WaveSource parentWS) {
+        public override void CleanDeviceHitTrace(Wave parentWS) {
             if (m_parent == null && m_child == null) return;
             m_child.WaveClean();
             Destroy(m_child.gameObject);
