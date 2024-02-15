@@ -13,11 +13,10 @@ public class TempSingletonManager : MonoSingleton<TempSingletonManager>
     public DragMoveController m_dragMoveController;
     public CameraRotateController m_cameraRotateController;
     public CameraMovementController m_cameraMovementController;
-
-
-    [Header("Referemce Variables")]
     public MouseInput m_mouseInput;
 
+    [Header("Referemce Variables")]
+    
     [SerializeField] private PlayerInput m_playerInput;
     [SerializeField] private CinemachineVirtualCamera m_vcam;
     [SerializeField] private Transform m_lookingObject;
