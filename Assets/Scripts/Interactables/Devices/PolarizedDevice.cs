@@ -64,7 +64,7 @@ namespace GO_Device {
             else if (DeviceType == DEVICETYPE.WEAVEPLATE) {
                 resVec = WaveplateMatrix() * resVec;
             }
-            float eox, eoy, phi = parentWP.phi, theta;
+            float eox, eoy, phi = parentWP.Phi, theta;
             WaveAlgorithm.JohnsVectorToWave(resVec, out eox, out eoy, ref phi, out theta);
 
             /* Calculate ReadOnly Effective Distance*/
@@ -75,8 +75,8 @@ namespace GO_Device {
                 parentWP.Type, parentWP.Origin,
                 parentWP.UHat, parentWP.VHat, parentWP.KHat,
                 eox, eoy, theta,
-                parentWP.T, parentWP.mu, parentWP.w, parentWP.lambda, parentWP.f, parentWP.k, 
-                phi, parentWP.n,
+                parentWP.T, parentWP.Mu, parentWP.W, parentWP.Lambda, parentWP.F, parentWP.K, 
+                phi, parentWP.N,
                 tmpDistance - hit.distance
             );
 

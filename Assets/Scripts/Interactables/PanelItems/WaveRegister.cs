@@ -26,18 +26,18 @@ namespace GO_Wave {
             NameTuple.Getter = () => { return this.name; };
             EoxTuple.Getter = () => { return m_params.Eox; };
             EoyTuple.Getter = () => { return m_params.Eoy; };
-            thetaTuple.Getter = () => { return m_params.theta; };
+            thetaTuple.Getter = () => { return m_params.Theta; };
 
             TTuple.Getter = () => { return m_params.T; };
-            muTuple.Getter = () => { return m_params.mu; };
-            wTuple.Getter = () => { return m_params.w; };
+            muTuple.Getter = () => { return m_params.Mu; };
+            wTuple.Getter = () => { return m_params.W; };
 
-            lambdaTuple.Getter = () => { return m_params.lambda; };
-            fTuple.Getter = () => { return m_params.f; };
-            kTuple.Getter = () => { return m_params.k; };
+            lambdaTuple.Getter = () => { return m_params.Lambda; };
+            fTuple.Getter = () => { return m_params.F; };
+            kTuple.Getter = () => { return m_params.K; };
 
-            phiTuple.Getter = () => { return m_params.phi; };
-            nTuple.Getter = () => { return m_params.n; };
+            phiTuple.Getter = () => { return m_params.Phi; };
+            nTuple.Getter = () => { return m_params.N; };
         }
     }
 }

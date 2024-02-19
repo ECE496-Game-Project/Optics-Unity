@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using CommonUtils;
 
 namespace WaveUtils {
 	public enum WAVETYPE {
@@ -49,33 +50,56 @@ namespace WaveUtils {
         }
 	}
 	public class WaveParam {
-		private bool roflag;
-		public WAVETYPE Type { get; }
+		private bool roflag = true;
+		private WAVETYPE type;
+		private Vector3 origin;
+		private Vector3 uHat;
+		private Vector3 vHat;
+		private Vector3 kHat;
 
-		public Vector3 Origin { get; }
-        public Vector3 UHat { get; }
-		public Vector3 VHat { get; }
-		public Vector3 KHat { get; }
+		private float eox;
+		private float eoy;
+		private float theta;
 
-		public float Eox { get; }
-		public float Eoy { get; }
-		public float theta { get; }
+		private float t;
+		private float mu;
+		private float w;
 
-		public float T;
-		public float mu;
-		public float w;
+		private float lambda;
+		private float f;
+		private float k;
 
-		public float lambda;
-		public float f;
-		public float k;
+		private float phi;
+		private float n;
 
-		public float phi;
-		public float n;
+		private float roDistance;
 
-		public float RODistance;
+		public WAVETYPE Type { get => type; set { if (!roflag) type = value; else DebugLogger.Error("WaveParam", "ROFlag Disabled!"); } }
+		public Vector3 Origin { get => origin; set { if (!roflag) origin = value; else DebugLogger.Error("WaveParam", "ROFlag Disabled!"); } }
+		public Vector3 UHat { get => uHat; set { if (!roflag) uHat = value; else DebugLogger.Error("WaveParam", "ROFlag Disabled!"); } }
+		public Vector3 VHat { get => vHat; set { if (!roflag) vHat = value; else DebugLogger.Error("WaveParam", "ROFlag Disabled!"); } }
+		public Vector3 KHat { get => kHat; set { if (!roflag) kHat = value; else DebugLogger.Error("WaveParam", "ROFlag Disabled!"); } }
+
+		public float Eox { get => eox; set { if (!roflag) eox = value; else DebugLogger.Error("WaveParam", "ROFlag Disabled!"); } }
+		public float Eoy { get => eoy; set { if (!roflag) eoy = value; else DebugLogger.Error("WaveParam", "ROFlag Disabled!"); } }
+		public float Theta { get => theta; set { if (!roflag) theta = value; else DebugLogger.Error("WaveParam", "ROFlag Disabled!"); } }
+
+		public float T { get => t; set { if (!roflag) t = value; else DebugLogger.Error("WaveParam", "ROFlag Disabled!"); } }
+		public float Mu { get => mu; set { if (!roflag) mu = value; else DebugLogger.Error("WaveParam", "ROFlag Disabled!"); } }
+		public float W { get => w; set { if (!roflag) w = value; else DebugLogger.Error("WaveParam", "ROFlag Disabled!"); } }
+
+		public float Lambda { get => lambda; set { if (!roflag) lambda = value; else DebugLogger.Error("WaveParam", "ROFlag Disabled!"); } }
+		public float F { get => f; set { if (!roflag) f = value; else DebugLogger.Error("WaveParam", "ROFlag Disabled!"); } }
+		public float K { get => k; set { if (!roflag) k = value; else DebugLogger.Error("WaveParam", "ROFlag Disabled!"); } }
+
+		public float Phi { get => phi; set { if (!roflag) phi = value; else DebugLogger.Error("WaveParam", "ROFlag Disabled!"); } }
+		public float N { get => n; set { if (!roflag) n = value; else DebugLogger.Error("WaveParam", "ROFlag Disabled!"); } }
+
+		public float RODistance { get => roDistance; set { if (!roflag) roDistance = value; else DebugLogger.Error("WaveParam", "ROFlag Disabled!"); } }
 
 		public WaveParam() { }
 		public WaveParam(WaveSourceParam wsParam) {
+			roflag = false;
 			Type = wsParam.Type;
 
 			Origin = wsParam.Origin;
@@ -87,14 +111,16 @@ namespace WaveUtils {
 			Eoy = wsParam.Eoy;
 			theta = wsParam.theta;
 
-			lambda = wsParam.lambda;
-			n = wsParam.n;
+			Lambda = wsParam.lambda;
+			N = wsParam.n;
 			RODistance = wsParam.RODistance;
 
 			modifyLambda(); 
-			phi = 0; 
+			Phi = 0;
+			roflag = true;
 		}
 		public WaveParam(WAVETYPE type, Vector3 origin, Vector3 uHat, Vector3 vHat, Vector3 kHat, float eox, float eoy, float theta, float t, float mu, float w, float lambda, float f, float k, float phi, float n, float roDistance) {
+			roflag = false;
 			Type = type;
 			Origin = origin;
 			UHat = uHat;
@@ -104,22 +130,23 @@ namespace WaveUtils {
 			Eoy = eoy;
 			this.theta = theta;
 			T = t;
-			this.mu = mu;
-			this.w = w;
-			this.lambda = lambda;
-			this.f = f;
-			this.k = k;
-			this.phi = phi;
-			this.n = n;
+			this.Mu = mu;
+			this.W = w;
+			this.Lambda = lambda;
+			this.F = f;
+			this.K = k;
+			this.Phi = phi;
+			this.N = n;
 			RODistance = roDistance;
+			roflag = true;
 		}
 
 		public void modifyLambda() {
-			f = 1 / lambda;
-			k = 2 * Mathf.PI * f;
-			w = WaveAlgorithm.C * k / n;
-			T = 2 * Mathf.PI / w;
-			mu = 1 / T;
+			F = 1 / Lambda;
+			K = 2 * Mathf.PI * F;
+			W = WaveAlgorithm.C * K / N;
+			T = 2 * Mathf.PI / W;
+			Mu = 1 / T;
 		}
 	}
 }

@@ -48,11 +48,11 @@ namespace WaveUtils {
 
         public static Vector3 CalcIrradiance(Vector3 currPos, float t, WaveParam param) {
             Vector3 r = currPos - param.Origin;
-			float kdotr = Vector3.Dot(param.KHat, r) * param.k;
-			float expCommon = kdotr - Mathf.Deg2Rad * param.w * t + Mathf.Deg2Rad * param.phi;
+			float kdotr = Vector3.Dot(param.KHat, r) * param.K;
+			float expCommon = kdotr - Mathf.Deg2Rad * param.W * t + Mathf.Deg2Rad * param.Phi;
 
 			float uMag = param.Eox * Mathf.Cos(expCommon);
-			float vMag = param.Eoy * Mathf.Cos(expCommon + Mathf.Deg2Rad * param.theta);
+			float vMag = param.Eoy * Mathf.Cos(expCommon + Mathf.Deg2Rad * param.Theta);
 			
 			return uMag * param.UHat + vMag * param.VHat;
         }
@@ -83,7 +83,7 @@ namespace WaveUtils {
         public static ComplexVector2 WaveToJohnsVector(WaveParam param) {
 			return new ComplexVector2(
 				new Complex(param.Eox, 0),
-				param.Eoy * Complex.Exp(Complex.ImaginaryOne * Mathf.Deg2Rad * param.theta)
+				param.Eoy * Complex.Exp(Complex.ImaginaryOne * Mathf.Deg2Rad * param.Theta)
 			);
 		}
 
