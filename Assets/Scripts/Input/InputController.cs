@@ -1,21 +1,20 @@
-
-using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class InputController
 {
     protected bool m_isAllowed = true;
 
-    public virtual string m_name { get;}
+    public abstract string m_name { get;}
 
     public InputController m_manager;
 
     public List<InputController> m_employee = new List<InputController>();
-    public Action<InputController> m_notifyParentIsOn, m_notifyParentIsFinished;
 
     public Dictionary<string, Dictionary<string, bool>> employeeRelationships = new Dictionary<string, Dictionary<string, bool>>();
+
+    public Dictionary<string, bool> m_employeeStatus = new Dictionary<string, bool>();
+    private int m_numberOfEmployeeOn = 0;
 
     protected InputController(InputController manager)
     {
@@ -28,6 +27,12 @@ public abstract class InputController
         else
         {
             m_isAllowed = true;
+
+            //unblock all my employees
+            foreach (InputController employee in m_employee)
+            {
+                employee.Unblock();
+            }
         }
     }
 
@@ -37,16 +42,22 @@ public abstract class InputController
         else
         {
             m_isAllowed = false;
+
+            //block all my employees
+            foreach (InputController employee in m_employee)
+            {
+                employee.Block();
+            }
         }
     }
 
     public void AddController(InputController employee)
     {
         m_employee.Add(employee);
-        //employee.m_manager = this;
-        //employee.m_notifyParentIsOn = NotifyParentIsOn;
-        //employee.m_notifyParentIsFinished = NotifyParentIsFinished;
+        employee.m_manager = this;
+
         employeeRelationships.Add(employee.m_name, new Dictionary<string, bool>());
+        m_employeeStatus.Add(employee.m_name, false);
     }
 
     public void AddControllerRelationship(string firstEmployee, string secondEmployee, bool value)
@@ -88,19 +99,65 @@ public abstract class InputController
         }
     }
 
-    public virtual void NotifyParentIsOn(InputController employee)
+    public void NotifyMyParentIsOn()
+    {
+        m_manager?.NotifyParentFromChildrenIsOn(this);
+    }
+
+    public void NotifyMyParentIsFinished()
+    {
+        m_manager?.NotifyParentFromChildrenIsFinished(this);
+    }
+
+    public virtual void NotifyParentFromChildrenIsOn(InputController employee)
     {
         BlockOtherControllers(employee);
 
+        if (!m_employeeStatus.ContainsKey(employee.m_name))
+        {
+            Debug.LogError("Can not find employee " + employee.m_name + " controller");
+            return;
+        }
+        
         // notify its parent
-        m_notifyParentIsOn?.Invoke(this);
+        
+        // if this is the first employee to be turned on, notify my parent
+        if (m_numberOfEmployeeOn == 0)
+        {
+            NotifyMyParentIsOn();
+        }
+
+        if (!m_employeeStatus[employee.m_name])
+        {
+            m_employeeStatus[employee.m_name] = true;
+            m_numberOfEmployeeOn++;
+        }
+
     }
 
-    public virtual void NotifyParentIsFinished(InputController employee)
+    public virtual void NotifyParentFromChildrenIsFinished(InputController employee)
     {
         UnblockOtherControllers(employee);
+        
+        if (!m_employeeStatus.ContainsKey(employee.m_name))
+        {
+            Debug.LogError("Can not find employee " + employee.m_name + " controller");
+            return;
+        }
 
-        // notify its parent
-        m_notifyParentIsFinished?.Invoke(this);
+        if (!m_employeeStatus[employee.m_name])
+        {
+            Debug.LogError("Employee " + employee.m_name + " is already finished");
+            return;
+        }
+
+        m_numberOfEmployeeOn--;
+        m_employeeStatus[employee.m_name] = false;
+
+        if (m_numberOfEmployeeOn == 0)
+        {
+            NotifyMyParentIsFinished();
+        }
+
     }
 }
