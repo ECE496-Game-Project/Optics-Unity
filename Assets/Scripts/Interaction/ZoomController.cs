@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [System.Serializable]
-public class ZoomController
+public class ZoomController: InputController
 {
-
+    public override string m_name => "ZoomController";
     private PlayerInput m_playerInput;
 
 
@@ -18,12 +18,14 @@ public class ZoomController
 
     public float CameraDepth => -m_transposer.m_FollowOffset.z;
 
-    public ZoomController(PlayerInput playerInput, CinemachineVirtualCamera vcam)
+    public ZoomController(InputController manager, PlayerInput playerInput, CinemachineVirtualCamera vcam):base(manager)
     {
         m_playerInput = playerInput;
         m_vcam = vcam;
 
         m_playerInput.actions["Zoom"].performed += OnZoomPerformed;
+        m_playerInput.actions["Zoom"].started += OnZoomStarted;
+        m_playerInput.actions["Zoom"].canceled += OnZoomEnded;
         m_transposer = m_vcam.GetCinemachineComponent(CinemachineCore.Stage.Body) as CinemachineTransposer;
     }
 
@@ -35,8 +37,16 @@ public class ZoomController
     //    m_transposer = m_vcam.GetCinemachineComponent(CinemachineCore.Stage.Body) as CinemachineTransposer;
     //}
 
+    private void OnZoomStarted(InputAction.CallbackContext context)
+    {
+        if (!m_isAllowed) return;
+        NotifyMyParentIsOn();
+        Debug.Log("Zoom Started " + Time.frameCount);
+    }
+
     private void OnZoomPerformed(InputAction.CallbackContext context)
     {
+        if (!m_isAllowed) return;
         float value = context.ReadValue<Vector2>().y;
 
         if (value < 0 )
@@ -51,7 +61,15 @@ public class ZoomController
 
         m_transposer.m_FollowOffset.z = Math.Clamp(m_transposer.m_FollowOffset.z, -float.MaxValue, -1f);
 
+        Debug.Log("Zoom Processing " + Time.frameCount);
 
+    }
+
+    private void OnZoomEnded(InputAction.CallbackContext context)
+    {
+        if (!m_isAllowed) return;
+        NotifyMyParentIsFinished();
+        Debug.Log("Zoom Ended " + Time.frameCount);
     }
 
 }

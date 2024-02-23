@@ -14,6 +14,9 @@ public abstract class InputController
     public Dictionary<string, Dictionary<string, bool>> employeeRelationships = new Dictionary<string, Dictionary<string, bool>>();
 
     public Dictionary<string, bool> m_employeeStatus = new Dictionary<string, bool>();
+
+    public bool m_myStatus = false;
+
     private int m_numberOfEmployeeOn = 0;
 
     protected InputController(InputController manager)
@@ -101,11 +104,17 @@ public abstract class InputController
 
     public void NotifyMyParentIsOn()
     {
+        //I already notified my parent, no need to notify again
+        if (m_myStatus) return;
+        m_myStatus = true;
         m_manager?.NotifyParentFromChildrenIsOn(this);
     }
 
     public void NotifyMyParentIsFinished()
     {
+        //Either I already notified my parent or I did not even started it, no need to notify
+        if (!m_myStatus) return;
+        m_myStatus = false;
         m_manager?.NotifyParentFromChildrenIsFinished(this);
     }
 

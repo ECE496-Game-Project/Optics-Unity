@@ -15,6 +15,7 @@ public class TempSingletonManager : MonoSingleton<TempSingletonManager>
     public CameraMovementController m_cameraMovementController;
     public MouseInput m_mouseInput;
 
+    public CameraAbstractController m_cameraAbstractController;
     [Header("Referemce Variables")]
     
     [SerializeField] private PlayerInput m_playerInput;
@@ -30,9 +31,11 @@ public class TempSingletonManager : MonoSingleton<TempSingletonManager>
 
         m_mouseInput = new MouseInput(m_playerInput);
         m_selectionController = new SelectionController(m_mouseInput);
-        m_zoomController = new ZoomController(m_playerInput, m_vcam);
-        m_dragMoveController = new DragMoveController(m_playerInput, m_zoomController, m_lookingObject);
-        m_cameraRotateController = new CameraRotateController(m_lookingObject, m_playerInput);
+
+        m_cameraAbstractController = new CameraAbstractController(null);
+        //m_zoomController = new ZoomController(m_playerInput, m_vcam);
+        //m_dragMoveController = new DragMoveController(m_playerInput, m_zoomController, m_lookingObject);
+        //m_cameraRotateController = new CameraRotateController(m_lookingObject, m_playerInput);
         m_cameraMovementController = new CameraMovementController(m_lookingObject, m_playerInput);
     }
 

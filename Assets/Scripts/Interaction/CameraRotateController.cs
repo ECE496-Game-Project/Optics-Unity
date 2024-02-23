@@ -2,27 +2,38 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [System.Serializable]
-public class CameraRotateController
+public class CameraRotateController: InputController
 {
+
+    public override string m_name => "CameraRotateController";
 
     private Transform m_lookingObject;
 
     private PlayerInput m_playerInput;
 
     [SerializeField]
-    private float m_degreePerUnit = 10f;
+    private float m_degreePerUnit = 1f;
 
 
-    public CameraRotateController(Transform lookingObject, PlayerInput playerInput)
+    public CameraRotateController(InputController parent, Transform lookingObject, PlayerInput playerInput): base(parent)
     {
         m_lookingObject = lookingObject;
         m_playerInput = playerInput;
+        m_playerInput.actions["Rotate"].started += OnRotateStarted;
         m_playerInput.actions["Rotate"].performed += OnRotatePerformed;
+        m_playerInput.actions["Rotate"].canceled += OnRotateEnded;
+    }
+
+    public void OnRotateStarted(InputAction.CallbackContext context)
+    {
+        if (!m_isAllowed) return;
+        NotifyMyParentIsOn();
+        Debug.Log("Rotate Started " + Time.frameCount);
     }
 
     private void OnRotatePerformed(InputAction.CallbackContext context)
     {
-
+        if (!m_isAllowed) return;
         // record the mouse movement
         Vector2 delta = context.ReadValue<Vector2>();
         
@@ -33,6 +44,13 @@ public class CameraRotateController
 
         // when mouse is moving downward, it will rotate clockwise according to left hand coordinate systm
         m_lookingObject.Rotate(Vector3.right, -delta.y, Space.Self);
+        Debug.Log("Rotate Processing " + Time.frameCount);
     }
 
+    public void OnRotateEnded(InputAction.CallbackContext context)
+    {
+        if (!m_isAllowed) return;
+        NotifyMyParentIsFinished();
+        Debug.Log("Rotate Ended " + Time.frameCount);
+    }
 }

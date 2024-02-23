@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class DragMoveController
+public class DragMoveController: InputController
 {
+    public override string m_name => "DragMoveController";
 
     private Transform m_lookingObject;
 
@@ -12,26 +13,31 @@ public class DragMoveController
 
     private Vector2 m_previousMousePosition;
 
-    public DragMoveController(PlayerInput playerInput, ZoomController zoomController, Transform reference)
+    public DragMoveController(InputController parent, PlayerInput playerInput, ZoomController zoomController, Transform reference): base(parent)
     {
         m_playerInput = playerInput;
         m_zoomComponent = zoomController;
         m_lookingObject = reference;
-
-        m_playerInput.actions["Translation"].performed += OnMouseMove;
+        
         m_playerInput.actions["Translation"].started += OnMousePrep;
+        m_playerInput.actions["Translation"].performed += OnMouseMove;
+        m_playerInput.actions["Translation"].canceled += OnMouseFinished;
+        
     }
 
     private void OnMousePrep(InputAction.CallbackContext context)
     {
-
+        if (!m_isAllowed) return;
         m_previousMousePosition = context.ReadValue<Vector2>();
 
+        NotifyMyParentIsOn();
     }
 
 
     public void OnMouseMove(InputAction.CallbackContext context)
     {
+        if (!m_isAllowed) return;
+
         Vector3 mousePosition = context.ReadValue<Vector2>();
 
         // set the depth to where the looking object is
@@ -49,5 +55,11 @@ public class DragMoveController
 
         m_lookingObject.Translate(-translation, Space.World);
         m_previousMousePosition = mousePosition;
+    }
+
+    public void OnMouseFinished(InputAction.CallbackContext context)
+    {
+        if (!m_isAllowed) return;
+        NotifyMyParentIsFinished();
     }
 }
