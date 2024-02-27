@@ -12,7 +12,7 @@ public class CameraRotateController: InputController
     private PlayerInput m_playerInput;
 
     [SerializeField]
-    private float m_degreePerUnit = 1f;
+    private float m_degreePerUnit = 10f;
 
 
     public CameraRotateController(InputController parent, Transform lookingObject, PlayerInput playerInput): base(parent)
@@ -28,7 +28,6 @@ public class CameraRotateController: InputController
     {
         if (!m_isAllowed) return;
         NotifyMyParentIsOn();
-        Debug.Log("Rotate Started " + Time.frameCount);
     }
 
     private void OnRotatePerformed(InputAction.CallbackContext context)
@@ -44,13 +43,13 @@ public class CameraRotateController: InputController
 
         // when mouse is moving downward, it will rotate clockwise according to left hand coordinate systm
         m_lookingObject.Rotate(Vector3.right, -delta.y, Space.Self);
-        Debug.Log("Rotate Processing " + Time.frameCount);
+
     }
 
     public void OnRotateEnded(InputAction.CallbackContext context)
     {
         if (!m_isAllowed) return;
         NotifyMyParentIsFinished();
-        Debug.Log("Rotate Ended " + Time.frameCount);
+
     }
 }

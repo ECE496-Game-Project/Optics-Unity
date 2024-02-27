@@ -43,14 +43,19 @@ public class CameraAbstractController : InputController
         ZoomController zoomController = new ZoomController(this, playerInput, virtualCamera);
         CameraRotateController rotateController = new CameraRotateController(this, lookingObject, playerInput);
         DragMoveController dragMoveController = new DragMoveController(this, playerInput, zoomController, lookingObject);
-
+        CameraMovementController cameraMovementController = new CameraMovementController(this, lookingObject, playerInput);
         AddController(zoomController);
         AddController(rotateController);
         AddController(dragMoveController);
+        AddController(cameraMovementController);
 
         AddControllerRelationship(zoomController.m_name, rotateController.m_name, false);
         AddControllerRelationship(zoomController.m_name, dragMoveController.m_name, false);
         AddControllerRelationship(rotateController.m_name, dragMoveController.m_name, false);
+
+        AddControllerRelationship(cameraMovementController.m_name, zoomController.m_name, true);
+        AddControllerRelationship(cameraMovementController.m_name, rotateController.m_name, true);
+        AddControllerRelationship(cameraMovementController.m_name, dragMoveController.m_name, false);
     }
 
     

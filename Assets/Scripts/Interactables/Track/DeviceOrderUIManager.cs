@@ -64,11 +64,11 @@ namespace Constraint.UI
 
 
        }
-       SelectionController m_selectionController;
+       //SelectionController m_selectionController;
        private void Start()
        {
-           m_selectionController = TempSingletonManager.Instance.m_selectionController;
-           Assert.IsNotNull(m_selectionController);
+           //m_selectionController = TempSingletonManager.Instance.m_selectionController;
+           //Assert.IsNotNull(m_selectionController);
        }
 
        private void OnEnable()
@@ -104,12 +104,12 @@ namespace Constraint.UI
            if (!m_isMouseInside && isInside(mousePosition))
            {
                m_isMouseInside = true;
-               m_selectionController.TurnOff();
+               //m_selectionController.TurnOff();
            }
            else if (m_isMouseInside && !isInside(mousePosition))
            {
                m_isMouseInside = false;
-               m_selectionController.TurnOn();
+               //m_selectionController.TurnOn();
            }
 
        }

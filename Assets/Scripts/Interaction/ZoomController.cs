@@ -41,7 +41,7 @@ public class ZoomController: InputController
     {
         if (!m_isAllowed) return;
         NotifyMyParentIsOn();
-        Debug.Log("Zoom Started " + Time.frameCount);
+       
     }
 
     private void OnZoomPerformed(InputAction.CallbackContext context)
@@ -61,7 +61,6 @@ public class ZoomController: InputController
 
         m_transposer.m_FollowOffset.z = Math.Clamp(m_transposer.m_FollowOffset.z, -float.MaxValue, -1f);
 
-        Debug.Log("Zoom Processing " + Time.frameCount);
 
     }
 
@@ -69,7 +68,6 @@ public class ZoomController: InputController
     {
         if (!m_isAllowed) return;
         NotifyMyParentIsFinished();
-        Debug.Log("Zoom Ended " + Time.frameCount);
     }
 
 }

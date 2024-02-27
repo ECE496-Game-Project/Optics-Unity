@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class InputController
@@ -168,5 +169,14 @@ public abstract class InputController
             NotifyMyParentIsFinished();
         }
 
+    }
+
+    public virtual void Update(float deltaTime)
+    {
+        // update my children
+        for (int i = 0; i < m_employee.Count; i++)
+        {
+            m_employee[i].Update(deltaTime);
+        }
     }
 }
