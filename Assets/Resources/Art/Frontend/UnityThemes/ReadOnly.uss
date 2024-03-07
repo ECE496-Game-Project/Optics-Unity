@@ -1,0 +1,8 @@
+.read-only FloatField {
+    background-color: rgba(240, 240, 240, 0);
+    border: 1px dashed rgb(204, 204, 204);
+    color: rgb(152, 152, 152);
+    cursor: default;
+    -unity-text-outline-color: rgba(0, 0, 0, 0.48);
+    font-size: 24px;
+}

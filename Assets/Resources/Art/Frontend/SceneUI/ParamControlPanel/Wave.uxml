@@ -1,28 +1,29 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Resources/Art/Frontend/UnityThemes/ReadOnly.uss?fileID=7433441132597879392&amp;guid=891b6d72276de0843ab2494f78929f8b&amp;type=3#ReadOnly" />
     <ui:VisualElement name="Name" style="flex-grow: 1; height: 10%; justify-content: center;">
         <ui:TextField picking-mode="Ignore" value="Object Name" style="height: 100%; -unity-text-align: middle-left; align-self: auto; align-items: center; -unity-font-style: bold; font-size: 20px; width: 70%;" />
     </ui:VisualElement>
-    <ui:VisualElement name="Parameter" style="flex-grow: 1; height: 90%; display: flex; -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(23, 74, 94);">
+    <ui:VisualElement name="Parameter" class="read-only" style="flex-grow: 1; height: 90%; display: flex; -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(23, 74, 94);">
         <ui:Foldout text="Amplitude" name="Amplitude" style="height: 25%; color: rgb(255, 255, 255); -unity-font-style: bold;">
             <ui:VisualElement name="UdirAmp" style="flex-grow: 1; flex-direction: row;">
-                <ui:FloatField label="Udir Amp(Eox)" value="1" name="FloatField" readonly="true" style="width: 252px; align-items: center; color: rgb(255, 255, 255); -unity-text-align: middle-left; -unity-text-outline-color: rgb(23, 74, 94); -unity-text-outline-width: 1px;">
+                <ui:FloatField label="Eox" value="1" name="FloatField" readonly="true" class="read-only" style="width: 256px;">
                     <ui:Label tabindex="-1" text="V/m" parse-escape-sequences="true" display-tooltip-when-elided="true" />
                 </ui:FloatField>
             </ui:VisualElement>
             <ui:VisualElement name="VdirAmp" style="flex-grow: 1; flex-direction: row;">
-                <ui:FloatField label="Vdir Amp(Eoy)" value="1" name="FloatField" readonly="true" style="width: 252px; align-items: center;">
+                <ui:FloatField label="Eoy" value="1" name="FloatField" readonly="true" style="width: 256px; align-items: center;">
                     <ui:Label tabindex="-1" text="V/m" parse-escape-sequences="true" display-tooltip-when-elided="true" />
                 </ui:FloatField>
             </ui:VisualElement>
             <ui:VisualElement name="Theta" style="flex-grow: 1; flex-direction: row;">
-                <ui:FloatField label="Phase Diff(Theta)" value="42" name="FloatField" readonly="true" style="width: 232px; align-items: center;">
+                <ui:FloatField label="Theta" value="42" name="FloatField" readonly="true" focusable="false" style="width: 218px; align-items: center;">
                     <ui:Label tabindex="-1" text="°" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                 </ui:FloatField>
             </ui:VisualElement>
         </ui:Foldout>
         <ui:Foldout text="Temperal Properties" name="Temperal" style="height: 25%; color: rgb(255, 255, 255); -unity-font-style: bold;">
             <ui:VisualElement name="T" style="flex-grow: 1;">
-                <ui:FloatField label="Period (T)" value="42.2" readonly="true" name="FloatField" style="align-items: center; width: 70%;">
+                <ui:FloatField label="T" value="42.2" readonly="true" name="FloatField" style="align-items: center; width: 230px;">
                     <ui:Label tabindex="-1" text="fs" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
                 </ui:FloatField>
             </ui:VisualElement>
@@ -60,7 +61,7 @@
             </ui:FloatField>
         </ui:VisualElement>
         <ui:VisualElement name="N" style="flex-grow: 1; flex-direction: row; height: 6%; color: rgb(255, 255, 255); -unity-font-style: bold;">
-            <ui:FloatField label="Refractive Index (n)" value="1" name="FloatField" readonly="true" style="width: 282px; align-items: center;">
+            <ui:FloatField label="Refractive Index (n)" value="1" name="FloatField" readonly="true" class="read-only" style="width: 282px; align-items: center;">
                 <ui:Label tabindex="-1" text="const" parse-escape-sequences="true" display-tooltip-when-elided="true" />
             </ui:FloatField>
         </ui:VisualElement>
