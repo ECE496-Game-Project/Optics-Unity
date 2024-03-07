@@ -4,5 +4,13 @@
     color: rgb(152, 152, 152);
     cursor: default;
     -unity-text-outline-color: rgba(0, 0, 0, 0.48);
-    font-size: 24px;
+    font-size: 20px;
+}
+
+.font {
+    -unity-text-outline-color: rgb(25, 38, 63);
+    font-size: 20px;
+    -unity-font-style: bold;
+    -unity-text-align: upper-center;
+    letter-spacing: 0;
 }
