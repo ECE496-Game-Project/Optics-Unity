@@ -21,6 +21,6 @@ MonoBehaviour:
     Eox: 1
     Eoy: 1
     theta: 90
-    lambda: 19
+    lambda: 7
     n: 1
     RODistance: 50

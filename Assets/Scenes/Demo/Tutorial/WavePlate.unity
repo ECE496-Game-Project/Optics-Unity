@@ -410,6 +410,29 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1 &456677173 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6405443755208858056, guid: 40489e7ec2e214f429f8f2f591f0bfea,
+    type: 3}
+  m_PrefabInstance: {fileID: 1128092328}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &456677178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456677173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed343eed47915a242a26a85fd95c9a9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _profile: {fileID: 11400000, guid: d2d780b4c9135d64d950038596d728eb, type: 2}
+  _interactMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _sampleResolution: 1
 --- !u!1001 &525148768
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -524,6 +547,8 @@ MonoBehaviour:
       type: 2}
     m_negativeMaterial: {fileID: 2100000, guid: 7e3edfc48f2476941ac1214b65a4973a,
       type: 2}
+  m_scaleManager:
+    m_nmPerUnit: 100
 --- !u!4 &590535440
 Transform:
   m_ObjectHideFlags: 0
@@ -827,10 +852,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaveSource
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9019531392649539281, guid: 40489e7ec2e214f429f8f2f591f0bfea, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6405443755208858056, guid: 40489e7ec2e214f429f8f2f591f0bfea,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 456677178}
   m_SourcePrefab: {fileID: 100100000, guid: 40489e7ec2e214f429f8f2f591f0bfea, type: 3}
 --- !u!1 &1137722187
 GameObject:
