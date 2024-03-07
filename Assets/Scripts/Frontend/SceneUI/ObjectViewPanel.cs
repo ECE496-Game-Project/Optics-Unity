@@ -35,7 +35,7 @@ public class ObjectViewPanel : MonoBehaviour
         Length height = new Length(HIDE_POSITION, LengthUnit.Percent);
         expPanel.style.top = new StyleLength(height);
         expBody.style.display = DisplayStyle.None;
-        expButton.text = "<";
+        expButton.text = "\u2191";
         isPanelExpanded = false;
     }
     public void OpenExpandPanel(VisualElement root){
@@ -48,7 +48,7 @@ public class ObjectViewPanel : MonoBehaviour
         height = new Length(100 - PANEL_HEIGHT, LengthUnit.Percent);
         expPanel.style.top = new StyleLength(height);
         expBody.style.display = DisplayStyle.Flex;
-        expButton.text = ">";
+        expButton.text = "\u2193";
         isPanelExpanded = true;
     }
 }

@@ -232,7 +232,7 @@ namespace Panel {
         public void CloseExpandPanel(){
             Body.style.display = DisplayStyle.None;
             ExpandPanel.style.width = PANEL_WIDTH;
-            ExpandButton.text = ">";
+            ExpandButton.text = "\u2192";
 
             isPanelExpanded = false;
         }
@@ -241,7 +241,7 @@ namespace Panel {
             Length width = new Length(PANEL_WIDTH, LengthUnit.Percent);
             ExpandPanel.style.width = new StyleLength(width);
             Body.style.display = DisplayStyle.Flex;
-            ExpandButton.text = "<";
+            ExpandButton.text = "\u2190";
 
             isPanelExpanded = true;
         }

@@ -58,7 +58,7 @@ public class TutorialPanel : MonoBehaviour
         expPanel.style.left = new StyleLength(width);
         expBody.style.display = DisplayStyle.None;
 
-        expButton.text = "<";
+        expButton.text = "\u2190";
         isPanelExpanded = false;
     }
     public void OpenExpandPanel(VisualElement root){
@@ -72,7 +72,7 @@ public class TutorialPanel : MonoBehaviour
         expPanel.style.left = new StyleLength(width);
         expBody.style.display = DisplayStyle.Flex;
 
-        expButton.text = ">";
+        expButton.text = "\u2192";
         isPanelExpanded = true;
     }
 }

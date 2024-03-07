@@ -1,5 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="ExpandPanel" style="flex-grow: 1; max-height: 75%; height: 75%; width: 30%; max-width: 30%; flex-direction: row; align-self: auto; -unity-text-align: upper-left; background-color: rgba(23, 74, 94, 0.59); top: 4%;">
+    <Style src="project://database/Assets/Resources/Art/Frontend/UnityThemes/Tutorial.uss?fileID=7433441132597879392&amp;guid=665bfc0963e4fdb4488d7897e33da9ab&amp;type=3#Tutorial" />
+    <ui:VisualElement name="ExpandPanel" class="ExpandPanel" style="flex-grow: 1; max-height: 75%; height: 75%; width: 30%; max-width: 30%; flex-direction: row; align-self: auto; -unity-text-align: upper-left; background-color: rgba(23, 74, 94, 0.59); top: 4%;">
         <ui:VisualElement name="Body" style="flex-grow: 1; width: 95%; display: flex; visibility: visible;" />
         <ui:VisualElement name="SideBar" style="flex-grow: 1; width: 5%;">
             <ui:Button text="&lt;" parse-escape-sequences="false" display-tooltip-when-elided="true" name="ExpandButton" style="width: 30px; max-width: 30px; max-height: 30px; height: 30px; align-items: center; align-self: center; background-color: rgb(241, 170, 87); -unity-font-style: bold; color: rgb(255, 255, 255);" />
