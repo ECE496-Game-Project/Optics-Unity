@@ -13,16 +13,15 @@ namespace GO_Device {
         WEAVEPLATE,
     }
 
-    public class PolarizedDevice : DeviceBase {
-        public override string ParamTransferName { get { return "PolarizedDevice"; } }
+    public partial class PolarizedDevice : DeviceBase {
 
         [SerializeField] protected DEVICETYPE DeviceType;
         [SerializeField] private float ThicknessOffset;
         [SerializeField] private float RotDeg;
         [SerializeField] private float AxisDiffDeg;
 
-        private WaveSource m_parent;
-        private WaveSource m_child;
+        private Wave m_parent = null;
+        private Wave m_child = null;
 
         public ComplexMatrix2X2 PolarizerMatrix() {
             if(AxisDiffDeg != 0)
@@ -51,94 +50,52 @@ namespace GO_Device {
             );
         }
 
-        public override void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
-            var NameTuple = (ParameterInfo<string>)ParameterInfos.SymbolQuickAccess["Name"];
-            var DeviceTypeTuple = (ParameterInfo<Enum>)ParameterInfos.SymbolQuickAccess["DeviceType"];
-            var RotDegTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["RotDeg"];
-            var AxisDiffDegTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["AxisDiffDeg"];
-
-            NameTuple.Getter = () => { return this.name; };
-            DeviceTypeTuple.Getter = () => { return DeviceType; };
-            RotDegTuple.Getter = () => { return RotDeg; };
-            AxisDiffDegTuple.Getter = () => { return AxisDiffDeg; };
-
-            NameTuple.Setter = (evt) => { /*this.name = evt.newValue;*/ };
-            DeviceTypeTuple.Setter = (evt) => { DeviceType = (DEVICETYPE)evt.newValue; ParameterChangeTrigger(); };
-            RotDegTuple.Setter = (evt) => { RotDeg = evt.newValue; ParameterChangeTrigger(); };
-            AxisDiffDegTuple.Setter = (evt) => { AxisDiffDeg = evt.newValue; ParameterChangeTrigger(); };
-        }
-
-        public override void ParameterChangeTrigger() {
-            m_parent.ParameterChangeTrigger();
-        }
-
-        public override void WaveHit(in RaycastHit hit, WaveSource parentWS) {
+        public override void WaveHit(in RaycastHit hit, Wave parentWave) {
             /*GO Setup*/
-            // Awake function in scripts will be called in the order of,
-            // WaveSource -> LineWaveRender -> BoxCollider -> LineWaveLogic
-            GameObject new_GO = new GameObject(
-                parentWS.name + "_Child", 
-                typeof(WaveSource), 
-                typeof(LineWaveRender), 
-                typeof(BoxCollider), 
-                typeof(LineWaveLogic),
-                typeof(SelectableChildWave)
-            );
-            new_GO.transform.position = hit.point + Vector3.Normalize(hit.point - parentWS.transform.position) * ThicknessOffset;
-            new_GO.transform.rotation = parentWS.transform.rotation;
+            WaveParam parentWP = parentWave.Params;
+            LineWaveLogic parentLWL = (LineWaveLogic)parentWave.WaveLogic;
+            LineWaveDisplay parentLWD = (LineWaveDisplay)parentWave.WaveDisplay;
 
-            /*Wave Source, Display, Interact Setup*/
-            WaveSource childWS = new_GO.GetComponent<WaveSource>();
-            LineWaveRender lwd = new_GO.GetComponent<LineWaveRender>();
-            LineWaveLogic lwi = new_GO.GetComponent<LineWaveLogic>();
-
-            WaveParams childWP = new WaveParams();
             /* Calculate Eox, Eoy, Theta*/
-            ComplexVector2 resVec = WaveAlgorithm.WaveToJohnsVector(parentWS.Params);
-            
-            if(DeviceType == DEVICETYPE.POLARIZER)
+            ComplexVector2 resVec = WaveAlgorithm.WaveToJohnsVector(parentWave.Params);
+
+            if (DeviceType == DEVICETYPE.POLARIZER)
                 resVec = PolarizerMatrix() * resVec;
-            else if(DeviceType == DEVICETYPE.WEAVEPLATE)
-            {
+            else if (DeviceType == DEVICETYPE.WEAVEPLATE) {
                 resVec = WaveplateMatrix() * resVec;
             }
+            float eox, eoy, phi = parentWP.Phi, theta;
+            WaveAlgorithm.JohnsVectorToWave(resVec, out eox, out eoy, ref phi, out theta);
 
             /* Calculate ReadOnly Effective Distance*/
-            float tmpDistance = parentWS.EffectDistance;
-            parentWS.EffectDistance = hit.distance;
-            childWP.RODistance = tmpDistance - hit.distance;
+            float tmpDistance = parentLWL.EffectDistance;
+            parentLWL.EffectDistance = hit.distance;
 
-            /* Copy Parent's t & n, then compute rest*/
-            childWP.T = parentWS.Params.T;
-            childWP.n = parentWS.Params.n;
+            var childWP = new WaveParam(
+                parentWP.Type, parentWP.Origin,
+                parentWP.UHat, parentWP.VHat, parentWP.KHat,
+                eox, eoy, theta,
+                parentWP.T, parentWP.Mu, parentWP.W, parentWP.Lambda, parentWP.F, parentWP.K, 
+                phi, parentWP.N,
+                tmpDistance - hit.distance
+            );
 
-            /* childWS type must be Plane*/
-            childWP.Type = WAVETYPE.PLANE;
-
-            childWS._awake(childWP);
-            
-
-            WaveAlgorithm.CalculateTravelAccumulatedPhase(hit.point - parentWS.transform.position, parentWS.Params, childWS.Params);
-            WaveAlgorithm.JohnsVectorToWave(resVec, childWP);
-
-            lwd.SyncRootParam(parentWS.WaveDisplay);
-            lwi.SyncRootParam(parentWS.WaveInteract);
-
-            
+            Wave childWave = Wave.NewLineWave(
+                this.name + "GenLineWave",
+                childWP, parentLWL.InteractMask, 
+                parentLWD.SampleResolution,
+                hit.point + Vector3.Normalize(hit.point - parentWave.transform.position) * ThicknessOffset,
+                parentWave.transform.rotation
+            );
             /*Store Pair*/
-            m_parent = parentWS;
-            m_child = childWS;
+            m_parent = parentWave;
+            m_child = childWave;
         }
 
-        public override void CleanDeviceHitTrace(WaveSource parentWS) {
+        public override void CleanDeviceHitTrace(Wave parentWS) {
             if (m_parent == null && m_child == null) return;
             m_child.WaveClean();
             Destroy(m_child.gameObject);
-            m_child = null;
-            m_parent = null;
-        }
-
-        public void Awake() {
             m_child = null;
             m_parent = null;
         }

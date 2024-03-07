@@ -27,9 +27,9 @@ namespace Constraint
 
         private List<DeviceOrderInfo> m_devices = new List<DeviceOrderInfo>();
         
-        private WaveSource m_waveSource;
+        private Wave m_waveSource;
 
-        public WaveSource WaveSource
+        public Wave WaveSource
         {
             get => m_waveSource;
             set => m_waveSource = value;
@@ -44,7 +44,7 @@ namespace Constraint
             DeviceSeperationDistance = deviceSeperationDistance;
         }
 
-        public WaveDeviceOrder(WaveSource waveSource, int maxDeviceCount, int deviceSeperationDistance)
+        public WaveDeviceOrder(Wave waveSource, int maxDeviceCount, int deviceSeperationDistance)
         {
             m_waveSource = waveSource;
             MaxDeviceCount = maxDeviceCount;
