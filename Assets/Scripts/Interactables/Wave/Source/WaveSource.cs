@@ -41,6 +41,11 @@ namespace GO_Wave {
             m_param.UHat = transform.right;
             m_param.VHat = transform.up;
             m_param.KHat = transform.forward;
+            
+        }
+
+        private void Start()
+        {
             Emit();
         }
     }
