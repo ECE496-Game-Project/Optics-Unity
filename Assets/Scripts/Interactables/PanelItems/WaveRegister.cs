@@ -28,10 +28,11 @@ namespace GO_Wave {
             EoyTuple.Getter = () => { return m_params.Eoy; };
             thetaTuple.Getter = () => { return m_params.Theta; };
 
-            // we divide 1000 because right now the unit is PHz, but we want to convert it to THz
-            TTuple.Getter = () => { return m_params.T * TempSingletonManager.Instance.m_scaleManager.fsPerUnitySecond / 1000f; };
-            muTuple.Getter = () => { return m_params.Mu / TempSingletonManager.Instance.m_scaleManager.nmPerUnit; };
-            wTuple.Getter = () => { return m_params.W / TempSingletonManager.Instance.m_scaleManager.nmPerUnit; };
+            
+            TTuple.Getter = () => { return m_params.T * TempSingletonManager.Instance.m_scaleManager.fsPerUnitySecond;  };
+            // we multiply 1000 because right now the unit is PHz, but we want to convert it to THz
+            muTuple.Getter = () => { return m_params.Mu / TempSingletonManager.Instance.m_scaleManager.fsPerUnitySecond * 1000f; };
+            wTuple.Getter = () => { return m_params.W / TempSingletonManager.Instance.m_scaleManager.fsPerUnitySecond; };
 
             lambdaTuple.Getter = () => { return m_params.Lambda * TempSingletonManager.Instance.m_scaleManager.nmPerUnit; };
             fTuple.Getter = () => { return m_params.F / TempSingletonManager.Instance.m_scaleManager.nmPerUnit; };
