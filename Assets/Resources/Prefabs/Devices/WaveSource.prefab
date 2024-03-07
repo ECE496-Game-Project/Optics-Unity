@@ -44,14 +44,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6405443755208858056}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa805d578cd6bd747a4062822164b28d, type: 3}
+  m_Script: {fileID: 11500000, guid: ed343eed47915a242a26a85fd95c9a9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _profile: {fileID: 11400000, guid: d2d780b4c9135d64d950038596d728eb, type: 2}
   _interactMask:
     serializedVersion: 2
     m_Bits: 64
-  _sampleResolution: 1
+  _sampleResolution: 0.4
 --- !u!114 &8556279221832235535
 MonoBehaviour:
   m_ObjectHideFlags: 0
