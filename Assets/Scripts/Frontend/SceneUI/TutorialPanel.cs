@@ -10,13 +10,35 @@ public class TutorialPanel : MonoBehaviour
     public const int PANEL_WIDTH = 30;
     private const float HIDE_POSITION = 98.5f;
     bool isPanelExpanded = false;
-
+    int curPage = 1;
+    int maxPage = 3;
     public void PreRegisterCallback(VisualElement root) {
         Button expButton = root.Q<Button>(name: "ExpandButton");
         expButton.clicked += () => {
             if(isPanelExpanded) CloseExpandPanel(root);
             else OpenExpandPanel(root);
         };
+
+        Button prevPage = root.Q<Button>(name: "prevPage");
+        prevPage.clicked += () => {
+            if (curPage <= 1) return;
+            SetPageDisplay(false, curPage);
+            curPage--;
+            SetPageDisplay(true, curPage);
+        };
+
+        Button nextPage = root.Q<Button>(name: "nextPage");
+        nextPage.clicked += () => {
+            if(curPage >= maxPage) return;
+            SetPageDisplay(false, curPage);
+            curPage++;
+            SetPageDisplay(true, curPage);
+        };
+    }
+
+    public void SetPageDisplay(bool display, int pgn) {
+        VisualElement page = doc.rootVisualElement.Q<VisualElement>(name: ("page"+ pgn.ToString()));
+        page.style.display = display ? DisplayStyle.Flex : DisplayStyle.None;
     }
 
     void Awake()
