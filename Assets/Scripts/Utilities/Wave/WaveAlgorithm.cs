@@ -1,10 +1,20 @@
 using UnityEngine;
 using Complex = System.Numerics.Complex;
 using CommonUtils;
+using System.Linq.Expressions;
 
 namespace WaveUtils {
     public static class WaveAlgorithm {
-        public static float C = 299.792458f; // Unit is nm/fs
+        public static float C {
+            get
+            {
+                // v = Lambda /T
+                // scale the distance by certain amount be view as the speed of light change by
+                // the same amount
+                return 299.792458f / TempSingletonManager.Instance.m_scaleManager.nmPerUnit * TempSingletonManager.Instance.m_scaleManager.fsPerUnitySecond;
+            }
+            
+        }  // Unit is nm/fs
         //public static void changeT(WaveParam param) {
         //    param.mu = 1 / param.T;
         //    param.w = 2 * Mathf.PI * param.mu;
@@ -49,7 +59,7 @@ namespace WaveUtils {
         public static Vector3 CalcIrradiance(Vector3 currPos, float t, WaveParam param) {
             Vector3 r = currPos - param.Origin;
 			float kdotr = Vector3.Dot(param.KHat, r) * param.K;
-			float expCommon = kdotr - Mathf.Deg2Rad * param.W * t + Mathf.Deg2Rad * param.Phi;
+			float expCommon = kdotr - param.W * t + Mathf.Deg2Rad * param.Phi;
 
 			float uMag = param.Eox * Mathf.Cos(expCommon);
 			float vMag = param.Eoy * Mathf.Cos(expCommon + Mathf.Deg2Rad * param.Theta);

@@ -19,6 +19,8 @@ public class TempSingletonManager : MonoSingleton<TempSingletonManager>
     [Header("Rendering")]
     public LineWaveSampleMaterialController m_lineWaveSampleMaterialController;
 
+    [Header("Wave Parameter")]
+    public ScaleManager m_scaleManager;
     protected override void Init()
     {
         base.Init();

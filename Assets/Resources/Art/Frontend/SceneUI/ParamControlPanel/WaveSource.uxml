@@ -1,10 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Resources/Art/Frontend/UnityThemes/ReadOnly.uss?fileID=7433441132597879392&amp;guid=891b6d72276de0843ab2494f78929f8b&amp;type=3#ReadOnly" />
     <ui:VisualElement name="Name" style="flex-grow: 1; height: 10%; justify-content: center;">
         <ui:TextField picking-mode="Ignore" value="Laser" style="height: 100%; -unity-text-align: middle-left; align-self: auto; align-items: center; -unity-font-style: bold; font-size: 20px; width: 70%;" />
     </ui:VisualElement>
     <ui:VisualElement name="Parameter" style="flex-grow: 1; height: 90%; display: flex; -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(23, 74, 94);">
-        <ui:VisualElement name="UdirAmp" style="flex-grow: 1; flex-direction: row;">
-            <ui:FloatField label="Udir Amp(Eox)" value="1" name="FloatField" style="width: 252px; align-items: center; color: rgb(255, 255, 255); -unity-text-align: middle-left; -unity-text-outline-color: rgb(23, 74, 94); -unity-text-outline-width: 1px;">
+        <ui:VisualElement name="UdirAmp" class="font" style="flex-grow: 1; flex-direction: row; font-size: 20px; color: rgb(255, 255, 255); -unity-text-outline-width: 2px; height: 22px; width: 735px;">
+            <ui:FloatField label="Udir Amp(Eox)" value="1" name="FloatField" style="width: 281px; align-items: center; color: rgb(255, 255, 255); -unity-text-align: middle-left; -unity-text-outline-color: rgb(23, 74, 94); -unity-text-outline-width: 1px;">
                 <ui:Label tabindex="-1" text="V/m" parse-escape-sequences="true" display-tooltip-when-elided="true" />
             </ui:FloatField>
             <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
@@ -13,8 +14,8 @@
                 <ui:Label tabindex="-1" text="2" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Max" style="align-self: center;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="VdirAmp" style="flex-grow: 1; flex-direction: row;">
-            <ui:FloatField label="Vdir Amp(Eoy)" value="1" name="FloatField" style="width: 252px; align-items: center;">
+        <ui:VisualElement name="VdirAmp" class="font" style="flex-grow: 1; flex-direction: row;">
+            <ui:FloatField label="Vdir Amp(Eoy)" value="1" name="FloatField" style="width: 278px; align-items: center;">
                 <ui:Label tabindex="-1" text="V/m" parse-escape-sequences="true" display-tooltip-when-elided="true" />
             </ui:FloatField>
             <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
@@ -23,8 +24,8 @@
                 <ui:Label tabindex="-1" text="2" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Max" style="align-self: center;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="Theta" style="flex-grow: 1; flex-direction: row;">
-            <ui:FloatField label="Phase Diff(Theta)" value="42" name="FloatField" style="width: 232px; align-items: center;">
+        <ui:VisualElement name="Theta" class="font" style="flex-grow: 1; flex-direction: row; height: 31px; width: 710px;">
+            <ui:FloatField label="Phase Diff (θ)" value="42" name="FloatField" style="width: 258px; align-items: center;">
                 <ui:Label tabindex="-1" text="°" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
             </ui:FloatField>
             <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
@@ -33,14 +34,14 @@
                 <ui:Label tabindex="-1" text="360°" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Max" focusable="true" style="flex-wrap: nowrap; align-self: center;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="lambda" style="flex-grow: 1; flex-direction: row; height: 99px; width: 532px;">
-            <ui:FloatField label="Period (lambda)" value="400" readonly="false" name="FloatField" is-delayed="false" style="align-self: auto; align-items: center; width: 245px;">
+        <ui:VisualElement name="lambda" class="font" style="flex-grow: 1; flex-direction: row; height: 49px; width: 644px;">
+            <ui:FloatField label="Period (λ)" value="400" readonly="false" name="FloatField" is-delayed="false" style="align-self: auto; align-items: center; width: 278px;">
                 <ui:Label tabindex="-1" text="nm" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
             </ui:FloatField>
             <ui:Slider picking-mode="Ignore" value="42" high-value="780" name="Slider" low-value="400" style="background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;Art/Images/ParamUI/visible-spectrum&apos;); width: 267px; align-self: center; align-items: auto; height: 79px;" />
         </ui:VisualElement>
-        <ui:VisualElement name="Phi" style="flex-grow: 1; flex-direction: row; height: 6%; color: rgb(255, 255, 255); -unity-font-style: bold;">
-            <ui:FloatField label="Initial Phase (Phi)" value="42" name="FloatField" style="width: 252px; align-items: center; justify-content: flex-start;">
+        <ui:VisualElement name="Phi" class="font" style="flex-grow: 1; flex-direction: row; height: 6%; color: rgb(255, 255, 255); -unity-font-style: bold;">
+            <ui:FloatField label="Init Phase (φ)" value="42" name="FloatField" style="width: 252px; align-items: center; justify-content: flex-start;">
                 <ui:Label tabindex="-1" text="°" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
             </ui:FloatField>
             <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
@@ -49,8 +50,8 @@
                 <ui:Label tabindex="-1" text="360°" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Max" enable-rich-text="false" style="align-self: center;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="N" style="flex-grow: 1; flex-direction: row; height: 6%; color: rgb(255, 255, 255); -unity-font-style: bold;">
-            <ui:FloatField label="Refractive Index (n)" value="1" name="FloatField" style="width: 282px; align-items: center;">
+        <ui:VisualElement name="N" class="font" style="flex-grow: 1; flex-direction: row; height: 6%; color: rgb(255, 255, 255); -unity-font-style: bold;">
+            <ui:FloatField label="Ref Idx (n)" value="1" name="FloatField" style="width: 299px; align-items: center;">
                 <ui:Label tabindex="-1" text="const" parse-escape-sequences="true" display-tooltip-when-elided="true" />
             </ui:FloatField>
             <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
@@ -59,6 +60,5 @@
                 <ui:Label tabindex="-1" text="5" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Max" focusable="true" enable-rich-text="false" style="flex-wrap: nowrap; align-self: center;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="EmptySpace" style="flex-grow: 1; height: 5%;" />
     </ui:VisualElement>
 </ui:UXML>
