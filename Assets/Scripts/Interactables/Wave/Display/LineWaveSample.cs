@@ -5,9 +5,6 @@ using CommonUtils;
 
 namespace GO_Wave {
     public class LineWaveSample : MonoBehaviour {
-
-        private static float DISPLAYOFFSET = 0.01f;
-
         public WaveArrowController m_waveArrowController;
         [SerializeField] private GameObject _dispalyModule;
 

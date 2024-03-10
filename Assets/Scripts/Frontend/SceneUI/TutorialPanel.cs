@@ -34,6 +34,11 @@ public class TutorialPanel : MonoBehaviour
             curPage++;
             SetPageDisplay(true, curPage);
         };
+
+        Toggle pause = root.Q<Toggle>(name: "Pause");
+        pause.RegisterValueChangedCallback(evt => {
+            TempSingletonManager.Instance.paused = evt.newValue;
+        });
     }
 
     public void SetPageDisplay(bool display, int pgn) {
