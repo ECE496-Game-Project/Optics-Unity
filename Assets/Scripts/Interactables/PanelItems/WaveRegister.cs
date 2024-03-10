@@ -25,9 +25,9 @@ namespace GO_Wave {
             var nTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["N"];
 
             NameTuple.Getter = () => { return this.name; };
-            EoxTuple.Getter = () => { return m_params.Eox; };
-            EoyTuple.Getter = () => { return m_params.Eoy; };
-            thetaTuple.Getter = () => { return m_params.Theta; };
+            EoxTuple.Getter = () => { return WaveAlgorithm.FloatRounding2dec(m_params.Eox); };
+            EoyTuple.Getter = () => { return WaveAlgorithm.FloatRounding2dec(m_params.Eoy); };
+            thetaTuple.Getter = () => { return WaveAlgorithm.FloatRounding2dec(m_params.Theta); };
 
             
             TTuple.Getter = () => { return m_params.T * WaveAlgorithm.fsPerUnitySecond;  };
@@ -39,8 +39,8 @@ namespace GO_Wave {
             fTuple.Getter = () => { return m_params.F / WaveAlgorithm.nmPerUnit; };
             kTuple.Getter = () => { return m_params.K / WaveAlgorithm.nmPerUnit; };
 
-            phiTuple.Getter = () => { return m_params.Phi; };
-            nTuple.Getter = () => { return m_params.N; };
+            phiTuple.Getter = () => { return WaveAlgorithm.FloatRounding2dec(m_params.Phi); };
+            nTuple.Getter = () => { return WaveAlgorithm.FloatRounding2dec(m_params.N); };
         }
     }
 }

@@ -148,5 +148,28 @@ namespace WaveUtils {
 			T = 2 * Mathf.PI / W;
 			Mu = 1 / T;
 		}
+		
+		public override
+		string ToString() {
+			string res = "roflag = " + roflag.ToString() + "\n";
+			res += "type = " + type.ToString() + "\n";
+			res += "origin = " + origin.ToString() + "\n";
+			res += "uHat = " + uHat.ToString() + "\n";
+			res += "vHat = " + vHat.ToString() + "\n";
+			res += "kHat = " + kHat.ToString() + "\n";
+			res += "eox = " + eox.ToString() + "\n";
+			res += "eoy = " + eoy.ToString() + "\n";
+			res += "theta = " + theta.ToString() + "\n";
+			res += "t = " + t.ToString() + "\n";
+			res += "mu = " + mu.ToString() + "\n";
+			res += "w = " + w.ToString() + "\n";
+			res += "lambda = " + lambda.ToString() + "\n";
+			res += "f = " + f.ToString() + "\n";
+			res += "k = " + k.ToString() + "\n";
+			res += "phi = " + phi.ToString() + "\n";
+			res += "n = " + n.ToString() + "\n";
+			res += "roDistance = " + roDistance.ToString() + "\n";
+			return res;
+		}
 	}
 }

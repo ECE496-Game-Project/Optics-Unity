@@ -2,9 +2,15 @@ using UnityEngine;
 using Complex = System.Numerics.Complex;
 using CommonUtils;
 using System.Linq.Expressions;
-
+using System;
 namespace WaveUtils {
     public static class WaveAlgorithm {
+        public static float FLOATROUNDING = 0.001f;
+        public static float FloatRounding2dec(float input) {
+            if (input < FLOATROUNDING) return 0;
+            return (float)Math.Round(input,2);
+        }
+
         [SerializeField]
         private static float m_nmPerUnit = 100f;
 

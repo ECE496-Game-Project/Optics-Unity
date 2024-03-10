@@ -33,7 +33,7 @@ namespace GO_Wave {
             get { if (m_waveLogic == null) m_waveLogic = GetComponent<I_WaveLogic>(); return m_waveLogic; }
         }
 
-        private WaveParam m_params;
+        [SerializeField] private WaveParam m_params;
         public WaveParam Params {
             get { return m_params; }
             set {
