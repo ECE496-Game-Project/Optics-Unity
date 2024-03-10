@@ -10,13 +10,40 @@ public class TutorialPanel : MonoBehaviour
     public const int PANEL_WIDTH = 30;
     private const float HIDE_POSITION = 98.5f;
     bool isPanelExpanded = false;
-
+    int curPage = 1;
+    int maxPage = 3;
     public void PreRegisterCallback(VisualElement root) {
         Button expButton = root.Q<Button>(name: "ExpandButton");
         expButton.clicked += () => {
             if(isPanelExpanded) CloseExpandPanel(root);
             else OpenExpandPanel(root);
         };
+
+        Button prevPage = root.Q<Button>(name: "prevPage");
+        prevPage.clicked += () => {
+            if (curPage <= 1) return;
+            SetPageDisplay(false, curPage);
+            curPage--;
+            SetPageDisplay(true, curPage);
+        };
+
+        Button nextPage = root.Q<Button>(name: "nextPage");
+        nextPage.clicked += () => {
+            if(curPage >= maxPage) return;
+            SetPageDisplay(false, curPage);
+            curPage++;
+            SetPageDisplay(true, curPage);
+        };
+
+        Toggle pause = root.Q<Toggle>(name: "Pause");
+        pause.RegisterValueChangedCallback(evt => {
+            TempSingletonManager.Instance.paused = evt.newValue;
+        });
+    }
+
+    public void SetPageDisplay(bool display, int pgn) {
+        VisualElement page = doc.rootVisualElement.Q<VisualElement>(name: ("page"+ pgn.ToString()));
+        page.style.display = display ? DisplayStyle.Flex : DisplayStyle.None;
     }
 
     void Awake()
@@ -36,7 +63,7 @@ public class TutorialPanel : MonoBehaviour
         expPanel.style.left = new StyleLength(width);
         expBody.style.display = DisplayStyle.None;
 
-        expButton.text = "<";
+        expButton.text = "\u2190";
         isPanelExpanded = false;
     }
     public void OpenExpandPanel(VisualElement root){
@@ -50,7 +77,7 @@ public class TutorialPanel : MonoBehaviour
         expPanel.style.left = new StyleLength(width);
         expBody.style.display = DisplayStyle.Flex;
 
-        expButton.text = ">";
+        expButton.text = "\u2192";
         isPanelExpanded = true;
     }
 }

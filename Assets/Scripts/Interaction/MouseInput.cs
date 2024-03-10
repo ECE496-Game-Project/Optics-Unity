@@ -7,7 +7,7 @@ using UnityEngine.Assertions;
 public class MouseInput
 {
 
-    private static MouseInput m_instance;
+    private static MouseInput m_instance=null;
     public static MouseInput Instance => m_instance;
 
     public UnityEvent<Vector2> onMouseMoved, onMouseClicked;
@@ -19,6 +19,7 @@ public class MouseInput
         if (m_instance == null) m_instance  = this;
         else Assert.IsTrue(false, "MouseInput already exists");
 
+        
         m_playerInput = playerInput;
         onMouseMoved = new UnityEvent<Vector2>();
         onMouseClicked = new UnityEvent<Vector2>();

@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028210979}
   serializedVersion: 2
-  m_LocalRotation: {x: 1e-45, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalRotation: {x: 1e-45, y: -0.000000014901161, z: -0, w: 1}
+  m_LocalPosition: {x: 0.00000023841858, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -349,9 +349,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6901406372233256972}
-  - component: {fileID: 6901406372233256963}
-  - component: {fileID: 6901406372233256962}
-  - component: {fileID: 6901406372233256973}
   m_Layer: 0
   m_Name: CameraController
   m_TagString: Untagged
@@ -378,51 +375,6 @@ Transform:
   - {fileID: 1028210982}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6901406372233256963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6901406372233256961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff8e89b26b8e3754299f68054372c5ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_lookingObject: {fileID: 6901406372120178830}
-  m_playerInput: {fileID: 6901406371983331561}
-  m_degreePerUnit: 10
---- !u!114 &6901406372233256962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6901406372233256961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d57c80ff0112ab64fa3aa5bbc5920550, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_playerInput: {fileID: 6901406371983331561}
-  m_vcam: {fileID: 6901406372872370138}
-  m_zoomDelta: 1.5
---- !u!114 &6901406372233256973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6901406372233256961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36b390c25e472d54cb604af42fec9f50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_lookingObject: {fileID: 6901406372120178830}
-  m_playerInput: {fileID: 6901406371983331561}
-  m_zoomComponent: {fileID: 0}
 --- !u!1 &6901406372872370137
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,8 +400,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6901406372872370137}
   serializedVersion: 2
-  m_LocalRotation: {x: 1e-45, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalRotation: {x: 1e-45, y: -0.000000014901161, z: -0, w: 1}
+  m_LocalPosition: {x: 0.00000023841858, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

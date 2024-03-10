@@ -35,7 +35,7 @@ namespace Panel {
             public SO_ParamTransfer paramTrans;
             public VisualTreeAsset paramUIAsset;
         }
-        
+        [Tooltip("Name Of ParamTransfer must match CorrespondingUIInfoName who interits I_ParameterPanel")]
         public List<UIPair> UIInfoTransfer; // For Inspector Registration Purpose
 
         public class UIInfo {
@@ -162,6 +162,7 @@ namespace Panel {
         private void RegisterSetter() {
             ParameterInfoList list = m_paramInfoDict[m_selectedUI].List;
             foreach (var entry in list.SymbolQuickAccess) {
+                if (entry.Value.Permit == Permission.RO) continue;
                 var pi = entry.Value;
                 switch (pi.Type) {
                     case ParamType.String:
@@ -209,7 +210,7 @@ namespace Panel {
             }
         }
 
-        private void UISetupPipeline(I_ParameterTransfer pt, string newlySelect) {
+        private void UISetupPipeline(I_ParameterPanel pt, string newlySelect) {
             if(m_selectedUI != "") CleanSetter(m_paramInfoDict[m_selectedUI].List);
             m_selectedUI = newlySelect;
             pt.RegisterParametersCallback(m_paramInfoDict[m_selectedUI].List);
@@ -218,12 +219,12 @@ namespace Panel {
         }
 
         public void SelectParamView(GameObject obj) {
-            var objts = obj.GetComponent<I_ParameterTransfer>();
+            var objts = obj.GetComponent<I_ParameterPanel>();
             if (objts == null)
                 DebugLogger.Error(this.name, "Pass in GameObject does not have Component I_ParamTrans, Panic!");
 
             // All functionality operates with string m_selectedUI
-            UISetupPipeline(objts, objts.ParamTransferName);
+            UISetupPipeline(objts, objts.CorrespondingUIInfoName);
             OpenParamUIDisplay();
             OpenExpandPanel();
         }
@@ -231,7 +232,7 @@ namespace Panel {
         public void CloseExpandPanel(){
             Body.style.display = DisplayStyle.None;
             ExpandPanel.style.width = PANEL_WIDTH;
-            ExpandButton.text = ">";
+            ExpandButton.text = "\u2192";
 
             isPanelExpanded = false;
         }
@@ -240,7 +241,7 @@ namespace Panel {
             Length width = new Length(PANEL_WIDTH, LengthUnit.Percent);
             ExpandPanel.style.width = new StyleLength(width);
             Body.style.display = DisplayStyle.Flex;
-            ExpandButton.text = "<";
+            ExpandButton.text = "\u2190";
 
             isPanelExpanded = true;
         }
