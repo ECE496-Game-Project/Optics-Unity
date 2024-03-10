@@ -5,13 +5,24 @@ using System.Linq.Expressions;
 
 namespace WaveUtils {
     public static class WaveAlgorithm {
+        [SerializeField]
+        private static float m_nmPerUnit = 100f;
+
+        public static float nmPerUnit => m_nmPerUnit;
+
+        [SerializeField]
+        private static float m_fsPerUnitySecond = 0.5f;
+
+        public static float fsPerUnitySecond => m_fsPerUnitySecond;
+
         public static float C {
             get
             {
                 // v = Lambda /T
                 // scale the distance by certain amount be view as the speed of light change by
                 // the same amount
-                return 299.792458f / TempSingletonManager.Instance.m_scaleManager.nmPerUnit * TempSingletonManager.Instance.m_scaleManager.fsPerUnitySecond;
+                //return 299.792458f / TempSingletonManager.Instance.m_scaleManager.nmPerUnit * TempSingletonManager.Instance.m_scaleManager.fsPerUnitySecond;
+                return 299.792458f / nmPerUnit * fsPerUnitySecond;
             }
             
         }  // Unit is nm/fs
