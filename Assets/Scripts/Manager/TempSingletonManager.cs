@@ -28,7 +28,6 @@ public class TempSingletonManager : MonoSingleton<TempSingletonManager>
     //[Header("Wave Parameter")]
     //public ScaleManager m_scaleManager;
 
-    public bool paused;
     protected override void Init()
     {
         base.Init();
@@ -43,16 +42,6 @@ public class TempSingletonManager : MonoSingleton<TempSingletonManager>
 
     private void Update()
     {
-
-        if (paused)
-        {
-            WaveTime.PauseTime();
-        }
-        else
-        {
-            WaveTime.ResumeTime();
-        }
-
         WaveTime.Update(Time.deltaTime);
         m_cameraMovementController.Update(Time.deltaTime);
     }
