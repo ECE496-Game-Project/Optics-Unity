@@ -3,9 +3,9 @@
     <ui:VisualElement name="Name" style="flex-grow: 1; height: 10%; justify-content: center;">
         <ui:TextField picking-mode="Ignore" value="Laser" style="height: 100%; -unity-text-align: middle-left; align-self: auto; align-items: center; -unity-font-style: bold; font-size: 20px; width: 70%;" />
     </ui:VisualElement>
-    <ui:VisualElement name="Parameter" style="flex-grow: 1; height: 90%; display: flex; -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(23, 74, 94);">
-        <ui:VisualElement name="UdirAmp" class="font" style="flex-grow: 1; flex-direction: row; font-size: 20px; color: rgb(255, 255, 255); -unity-text-outline-width: 2px; height: 22px; width: 735px;">
-            <ui:FloatField label="Udir Amp(Eox)" value="1" name="FloatField" style="width: 281px; align-items: center; color: rgb(255, 255, 255); -unity-text-align: middle-left; -unity-text-outline-color: rgb(23, 74, 94); -unity-text-outline-width: 1px;">
+    <ui:VisualElement name="Parameter" style="flex-grow: 1; height: 90%; display: flex; -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(0, 0, 0);">
+        <ui:VisualElement name="UdirAmp" class="font" style="flex-grow: 1; flex-direction: row; font-size: 20px; color: rgb(255, 255, 255); -unity-text-outline-width: 2px; height: 22px; width: 735px; -unity-text-outline-color: rgb(0, 0, 0);">
+            <ui:FloatField label="Udir Amp(Eox)" value="1" name="FloatField" style="width: 281px; align-items: center; color: rgb(255, 255, 255); -unity-text-align: middle-left; -unity-text-outline-color: rgb(0, 0, 0); -unity-text-outline-width: 1px;">
                 <ui:Label tabindex="-1" text="V/m" parse-escape-sequences="true" display-tooltip-when-elided="true" />
             </ui:FloatField>
             <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row; color: rgb(255, 255, 255); -unity-text-outline-width: 1px;">
@@ -14,7 +14,7 @@
                 <ui:Label tabindex="-1" text="2" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Max" style="align-self: center;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="VdirAmp" class="font" style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="VdirAmp" class="font" style="flex-grow: 1; flex-direction: row; -unity-text-outline-color: rgb(0, 0, 0);">
             <ui:FloatField label="Vdir Amp(Eoy)" value="1" name="FloatField" style="width: 278px; align-items: center; color: rgb(255, 255, 255);">
                 <ui:Label tabindex="-1" text="V/m" parse-escape-sequences="true" display-tooltip-when-elided="true" />
             </ui:FloatField>
@@ -24,7 +24,7 @@
                 <ui:Label tabindex="-1" text="2" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Max" style="align-self: center;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="Theta" class="font" style="flex-grow: 1; flex-direction: row; height: 31px; width: 710px;">
+        <ui:VisualElement name="Theta" class="font" style="flex-grow: 1; flex-direction: row; height: 31px; width: 710px; -unity-text-outline-color: rgb(0, 0, 0);">
             <ui:FloatField label="Phase Diff (θ)" value="42" name="FloatField" style="width: 258px; align-items: center; color: rgb(255, 255, 255);">
                 <ui:Label tabindex="-1" text="°" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
             </ui:FloatField>
@@ -34,30 +34,30 @@
                 <ui:Label tabindex="-1" text="360°" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Max" focusable="true" style="flex-wrap: nowrap; align-self: center;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="lambda" class="font" style="flex-grow: 1; flex-direction: row; height: 49px; width: 644px;">
+        <ui:VisualElement name="lambda" class="font" style="flex-grow: 1; flex-direction: row; height: 49px; width: 644px; -unity-text-outline-color: rgb(0, 0, 0);">
             <ui:FloatField label="Period (λo)" value="400" readonly="false" name="FloatField" is-delayed="false" style="align-self: auto; align-items: center; width: 278px; color: rgb(255, 255, 255);">
                 <ui:Label tabindex="-1" text="nm" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
             </ui:FloatField>
             <ui:Slider picking-mode="Ignore" value="42" high-value="780" name="Slider" low-value="400" style="background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;Art/Images/ParamUI/visible-spectrum&apos;); width: 267px; align-self: center; align-items: auto; height: 79px;" />
         </ui:VisualElement>
-        <ui:VisualElement name="Phi" class="font" style="flex-grow: 1; flex-direction: row; height: 6%; color: rgb(255, 255, 255); -unity-font-style: bold;">
-            <ui:FloatField label="Init Phase (φ)" value="42" name="FloatField" style="width: 252px; align-items: center; justify-content: flex-start;">
+        <ui:VisualElement name="Phi" class="font" style="flex-grow: 1; flex-direction: row; height: 6%; color: rgb(255, 255, 255); -unity-font-style: bold; -unity-text-outline-color: rgb(0, 0, 0);">
+            <ui:FloatField label="Init Phase (φ)" value="42" name="FloatField" style="width: 252px; align-items: center; justify-content: flex-start; -unity-text-outline-color: rgb(0, 0, 0);">
                 <ui:Label tabindex="-1" text="°" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
             </ui:FloatField>
-            <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
+            <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row; -unity-text-outline-color: rgb(0, 0, 0);">
                 <ui:Label tabindex="-1" text="0°" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Min" style="align-items: stretch; justify-content: flex-start; align-self: center;" />
                 <ui:Slider picking-mode="Ignore" value="42" high-value="360" name="Slider" style="width: 135px;" />
                 <ui:Label tabindex="-1" text="360°" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Max" enable-rich-text="false" style="align-self: center;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="N" class="font" style="flex-grow: 1; flex-direction: row; height: 6%; color: rgb(255, 255, 255); -unity-font-style: bold;">
-            <ui:FloatField label="Ref Idx (n)" value="1" name="FloatField" style="width: 299px; align-items: center;">
+        <ui:VisualElement name="N" class="font" style="flex-grow: 1; flex-direction: row; height: 6%; color: rgb(255, 255, 255); -unity-font-style: bold; -unity-text-outline-color: rgb(0, 0, 0);">
+            <ui:FloatField label="Ref Idx (n)" value="1" name="FloatField" style="width: 299px; align-items: center; -unity-text-outline-color: rgb(0, 0, 0);">
                 <ui:Label tabindex="-1" text="const" parse-escape-sequences="true" display-tooltip-when-elided="true" />
             </ui:FloatField>
             <ui:VisualElement name="Slider" style="flex-grow: 1; flex-direction: row;">
-                <ui:Label tabindex="-1" text="0" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Min" focusable="true" style="flex-wrap: nowrap; align-self: center;" />
-                <ui:Slider picking-mode="Ignore" value="1" high-value="5" style="width: 156px;" />
-                <ui:Label tabindex="-1" text="5" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Max" focusable="true" enable-rich-text="false" style="flex-wrap: nowrap; align-self: center;" />
+                <ui:Label tabindex="-1" text="1" parse-escape-sequences="false" display-tooltip-when-elided="true" name="Min" focusable="true" style="flex-wrap: nowrap; align-self: center; -unity-text-outline-color: rgb(0, 0, 0);" />
+                <ui:Slider picking-mode="Ignore" value="1" high-value="5" low-value="1" style="width: 156px;" />
+                <ui:Label tabindex="-1" text="5" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Max" focusable="true" enable-rich-text="false" style="flex-wrap: nowrap; align-self: center; -unity-text-outline-color: rgb(0, 0, 0);" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

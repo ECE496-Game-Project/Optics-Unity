@@ -3,7 +3,7 @@
     <ui:VisualElement name="Name" style="flex-grow: 1; height: 10%; justify-content: center;">
         <ui:TextField picking-mode="Ignore" value="Object Name" style="height: 100%; -unity-text-align: middle-left; align-self: auto; align-items: center; -unity-font-style: bold; font-size: 20px; width: 70%;" />
     </ui:VisualElement>
-    <ui:VisualElement name="Parameter" class="read-only" style="flex-grow: 1; height: 90%; display: flex; -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(23, 74, 94);">
+    <ui:VisualElement name="Parameter" class="read-only" style="flex-grow: 1; height: 90%; display: flex; -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(0, 0, 0); color: rgb(255, 255, 255);">
         <ui:Foldout text="Amplitude Prop." name="Amplitude" style="height: 25%; color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 20px; -unity-text-outline-color: rgb(0, 0, 0);">
             <ui:VisualElement name="UdirAmp" style="flex-grow: 1; flex-direction: row;">
                 <ui:FloatField label="Eox" value="1" name="FloatField" readonly="true" class="read-only" style="width: 300px; color: rgb(255, 255, 255);">
