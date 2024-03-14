@@ -19,6 +19,12 @@ public class TempSingletonManager : MonoSingleton<TempSingletonManager>
     [Header("Rendering")]
     public LineWaveSampleMaterialController m_lineWaveSampleMaterialController;
 
+    [Header("Model")]
+    [SerializeField]
+    public GameObject PolarizerPrefab;
+
+    [SerializeField]
+    public GameObject WaveplatePrefab;
     //[Header("Wave Parameter")]
     //public ScaleManager m_scaleManager;
 
