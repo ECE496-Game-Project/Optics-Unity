@@ -8,53 +8,54 @@ using UnityEngine.InputSystem;
 public class TempSingletonManager : MonoSingleton<TempSingletonManager>
 {
     [Header("User Input Parameters")]
-    public SelectionController m_selectionController;
-    public ZoomController m_zoomController;
-    public DragMoveController m_dragMoveController;
-    public CameraRotateController m_cameraRotateController;
-    public CameraMovementController m_cameraMovementController;
-
+    public MouseInput m_mouseInput;
+    public GlobalController m_globalController;
 
     [Header("Referemce Variables")]
-    public MouseInput m_mouseInput;
 
     [SerializeField] private PlayerInput m_playerInput;
-    [SerializeField] private CinemachineVirtualCamera m_vcam;
-    [SerializeField] private Transform m_lookingObject;
+
 
     [Header("Rendering")]
     public LineWaveSampleMaterialController m_lineWaveSampleMaterialController;
 
+    [Header("Model")]
+    [SerializeField]
+    public GameObject PolarizerPrefab;
+
+    [SerializeField]
+    public GameObject WaveplatePrefab;
     //[Header("Wave Parameter")]
     //public ScaleManager m_scaleManager;
 
-    public bool paused;
     protected override void Init()
     {
         base.Init();
+        GameObject cameraController = GameObject.Find("CameraController");
+        if (cameraController == null)
+        {
+            Debug.LogError("CameraController not found");
+            return;
+        }
 
+        PlayerInput playerInput = cameraController.transform.Find("PlayerInput").GetComponent<PlayerInput>();
+        if (playerInput == null)
+        {
+            Debug.LogError("PlayerInput not found");
+            return;
+        }
+
+        m_playerInput = playerInput;
         m_mouseInput = new MouseInput(m_playerInput);
-        m_selectionController = new SelectionController(m_mouseInput);
-        m_zoomController = new ZoomController(m_playerInput, m_vcam);
-        m_dragMoveController = new DragMoveController(m_playerInput, m_zoomController, m_lookingObject);
-        m_cameraRotateController = new CameraRotateController(m_lookingObject, m_playerInput);
-        m_cameraMovementController = new CameraMovementController(m_lookingObject, m_playerInput);
+
+        m_globalController = new GlobalController(m_mouseInput);
+
     }
 
     private void Update()
     {
-
-        if (paused)
-        {
-            WaveTime.PauseTime();
-        }
-        else
-        {
-            WaveTime.ResumeTime();
-        }
-
         WaveTime.Update(Time.deltaTime);
-        m_cameraMovementController.Update(Time.deltaTime);
+        m_globalController.Update(Time.deltaTime);
     }
 
 

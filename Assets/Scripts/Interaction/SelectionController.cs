@@ -6,16 +6,17 @@ using UnityEngine.UIElements;
 using System.Linq;
 using System.Collections.Generic;
 using SelectItems;
-public class SelectionController
+public class SelectionController : InputController
 {
     private GameObject m_highlight, m_select;
 
-    private bool m_selectChangeOn = true;
     /* Check if MouseClick on UI */
     private List<VisualElement> m_expandPanels = new List<VisualElement>();
     private MouseInput m_mouseInput;
 
-    public SelectionController(MouseInput mouseInput)
+    public override string m_name => "SelectionController";
+
+    public SelectionController(InputController parent, MouseInput mouseInput):base(parent)
     {
 
         m_mouseInput = mouseInput;
@@ -29,22 +30,10 @@ public class SelectionController
         m_mouseInput?.onMouseMoved.RemoveListener(OnMouseMoved);
     }
 
-    public void TurnOn()
-    {
-        Assert.IsFalse(m_selectChangeOn);
-        m_selectChangeOn = true;
-
-    }
-
-    public void TurnOff()
-    {
-        Assert.IsTrue(m_selectChangeOn);
-        m_selectChangeOn = false;
-    }
 
     private void OnMouseClicked(Vector2 mousePos)
     {
-        if (!m_selectChangeOn) return;
+        if (!m_isAllowed) return;
 
         // turn off previous select
         if (m_select != null)
@@ -87,7 +76,7 @@ public class SelectionController
 
     private void OnMouseMoved(Vector2 mousePos)
     {
-        if (!m_selectChangeOn) return;
+        if (!m_isAllowed) return;
 
         // do nothing when currently selected object
         if (m_select != null) return;

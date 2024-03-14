@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f91d9d635803bbb44bc8ba6c974dfcb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeviceType: 2
+  DeviceType: 1
   ThicknessOffset: 0.005
   RotDeg: 0
   AxisDiffDeg: 90

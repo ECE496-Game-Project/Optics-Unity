@@ -7,9 +7,10 @@ using UnityEngine.UIElements;
 public class TutorialPanel : MonoBehaviour
 {
     public UIDocument doc;
-    public const int PANEL_WIDTH = 30;
+    private const int PANEL_WIDTH = 30;
     private const float HIDE_POSITION = 98.5f;
     bool isPanelExpanded = false;
+    bool isPaused = false;
     int curPage = 1;
     int maxPage = 3;
     public void PreRegisterCallback(VisualElement root) {
@@ -35,10 +36,18 @@ public class TutorialPanel : MonoBehaviour
             SetPageDisplay(true, curPage);
         };
 
-        Toggle pause = root.Q<Toggle>(name: "Pause");
-        pause.RegisterValueChangedCallback(evt => {
-            TempSingletonManager.Instance.paused = evt.newValue;
-        });
+        Button pause = root.Q<Button>(name: "PauseButton");
+        pause.clicked += () => {
+            if (!isPaused) {
+                pause.text = "\u25B6";
+                WaveTime.PauseTime();
+            }
+            else {
+                pause.text = "\u2588";
+                WaveTime.ResumeTime();
+            }
+            isPaused = !isPaused;
+        };
     }
 
     public void SetPageDisplay(bool display, int pgn) {
