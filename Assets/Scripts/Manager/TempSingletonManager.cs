@@ -48,8 +48,6 @@ public class TempSingletonManager : MonoSingleton<TempSingletonManager>
 
     private void Update()
     {
-        
-
         WaveTime.Update(Time.deltaTime);
         m_globalController.Update(Time.deltaTime);
     }

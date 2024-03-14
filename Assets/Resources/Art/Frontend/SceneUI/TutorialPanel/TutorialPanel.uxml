@@ -3,7 +3,7 @@
     <ui:VisualElement name="ExpandPanel" class="ExpandPanel page" style="flex-grow: 1; width: auto; height: auto; max-height: 75%; right: auto; background-color: rgba(23, 74, 94, 0.59); left: 60%; top: 4%; flex-direction: row; bottom: 70px;">
         <ui:VisualElement name="SideBar" style="flex-grow: 1; width: 10%;">
             <ui:Button text="&lt;" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="true" name="ExpandButton" style="background-color: rgb(241, 170, 87); font-size: 15px; -unity-font-style: bold; color: rgb(255, 255, 255); width: 40px; height: 40px; display: flex;" />
-            <ui:Button text="\u25B6" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PauseButton" class="page" />
+            <ui:Button text="█" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PauseButton" class="page" />
         </ui:VisualElement>
         <ui:VisualElement name="Body" style="flex-grow: 1; width: 90%; -unity-font-style: normal;">
             <ui:Label tabindex="-1" text="Tutorial" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" name="Tutorial" style="font-size: 20px; -unity-font-style: bold; color: rgb(255, 255, 255);" />
