@@ -1,15 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
+using GO_Device;
+using CommonUtils;
 
-public class ObjectViewPanel : MonoBehaviour
+public class ObjectViewPanel : MonoSingleton<ObjectViewPanel>
 {
     public UIDocument doc;
-    public const int PANEL_HEIGHT = 20;
+    public VisualTreeAsset TrackSliderAsset;
+
+    private const int PANEL_HEIGHT = 20;
     private const int HIDE_POSITION = 98;
-    bool isPanelExpanded = false;
+    private bool isPanelExpanded = false;
+    private VisualElement Body;
+    private Button addButton;
+    private Action myButtonClickedAction;
 
     public void PreRegisterCallback(VisualElement root) {
         Button expButton = root.Q<Button>(name: "ExpandButton");
@@ -18,10 +23,64 @@ public class ObjectViewPanel : MonoBehaviour
             else OpenExpandPanel(root);
         };
     }
+    /// <summary>
+    /// initalization of dynamic slider
+    /// </summary>
+    /// <param name="info"></param>
+    /// <param name="track"></param>
+    /// <param name="prec">if set to -1 then calculated from track </param>
+    public void initSlider(TrackSlideInfo info, Track track, float prec) {
+        VisualElement Container = TrackSliderAsset.Instantiate();
+        Body.Add(Container);
+
+        Slider precSlider = Container.Q<Slider>();
+        precSlider.label = info.device.gameObject.name;
+        precSlider.value = (prec < 0)? track.GetPrec(info) : prec;
+        precSlider.RegisterValueChangedCallback(evt => {
+            info.UIPrecChangeCallTrack.Invoke(evt.newValue);
+        });
+        info.TrackPrecChangeCallUI.RemoveAllListeners();
+        info.TrackPrecChangeCallUI.AddListener((float value) => {
+            precSlider.value = value;
+        });
+
+        Button delete = Container.Q<Button>();
+        delete.clicked += () => {
+            track.RemoveDevice(info);
+            Body.Remove(Container);
+        };
+    }
+
+    public void CleanTrackView() {
+        Body.Clear();
+    }
+
+    public void SelectTrackView(Track track) {
+        CleanTrackView();
+
+        foreach (TrackSlideInfo info in track.DevicesOnTrack) {
+            initSlider(info, track, -1);
+        }
+
+        // Ensure we don't subscribe multiple times if Start is called again.
+        if (myButtonClickedAction != null) {
+            addButton.clicked -= myButtonClickedAction;
+        }
+
+        myButtonClickedAction = () => {
+            var info = track.AddDevice();
+            initSlider(info, track, 1);
+        };
+
+        addButton.clicked += myButtonClickedAction;
+    }
 
     void Awake()
     {
         VisualElement root = doc.rootVisualElement;
+        Body = root.Q("Body");
+        addButton = root.Q<Button>(name: "AddButton");
+
         CloseExpandPanel(root);
         PreRegisterCallback(root);
     }

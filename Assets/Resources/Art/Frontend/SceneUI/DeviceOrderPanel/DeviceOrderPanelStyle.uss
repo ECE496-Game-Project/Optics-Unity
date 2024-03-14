@@ -1,4 +1,4 @@
-@import "../CommonStyle.uss";
+@import "../../UnityThemes/CommonStyle.uss";
 
 /* Level 1 */
 .root{
