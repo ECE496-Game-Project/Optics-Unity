@@ -166,7 +166,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 0.02}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2501350016302674826}
@@ -187,9 +187,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f91d9d635803bbb44bc8ba6c974dfcb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DeviceType: 1
+  DeviceType: 0
   ThicknessOffset: 0.005
-  RotDeg: 30
+  RotDeg: 0
   AxisDiffDeg: 0
 --- !u!65 &2679604782596750386
 BoxCollider:
