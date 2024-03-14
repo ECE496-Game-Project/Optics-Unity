@@ -35,7 +35,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="lambda" class="font" style="flex-grow: 1; flex-direction: row; height: 49px; width: 644px;">
-            <ui:FloatField label="Period (λ)" value="400" readonly="false" name="FloatField" is-delayed="false" style="align-self: auto; align-items: center; width: 278px; color: rgb(255, 255, 255);">
+            <ui:FloatField label="Period (λo)" value="400" readonly="false" name="FloatField" is-delayed="false" style="align-self: auto; align-items: center; width: 278px; color: rgb(255, 255, 255);">
                 <ui:Label tabindex="-1" text="nm" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" />
             </ui:FloatField>
             <ui:Slider picking-mode="Ignore" value="42" high-value="780" name="Slider" low-value="400" style="background-color: rgba(0, 0, 0, 0); background-image: resource(&apos;Art/Images/ParamUI/visible-spectrum&apos;); width: 267px; align-self: center; align-items: auto; height: 79px;" />
