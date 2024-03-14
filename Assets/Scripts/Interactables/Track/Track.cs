@@ -1,10 +1,22 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using GO_Device;
 using UnityEngine.Events;
 using UnityEngine.Assertions;
+using GO_Wave;
 
 namespace GO_Device {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// 
+    public class TrackSlideInfo {
+        public DeviceBase device = null;
+        // UI register a callback function, if track change precition, call this function
+        public UnityEvent<float> TrackPrecChangeCallUI = new UnityEvent<float>();
+        // Track register a callback function, if ui change precition, call this funciton
+        public UnityEvent<float> UIPrecChangeCallTrack = new UnityEvent<float>();
+    }
+
     public class Track : MonoBehaviour {
 
         /// <summary>
@@ -13,19 +25,8 @@ namespace GO_Device {
         public Transform Head;
         public Transform Tail;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// 
-        public class TrackSlideInfo{
-            public DeviceBase device = null ;
-            // UI register a callback function, if track change precition, call this function
-            public UnityEvent<float> TrackPrecChangeCallUI = new UnityEvent<float>();
-            // Track register a callback function, if ui change precition, call this funciton
-            public UnityEvent<float> UIPrecChangeCallTrack = new UnityEvent<float>();
-        }
-
         public List<TrackSlideInfo> DevicesOnTrack;
+        public WaveSource WsOnTrack;
 
         public void MovePosition(DeviceBase device, float prec) {
             prec = Mathf.Clamp01(prec);
@@ -38,6 +39,8 @@ namespace GO_Device {
 
 
             device.transform.position = Head.position + newRelPosition + orthognalComponent;
+
+            WsOnTrack.Emit();
         }
 
         public float GetPrec(TrackSlideInfo slideInfo)
@@ -54,9 +57,9 @@ namespace GO_Device {
         public TrackSlideInfo AddDevice()
         {
             // Instanite Tail
-            DeviceBase newDevice = GameObject.Instantiate(TempSingletonManager.Instance.PolarizerPrefab, this.transform).GetComponent<DeviceBase>();
+            DeviceBase newDevice = Instantiate(TempSingletonManager.Instance.PolarizerPrefab, this.transform).GetComponent<DeviceBase>();
             newDevice.transform.position = Tail.position;
-            newDevice.gameObject.name = "Polarizer";
+            newDevice.gameObject.name = "PolarizerAdded"+ DevicesOnTrack.Count;
             return AddDevice(newDevice);
 
         }
@@ -91,13 +94,13 @@ namespace GO_Device {
                     break;
                 }
             }
-
             Destroy(sliderInfo.device.gameObject);
         }
 
         void Start() {
             List<DeviceBase> devices = new List<DeviceBase>(GetComponentsInChildren<DeviceBase>());
-
+            if(WsOnTrack == null) WsOnTrack = GetComponentInChildren<WaveSource>();
+            if (WsOnTrack == null) Debug.LogError("Track cant find Wavesource!");
             DevicesOnTrack = new List<TrackSlideInfo>();
             foreach (var device in devices)
             {

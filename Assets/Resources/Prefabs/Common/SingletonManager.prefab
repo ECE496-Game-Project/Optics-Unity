@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 7961788794737899505}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2853875, y: 0.014, z: 1.5815728}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -50,5 +50,7 @@ MonoBehaviour:
       type: 2}
     m_negativeMaterial: {fileID: 2100000, guid: 7e3edfc48f2476941ac1214b65a4973a,
       type: 2}
-    m_positiveRangeMin: -90
-    m_positiveRangeMax: 90
+  PolarizerPrefab: {fileID: 4096693397236163748, guid: 283d78a58921b4c8e96cf2be87c730b0,
+    type: 3}
+  WaveplatePrefab: {fileID: 2884620597156664014, guid: 7478b4cbb76314a13b9f7ecdaa7ad630,
+    type: 3}

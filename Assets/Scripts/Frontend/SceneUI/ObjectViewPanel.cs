@@ -56,6 +56,7 @@ public class ObjectViewPanel : MonoSingleton<ObjectViewPanel>
     }
 
     public void SelectTrackView(Track track) {
+        if (!isPanelExpanded) OpenExpandPanel(doc.rootVisualElement);
         CleanTrackView();
 
         foreach (TrackSlideInfo info in track.DevicesOnTrack) {
