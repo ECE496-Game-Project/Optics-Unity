@@ -2,16 +2,33 @@ using UnityEngine;
 using Complex = System.Numerics.Complex;
 using CommonUtils;
 using System.Linq.Expressions;
-
+using System;
 namespace WaveUtils {
     public static class WaveAlgorithm {
+        public static float FLOATROUNDING = 0.001f;
+        public static float FloatRounding2dec(float input) {
+            if (input < FLOATROUNDING) return 0;
+            return (float)Math.Round(input,2);
+        }
+
+        [SerializeField]
+        private static float m_nmPerUnit = 100f;
+
+        public static float nmPerUnit => m_nmPerUnit;
+
+        [SerializeField]
+        private static float m_fsPerUnitySecond = 0.5f;
+
+        public static float fsPerUnitySecond => m_fsPerUnitySecond;
+
         public static float C {
             get
             {
                 // v = Lambda /T
                 // scale the distance by certain amount be view as the speed of light change by
                 // the same amount
-                return 299.792458f / TempSingletonManager.Instance.m_scaleManager.nmPerUnit * TempSingletonManager.Instance.m_scaleManager.fsPerUnitySecond;
+                //return 299.792458f / TempSingletonManager.Instance.m_scaleManager.nmPerUnit * TempSingletonManager.Instance.m_scaleManager.fsPerUnitySecond;
+                return 299.792458f / nmPerUnit * fsPerUnitySecond;
             }
             
         }  // Unit is nm/fs

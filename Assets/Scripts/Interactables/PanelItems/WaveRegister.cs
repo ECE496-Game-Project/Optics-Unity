@@ -1,5 +1,6 @@
 ﻿using Interfaces;
 using ParameterTransfer;
+using WaveUtils;
 
 namespace GO_Wave {
     public partial class Wave : I_ParameterPanel {
@@ -24,22 +25,22 @@ namespace GO_Wave {
             var nTuple = (ParameterInfo<float>)ParameterInfos.SymbolQuickAccess["N"];
 
             NameTuple.Getter = () => { return this.name; };
-            EoxTuple.Getter = () => { return m_params.Eox; };
-            EoyTuple.Getter = () => { return m_params.Eoy; };
-            thetaTuple.Getter = () => { return m_params.Theta; };
+            EoxTuple.Getter = () => { return WaveAlgorithm.FloatRounding2dec(m_params.Eox); };
+            EoyTuple.Getter = () => { return WaveAlgorithm.FloatRounding2dec(m_params.Eoy); };
+            thetaTuple.Getter = () => { return WaveAlgorithm.FloatRounding2dec(m_params.Theta); };
 
             
-            TTuple.Getter = () => { return m_params.T * TempSingletonManager.Instance.m_scaleManager.fsPerUnitySecond;  };
+            TTuple.Getter = () => { return m_params.T * WaveAlgorithm.fsPerUnitySecond;  };
             // we multiply 1000 because right now the unit is PHz, but we want to convert it to THz
-            muTuple.Getter = () => { return m_params.Mu / TempSingletonManager.Instance.m_scaleManager.fsPerUnitySecond * 1000f; };
-            wTuple.Getter = () => { return m_params.W / TempSingletonManager.Instance.m_scaleManager.fsPerUnitySecond; };
+            muTuple.Getter = () => { return m_params.Mu / WaveAlgorithm.fsPerUnitySecond * 1000f; };
+            wTuple.Getter = () => { return m_params.W / WaveAlgorithm.fsPerUnitySecond; };
 
-            lambdaTuple.Getter = () => { return m_params.Lambda * TempSingletonManager.Instance.m_scaleManager.nmPerUnit; };
-            fTuple.Getter = () => { return m_params.F / TempSingletonManager.Instance.m_scaleManager.nmPerUnit; };
-            kTuple.Getter = () => { return m_params.K / TempSingletonManager.Instance.m_scaleManager.nmPerUnit; };
+            lambdaTuple.Getter = () => { return m_params.Lambda * WaveAlgorithm.nmPerUnit; };
+            fTuple.Getter = () => { return m_params.F / WaveAlgorithm.nmPerUnit; };
+            kTuple.Getter = () => { return m_params.K / WaveAlgorithm.nmPerUnit; };
 
-            phiTuple.Getter = () => { return m_params.Phi; };
-            nTuple.Getter = () => { return m_params.N; };
+            phiTuple.Getter = () => { return WaveAlgorithm.FloatRounding2dec(m_params.Phi); };
+            nTuple.Getter = () => { return WaveAlgorithm.FloatRounding2dec(m_params.N); };
         }
     }
 }

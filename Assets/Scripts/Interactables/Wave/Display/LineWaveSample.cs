@@ -5,17 +5,22 @@ using CommonUtils;
 
 namespace GO_Wave {
     public class LineWaveSample : MonoBehaviour {
-
-
         public WaveArrowController m_waveArrowController;
+        [SerializeField] private GameObject _dispalyModule;
 
         private bool isFirst;
         public void UpdateEVec(Vector3 vec) {
+            _dispalyModule.SetActive(true);
 
             float oldAngle = m_waveArrowController.RotZ;
 
 
             float scale = vec.magnitude;
+            if(scale < WaveAlgorithm.FLOATROUNDING) {
+                _dispalyModule.SetActive(false);
+                return;
+            }
+
             float newAngle = Mathf.Acos(vec.y / scale) * Mathf.Rad2Deg;
             if (Vector3.Cross(vec, Vector3.up).z < 0)
             {
@@ -29,7 +34,6 @@ namespace GO_Wave {
                 isFirst = false;
                 return;
             }
-
             
             var newMaterial = TempSingletonManager.Instance.m_lineWaveSampleMaterialController.GetMaterial(oldAngle, newAngle);
             
@@ -37,20 +41,6 @@ namespace GO_Wave {
             {
                 m_waveArrowController.UpdateMaterial(newMaterial);
             }
-            
-        }
-
-        private void Awake() {
-            //_dispalyModule = this.transform.Find("_dispalyModule").gameObject;
-            //if (_dispalyModule == null) {
-            //    DebugLogger.Error(this.name, "Hierarchy collapse, Child GameObject Doesn't contains _dispalyModule, Stop Executing.");
-            //}
-
-            //_meshRenderer = _dispalyModule.GetComponent<MeshRenderer>();
-            //if (_meshRenderer == null)
-            //{
-            //    DebugLogger.Error(this.name, "Can not find MeshRenderer");
-            //}
         }
     }
 }

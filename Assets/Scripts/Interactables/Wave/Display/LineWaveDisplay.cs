@@ -68,7 +68,7 @@ namespace GO_Wave {
             foreach (var item in m_samplePointList) {
                 Vector3 vec = WaveAlgorithm.CalcIrradiance(
                     item.transform.position,
-                    Time.time,
+                    WaveTime.Time,
                     m_wave.Params
                 );
                 item.UpdateEVec(vec);
