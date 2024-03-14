@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class TutorialPanel : MonoBehaviour
 {
     public UIDocument doc;
-    public const int PANEL_WIDTH = 30;
+    private const int PANEL_WIDTH = 30;
     private const float HIDE_POSITION = 98.5f;
     bool isPanelExpanded = false;
     bool isPaused = false;
