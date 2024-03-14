@@ -37,7 +37,7 @@ public class TutorialPanel : MonoBehaviour
 
         Toggle pause = root.Q<Toggle>(name: "Pause");
         pause.RegisterValueChangedCallback(evt => {
-            TempSingletonManager.Instance.paused = evt.newValue;
+            //TempSingletonManager.Instance.paused = evt.newValue;
         });
     }
 
