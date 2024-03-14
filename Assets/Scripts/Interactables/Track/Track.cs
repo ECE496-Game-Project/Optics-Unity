@@ -2,7 +2,7 @@
 using UnityEngine;
 using GO_Device;
 using UnityEngine.Events;
-namespace Track {
+namespace GO_Device {
     public class Track : MonoBehaviour {
 
         /// <summary>
@@ -15,21 +15,26 @@ namespace Track {
         /// 
         /// </summary>
         /// 
-        public class DeviceInfo{
+        public class TrackSlideInfo{
             public DeviceBase device;
-            public float positionPerc;
-            public UnityEvent UIValueChangeCallback;
+            // UI register a callback function, if track change precition, call this function
+            public UnityEvent<float> TrackPrecChangeCallUI;
+            // Track register a callback function, if ui change precition, call this funciton
+            public UnityEvent<float> UIPrecChangeCallTrack;
         }
 
-        private List<DeviceInfo> m_devicesOnTrack;
+        public List<TrackSlideInfo> DevicesOnTrack;
 
-
-        public void MovePosition(DeviceInfo device) {
+        public void MovePosition(DeviceBase device, float prec) {
 
         }
 
-        public void AddDevice() {
+        public void AddDevice(DeviceBase basedevice) {
             // Instanite Tail
+            //TrackSlideInfo slideinfo = new TrackSlideInfo(basedevice);
+            //slideinfo.UIPrecChangeCallTrack = (val){
+            //    MovePosition(slideinfo.device, val);
+            //};
         }
 
         public void RemoveDevice(DeviceBase device) {
