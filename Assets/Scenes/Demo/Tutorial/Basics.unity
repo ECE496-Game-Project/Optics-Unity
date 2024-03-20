@@ -702,7 +702,7 @@ PrefabInstance:
         type: 3}
       propertyPath: WsOnTrack
       value: 
-      objectReference: {fileID: 2768773370630529945}
+      objectReference: {fileID: 0}
     - target: {fileID: 7838714109662062720, guid: 9f3d0e3e04a7f4c31b77f05ceae92fe6,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -1131,6 +1131,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6348737191341768783, guid: 40489e7ec2e214f429f8f2f591f0bfea,
+        type: 3}
+      propertyPath: _sampleResolution
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6348737191341768783, guid: 40489e7ec2e214f429f8f2f591f0bfea,
+        type: 3}
+      propertyPath: _interactMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 6405443755208858056, guid: 40489e7ec2e214f429f8f2f591f0bfea,
         type: 3}
       propertyPath: m_Name
@@ -1146,18 +1156,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40489e7ec2e214f429f8f2f591f0bfea, type: 3}
---- !u!114 &2768773370630529945 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6348737191341768783, guid: 40489e7ec2e214f429f8f2f591f0bfea,
-    type: 3}
-  m_PrefabInstance: {fileID: 2768773370630529944}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa805d578cd6bd747a4062822164b28d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2768773370630529946 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3034833891548442912, guid: 40489e7ec2e214f429f8f2f591f0bfea,

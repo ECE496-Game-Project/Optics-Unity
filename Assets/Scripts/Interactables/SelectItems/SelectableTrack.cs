@@ -7,7 +7,7 @@ namespace SelectItems {
         }
 
         public override void OnMouseSelect() {
-            OutlineManager.Instance.Highlight(this.gameObject);
+            //OutlineManager.Instance.Highlight(this.gameObject);
             ObjectViewPanel.Instance.SelectTrackView(this.GetComponent<Track>());
         }
 

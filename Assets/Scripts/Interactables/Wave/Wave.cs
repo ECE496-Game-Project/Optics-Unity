@@ -7,8 +7,9 @@ using System.Collections.Generic;
 
 namespace GO_Wave {
     public partial class Wave : MonoBehaviour {
-        public List<WaveSource> WaveSources;
-        public static Wave NewLineWave(string name, List<WaveSource> sources, WaveParam roWP, LayerMask interactMask, float sampleRes, Vector3 position, Quaternion rotation) {
+        // determine which wavesource creates thhis wave
+        public WaveSource correspondWS;
+        public static Wave NewLineWave(string name, WaveSource sources, WaveParam roWP, LayerMask interactMask, float sampleRes, Vector3 position, Quaternion rotation) {
             GameObject new_GO = new GameObject(
                 name,
                 typeof(BoxCollider),
@@ -63,9 +64,10 @@ namespace GO_Wave {
         /// Script-Generated-WaveSource Requires to Call ManualAwake.
         /// </summary>
         /// <param name="srcWP"> Pre initalized WaveParameter.</param>
-        public void Init(List<WaveSource> sources, WaveParam srcWP) {
-            WaveSources = new List<WaveSource>(sources);
+        public void Init(WaveSource sources, WaveParam srcWP) {
+            correspondWS = sources;
             m_params = srcWP;
+            sources.generatedWaves.Add(this);
         }
 
         public void Start() {
