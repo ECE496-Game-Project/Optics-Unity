@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Resources/Art/Frontend/UnityThemes/Tutorial.uss?fileID=7433441132597879392&amp;guid=665bfc0963e4fdb4488d7897e33da9ab&amp;type=3#Tutorial" />
-    <ui:VisualElement name="ExpandPanel" class="ExpandPanel page" style="flex-grow: 1; height: 20%; max-height: 20%; top: 80%; background-color: rgba(23, 74, 94, 0.59); flex-direction: column;">
+    <ui:VisualElement name="ExpandPanel" class="ExpandPanel page" style="flex-grow: 1; height: 20%; max-height: 20%; top: 80%; background-color: rgba(0, 0, 0, 0.59); flex-direction: column;">
         <ui:VisualElement name="SideBar" style="flex-grow: 1; width: auto; height: 15%; align-items: stretch; flex-direction: row;">
             <ui:Button text="\u2191" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ExpandButton" style="width: 30px; height: 30px; font-size: 15px; -unity-font-style: bold; background-color: rgb(241, 170, 87); color: rgb(255, 255, 255);" />
             <ui:Button text="+" parse-escape-sequences="true" display-tooltip-when-elided="true" name="AddButton" style="width: 30px; height: 30px; font-size: 15px; -unity-font-style: bold; background-color: rgb(241, 170, 87); color: rgb(255, 255, 255);" />
