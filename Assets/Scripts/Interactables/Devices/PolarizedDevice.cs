@@ -82,7 +82,8 @@ namespace GO_Device {
 
             Wave childWave = Wave.NewLineWave(
                 this.name + "GenLineWave",
-                childWP, parentLWL.InteractMask, 
+                parentWave.WaveSources, childWP, 
+                parentLWL.InteractMask, 
                 parentLWD.SampleResolution,
                 hit.point + Vector3.Normalize(hit.point - parentWave.transform.position) * ThicknessOffset,
                 parentWave.transform.rotation

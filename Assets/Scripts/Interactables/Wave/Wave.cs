@@ -3,10 +3,12 @@ using CommonUtils;
 using WaveUtils;
 using Interfaces;
 using SelectItems;
+using System.Collections.Generic;
 
 namespace GO_Wave {
     public partial class Wave : MonoBehaviour {
-        public static Wave NewLineWave(string name, WaveParam roWP, LayerMask interactMask, float sampleRes, Vector3 position, Quaternion rotation) {
+        public List<WaveSource> WaveSources;
+        public static Wave NewLineWave(string name, List<WaveSource> sources, WaveParam roWP, LayerMask interactMask, float sampleRes, Vector3 position, Quaternion rotation) {
             GameObject new_GO = new GameObject(
                 name,
                 typeof(BoxCollider),
@@ -15,11 +17,12 @@ namespace GO_Wave {
                 typeof(LineWaveLogic),
                 typeof(SelectableWave)
             );
-            new_GO.GetComponent<Wave>().Init(roWP);
+            new_GO.GetComponent<Wave>().Init(sources, roWP);
             new_GO.GetComponent<LineWaveDisplay>().Init(sampleRes);
             new_GO.GetComponent<LineWaveLogic>().Init(interactMask);
             new_GO.transform.position = position;
             new_GO.transform.rotation = rotation;
+
             return new_GO.GetComponent<Wave>();
         }
 
@@ -60,7 +63,8 @@ namespace GO_Wave {
         /// Script-Generated-WaveSource Requires to Call ManualAwake.
         /// </summary>
         /// <param name="srcWP"> Pre initalized WaveParameter.</param>
-        public void Init(WaveParam srcWP) {
+        public void Init(List<WaveSource> sources, WaveParam srcWP) {
+            WaveSources = new List<WaveSource>(sources);
             m_params = srcWP;
         }
 
