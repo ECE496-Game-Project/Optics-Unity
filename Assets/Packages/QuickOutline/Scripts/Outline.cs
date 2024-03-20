@@ -123,10 +123,10 @@ public class Outline : MonoBehaviour {
       bakeValues.Clear();
     }
 
-    // Generate smooth normals when baking is enabled
-    if (precomputeOutline && bakeKeys.Count == 0) {
-      Bake();
-    }
+    //// Generate smooth normals when baking is enabled
+    //if (precomputeOutline && bakeKeys.Count == 0) {
+    //  Bake();
+    //}
   }
 
   void Update() {
