@@ -6,13 +6,14 @@ using UnityEngine;
 using static UnityEditor.Progress;
 using WaveUtils;
 using System.Runtime.CompilerServices;
+using UnityEngine.Events;
 
 namespace Inteference
 {
 
     public class RegionManager:MonoBehaviour
     {
-        private List<WaveSwitch> m_waves = new List<WaveSwitch>();
+        public List<WaveInfo> m_waves = new List<WaveInfo>();
 
         [SerializeField]
         private List<WaveSource> m_sources;
@@ -73,7 +74,7 @@ namespace Inteference
                 Renderer ballRenderer = ball.GetComponent<Renderer>();
                 Vector3 E = Vector3.zero;
 
-                foreach(WaveSwitch waveSwitch in m_waves)
+                foreach(WaveInfo waveSwitch in m_waves)
                 {
                     if (waveSwitch.isOn)
                     {
@@ -103,7 +104,7 @@ namespace Inteference
 
                     foreach (Wave wave in source.generatedWaves)
                     {
-                        m_waves.Add(new WaveSwitch(wave));
+                        m_waves.Add(new WaveInfo(wave));
                     }
                    
                 }
@@ -115,16 +116,20 @@ namespace Inteference
 
     }
 
-    public class WaveSwitch
+    public class WaveInfo
     {
         public Wave wave;
-        public bool isOn=true;
+        public string name => wave.gameObject.name;
+        public bool isOn = true;
+        public UnityEvent<bool> UIisCalcChangeCallRegionManager = new UnityEvent<bool>();
 
-        public WaveSwitch(Wave wave)
+        public WaveInfo(Wave wave)
         {
             this.wave = wave;
+            UIisCalcChangeCallRegionManager.AddListener((isOnFromUI) => { isOn = isOnFromUI; });
         }
     }
+
 
     [System.Serializable]
     public struct AABBRectangle
