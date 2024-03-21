@@ -4,11 +4,28 @@ using WaveUtils;
 using Interfaces;
 using SelectItems;
 using System.Collections.Generic;
+using static UnityEngine.Rendering.DebugUI.Table;
+using UnityEngine.Profiling;
 
 namespace GO_Wave {
     public partial class Wave : MonoBehaviour {
         // determine which wavesource creates thhis wave
         public WaveSource correspondWS;
+
+        public static Wave NewRegionWave(string name, WaveSource sources, WaveParam roWP, LayerMask interactMask, float sampleRes, Vector3 position, Quaternion rotation) {
+            GameObject new_GO = new GameObject(
+                name,
+                typeof(BoxCollider),
+                typeof(Wave),
+                typeof(SelectableWave)
+            );
+            new_GO.GetComponent<Wave>().Init(sources, roWP);
+            new_GO.transform.position = position;
+            new_GO.transform.rotation = rotation;
+
+            return new_GO.GetComponent<Wave>();
+        }
+
         public static Wave NewLineWave(string name, WaveSource sources, WaveParam roWP, LayerMask interactMask, float sampleRes, Vector3 position, Quaternion rotation) {
             GameObject new_GO = new GameObject(
                 name,
@@ -49,13 +66,13 @@ namespace GO_Wave {
 
         #region GLOBAL METHODS
         public void WaveVisualize() {
-            WaveLogic.CleanInteract();
-            WaveLogic.Interact();
-            WaveDisplay.RefreshDisplay();
+            WaveLogic?.CleanInteract();
+            WaveLogic?.Interact();
+            WaveDisplay?.RefreshDisplay();
         }
         public void WaveClean() {
-            WaveLogic.CleanInteract();
-            WaveDisplay.CleanDisplay();
+            WaveLogic?.CleanInteract();
+            WaveDisplay?.CleanDisplay();
         }
         #endregion
 

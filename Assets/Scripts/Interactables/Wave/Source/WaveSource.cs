@@ -15,6 +15,13 @@ namespace GO_Wave {
         private WaveSourceParam m_param;
         public List<Wave> generatedWaves = new List<Wave>();
 
+        public enum WaveType
+        {
+            LineWave,
+            RegionWave
+        }
+
+        public WaveType m_waveType = WaveType.LineWave;
         public void Emit() {
             Close();
             Wave.NewLineWave(
@@ -47,7 +54,19 @@ namespace GO_Wave {
 
         private void Start()
         {
-            Emit();
+            if (m_waveType == WaveType.LineWave)
+                Emit();
+            else
+            {
+                Wave.NewRegionWave(
+                    this.name + "GenRegionWave", this,
+                    new WaveParam(m_param), _interactMask,
+                    _sampleResolution,
+                    this.transform.position + this.transform.forward * 0.01f,
+                    this.transform.rotation
+                );
+            }
+
         }
     }
 }
