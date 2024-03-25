@@ -18,9 +18,9 @@ MonoBehaviour:
     UHat: {x: 1, y: 0, z: 0}
     VHat: {x: 0, y: 1, z: 0}
     KHat: {x: 0, y: 0, z: 1}
-    Eox: 10
-    Eoy: 0
+    Eox: 0
+    Eoy: 1
     theta: 0
-    lambda: 19
+    lambda: 7
     n: 1
     RODistance: 50
