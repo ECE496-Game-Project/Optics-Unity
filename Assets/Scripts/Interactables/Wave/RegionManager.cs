@@ -3,7 +3,9 @@ using GO_Wave;
 using Interfaces;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using static UnityEditor.Progress;
+#endif
 using WaveUtils;
 using System.Runtime.CompilerServices;
 using UnityEngine.Events;
