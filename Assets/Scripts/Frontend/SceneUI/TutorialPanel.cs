@@ -82,11 +82,11 @@ public class TutorialPanel : MonoBehaviour
         Button pause = root.Q<Button>(name: "PauseButton");
         pause.clicked += () => {
             if (!isPaused) {
-                pause.text = "\u25B6";
+                pause.style.backgroundImage = Resources.Load<Texture2D>("Art/Images/Icons/play");
                 WaveTime.PauseTime();
             }
             else {
-                pause.text = "\u2588";
+                pause.style.backgroundImage = Resources.Load<Texture2D>("Art/Images/Icons/pause");
                 WaveTime.ResumeTime();
             }
             isPaused = !isPaused;
