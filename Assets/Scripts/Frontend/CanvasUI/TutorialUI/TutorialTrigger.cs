@@ -4,13 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using UnityEngine;
-using UnityEngine.EventSystems;
-using TMPro;
 using Ink.Runtime;
+using UnityEngine.EventSystems;
 
-using CommonUtils;
-
-public class TutorialManager : MonoSingleton<TutorialManager>
+public class TutorialTrigger : MonoBehaviour 
 {
     
-}
+}   
