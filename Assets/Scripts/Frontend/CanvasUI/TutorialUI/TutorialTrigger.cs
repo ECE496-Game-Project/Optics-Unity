@@ -9,5 +9,10 @@ using UnityEngine.EventSystems;
 
 public class TutorialTrigger : MonoBehaviour 
 {
-    
+    [Header("Ink JSON")]
+    [SerializeField] private TextAsset inkJSON;
+
+    private void Trigger(){
+        TutorialPanel.Instance.BeginTutorial(inkJSON);
+    }
 }   

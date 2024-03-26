@@ -62,4 +62,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4755c5781169449a893889d16422ac14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TYPE_SPEED: 0.04
+  PANEL_WIDTH: 30
+  HIDE_POSITION: 98.5
   doc: {fileID: 656388438554220710}
+  globalJSON: {fileID: 4900000, guid: 9f1eee85e89ea48059cdc82fa487a0ae, type: 3}
+  defaultInkJSON: {fileID: 4900000, guid: 641cf883bce0d4ac2a344553c9a649a7, type: 3}
