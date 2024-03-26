@@ -6,14 +6,8 @@
             <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="PauseButton" class="page" style="font-size: 25px; background-image: resource(&apos;Art/Images/Icons/pause&apos;); background-color: rgb(255, 165, 0);" />
         </ui:VisualElement>
         <ui:VisualElement name="Body" style="flex-grow: 1; width: 90%; -unity-font-style: normal;">
-            <ui:Label tabindex="-1" text="Tutorial" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" name="Tutorial" style="font-size: 20px; -unity-font-style: bold; color: rgb(255, 255, 255);" />
-            <ui:VisualElement name="page1" style="flex-grow: 1; font-size: 15px; color: rgb(255, 255, 255); background-image: resource(&apos;Art/Images/Tutorial/page1&apos;); height: auto; width: auto; -unity-slice-scale: 0; justify-content: space-around; align-self: stretch; display: flex;" />
-            <ui:VisualElement name="page2" style="flex-grow: 1; font-size: 15px; color: rgb(255, 255, 255); background-image: resource(&apos;Art/Images/Tutorial/page2&apos;); height: auto; width: auto; -unity-slice-scale: 0; justify-content: space-around; align-self: stretch; overflow: visible; display: none;" />
-            <ui:VisualElement name="page3" style="flex-grow: 1; font-size: 15px; color: rgb(255, 255, 255); background-image: resource(&apos;Art/Images/Tutorial/page3&apos;); height: auto; width: auto; -unity-slice-scale: 0; justify-content: space-around; align-self: stretch; overflow: visible; display: none;" />
-            <ui:VisualElement name="PageFlip" class="page" style="flex-grow: 0; flex-direction: row; justify-content: center; align-self: stretch; align-items: flex-end; flex-shrink: 0;">
-                <ui:Button text="\u2190" parse-escape-sequences="true" display-tooltip-when-elided="true" name="prevPage" style="font-size: 25px; -unity-font-style: bold; color: rgb(255, 255, 255);" />
-                <ui:Button text="\u2192" parse-escape-sequences="true" display-tooltip-when-elided="true" name="nextPage" style="color: rgb(255, 255, 255); font-size: 25px;" />
-            </ui:VisualElement>
+            <ui:Label tabindex="-1" text="Tutorial" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" name="title" style="font-size: 20px; -unity-font-style: bold; color: rgb(255, 255, 255);" />
+            <ui:ScrollView name="content" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
