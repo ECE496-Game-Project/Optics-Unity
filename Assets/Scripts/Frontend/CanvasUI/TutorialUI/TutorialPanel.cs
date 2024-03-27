@@ -300,7 +300,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     private void MoveSpacerToEnd()
     {
         float contentHeight = content.contentContainer.layout.height;
-        float bottomOffset = Mathf.Max(0, contentHeight);
+        float bottomOffset = Mathf.Max(0, contentHeight + spacer.layout.height/2);
         spacer.style.top = bottomOffset;
     }
 
