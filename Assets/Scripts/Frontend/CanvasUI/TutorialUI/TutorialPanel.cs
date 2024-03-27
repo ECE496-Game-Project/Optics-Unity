@@ -42,7 +42,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     private Story currStory;
     private Coroutine displayLine;
 
-    void Awake()
+    private void Awake()
     {
         root = doc.rootVisualElement;
         
@@ -61,15 +61,17 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         realChoice = Resources.Load<VisualTreeAsset>("Art/Frontend/Documents/TutorialPanel/RealChoice");
         fakeChoice = Resources.Load<VisualTreeAsset>("Art/Frontend/Documents/TutorialPanel/FakeChoice");
         textArea = Resources.Load<VisualTreeAsset>("Art/Frontend/Documents/TutorialPanel/TextArea");
+    }
 
+    private void Start()
+    {
         BeginTutorial(defaultInkJSON);
     }
 
     private void Update(){
         if (!tutIsPlaying) return;
         
-        if (canGoToNextLine && currStory.currentChoices.Count == 0 // && isUserInput()
-        ){
+        if (canGoToNextLine && currStory.currentChoices.Count == 0 && isUserInput()){
             ContinueStory();
         }
     }
@@ -224,8 +226,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     }
 
     private bool isUserInput(){
-        // InputManager.GetInstance().GetSubmitPressed() or Click left mouse
-        return false;
+        return TutorialController.Instance.isInput;
     }
 
     #endregion
