@@ -14,7 +14,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     [Header("Params")]
     [SerializeField] private float TYPE_SPEED = 0.04f;
     [SerializeField] private float SCROLL_SPEED = 50f;
-    [SerializeField] private float SCROLL_WIDTH = 30f;
+    [SerializeField] private float SPACER_HEIGHT = 300f; 
     [SerializeField] private float EXIT_LAG_TIME = 0.5f;
     [SerializeField] private int PANEL_WIDTH = 30;
     [SerializeField] private float HIDE_POSITION = 98.5f;
@@ -36,6 +36,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     private VisualTreeAsset realChoice;
     private VisualTreeAsset fakeChoice;
     private VisualTreeAsset textArea;
+    private VisualElement spacer;
 
     private bool isPanelExpanded = true;
     private bool isPaused = false;
@@ -60,13 +61,13 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         expButton = root.Q<Button>(name: "ExpandButton");
         pause = root.Q<Button>(name: "PauseButton");
 
+        title = root.Q<Label>(name: "title");
+
         content = root.Q<ScrollView>(name: "content");
         content.horizontalScrollerVisibility = ScrollerVisibility.Hidden;
-        content.verticalScroller.style.width = SCROLL_WIDTH;
+        content.verticalScrollerVisibility = ScrollerVisibility.Hidden;
         content.mouseWheelScrollSize = SCROLL_SPEED;
         content.elasticity = SCROLL_SPEED;
-
-        title = root.Q<Label>(name: "title");
 
         realChoice = Resources.Load<VisualTreeAsset>("Art/Frontend/Documents/TutorialPanel/RealChoice");
         fakeChoice = Resources.Load<VisualTreeAsset>("Art/Frontend/Documents/TutorialPanel/FakeChoice");
@@ -83,7 +84,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     private void Update(){
         if (!tutIsPlaying) return;
         
-        if (canGoToNextLine && currStory.currentChoices.Count == 0 && isUserInput()){
+        if (canGoToNextLine && currStory.currentChoices.Count == 0 && IsUserInput()){
             ContinueStory();
         }
     }
@@ -140,6 +141,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         displaySpeakerName = "???";
 
         OpenExpandPanel();
+        AddSpacer();
         ContinueStory();
     }
 
@@ -152,8 +154,10 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         if(displayLine != null) StopCoroutine(displayLine); 
         displayLine = StartCoroutine(DisplayLine(currStory.Continue()));
         
-        float targetValue = content.verticalScroller.highValue > 0 ? content.verticalScroller.highValue : 0;
-        DOTween.To(()=>content.verticalScroller.value, x=> content.verticalScroller.value = x, targetValue, EXIT_LAG_TIME);
+        Scroller scroller = content.verticalScroller;
+        float targetValue = scroller.highValue > 0 ? scroller.highValue : 0;
+        DOTween.To(()=>scroller.value, x=> scroller.value = x, targetValue, EXIT_LAG_TIME);
+        MoveSpacerToEnd();
 
         HandleTags(currStory.currentTags);
     }
@@ -178,7 +182,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         canGoToNextLine = false;
 
         foreach (char letter in line.ToCharArray()){
-            if (isUserInput()) {
+            if (IsUserInput()) {
                 label.text = displaySpeakerName + "-" + line;
                 break;
             }
@@ -283,8 +287,21 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         // dialogueVariables.SaveVariables();
     }
 
-    private bool isUserInput(){
+    private bool IsUserInput(){
         return TutorialController.Instance.isInput;
+    }
+
+    private void AddSpacer(){
+        spacer = new VisualElement();
+        spacer.style.height = SPACER_HEIGHT; 
+        content.Add(spacer);
+    }
+
+    private void MoveSpacerToEnd()
+    {
+        float contentHeight = content.contentContainer.layout.height;
+        float bottomOffset = Mathf.Max(0, contentHeight);
+        spacer.style.top = bottomOffset;
     }
 
     #endregion
