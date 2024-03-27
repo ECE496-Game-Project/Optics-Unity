@@ -15,7 +15,7 @@
 .page Button:hover {
     background-color: rgb(255, 140, 0);
     border-radius: 10px;
-    scale: 1.1;
+    scale: 1.02;
 }
 
 .ExpandPanel {

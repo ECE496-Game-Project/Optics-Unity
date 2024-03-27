@@ -27,7 +27,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     private VisualElement expPanel;
     private VisualElement expBody;
     private Label title;
-    private VisualElement content;
+    private ScrollView content;
     private Button expButton;
     private Button pause;
     private VisualTreeAsset realChoice;
@@ -42,6 +42,11 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     private Story currStory;
     private Coroutine displayLine;
 
+    private const string SPEAKER_TAG = "speaker";
+    private const string CHOICE_TAG = "choice";
+
+    private string displaySpeakerName = "";
+
     private void Awake()
     {
         root = doc.rootVisualElement;
@@ -52,7 +57,9 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         expButton = root.Q<Button>(name: "ExpandButton");
         pause = root.Q<Button>(name: "PauseButton");
 
-        content = root.Q<VisualElement>(name: "content");
+        content = root.Q<ScrollView>(name: "content");
+        content.horizontalScrollerVisibility = ScrollerVisibility.Hidden;
+
         title = root.Q<Label>(name: "title");
 
         realChoice = Resources.Load<VisualTreeAsset>("Art/Frontend/Documents/TutorialPanel/RealChoice");
@@ -122,8 +129,11 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     public void BeginTutorial(TextAsset inkJSON){
         currStory = new Story(inkJSON.text);
         // dialogueVariables.StartListening(currentStory);
+        
         // title.text = 
         tutIsPlaying = true;
+        displaySpeakerName = "???";
+
         OpenExpandPanel();
         ContinueStory();
     }
@@ -134,7 +144,6 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
             return;
         }
 
-        // set text for the current dialogue line
         if(displayLine != null) StopCoroutine(displayLine); 
         displayLine = StartCoroutine(DisplayLine(currStory.Continue()));
         
@@ -143,22 +152,26 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
 
     private IEnumerator ExitTutorial(){
         yield return new WaitForSeconds(EXIT_LAG_TIME);
+        
         // dialogueVariables.StopListening(currentStory);
+        
         tutIsPlaying = false;
+        displaySpeakerName = "";
+
         CloseExpandPanel();
     }
 
     private IEnumerator DisplayLine(string line){
         VisualElement textLine = textArea.Instantiate();
         Label label = textLine.Q<Label>();
-        label.text = "";
+        label.text = displaySpeakerName + " - ";
         content.Add(textLine);
 
         canGoToNextLine = false;
 
         foreach (char letter in line.ToCharArray()){
             if (isUserInput()) {
-                label.text = line;
+                label.text = displaySpeakerName + " - " + line;
                 break;
             }
 
@@ -173,8 +186,20 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
 
     private void DisplayChoices(){
         List<Choice> currChoices = currStory.currentChoices;
+        
+        // 1. Fake Choice
+        if(currChoices.Count == 1){
+            VisualElement choice = fakeChoice.Instantiate();
+            Button button = choice.Q<Button>();
+            button.text = currChoices[0].text + " " + '\u25B6';
+            button.clicked += () => {
+                MakeChoice(currChoices[0], choice);
+            };
+            content.Add(choice);
+            return;
+        }
 
-        // 1. Real Choice
+        // 2. Real Choice
         List<VisualElement> realChoices = new List<VisualElement>();
         foreach(Choice choice in currChoices) {   
             VisualElement choiceElement = realChoice.Instantiate();
@@ -191,9 +216,6 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
             };
             index++;
         }
-
-        // 2. Fake Choice
-        // CONTINUE + \u25B6
     }
 
     private void MakeChoice(Choice choice, List<VisualElement> choices){
@@ -204,16 +226,42 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         }
 
         VisualElement textLine = textArea.Instantiate();
-        textLine.Q<Label>().text = choice.text;
+        textLine.Q<Label>().text = "You - \"" + choice.text + "\"";
         content.Add(textLine);
 
         currStory.ChooseChoiceIndex(choice.index);
+        ContinueStory();
+    }
 
+    private void MakeChoice(Choice choice, VisualElement choiceEl){
+        if (!canGoToNextLine) return;
+        content.Remove(choiceEl);
+        currStory.ChooseChoiceIndex(choice.index);
         ContinueStory();
     }
 
     private void HandleTags(List<string> tags){
-
+        foreach (string tag in tags) {
+            // parse the tag
+            string[] splitTag = tag.Split(':');
+            if (splitTag.Length != 2) {
+                Debug.LogError("Tag could not be appropriately parsed: " + tag);
+            }
+            string tagKey = splitTag[0].Trim();
+            string tagValue = splitTag[1].Trim();
+            
+            // handle the tag
+            switch (tagKey) {
+                case SPEAKER_TAG:
+                    displaySpeakerName = tagValue;
+                    break;
+                case CHOICE_TAG:
+                    break;
+                default:
+                    Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
+                    break;
+            }
+        }
     }
 
     public Ink.Runtime.Object GetVariableState(string varName){
