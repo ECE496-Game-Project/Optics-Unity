@@ -1,4 +1,5 @@
-Hello, I am OPTICS. #speaker:OPTICS
+#title:Control #speaker:OPTICS
+Hello, I am OPTICS.
 -> control
 
 === control ===
@@ -18,7 +19,7 @@ Are familiar with the control of 3D software?
             At Mac:
             Click [OPTION] + Right Mouse to drag camera around.
             Click [OPTION] + Left Mouse to rotate camera around.
-            Interaction:
+            Interaction Control:
             Click Left Mouse at any object in the scene to see details.
             Click Input Fields to input parameters.
             Drag Sliders to modify parameter smoothly.

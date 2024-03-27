@@ -6,12 +6,15 @@ using UnityEngine.UIElements;
 using UnityEngine.EventSystems;
 
 using Ink.Runtime;
+using DG.Tweening;
 using CommonUtils;
 
 public class TutorialPanel : MonoSingleton<TutorialPanel>
 {
     [Header("Params")]
     [SerializeField] private float TYPE_SPEED = 0.04f;
+    [SerializeField] private float SCROLL_SPEED = 50f;
+    [SerializeField] private float SCROLL_WIDTH = 30f;
     [SerializeField] private float EXIT_LAG_TIME = 0.5f;
     [SerializeField] private int PANEL_WIDTH = 30;
     [SerializeField] private float HIDE_POSITION = 98.5f;
@@ -43,7 +46,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     private Coroutine displayLine;
 
     private const string SPEAKER_TAG = "speaker";
-    private const string CHOICE_TAG = "choice";
+    private const string TITLE_TAG = "title";
 
     private string displaySpeakerName = "";
 
@@ -59,6 +62,9 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
 
         content = root.Q<ScrollView>(name: "content");
         content.horizontalScrollerVisibility = ScrollerVisibility.Hidden;
+        content.verticalScroller.style.width = SCROLL_WIDTH;
+        content.mouseWheelScrollSize = SCROLL_SPEED;
+        content.elasticity = SCROLL_SPEED;
 
         title = root.Q<Label>(name: "title");
 
@@ -130,7 +136,6 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         currStory = new Story(inkJSON.text);
         // dialogueVariables.StartListening(currentStory);
         
-        // title.text = 
         tutIsPlaying = true;
         displaySpeakerName = "???";
 
@@ -147,6 +152,9 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         if(displayLine != null) StopCoroutine(displayLine); 
         displayLine = StartCoroutine(DisplayLine(currStory.Continue()));
         
+        float targetValue = content.verticalScroller.highValue > 0 ? content.verticalScroller.highValue : 0;
+        DOTween.To(()=>content.verticalScroller.value, x=> content.verticalScroller.value = x, targetValue, EXIT_LAG_TIME);
+
         HandleTags(currStory.currentTags);
     }
 
@@ -255,7 +263,8 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
                 case SPEAKER_TAG:
                     displaySpeakerName = tagValue;
                     break;
-                case CHOICE_TAG:
+                case TITLE_TAG:
+                    title.text = tagValue;
                     break;
                 default:
                     Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
