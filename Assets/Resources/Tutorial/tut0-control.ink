@@ -29,18 +29,19 @@ Are familiar with the control of 3D software?
                 Click [A], [D] to move camera horizontally.
                 Click [Q], [E] to move camera vertically.
                 Click [W], [S] to zoom in and zoom out the camera.
+                **** CONTINUE \u25B6
             *** Mouse
                 Are you using Mac keyboard?
                 **** Yes
                     Slide Mouse wheel to zoom in and zoom out the camera.
                     Click [OPTION] + Right Mouse to drag camera around.
                     Click [OPTION] + Left Mouse to rotate camera around.
+                    ***** CONTINUE \u25B6
                 **** No
                     Slide Mouse wheel to zoom in and zoom out the camera.
                     Click [ALT] + Right Mouse to drag camera around.
                     Click [ALT] + Left Mouse to rotate camera around.
-            ---
-            **** CONTINUE \u25B6
+                    ***** CONTINUE \u25B6
         -- 
         Click Left Mouse at any object in the scene to see details.
         Click Input Fields to input parameters.

@@ -12,7 +12,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
 {
     [Header("Params")]
     [SerializeField] private float TYPE_SPEED = 0.04f;
-    [SerializeField] private float EXIT_LAG_TIME = 0.2f;
+    [SerializeField] private float EXIT_LAG_TIME = 0.5f;
     [SerializeField] private int PANEL_WIDTH = 30;
     [SerializeField] private float HIDE_POSITION = 98.5f;
     
@@ -52,9 +52,6 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         expButton = root.Q<Button>(name: "ExpandButton");
         pause = root.Q<Button>(name: "PauseButton");
 
-        OpenExpandPanel();
-        PreRegisterCallback();
-
         content = root.Q<VisualElement>(name: "content");
         title = root.Q<Label>(name: "title");
 
@@ -64,7 +61,9 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     }
 
     private void Start()
-    {
+    {   
+        OpenExpandPanel();
+        PreRegisterCallback();
         BeginTutorial(defaultInkJSON);
     }
 
@@ -176,9 +175,9 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
             }
         }
 
-        canGoToNextLine = true;
-
         DisplayChoices();
+
+        canGoToNextLine = true;
     }
 
     private void DisplayChoices(){
@@ -186,19 +185,17 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
 
         // 1. Real Choice
         List<VisualElement> realChoices = new List<VisualElement>();
-        int index = 0;
         foreach(Choice choice in currChoices) 
         {   
             VisualElement choiceElement = realChoice.Instantiate();
             Button button = choiceElement.Q<Button>();
             button.text = choice.text;
             button.clicked += () => {
-                MakeChoice(index);
+                MakeChoice(choice.index);
             };
 
             realChoices.Add(choiceElement);
             content.Add(choiceElement);
-            index++;
         }
 
         // 2. Fake Choice
@@ -207,7 +204,6 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     private void MakeChoice(int choiceIdx){
         if (!canGoToNextLine) return;
         currStory.ChooseChoiceIndex(choiceIdx);
-        // InputManager.GetInstance().RegisterSubmitPressed();
         ContinueStory();
     }
 
