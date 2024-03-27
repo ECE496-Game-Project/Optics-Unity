@@ -164,14 +164,14 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     private IEnumerator DisplayLine(string line){
         VisualElement textLine = textArea.Instantiate();
         Label label = textLine.Q<Label>();
-        label.text = displaySpeakerName + " - ";
+        label.text = displaySpeakerName + "-";
         content.Add(textLine);
 
         canGoToNextLine = false;
 
         foreach (char letter in line.ToCharArray()){
             if (isUserInput()) {
-                label.text = displaySpeakerName + " - " + line;
+                label.text = displaySpeakerName + "-" + line;
                 break;
             }
 
@@ -210,7 +210,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         int index = 0;
         foreach(Choice choice in currChoices){
             Button button = realChoices[index].Q<Button>();
-            button.text = choice.text;
+            button.text = index + ".-" + choice.text;
             button.clicked += () => {
                 MakeChoice(choice, realChoices);
             };
@@ -226,7 +226,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         }
 
         VisualElement textLine = textArea.Instantiate();
-        textLine.Q<Label>().text = "You - \"" + choice.text + "\"";
+        textLine.Q<Label>().text = "You-\"" + choice.text + "\"";
         content.Add(textLine);
 
         currStory.ChooseChoiceIndex(choice.index);
