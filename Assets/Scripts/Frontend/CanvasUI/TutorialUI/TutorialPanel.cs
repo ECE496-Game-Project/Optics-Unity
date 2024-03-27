@@ -37,6 +37,8 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     private bool isPanelExpanded = true;
     private bool isPaused = false;
 
+    private bool tutIsPlaying = false;
+    private bool canGoToNextLine = false;
     private Story currStory;
     private Coroutine displayLine;
 
@@ -61,6 +63,15 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         textArea = Resources.Load<VisualTreeAsset>("Art/Frontend/Documents/TutorialPanel/TextArea");
 
         BeginTutorial(defaultInkJSON);
+    }
+
+    private void Update(){
+        if (!tutIsPlaying) return;
+        
+        if (canGoToNextLine && currStory.currentChoices.Count == 0 // && isUserInput()
+        ){
+            ContinueStory();
+        }
     }
 
     #region Panel
@@ -111,6 +122,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         currStory = new Story(inkJSON.text);
         // dialogueVariables.StartListening(currentStory);
         // title.text = 
+        tutIsPlaying = true;
         OpenExpandPanel();
         ContinueStory();
     }
@@ -131,6 +143,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     private IEnumerator ExitTutorial(){
         yield return new WaitForSeconds(EXIT_LAG_TIME);
         // dialogueVariables.StopListening(currentStory);
+        tutIsPlaying = false;
         CloseExpandPanel();
     }
 
@@ -140,14 +153,14 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         label.text = "";
         content.Add(textLine);
 
-        bool isAddingRichTextTag = false;
+        canGoToNextLine = false;
 
+        bool isAddingRichTextTag = false;
         foreach (char letter in line.ToCharArray()){
-            // if the submit button is pressed, finish up displaying the line right away
-            // if (InputManager.GetInstance().GetSubmitPressed()) {
-                // dialogueText.maxVisibleCharacters = line.Length;
-                // break;
-            // }
+            if (isUserInput()) {
+                label.text = line;
+                break;
+            }
 
             // check for rich text tag, if found, add it without waiting
             if (letter == '<' || isAddingRichTextTag) {
@@ -161,15 +174,39 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
             }
         }
 
+        canGoToNextLine = true;
+
         DisplayChoices();
     }
 
     private void DisplayChoices(){
+        List<Choice> currChoices = currStory.currentChoices;
 
+        // 1. Real Choice
+        List<VisualElement> realChoices = new List<VisualElement>();
+        int index = 0;
+        foreach(Choice choice in currChoices) 
+        {   
+            VisualElement choiceElement = realChoice.Instantiate();
+            Button button = choiceElement.Q<Button>();
+            button.text = choice.text;
+            button.clicked += () => {
+                MakeChoice(index);
+            };
+
+            realChoices.Add(choiceElement);
+            content.Add(choiceElement);
+            index++;
+        }
+
+        // 2. Fake Choice
     }
 
     private void MakeChoice(int choiceIdx){
-
+        if (!canGoToNextLine) return;
+        currStory.ChooseChoiceIndex(choiceIdx);
+        // InputManager.GetInstance().RegisterSubmitPressed();
+        ContinueStory();
     }
 
     private void HandleTags(List<string> tags){
@@ -184,6 +221,11 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
 
     public void OnApplicationQuit() {
         // dialogueVariables.SaveVariables();
+    }
+
+    private bool isUserInput(){
+        // InputManager.GetInstance().GetSubmitPressed() or Click left mouse
+        return false;
     }
 
     #endregion
