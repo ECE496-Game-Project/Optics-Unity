@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Assertions;
 using GO_Wave;
+using System.Collections;
 
 namespace GO_Device {
     /// <summary>
@@ -27,6 +28,11 @@ namespace GO_Device {
 
         public List<TrackSlideInfo> DevicesOnTrack;
         public WaveSource WsOnTrack;
+        IEnumerator WaitOneFrameThenEmit() {
+            // Wait for one frame
+            yield return null;
+            WsOnTrack.Emit();
+        }
 
         public void MovePosition(DeviceBase device, float prec) {
             prec = Mathf.Clamp01(prec);
@@ -40,7 +46,7 @@ namespace GO_Device {
 
             device.transform.position = Head.position + newRelPosition + orthognalComponent;
 
-            WsOnTrack.Emit();
+            StartCoroutine(WaitOneFrameThenEmit());
         }
 
         public float GetPrec(TrackSlideInfo slideInfo)
@@ -60,8 +66,11 @@ namespace GO_Device {
             DeviceBase newDevice = Instantiate(TempSingletonManager.Instance.PolarizerPrefab, this.transform).GetComponent<DeviceBase>();
             newDevice.transform.position = Tail.position;
             newDevice.gameObject.name = "PolarizerAdded"+ DevicesOnTrack.Count;
-            return AddDevice(newDevice);
 
+            var device = AddDevice(newDevice);
+            StartCoroutine(WaitOneFrameThenEmit());
+
+            return device;
         }
 
         public TrackSlideInfo AddDevice(DeviceBase basedevice) {
@@ -79,6 +88,7 @@ namespace GO_Device {
             basedevice.transform.SetParent(this.transform);
 
             DevicesOnTrack.Add(slideinfo);
+            
             return slideinfo;
 
         }
@@ -95,6 +105,8 @@ namespace GO_Device {
                 }
             }
             Destroy(sliderInfo.device.gameObject);
+
+            StartCoroutine(WaitOneFrameThenEmit());
         }
 
         void Start() {

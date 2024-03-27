@@ -42,14 +42,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 467164277421919784}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa805d578cd6bd747a4062822164b28d, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ebf59738706ff740a70afdac1f4c6a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _profile: {fileID: 11400000, guid: d2d780b4c9135d64d950038596d728eb, type: 2}
-  _interactMask:
-    serializedVersion: 2
-    m_Bits: 64
-  _sampleResolution: 1
+  correspondWS: {fileID: 0}
 --- !u!65 &2474524276027000876
 BoxCollider:
   m_ObjectHideFlags: 0

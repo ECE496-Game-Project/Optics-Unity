@@ -10,6 +10,8 @@ namespace SelectItems {
         public override void OnMouseSelect() {
             OutlineManager.Instance.Highlight(this.gameObject);
             ParamPanelManager.Instance.SelectParamView(this.gameObject);
+
+            TutorialPanel.Instance.BeginTutorial(inkJSON);
         }
 
         public override void OnMouseUnhover() {

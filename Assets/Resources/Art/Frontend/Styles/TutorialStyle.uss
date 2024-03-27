@@ -1,0 +1,25 @@
+.page {
+}
+
+.page Button {
+    width: 40px;
+    height: 40px;
+    background-color: orange;
+    border-width: var(--border-width);
+    border-color: white;
+    transition: 0.25s all;
+    color: white;
+    -unity-font-style: bold;
+}
+
+.page Button:hover {
+    background-color: rgb(255, 140, 0);
+    border-radius: 10px;
+    scale: 1.02;
+}
+
+.ExpandPanel {
+    transition-property: all;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in;
+}

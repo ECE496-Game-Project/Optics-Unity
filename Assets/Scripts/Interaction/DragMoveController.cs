@@ -58,7 +58,6 @@ public class DragMoveController: InputController
 
     public void OnMouseFinished(InputAction.CallbackContext context)
     {
-        
         if (!m_isAllowed) return;
         NotifyMyParentIsFinished();
     }
