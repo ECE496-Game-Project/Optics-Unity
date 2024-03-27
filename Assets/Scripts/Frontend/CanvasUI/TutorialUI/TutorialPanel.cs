@@ -156,23 +156,14 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
 
         canGoToNextLine = false;
 
-        bool isAddingRichTextTag = false;
         foreach (char letter in line.ToCharArray()){
             if (isUserInput()) {
                 label.text = line;
                 break;
             }
 
-            // check for rich text tag, if found, add it without waiting
-            if (letter == '<' || isAddingRichTextTag) {
-                isAddingRichTextTag = true;
-                if (letter == '>') isAddingRichTextTag = false;
-            }
-
-            else {
-                label.text += letter;
-                yield return new WaitForSeconds(TYPE_SPEED);
-            }
+            label.text += letter;
+            yield return new WaitForSeconds(TYPE_SPEED);
         }
 
         DisplayChoices();
@@ -185,25 +176,39 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
 
         // 1. Real Choice
         List<VisualElement> realChoices = new List<VisualElement>();
-        foreach(Choice choice in currChoices) 
-        {   
+        foreach(Choice choice in currChoices) {   
             VisualElement choiceElement = realChoice.Instantiate();
-            Button button = choiceElement.Q<Button>();
-            button.text = choice.text;
-            button.clicked += () => {
-                MakeChoice(choice.index);
-            };
-
             realChoices.Add(choiceElement);
             content.Add(choiceElement);
         }
 
+        int index = 0;
+        foreach(Choice choice in currChoices){
+            Button button = realChoices[index].Q<Button>();
+            button.text = choice.text;
+            button.clicked += () => {
+                MakeChoice(choice, realChoices);
+            };
+            index++;
+        }
+
         // 2. Fake Choice
+        // CONTINUE + \u25B6
     }
 
-    private void MakeChoice(int choiceIdx){
+    private void MakeChoice(Choice choice, List<VisualElement> choices){
         if (!canGoToNextLine) return;
-        currStory.ChooseChoiceIndex(choiceIdx);
+        
+        foreach(VisualElement choiceEl in choices){
+            content.Remove(choiceEl);
+        }
+
+        VisualElement textLine = textArea.Instantiate();
+        textLine.Q<Label>().text = choice.text;
+        content.Add(textLine);
+
+        currStory.ChooseChoiceIndex(choice.index);
+
         ContinueStory();
     }
 
