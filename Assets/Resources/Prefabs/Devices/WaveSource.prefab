@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8656875070322859107}
   - component: {fileID: 8556279221832235535}
   - component: {fileID: 2582191855911653826}
-  - component: {fileID: 5116846908038447076}
   m_Layer: 0
   m_Name: WaveSource
   m_TagString: Untagged
@@ -67,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 889379f5d0248ab48917d2685e26ee45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inkJSON: {fileID: 4900000, guid: 4b21925c2369e4148888457e4fdc7850, type: 3}
 --- !u!65 &2582191855911653826
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -88,19 +88,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 4, z: 2}
   m_Center: {x: 0, y: -1, z: -0.6}
---- !u!114 &5116846908038447076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6405443755208858056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dbad849b03a24fd3943b9b4ce558933, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inkJSON: {fileID: 4900000, guid: 8a3e341b845cc403eabd0a3309c86bcd, type: 3}
 --- !u!1001 &1599072362472956657
 PrefabInstance:
   m_ObjectHideFlags: 0

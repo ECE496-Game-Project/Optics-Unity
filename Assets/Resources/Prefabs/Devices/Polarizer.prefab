@@ -149,7 +149,6 @@ GameObject:
   - component: {fileID: 2679604782596750386}
   - component: {fileID: 6242572386131563101}
   - component: {fileID: 4915388882394358725}
-  - component: {fileID: 28307234093202220}
   m_Layer: 6
   m_Name: Polarizer
   m_TagString: Untagged
@@ -237,18 +236,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b6408261048540889f630ee8a018b10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &28307234093202220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4096693397236163748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dbad849b03a24fd3943b9b4ce558933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8759947780327962446

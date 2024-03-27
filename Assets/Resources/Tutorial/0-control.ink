@@ -1,11 +1,11 @@
-#title:Control #speaker:OPTICS
+#title:Control #speaker:OPTICS #portrait:OPTICS
 Hello, I am OPTICS.
 -> control
 
 === control ===
 Welcome to the first OPTICS tutorial! 
 Are familiar with the control of 3D software? 
-    * [Yes, I am professional.]
+    * [Yes, I am an expert.]
         Since you are familiar with them, I would just list all the controls. Feel free to try it out!
         ** [CONTINUE]
             Camera Control:
@@ -13,11 +13,9 @@ Are familiar with the control of 3D software?
             Click [Q], [E] to move camera vertically.
             Click [W], [S] to zoom in and zoom out the camera.
             Slide Mouse wheel to zoom in and zoom out the camera.
-            At Windows: 
-            Click [ALT] + Right Mouse to drag camera around.
+            At Windows: Click [ALT] + Right Mouse to drag camera around. 
             Click [ALT] + Left Mouse to rotate camera around.
-            At Mac:
-            Click [OPTION] + Right Mouse to drag camera around.
+            At Mac: Click [OPTION] + Right Mouse to drag camera around.
             Click [OPTION] + Left Mouse to rotate camera around.
             Interaction Control:
             Click Left Mouse at any object in the scene to see details.

@@ -14,7 +14,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     [Header("Params")]
     [SerializeField] private float TYPE_SPEED = 0.04f;
     [SerializeField] private float SCROLL_SPEED = 50f;
-    [SerializeField] private float SPACER_HEIGHT = 300f; 
+    [SerializeField] private float SPACER_HEIGHT = 200f; 
     [SerializeField] private float EXIT_LAG_TIME = 0.5f;
     [SerializeField] private int PANEL_WIDTH = 30;
     [SerializeField] private float HIDE_POSITION = 98.5f;
@@ -48,6 +48,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
 
     private const string SPEAKER_TAG = "speaker";
     private const string TITLE_TAG = "title";
+    private const string PORTRAIT_TAG = "portrait";
 
     private string displaySpeakerName = "";
 
@@ -135,13 +136,17 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
 
     public void BeginTutorial(TextAsset inkJSON){
         currStory = new Story(inkJSON.text);
+        
         // dialogueVariables.StartListening(currentStory);
         
         tutIsPlaying = true;
+        title.text = "???";
         displaySpeakerName = "???";
 
-        OpenExpandPanel();
+        content.contentContainer.Clear();
         AddSpacer();
+
+        OpenExpandPanel();
         ContinueStory();
     }
 
@@ -154,10 +159,11 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         if(displayLine != null) StopCoroutine(displayLine); 
         displayLine = StartCoroutine(DisplayLine(currStory.Continue()));
         
+        MoveSpacerToEnd();
+
         Scroller scroller = content.verticalScroller;
         float targetValue = scroller.highValue > 0 ? scroller.highValue : 0;
         DOTween.To(()=>scroller.value, x=> scroller.value = x, targetValue, EXIT_LAG_TIME);
-        MoveSpacerToEnd();
 
         HandleTags(currStory.currentTags);
     }
@@ -270,6 +276,8 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
                 case TITLE_TAG:
                     title.text = tagValue;
                     break;
+                case PORTRAIT_TAG:
+                    break;
                 default:
                     Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
                     break;
@@ -292,8 +300,12 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     }
 
     private void AddSpacer(){
+        if(spacer != null){
+            if(content.Contains(spacer)) content.Remove(spacer);
+            spacer = null;
+        }
         spacer = new VisualElement();
-        spacer.style.height = SPACER_HEIGHT; 
+        spacer.style.height = SPACER_HEIGHT;
         content.Add(spacer);
     }
 
