@@ -7,7 +7,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="Body" style="flex-grow: 1; width: 90%; -unity-font-style: normal;">
             <ui:Label tabindex="-1" text="Tutorial" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" name="title" style="font-size: 25px; -unity-font-style: bold; color: rgb(255, 255, 255);" />
-            <ui:ScrollView name="content" style="padding-top: 10px; padding-right: 0; padding-bottom: 10px; padding-left: 0; text-overflow: clip; font-size: 20px;" />
+            <ui:ScrollView name="content" style="padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 0; text-overflow: clip; font-size: 20px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
