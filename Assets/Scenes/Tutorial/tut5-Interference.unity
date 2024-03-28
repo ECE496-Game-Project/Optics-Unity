@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.2331076, g: 0.23627803, b: 0.27289605, a: 1}
+  m_IndirectSpecularColor: {r: 0.23236361, g: 0.23479086, b: 0.27237764, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -658,7 +658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1028210982, guid: d7b07370d2c584fd2b6fcffcec839d18, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1028210982, guid: d7b07370d2c584fd2b6fcffcec839d18, type: 3}
       propertyPath: m_LocalPosition.y
@@ -666,7 +666,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1028210982, guid: d7b07370d2c584fd2b6fcffcec839d18, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 1028210982, guid: d7b07370d2c584fd2b6fcffcec839d18, type: 3}
       propertyPath: m_LocalRotation.w
@@ -777,7 +777,7 @@ PrefabInstance:
     - target: {fileID: 6901406372872370139, guid: d7b07370d2c584fd2b6fcffcec839d18,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6901406372872370139, guid: d7b07370d2c584fd2b6fcffcec839d18,
         type: 3}
@@ -787,7 +787,7 @@ PrefabInstance:
     - target: {fileID: 6901406372872370139, guid: d7b07370d2c584fd2b6fcffcec839d18,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 6901406372872370139, guid: d7b07370d2c584fd2b6fcffcec839d18,
         type: 3}
@@ -912,7 +912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed343eed47915a242a26a85fd95c9a9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _profile: {fileID: 11400000, guid: d2d780b4c9135d64d950038596d728eb, type: 2}
+  _profile: {fileID: 11400000, guid: f5bda07027411d84fab5dff1df93da49, type: 2}
   _interactMask:
     serializedVersion: 2
     m_Bits: 64
@@ -993,7 +993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed343eed47915a242a26a85fd95c9a9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _profile: {fileID: 11400000, guid: d2d780b4c9135d64d950038596d728eb, type: 2}
+  _profile: {fileID: 11400000, guid: f5bda07027411d84fab5dff1df93da49, type: 2}
   _interactMask:
     serializedVersion: 2
     m_Bits: 64
