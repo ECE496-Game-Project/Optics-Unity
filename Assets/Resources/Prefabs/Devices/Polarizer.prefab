@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02a0f2a9f4f6cea46b3d895e8b1f3497, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inkJSON: {fileID: 4900000, guid: 0bfeda276424047c89631fa235e63bc8, type: 3}
 --- !u!114 &4915388882394358725
 MonoBehaviour:
   m_ObjectHideFlags: 0

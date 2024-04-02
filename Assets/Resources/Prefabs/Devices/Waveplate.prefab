@@ -55,6 +55,8 @@ MonoBehaviour:
   ThicknessOffset: 0.005
   RotDeg: 0
   AxisDiffDeg: 90
+  m_parent: {fileID: 0}
+  m_child: {fileID: 0}
 --- !u!65 &2595241208123828559
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -88,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02a0f2a9f4f6cea46b3d895e8b1f3497, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inkJSON: {fileID: 4900000, guid: 6a834cba8cdc04b4fbaa354731b680f3, type: 3}
 --- !u!114 &8212191399171446905
 MonoBehaviour:
   m_ObjectHideFlags: 0

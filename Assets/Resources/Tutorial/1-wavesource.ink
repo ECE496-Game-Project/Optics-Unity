@@ -3,7 +3,7 @@
 === wavesource ===
 Hello, there!
 I know you are wondering what I am.
-My name is Wave Source. #title:Wave Source #speaker:WAVE SOURCE #portrait:WAVE_SOURCE
+My name is Wave Source. #title:Wave Source #speaker:Source #portrait:WAVE_SOURCE
 I produce light.
 Let's do a quiz!
 ->quiz
