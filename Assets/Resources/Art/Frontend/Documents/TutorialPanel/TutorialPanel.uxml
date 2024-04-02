@@ -4,6 +4,7 @@
         <ui:VisualElement name="SideBar" style="flex-grow: 1; width: 10%; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
             <ui:Button text="←" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="true" name="ExpandButton" style="background-color: rgb(241, 170, 87); font-size: 25px; -unity-font-style: bold; color: rgb(255, 255, 255); width: 40px; height: 40px; display: flex;" />
             <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="PauseButton" class="page" style="font-size: 25px; background-image: resource(&apos;Art/Images/Icons/pause&apos;); background-color: rgb(255, 165, 0);" />
+            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="SystemButton" class="page" style="font-size: 25px; background-image: resource(&apos;Art/Images/Icons/logo&apos;); background-color: rgb(255, 165, 0);" />
         </ui:VisualElement>
         <ui:VisualElement name="Body" style="flex-grow: 1; width: 90%; -unity-font-style: normal;">
             <ui:Label tabindex="-1" text="Tutorial" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="false" name="title" style="font-size: 25px; -unity-font-style: bold; color: rgb(255, 255, 255);" />

@@ -70,4 +70,4 @@ MonoBehaviour:
   HIDE_POSITION: 98.5
   doc: {fileID: 656388438554220710}
   globalJSON: {fileID: 4900000, guid: 9f1eee85e89ea48059cdc82fa487a0ae, type: 3}
-  defaultInkJSON: {fileID: 4900000, guid: 3c63b43faf92945669de6225426093f4, type: 3}
+  defaultInkJSON: {fileID: 4900000, guid: 613b91a4f39cf4f31a32b01edf5ecfe4, type: 3}

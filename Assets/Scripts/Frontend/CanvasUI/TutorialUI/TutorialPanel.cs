@@ -31,8 +31,9 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     private VisualElement expBody;
     private Label title;
     private ScrollView content;
-    private Button expButton;
+    private Button expand;
     private Button pause;
+    private Button system;
     private VisualTreeAsset realChoice;
     private VisualTreeAsset fakeChoice;
     private VisualTreeAsset textArea;
@@ -59,8 +60,9 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         expPanel = root.Q<VisualElement>(name: "ExpandPanel");
         expBody = root.Q<VisualElement>(name: "Body");
         
-        expButton = root.Q<Button>(name: "ExpandButton");
+        expand = root.Q<Button>(name: "ExpandButton");
         pause = root.Q<Button>(name: "PauseButton");
+        system = root.Q<Button>(name: "SystemButton");
 
         title = root.Q<Label>(name: "title");
 
@@ -97,7 +99,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         expPanel.style.left = new StyleLength(width);
         expBody.style.display = DisplayStyle.None;
 
-        expButton.text = "\u2190";
+        expand.text = "\u2190";
         isPanelExpanded = false;
     }
 
@@ -108,12 +110,12 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         expPanel.style.left = new StyleLength(width);
         expBody.style.display = DisplayStyle.Flex;
 
-        expButton.text = "\u2192";
+        expand.text = "\u2192";
         isPanelExpanded = true;
     }
 
     public void PreRegisterCallback() {
-        expButton.clicked += () => {
+        expand.clicked += () => {
             if(isPanelExpanded) CloseExpandPanel();
             else OpenExpandPanel();
         };
@@ -128,6 +130,10 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
                 WaveTime.ResumeTime();
             }
             isPaused = !isPaused;
+        };
+
+        system.clicked += () => {
+            this.BeginTutorial(defaultInkJSON);
         };
     }
     #endregion
