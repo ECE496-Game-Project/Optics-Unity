@@ -1,4 +1,4 @@
-@import "../PanelStyle.uss";
+@import "./PanelStyle.uss";
 
 .root{
     left: 0.5%;

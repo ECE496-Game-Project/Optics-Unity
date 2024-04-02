@@ -10,12 +10,12 @@
 /* Type */
 Label{
     color: var(--font-color);
-    -unity-font-definition: url('/Assets/Resources/Art/Font/Square-Black.ttf');
+    -unity-font-definition: url('/Assets/Resources/Art/Font/Anta-Regular.ttf');
 }
 
 TextElement{
     color: var(--background-color);
-    -unity-font-definition: url('/Assets/Resources/Art/Font/Square-Black.ttf');
+    -unity-font-definition: url('/Assets/Resources/Art/Font/Anta-Regular.ttf');
 }
 
 TextField,

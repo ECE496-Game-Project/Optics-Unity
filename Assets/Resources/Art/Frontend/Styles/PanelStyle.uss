@@ -1,4 +1,4 @@
-@import "CommonStyle.uss";
+@import "./CommonStyle.uss";
 
 .container {
     border-width: 1px;

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using GO_Device;
 using CommonUtils;
+using DG.Tweening;
 
 public class ObjectViewPanel : MonoSingleton<ObjectViewPanel>
 {
@@ -12,7 +13,7 @@ public class ObjectViewPanel : MonoSingleton<ObjectViewPanel>
     private const int PANEL_HEIGHT = 20;
     private const int HIDE_POSITION = 98;
     private bool isPanelExpanded = false;
-    private VisualElement Body;
+    private ScrollView Body;
     private Button addButton;
     private Action myButtonClickedAction;
 
@@ -71,6 +72,7 @@ public class ObjectViewPanel : MonoSingleton<ObjectViewPanel>
         myButtonClickedAction = () => {
             var info = track.AddDevice();
             initSlider(info, track, 1);
+            ScrollToBottom();
         };
 
         addButton.clicked += myButtonClickedAction;
@@ -79,7 +81,7 @@ public class ObjectViewPanel : MonoSingleton<ObjectViewPanel>
     void Awake()
     {
         VisualElement root = doc.rootVisualElement;
-        Body = root.Q("Body");
+        Body = root.Q<ScrollView>("Body");
         addButton = root.Q<Button>(name: "AddButton");
 
         CloseExpandPanel(root);
@@ -110,5 +112,11 @@ public class ObjectViewPanel : MonoSingleton<ObjectViewPanel>
         expBody.style.display = DisplayStyle.Flex;
         expButton.text = "\u2193";
         isPanelExpanded = true;
+    }
+
+    private void ScrollToBottom(){
+        Scroller scroller = Body.verticalScroller;
+        float targetValue = scroller.highValue > 0 ? scroller.highValue : 0;
+        DOTween.To(()=>scroller.value, x=> scroller.value = x, targetValue, 0.5f);
     }
 }

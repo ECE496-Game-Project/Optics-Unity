@@ -166,12 +166,14 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         displayLine = StartCoroutine(DisplayLine(currStory.Continue()));
         
         MoveSpacerToEnd();
+        ScrollToBottom();
+        HandleTags(currStory.currentTags);
+    }
 
+    private void ScrollToBottom(){
         Scroller scroller = content.verticalScroller;
         float targetValue = scroller.highValue > 0 ? scroller.highValue : 0;
         DOTween.To(()=>scroller.value, x=> scroller.value = x, targetValue, EXIT_LAG_TIME);
-
-        HandleTags(currStory.currentTags);
     }
 
     private IEnumerator ExitTutorial(){

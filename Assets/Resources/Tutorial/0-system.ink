@@ -66,4 +66,4 @@ Do you have any other things want to know? #title:System
 
 === end ===
 You could invoke me again by clicking the button with logo at anytime. May you have a good learning experience!
-* [LEAVE]->END
+* [LEAVE]->DONE
