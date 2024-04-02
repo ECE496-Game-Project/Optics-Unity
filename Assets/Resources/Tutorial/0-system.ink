@@ -1,9 +1,22 @@
-#title:Control #speaker:OPTICS #portrait:OPTICS
-Hello, I am OPTICS.
--> control
+#title:System #speaker:Moon #portrait:Moon
+Hello, I am Moon, the virtual agent of the OPTICS platform.
+You could ask me anything you want to know.
+-> choices
+
+=== choices ===
++ [How to control the OPTICS scene?] -> control
++ [Who are you?] -> personal
++ [No other things I want to know] -> end
+
+=== personal ===
+I'm glad you ask!#title:Personal Information
+My name is Moon, my avatar comes from the classical album "The Dark Side of the Moon". It is an album made by the band Pink Floyd in 1973.
+I use this album cover as my avatar because it is the classical dispersion experiment made by Newton using prism. 
+I hope this platform could act like the prism to the light. Make you truly understand knowledge inside the OPTICS.
+* [CONTINUE]->repeat
 
 === control ===
-Welcome to the first OPTICS tutorial! 
+Welcome to the control tutorial! #title:Control
 Are familiar with the control of 3D software? 
     * [Yes, I am an expert.]
         Since you are familiar with them, I would just list all the controls. Feel free to try it out!
@@ -45,4 +58,12 @@ Are familiar with the control of 3D software?
         -- Click Left Mouse at any object in the scene to see details.
         Click Input Fields to input parameters.
         Drag Sliders to modify parameter smoothly.
--   * [LEAVE]->END
+-   * [CONTINUE]->repeat
+
+=== repeat ===
+Do you have any other things want to know? #title:System 
+->choices
+
+=== end ===
+You could invoke me again by clicking the button with logo at anytime. May you have a good learning experience!
+* [LEAVE]->END
