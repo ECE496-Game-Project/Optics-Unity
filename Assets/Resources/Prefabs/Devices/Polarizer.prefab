@@ -191,6 +191,8 @@ MonoBehaviour:
   ThicknessOffset: 0.005
   RotDeg: 0
   AxisDiffDeg: 0
+  m_parent: {fileID: 0}
+  m_child: {fileID: 0}
 --- !u!65 &2679604782596750386
 BoxCollider:
   m_ObjectHideFlags: 0

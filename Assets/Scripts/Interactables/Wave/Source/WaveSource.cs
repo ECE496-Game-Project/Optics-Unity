@@ -2,6 +2,7 @@
 using CommonUtils;
 using WaveUtils;
 using Profiles;
+using System.Collections.Generic;
 
 namespace GO_Wave {
     public partial class WaveSource : MonoBehaviour {
@@ -12,12 +13,19 @@ namespace GO_Wave {
         #endregion
 
         private WaveSourceParam m_param;
-        private Wave m_wave;
-        
+        public List<Wave> generatedWaves = new List<Wave>();
+
+        public enum WaveType
+        {
+            LineWave,
+            RegionWave
+        }
+
+        public WaveType m_waveType = WaveType.LineWave;
         public void Emit() {
             Close();
-            m_wave = Wave.NewLineWave(
-                this.name + "GenLineWave",
+            Wave.NewLineWave(
+                this.name + "GenLineWave", this,
                 new WaveParam(m_param), _interactMask, 
                 _sampleResolution,
                 this.transform.position + this.transform.forward * 0.01f, 
@@ -25,10 +33,11 @@ namespace GO_Wave {
             );
         }
         public void Close() {
-            if (m_wave != null) {
-                m_wave.WaveClean();
-                Destroy(m_wave.gameObject);
+            foreach (Wave wave in generatedWaves) {
+                wave.WaveClean();
+                Destroy(wave.gameObject);
             }
+            generatedWaves.Clear();
         }
 
 
@@ -41,12 +50,23 @@ namespace GO_Wave {
             m_param.UHat = transform.right;
             m_param.VHat = transform.up;
             m_param.KHat = transform.forward;
-            
         }
 
         private void Start()
         {
-            Emit();
+            if (m_waveType == WaveType.LineWave)
+                Emit();
+            else
+            {
+                Wave.NewRegionWave(
+                    this.name + "GenRegionWave", this,
+                    new WaveParam(m_param), _interactMask,
+                    _sampleResolution,
+                    this.transform.position + this.transform.forward * 0.01f,
+                    this.transform.rotation
+                );
+            }
+
         }
     }
 }

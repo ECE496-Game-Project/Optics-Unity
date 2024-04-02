@@ -20,8 +20,8 @@ namespace GO_Device {
         [SerializeField] private float RotDeg;
         [SerializeField] private float AxisDiffDeg;
 
-        private Wave m_parent = null;
-        private Wave m_child = null;
+        [SerializeField] private Wave m_parent = null;
+        [SerializeField] private Wave m_child = null;
 
         public ComplexMatrix2X2 PolarizerMatrix() {
             if(AxisDiffDeg != 0)
@@ -82,7 +82,8 @@ namespace GO_Device {
 
             Wave childWave = Wave.NewLineWave(
                 this.name + "GenLineWave",
-                childWP, parentLWL.InteractMask, 
+                parentWave.correspondWS, childWP, 
+                parentLWL.InteractMask, 
                 parentLWD.SampleResolution,
                 hit.point + Vector3.Normalize(hit.point - parentWave.transform.position) * ThicknessOffset,
                 parentWave.transform.rotation
@@ -93,9 +94,6 @@ namespace GO_Device {
         }
 
         public override void CleanDeviceHitTrace(Wave parentWS) {
-            if (m_parent == null && m_child == null) return;
-            m_child.WaveClean();
-            Destroy(m_child.gameObject);
             m_child = null;
             m_parent = null;
         }

@@ -6,15 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Demo/Menu/Menu.unity
-    guid: db0e984323b724510adf3060ac329d89
+    path: Assets/Scenes/Tutorial/tut1-wave.unity
+    guid: 1f744f52d66d34b61b7431ea7977c0d7
   - enabled: 0
-    path: Assets/Scenes/Demo/Tutorial/Basics.unity
+    path: Assets/Scenes/Tutorial/tut2-polarization.unity
     guid: d4ac8f261ea1146e1b05e73e3de50792
   - enabled: 0
-    path: Assets/Scenes/Demo/Tutorial/Polarizer.unity
+    path: Assets/Scenes/Tutorial/tut3-polarizer.unity
     guid: b87e6ec64eaaa87408a54f6b1c62fa4f
   - enabled: 1
-    path: Assets/Scenes/Demo/Tutorial/WavePlate.unity
+    path: Assets/Scenes/Tutorial/tut4-waveplate.unity
     guid: 16bbf942dd6214a13af5b2bb81112dd4
   m_configObjects: {}
