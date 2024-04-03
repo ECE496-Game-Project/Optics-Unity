@@ -560,7 +560,7 @@ namespace Ink.Runtime
                     // If you get this exception, please assign an error handler to your story.
                     // If you're using Unity, you can do something like this when you create
                     // your story:
-                    //
+
                     // var story = new Ink.Runtime.Story(jsonTxt);
                     // story.onError = (errorMessage, errorType) => {
                     //     if( errorType == ErrorType.Warning )
@@ -568,8 +568,7 @@ namespace Ink.Runtime
                     //     else
                     //         Debug.LogError(errorMessage);
                     // };
-                    //
-                    // 
+                    
                     throw new StoryException(sb.ToString());
                 }
             }

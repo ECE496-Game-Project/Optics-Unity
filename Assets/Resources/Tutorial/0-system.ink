@@ -10,7 +10,7 @@ You could ask me anything you want to know.
 
 === personal ===
 I'm glad you ask!#title:Personal Information
-My name is Moon, my avatar comes from the classical album "The Dark Side of the Moon". It is an album made by the band Pink Floyd in 1973.
+My name is Moon, my avatar comes from the classical album "The Dark Side of the Moon". It is an album made by the band Pink Floyd in 1973. #image:Icons/logo
 I use this album cover as my avatar because it is the classical dispersion experiment made by Newton using prism. 
 I hope this platform could act like the prism to the light. Make you truly understand knowledge inside the OPTICS.
 * [CONTINUE]->repeat

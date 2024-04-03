@@ -15,6 +15,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     [SerializeField] private float TYPE_SPEED = 0.04f;
     [SerializeField] private float SCROLL_SPEED = 50f;
     [SerializeField] private float SPACER_HEIGHT = 200f; 
+    [SerializeField] private float MIN_WIDTH = 450f; 
     [SerializeField] private float EXIT_LAG_TIME = 0.5f;
     [SerializeField] private int PANEL_WIDTH = 30;
     [SerializeField] private float HIDE_POSITION = 98.5f;
@@ -34,10 +35,11 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     private Button expand;
     private Button pause;
     private Button system;
+    private VisualElement spacer;
     private VisualTreeAsset realChoice;
     private VisualTreeAsset fakeChoice;
     private VisualTreeAsset textArea;
-    private VisualElement spacer;
+    private VisualTreeAsset imgArea;
 
     private bool isPanelExpanded = true;
     private bool isPaused = false;
@@ -50,6 +52,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     private const string SPEAKER_TAG = "speaker";
     private const string TITLE_TAG = "title";
     private const string PORTRAIT_TAG = "portrait";
+    private const string IMG_TAG = "image";
 
     private string displaySpeakerName = "";
 
@@ -75,6 +78,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         realChoice = Resources.Load<VisualTreeAsset>("Art/Frontend/Documents/TutorialPanel/RealChoice");
         fakeChoice = Resources.Load<VisualTreeAsset>("Art/Frontend/Documents/TutorialPanel/FakeChoice");
         textArea = Resources.Load<VisualTreeAsset>("Art/Frontend/Documents/TutorialPanel/TextArea");
+        imgArea = Resources.Load<VisualTreeAsset>("Art/Frontend/Documents/TutorialPanel/ImgArea");
     }
 
     private void Start()
@@ -150,7 +154,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         displaySpeakerName = "???";
 
         content.contentContainer.Clear();
-        AddSpacer();
+        DisplaySpacer();
 
         OpenExpandPanel();
         ContinueStory();
@@ -165,15 +169,9 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         if(displayLine != null) StopCoroutine(displayLine); 
         displayLine = StartCoroutine(DisplayLine(currStory.Continue()));
         
+        HandleTags(currStory.currentTags);
         MoveSpacerToEnd();
         ScrollToBottom();
-        HandleTags(currStory.currentTags);
-    }
-
-    private void ScrollToBottom(){
-        Scroller scroller = content.verticalScroller;
-        float targetValue = scroller.highValue > 0 ? scroller.highValue : 0;
-        DOTween.To(()=>scroller.value, x=> scroller.value = x, targetValue, EXIT_LAG_TIME);
     }
 
     private IEnumerator ExitTutorial(){
@@ -187,6 +185,11 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         CloseExpandPanel();
     }
 
+    public void OnApplicationQuit() {
+        // dialogueVariables.SaveVariables();
+    }
+
+    #region Render
     private IEnumerator DisplayLine(string line){
         VisualElement textLine = textArea.Instantiate();
         Label label = textLine.Q<Label>();
@@ -244,17 +247,45 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         }
     }
 
+    private void DisplayImage(string imgVal){
+        VisualElement imgContainer = imgArea.Instantiate();
+        VisualElement img = imgContainer.Q<VisualElement>(name:"Image");
+        
+        Texture2D texture = Resources.Load<Texture2D>("Art/Images/" + imgVal);
+        if(texture == null){
+            Debug.LogError("Can't find image: " + imgVal);
+            return;
+        }
+
+        if(img.style.width.value.value == 0) img.style.width = MIN_WIDTH;
+        float aspectRatio = (float)texture.height / (float)texture.width;
+        img.style.height = new StyleLength(img.style.width.value.value * aspectRatio);
+        img.style.backgroundImage = texture;
+        content.Add(imgContainer);
+    }
+
+    private void DisplaySpacer(){
+        if(spacer != null){
+            if(content.Contains(spacer)) content.Remove(spacer);
+            spacer = null;
+        }
+        spacer = new VisualElement();
+        spacer.style.height = SPACER_HEIGHT;
+        content.Add(spacer);
+    }
+
+    #endregion
+
+    #region Logic
     private void MakeChoice(Choice choice, List<VisualElement> choices){
         if (!canGoToNextLine) return;
-        
+
         foreach(VisualElement choiceEl in choices){
             content.Remove(choiceEl);
         }
-
         VisualElement textLine = textArea.Instantiate();
         textLine.Q<Label>().text = "You-\"" + choice.text + "\"";
         content.Add(textLine);
-
         currStory.ChooseChoiceIndex(choice.index);
         ContinueStory();
     }
@@ -264,6 +295,18 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         content.Remove(choiceEl);
         currStory.ChooseChoiceIndex(choice.index);
         ContinueStory();
+    }
+
+    private void MoveSpacerToEnd(){
+        float contentHeight = content.contentContainer.layout.height;
+        float bottomOffset = Mathf.Max(0, contentHeight + spacer.layout.height/2);
+        spacer.style.top = bottomOffset;
+    }
+
+    private void ScrollToBottom(){
+        Scroller scroller = content.verticalScroller;
+        float targetValue = scroller.highValue > 0 ? scroller.highValue : 0;
+        DOTween.To(()=>scroller.value, x=> scroller.value = x, targetValue, EXIT_LAG_TIME);
     }
 
     private void HandleTags(List<string> tags){
@@ -286,12 +329,16 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
                     break;
                 case PORTRAIT_TAG:
                     break;
+                case IMG_TAG:
+                    DisplayImage(tagValue);
+                    break;
                 default:
                     Debug.LogWarning("Tag came in but is not currently being handled: " + tag);
                     break;
             }
         }
     }
+    #endregion
 
     public Ink.Runtime.Object GetVariableState(string varName){
         Ink.Runtime.Object variableValue = null;
@@ -299,29 +346,8 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         return variableValue;
     }
 
-    public void OnApplicationQuit() {
-        // dialogueVariables.SaveVariables();
-    }
-
     private bool IsUserInput(){
         return TutorialController.Instance.isInput;
-    }
-
-    private void AddSpacer(){
-        if(spacer != null){
-            if(content.Contains(spacer)) content.Remove(spacer);
-            spacer = null;
-        }
-        spacer = new VisualElement();
-        spacer.style.height = SPACER_HEIGHT;
-        content.Add(spacer);
-    }
-
-    private void MoveSpacerToEnd()
-    {
-        float contentHeight = content.contentContainer.layout.height;
-        float bottomOffset = Mathf.Max(0, contentHeight + spacer.layout.height/2);
-        spacer.style.top = bottomOffset;
     }
 
     #endregion
