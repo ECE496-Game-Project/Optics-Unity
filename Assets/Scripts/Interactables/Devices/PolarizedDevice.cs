@@ -91,11 +91,13 @@ namespace GO_Device {
             /*Store Pair*/
             m_parent = parentWave;
             m_child = childWave;
+            correspondWS = m_parent.correspondWS;
         }
 
         public override void CleanDeviceHitTrace(Wave parentWS) {
             m_child = null;
             m_parent = null;
+            correspondWS = null;
         }
     }
 }

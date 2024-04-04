@@ -170,14 +170,12 @@ namespace Panel {
                         picastStr.Root.Q<TextField>().RegisterValueChangedCallback(picastStr.Setter);
                         break;
                     case ParamType.Float:
-                        
                         var picastF = pi as ParameterInfo<float>;
                         picastF.Root.Q<FloatField>().RegisterValueChangedCallback(picastF.Setter);
                         break;
                     case ParamType.Enum:
                         var picastEPD = pi as ParameterInfo<Enum>;
                         picastEPD.Root.Q<EnumField>().RegisterValueChangedCallback(picastEPD.Setter);
-                        picastEPD.Setter = null;
                         break;
                     default:
                         DebugLogger.Error(this.name, "RegisterSetter Not Defined, Panic!");

@@ -1,13 +1,19 @@
 ﻿using System;
 using Interfaces;
 using ParameterTransfer;
+using GO_Wave;
+using UnityEngine;
 
 namespace GO_Device {
     public partial class PolarizedDevice : I_ParameterPanel {
+        // determine which wavesource creates thhis wave
+        public WaveSource correspondWS;
+
         public string CorrespondingUIInfoName { get { return "PolarizedDevice"; } }
 
         public void ParameterChangeTrigger() {
-            m_parent.ParameterChangeTrigger();
+            Debug.Log(this.name+" Parameter changed!");
+            correspondWS?.Emit();
         }
 
         public void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
