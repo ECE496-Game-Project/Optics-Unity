@@ -5,16 +5,15 @@ using Ink.Runtime;
 
 public class TutorialVariables{
     public Dictionary<string, Ink.Runtime.Object> variables { get; private set; }
-
     private Story globalVariablesStory;
-    private const string saveVariablesKey = "INK_VARIABLES";
+    private const string SAVE_VAR_KEY = "INK_VARIABLES";
 
     public TutorialVariables(TextAsset loadGlobalsJSON){
         // create the story
         globalVariablesStory = new Story(loadGlobalsJSON.text);
         // if we have saved data, load it
-        if (PlayerPrefs.HasKey(saveVariablesKey)){
-            string jsonState = PlayerPrefs.GetString(saveVariablesKey);
+        if (PlayerPrefs.HasKey(SAVE_VAR_KEY)){
+            string jsonState = PlayerPrefs.GetString(SAVE_VAR_KEY);
             globalVariablesStory.state.LoadJson(jsonState);
         }
 
@@ -28,13 +27,14 @@ public class TutorialVariables{
     }
 
     public void SaveVariables() {
-        if (globalVariablesStory != null) {
-            // Load the current state of all of our variables to the globals story
-            VariablesToStory(globalVariablesStory);
-            // NOTE: eventually, you'd want to replace this with an actual save/load method
-            // rather than using PlayerPrefs.
-            PlayerPrefs.SetString(saveVariablesKey, globalVariablesStory.state.ToJson());
-        }
+        if (globalVariablesStory == null) return;
+        // load the current state of all of our variables to the globals story
+        VariablesToStory(globalVariablesStory);
+        DataManager.SaveData(SAVE_VAR_KEY, globalVariablesStory.state.ToJson());
+    }
+
+    public string LoadVariables(string key) {
+        return DataManager.LoadData(key);
     }
 
     public void StartListening(Story story) {
