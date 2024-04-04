@@ -56,6 +56,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     private const string IMG_TAG = "image";
 
     private string displaySpeakerName = "";
+    private TutorialVariables dialogueVariables;
 
     private void Awake()
     {
@@ -80,6 +81,8 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         fakeChoice = Resources.Load<VisualTreeAsset>("Art/Frontend/Documents/TutorialPanel/FakeChoice");
         textArea = Resources.Load<VisualTreeAsset>("Art/Frontend/Documents/TutorialPanel/TextArea");
         imgArea = Resources.Load<VisualTreeAsset>("Art/Frontend/Documents/TutorialPanel/ImgArea");
+
+        dialogueVariables = new TutorialVariables(globalJSON);
     }
 
     private void Start()
@@ -148,7 +151,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     public void BeginTutorial(TextAsset inkJSON){
         currStory = new Story(inkJSON.text);
         
-        // dialogueVariables.StartListening(currentStory);
+        dialogueVariables.StartListening(currStory);
         
         tutIsPlaying = true;
         title.text = "???";
@@ -178,7 +181,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     private IEnumerator ExitTutorial(){
         yield return new WaitForSeconds(EXIT_LAG_TIME);
         
-        // dialogueVariables.StopListening(currentStory);
+        dialogueVariables.StopListening(currStory);
         
         tutIsPlaying = false;
         displaySpeakerName = "";
@@ -187,7 +190,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     }
 
     public void OnApplicationQuit() {
-        // dialogueVariables.SaveVariables();
+        dialogueVariables.SaveVariables();
     }
 
     #region Render
@@ -345,9 +348,12 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     #endregion
 
     public Ink.Runtime.Object GetVariableState(string varName){
-        Ink.Runtime.Object variableValue = null;
-
-        return variableValue;
+        Ink.Runtime.Object varValue = null;
+        dialogueVariables.variables.TryGetValue(varName, out varValue);
+        if (varValue == null) {
+            Debug.LogWarning("Ink Variable was found to be null: " + varName);
+        }
+        return varValue;
     }
 
     private bool IsUserInput(){
