@@ -1,0 +1,1 @@
+VAR answer = 0

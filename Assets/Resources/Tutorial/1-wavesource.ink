@@ -1,6 +1,5 @@
--> wavesource
+INCLUDE global.ink
 
-=== wavesource ===
 Hello, there!
 I know you are wondering what I am.
 My name is Wave Source. #title:Wave Source #speaker:Source #portrait:WAVE_SOURCE
@@ -14,7 +13,6 @@ What do you want?
 + [No other things I want to know.]->end
 
 === quiz ===
-VAR answer = 0
 What's the answer?
     + [Answer is 1]
         ~ answer = 1

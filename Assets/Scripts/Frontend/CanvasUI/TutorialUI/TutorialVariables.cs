@@ -48,11 +48,9 @@ public class TutorialVariables{
     }
 
     private void VariableChanged(string name, Ink.Runtime.Object value) {
-        // only maintain variables that were initialized from the globals ink file
-        if (variables.ContainsKey(name)) {
-            variables.Remove(name);
-            variables.Add(name, value);
-        }
+        if (!variables.ContainsKey(name)) return;
+        variables.Remove(name);
+        variables.Add(name, value);
     }
 
     private void VariablesToStory(Story story) {

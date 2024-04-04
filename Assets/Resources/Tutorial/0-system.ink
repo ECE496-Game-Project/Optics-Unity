@@ -1,3 +1,5 @@
+INCLUDE global.ink
+
 #title:System #speaker:Moon #portrait:Moon
 Hello, I am Moon, the virtual agent of the OPTICS platform.
 You could ask me anything you want to know.

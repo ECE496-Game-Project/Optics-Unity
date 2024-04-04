@@ -94,8 +94,9 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
 
     private void Update(){
         if (!tutIsPlaying) return;
-        
-        if (canGoToNextLine && currStory.currentChoices.Count == 0 && IsUserInput()){
+
+        if (canGoToNextLine && IsUserInput() 
+        && currStory.currentChoices.Count == 0){
             ContinueStory();
         }
     }
