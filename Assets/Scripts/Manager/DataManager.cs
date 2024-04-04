@@ -18,8 +18,13 @@ public class DataManager{
 /*
  * Data to Save and Load
  * 1. Wave Source parameter
+ * 
  * 2. Track Devices List
  * 2.1. Device Position
  * 2.2. Device Type
  * 2.3. Device Parameter
+ *
+ * 3. Tutorial Variable
+ * 
+ * 4. Self Create Scene List 
  */
