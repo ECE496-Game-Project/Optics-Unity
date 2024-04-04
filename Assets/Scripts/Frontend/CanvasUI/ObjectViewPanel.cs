@@ -10,8 +10,9 @@ public class ObjectViewPanel : MonoSingleton<ObjectViewPanel>
     public UIDocument doc;
     public VisualTreeAsset TrackSliderAsset;
 
-    private const int PANEL_HEIGHT = 20;
-    private const int HIDE_POSITION = 98;
+    [SerializeField] private const int PANEL_HEIGHT = 20;
+    [SerializeField] private const int HIDE_POSITION = 98;
+    [SerializeField] private float SCROLL_OFFSET = 70f;
     private bool isPanelExpanded = false;
     private ScrollView Body;
     private Button addButton;
@@ -116,7 +117,7 @@ public class ObjectViewPanel : MonoSingleton<ObjectViewPanel>
 
     private void ScrollToBottom(){
         Scroller scroller = Body.verticalScroller;
-        float targetValue = scroller.highValue > 0 ? scroller.highValue : 0;
+        float targetValue = scroller.highValue > 0 ? scroller.highValue + SCROLL_OFFSET : 0;
         DOTween.To(()=>scroller.value, x=> scroller.value = x, targetValue, 0.5f);
     }
 }

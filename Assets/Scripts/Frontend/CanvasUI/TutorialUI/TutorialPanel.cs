@@ -14,8 +14,9 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     [Header("Params")]
     [SerializeField] private float TYPE_SPEED = 0.04f;
     [SerializeField] private float SCROLL_SPEED = 50f;
+    [SerializeField] private float SCROLL_OFFSET = 100f;
     [SerializeField] private float SPACER_HEIGHT = 200f; 
-    [SerializeField] private float MIN_WIDTH = 450f; 
+    [SerializeField] private float MIN_WIDTH = 500f; 
     [SerializeField] private float EXIT_LAG_TIME = 0.5f;
     [SerializeField] private int PANEL_WIDTH = 30;
     [SerializeField] private float HIDE_POSITION = 98.5f;
@@ -257,7 +258,10 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
             return;
         }
 
-        if(img.style.width.value.value == 0) img.style.width = MIN_WIDTH;
+        if(img.style.width.value.value == 0){
+            img.style.width = MIN_WIDTH;
+            Debug.LogWarning("No valid width!");
+        } 
         float aspectRatio = (float)texture.height / (float)texture.width;
         img.style.height = new StyleLength(img.style.width.value.value * aspectRatio);
         img.style.backgroundImage = texture;
@@ -299,13 +303,13 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
 
     private void MoveSpacerToEnd(){
         float contentHeight = content.contentContainer.layout.height;
-        float bottomOffset = Mathf.Max(0, contentHeight + spacer.layout.height/2);
+        float bottomOffset = Mathf.Max(0, contentHeight + spacer.layout.height/2f);
         spacer.style.top = bottomOffset;
     }
 
     private void ScrollToBottom(){
         Scroller scroller = content.verticalScroller;
-        float targetValue = scroller.highValue > 0 ? scroller.highValue : 0;
+        float targetValue = scroller.highValue > 0 ? scroller.highValue + SCROLL_OFFSET : 0;
         DOTween.To(()=>scroller.value, x=> scroller.value = x, targetValue, EXIT_LAG_TIME);
     }
 
