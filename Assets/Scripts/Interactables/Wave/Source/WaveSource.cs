@@ -15,8 +15,7 @@ namespace GO_Wave {
         private WaveSourceParam m_param;
         public List<Wave> generatedWaves = new List<Wave>();
 
-        public enum WaveType
-        {
+        public enum WaveType {
             LineWave,
             RegionWave
         }
@@ -26,9 +25,9 @@ namespace GO_Wave {
             Close();
             Wave.NewLineWave(
                 this.name + "GenLineWave", this,
-                new WaveParam(m_param), _interactMask, 
+                new WaveParam(m_param), _interactMask,
                 _sampleResolution,
-                this.transform.position + this.transform.forward * 0.01f, 
+                this.transform.position + this.transform.forward * 0.01f,
                 this.transform.rotation
             );
         }
@@ -42,7 +41,7 @@ namespace GO_Wave {
 
 
         private void Awake() {
-            if(_profile == null)
+            if (_profile == null)
                 DebugLogger.Error(this.name, "RootWave Does not contain WaveProfile! Stop Executing.");
 
             m_param = new WaveSourceParam(_profile.Parameters);
@@ -52,12 +51,10 @@ namespace GO_Wave {
             m_param.KHat = transform.forward;
         }
 
-        private void Start()
-        {
+        private void Start() {
             if (m_waveType == WaveType.LineWave)
                 Emit();
-            else
-            {
+            else {
                 Wave.NewRegionWave(
                     this.name + "GenRegionWave", this,
                     new WaveParam(m_param), _interactMask,

@@ -7,7 +7,7 @@ namespace GO_Wave {
         public string CorrespondingUIInfoName { get { return "Wave";} }
         
         public void ParameterChangeTrigger() {
-            WaveVisualize();
+            correspondWS.Emit();
         }
 
         public void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
