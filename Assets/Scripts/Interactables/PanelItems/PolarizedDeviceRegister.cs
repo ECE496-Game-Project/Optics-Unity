@@ -12,7 +12,6 @@ namespace GO_Device {
         public string CorrespondingUIInfoName { get { return "PolarizedDevice"; } }
 
         public void ParameterChangeTrigger() {
-            Debug.Log(this.name+" Parameter changed!");
             correspondWS?.Emit();
         }
 
