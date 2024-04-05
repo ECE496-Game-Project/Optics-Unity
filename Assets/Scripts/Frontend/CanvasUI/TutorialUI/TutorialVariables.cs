@@ -11,6 +11,7 @@ public class TutorialVariables{
     public TutorialVariables(TextAsset loadGlobalsJSON){
         // create the story
         globalVariablesStory = new Story(loadGlobalsJSON.text);
+        
         // if we have saved data, load it
         if (PlayerPrefs.HasKey(SAVE_VAR_KEY)){
             string jsonState = PlayerPrefs.GetString(SAVE_VAR_KEY);
