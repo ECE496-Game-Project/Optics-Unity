@@ -1,6 +1,9 @@
 INCLUDE global.ink
 
-->intro1
+{ knowWaveplate:
+- false: ->intro1
+- true: ->repeat
+}
 
 === intro1 ===
 ... ...
@@ -14,6 +17,7 @@ Oh, hello. Sorry, I didn't see you.
 + [Wait, have we met before?]
     No, not at all. You must have met my brother. My name is waveplate. 
 - In general, I could filt polarization light. #title:Waveplate #speaker:Waveplate
+~ knowWaveplate = true
 Why do you come here?
 ->choices
 
@@ -32,7 +36,7 @@ To be continued... #title:Waveplate Quiz
 * [CONTINUE]->repeat
 
 === repeat ===
-Do you have any other things want to know? #title:Waveplate 
+Do you have any other things to ask? #title:Waveplate #speaker:Waveplate
 ->choices
 
 === end ===

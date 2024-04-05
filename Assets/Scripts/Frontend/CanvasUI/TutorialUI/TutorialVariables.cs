@@ -57,6 +57,7 @@ public class TutorialVariables{
     private void VariablesToStory(Story story) {
         foreach(KeyValuePair<string, Ink.Runtime.Object> variable in variables) {
             story.variablesState.SetGlobal(variable.Key, variable.Value);
+            Debug.Log(variable.Key);
         }
     }
 }

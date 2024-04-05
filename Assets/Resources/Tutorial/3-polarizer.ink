@@ -1,11 +1,18 @@
 INCLUDE global.ink
 
+{ knowPolarizer:
+- false: ->intro
+- true: ->repeat
+}
+
+=== intro ===
 Hi, bro!
 + [I know you, you are a lens]
     I am not a lens, man. I am a polarizer.
 + [Who are you?]
     I am a polarizer, man. 
 - In general, I could filt polarization light. #title:Polarizer #speaker:Polarizer
+~ knowPolarizer = true
 What do you want, man?
 ->choices
 
@@ -24,7 +31,7 @@ To be continued... #title:Polarizer Quiz
 * [CONTINUE]->repeat
 
 === repeat ===
-Do you have any other things want to know? #title:Polarizer 
+What else do you want, bro? #title:Polarizer #speaker:Polarizer
 ->choices
 
 === end ===

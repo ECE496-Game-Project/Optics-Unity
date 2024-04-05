@@ -153,6 +153,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         currStory = new Story(inkJSON.text);
         
         dialogueVariables.StartListening(currStory);
+        // TODO: load variables
         
         tutIsPlaying = true;
         title.text = "???";
@@ -183,6 +184,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         yield return new WaitForSeconds(EXIT_LAG_TIME);
         
         dialogueVariables.StopListening(currStory);
+        dialogueVariables.SaveVariables();
         
         tutIsPlaying = false;
         displaySpeakerName = "";

@@ -1,5 +1,11 @@
 INCLUDE global.ink
 
+{ knowWaveSource:
+- false: ->intro
+- true: ->repeat
+}
+
+=== intro ===
 How are doing today, sir!
 + [I am doing great, thanks!]
     I am glad to hear that.
@@ -10,7 +16,8 @@ How are doing today, sir!
 + [Since you ask, yes]
 - Thank you, sir. May I introduce myself. My name is Wave Source. #title:Wave Source #speaker:Source
 To be simple, my job is to produce light.
-Do you want to know anything from me, sir?
+~ knowWaveSource = true
+Please feel free to ask me anything you want to know, sir.
 ->choices
 
 === choices ===
@@ -32,7 +39,7 @@ What's a harmonic plane wave? #title:Wave Quiz
         Your answer is incorrect->quiz
 
 === repeat ===
-Do you have any other things want to know? #title:Wave Source 
+Sir, please feel free to ask me anything. #title:Wave Source #speaker:Source
 ->choices
 
 === end ===
