@@ -27,17 +27,16 @@ Please feel free to ask me anything you want to know, sir.
 
 === wave ===
 Of course, sir. Let me introduce the wave light to you. #title:Wave Knowledge 
-The Optical Electic Wave contains both Temporal and Spatial frequency, meaning that the magnitue of wave will change w.r.t. both time and space.#image:Tutorial/page2
-
-This can also be seen from the harmonic wave equaction as it contains k and w. #image:Tutorial/page3
+The Optical Electic Wave contains both Temporal and Spatial frequency, meaning that the magnitue of wave will change w.r.t. both time and space.#image:Tutorial/WaveSource/page2
+This can also be seen from the harmonic wave equaction as it contains k and w. #image:Tutorial/WaveSource/page3
 ~ isWaveTutFinish = true
-* [CONTINUE]->repeat
++ [CONTINUE]->repeat
 
 === quiz ===
 What's two component does harmonic wave contains? #title:Wave Quiz
     + [It contains temporal and spatial frequency]
         Your answer is correct
-        ** [CONTINUE]-> repeat
+        ++ [CONTINUE]-> repeat
     + [It contains animation and physics]
         Your answer is incorrect->quiz
 
@@ -47,4 +46,4 @@ Sir, please feel free to ask me anything. #title:Wave Source #speaker:Source
 
 === end ===
 You could invoke me again by clicking me again. May you have a good learning experience!
-* [LEAVE]->DONE
++ [LEAVE]->DONE
