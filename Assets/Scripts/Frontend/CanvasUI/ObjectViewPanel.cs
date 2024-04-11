@@ -9,12 +9,15 @@ public class ObjectViewPanel : MonoSingleton<ObjectViewPanel>
 {
     public UIDocument doc;
     public VisualTreeAsset TrackSliderAsset;
-
+    private float SCROLL_SPEED;
     [SerializeField] private const int PANEL_HEIGHT = 20;
     [SerializeField] private const int HIDE_POSITION = 98;
     [SerializeField] private float SCROLL_OFFSET = 70f;
+    [SerializeField] private float SCROLL_SPEED_AMPLIFIER = 50f;
+    [SerializeField] private float SCROLL_DAMP = 0.1f;
     private bool isPanelExpanded = false;
     private ScrollView Body;
+    private Scroller scroller;
     private Button addButton;
     private Action myButtonClickedAction;
 
@@ -79,14 +82,14 @@ public class ObjectViewPanel : MonoSingleton<ObjectViewPanel>
         addButton.clicked += myButtonClickedAction;
     }
 
-    void Awake()
-    {
+    void Awake(){
         VisualElement root = doc.rootVisualElement;
         Body = root.Q<ScrollView>("Body");
         addButton = root.Q<Button>(name: "AddButton");
 
         CloseExpandPanel(root);
         PreRegisterCallback(root);
+        setScrollView();
     }
 
     public void CloseExpandPanel(VisualElement root){
@@ -119,5 +122,24 @@ public class ObjectViewPanel : MonoSingleton<ObjectViewPanel>
         Scroller scroller = Body.verticalScroller;
         float targetValue = scroller.highValue > 0 ? scroller.highValue + SCROLL_OFFSET : 0;
         DOTween.To(()=>scroller.value, x=> scroller.value = x, targetValue, 0.5f);
+    }
+
+    private void setScrollView(){
+        Body.horizontalScrollerVisibility = ScrollerVisibility.Hidden;
+        scroller = Body.verticalScroller;
+        scroller.valueChanged += ChangeSpeed;
+        Body.RegisterCallback<WheelEvent>(ScrollCallback);
+    }
+    public void ScrollCallback(WheelEvent evt){
+        Body.UnregisterCallback<WheelEvent>(ScrollCallback);
+        SCROLL_SPEED += evt.delta.y * SCROLL_SPEED_AMPLIFIER;
+        evt.StopPropagation();
+        Body.RegisterCallback<WheelEvent>(ScrollCallback);
+    }
+    public void ChangeSpeed(float num){
+        scroller.valueChanged -= ChangeSpeed;
+        scroller.value += SCROLL_SPEED;
+        SCROLL_SPEED -= SCROLL_SPEED * SCROLL_DAMP;
+        scroller.valueChanged += ChangeSpeed;
     }
 }

@@ -23,3 +23,39 @@
     transition-duration: 0.2s;
     transition-timing-function: ease-in;
 }
+
+.unity-scroller--vertical {
+    width: 10px;
+}
+ 
+.unity-scroller--vertical > .unity-scroller__high-button {
+    width: 0%;
+    height: 0%;
+}
+ 
+.unity-scroller--vertical > .unity-scroller__low-button {
+    width: 0%;
+    height: 0%;
+}
+ 
+.unity-scroller--vertical > .unity-scroller__slider {
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    background-color: #A7A7A7;
+}
+
+.unity-scroller--vertical > .unity-scroller__drag-container {
+    border-radius: 10%;
+}
+ 
+.unity-scroller--vertical .unity-base-slider__tracker {
+    width: 100%;
+}
+ 
+.unity-scroller--vertical .unity-base-slider__dragger {
+    width: 100%;
+    align-self: center;
+    background-color: #494949;
+    border-radius: 5%;
+}

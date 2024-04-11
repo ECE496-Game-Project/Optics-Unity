@@ -8,6 +8,7 @@
     top: 80%;
     bottom: 0.5%;
     flex-direction: row;
+    --unity-metrics-single_line-height: 500px;
 }
 
 .slot {
