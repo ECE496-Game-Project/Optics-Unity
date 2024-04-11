@@ -1,13 +1,13 @@
 INCLUDE global.ink
 
 #title:System #speaker:Moon #portrait:Moon
-Hello, I am Moon, the virtual agent of the OPTICS platform.
+Hello, I am Moon, the virtual agent of the OPTICA.
 You could ask me anything you want to know.
 -> choices
 
 === choices ===
-+ [How to control the OPTICS scene?] -> control
 + [Who are you?] -> personal
++ [How to control the OPTICA scene?] -> control
 + [No other things I want to know] -> end
 
 === personal ===
@@ -41,21 +41,21 @@ Are familiar with the control of 3D software?
         ** [CONTINUE]
             Do you prefer to use keyboard or mouse to control camera?
             *** [Keyboard]
-                Click [A], [D] to move camera horizontally.
-                Click [Q], [E] to move camera vertically.
-                Click [W], [S] to zoom in and zoom out the camera.
+                Click [A], [D] to move camera horizontally. #image:Tutorial/Control/keyboard-ad
+                Click [Q], [E] to move camera vertically. #image:Tutorial/Control/keyboard-qe
+                Click [W], [S] to zoom in and zoom out the camera. #image:Tutorial/Control/keyboard-ws
                 **** [CONTINUE]
             *** [Mouse]
                 Are you using Mac keyboard?
                 **** [Yes]
-                    Slide Mouse wheel to zoom in and zoom out the camera.
-                    Click [OPTION] + Right Mouse to drag camera around.
-                    Click [OPTION] + Left Mouse to rotate camera around.
+                    Slide Mouse wheel to zoom in and zoom out the camera. #image:Tutorial/Control/mouse-zoom
+                    Click [OPTION] + Right Mouse to drag camera around. #image:Tutorial/Control/mouse-move-mac
+                    Click [OPTION] + Left Mouse to rotate camera around. #image:Tutorial/Control/mouse-rotate-mac
                     ***** [CONTINUE]
                 **** [No]
-                    Slide Mouse wheel to zoom in and zoom out the camera.
-                    Click [ALT] + Right Mouse to drag camera around.
-                    Click [ALT] + Left Mouse to rotate camera around.
+                    Slide Mouse wheel to zoom in and zoom out the camera. #image:Tutorial/Control/mouse-zoom
+                    Click [ALT] + Right Mouse to drag camera around. #image:Tutorial/Control/mouse-move-win
+                    Click [ALT] + Left Mouse to rotate camera around. #image:Tutorial/Control/mouse-rotate-win
                     ***** [CONTINUE]
         -- Click Left Mouse at any object in the scene to see details.
         Click Input Fields to input parameters.
