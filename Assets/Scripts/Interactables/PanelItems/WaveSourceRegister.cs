@@ -33,7 +33,9 @@ namespace GO_Wave {
             thetaTuple.Setter = (evt) => { m_param.theta = evt.newValue; ParameterChangeTrigger(); };
             lambdaTuple.Setter = (evt) => { 
                 if (evt.newValue == 0) return; 
-                m_param.lambda = evt.newValue / WaveAlgorithm.nmPerUnit; 
+                m_param.lambda = evt.newValue / WaveAlgorithm.nmPerUnit;
+                float tmp = (evt.newValue - 400) / 380;
+                mt.SetColor("_BaseColor", gradient.Evaluate(1-tmp));
                 ParameterChangeTrigger(); 
             };
             nTuple.Setter = (evt) => { if (evt.newValue > 5 || evt.newValue < 1) return; m_param.n = evt.newValue; ParameterChangeTrigger(); };
