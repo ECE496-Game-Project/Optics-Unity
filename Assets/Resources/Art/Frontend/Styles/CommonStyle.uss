@@ -5,6 +5,7 @@
     --background-color: #0D0D1A; /* Background Color: Dark blue */
     --border-color: #6699FF; /* Border Color: Accent shade of blue */
     --button-color: #335999; /* Button color (another shade of blue) */
+    --unity-metrics-single_line-height: 500px;
 }
 
 /* Type */

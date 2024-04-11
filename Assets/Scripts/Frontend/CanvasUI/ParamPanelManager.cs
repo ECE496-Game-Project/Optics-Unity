@@ -211,16 +211,25 @@ namespace Panel {
         private void UISetupPipeline(I_ParameterPanel pt, string newlySelect) {
             if(m_selectedUI != "") CleanSetter(m_paramInfoDict[m_selectedUI].List);
             m_selectedUI = newlySelect;
+            
             pt.RegisterParametersCallback(m_paramInfoDict[m_selectedUI].List);
             CallGetter();
             RegisterSetter();
         }
 
+        public GameObject currentObj;
         public void SelectParamView(GameObject obj) {
+            if(obj == null)
+            {
+                if (m_selectedUI != "") CleanSetter(m_paramInfoDict[m_selectedUI].List);
+                CloseExpandPanel();
+                return;
+            }
             var objts = obj.GetComponent<I_ParameterPanel>();
             if (objts == null)
                 DebugLogger.Error(this.name, "Pass in GameObject does not have Component I_ParamTrans, Panic!");
-
+            
+            currentObj = obj;
             // All functionality operates with string m_selectedUI
             UISetupPipeline(objts, objts.CorrespondingUIInfoName);
             OpenParamUIDisplay();

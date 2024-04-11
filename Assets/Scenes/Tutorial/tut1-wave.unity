@@ -498,15 +498,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1028210982, guid: d7b07370d2c584fd2b6fcffcec839d18, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 2.1175824e-22
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 1028210982, guid: d7b07370d2c584fd2b6fcffcec839d18, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 4.2351647e-22
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1028210982, guid: d7b07370d2c584fd2b6fcffcec839d18, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -9e-44
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6901406372233256961, guid: d7b07370d2c584fd2b6fcffcec839d18,
         type: 3}
@@ -606,17 +606,17 @@ PrefabInstance:
     - target: {fileID: 6901406372872370139, guid: d7b07370d2c584fd2b6fcffcec839d18,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 2.1175824e-22
+      value: 1e-45
       objectReference: {fileID: 0}
     - target: {fileID: 6901406372872370139, guid: d7b07370d2c584fd2b6fcffcec839d18,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 4.2351647e-22
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6901406372872370139, guid: d7b07370d2c584fd2b6fcffcec839d18,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -9e-44
+      value: -0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1076,6 +1076,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1252805851}
     m_Modifications:
+    - target: {fileID: 1093485222549694646, guid: 40489e7ec2e214f429f8f2f591f0bfea,
+        type: 3}
+      propertyPath: _profile
+      value: 
+      objectReference: {fileID: 11400000, guid: f5bda07027411d84fab5dff1df93da49,
+        type: 2}
     - target: {fileID: 3034833891548442912, guid: 40489e7ec2e214f429f8f2f591f0bfea,
         type: 3}
       propertyPath: m_LocalScale.z

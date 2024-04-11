@@ -12,10 +12,10 @@ INCLUDE global.ink
 
 === intro2 ===
 Oh, hello. Sorry, I didn't see you.
-+ [I know you, you are a polarizer]
-    Bro, that is my brother. I am the waveplate.
++ [I know you, you are a Polarizer.]
+    Bro, that is my brother. I am the Waveplate.
 + [Wait, have we met before?]
-    No, not at all. You must have met my brother. My name is waveplate. 
+    No, not at all. You must have met my brother. My name is waveplate.
 - In general, wave that has different polarization will behave differently when passing through me . #title:Waveplate #speaker:Waveplate
 ~ knowWaveplate = true
 Why do you come here?
@@ -47,7 +47,7 @@ What polarization of the wave will become spherical polarization after passing t
     Correct!!!
         ++ [CONTINUE]->repeat
     +[Spherical Polarization]
-    You almost got it right. When Spherical polarization passes through,
+    You almost got it right.
         ++[Redo the Quiz]->quiz
 
 === repeat ===

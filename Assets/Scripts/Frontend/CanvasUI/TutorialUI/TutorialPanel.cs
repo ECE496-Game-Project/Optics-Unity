@@ -13,7 +13,9 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
 {
     [Header("Params")]
     [SerializeField] private float TYPE_SPEED = 0.04f;
-    [SerializeField] private float SCROLL_SPEED = 50f;
+    private float SCROLL_SPEED;
+    [SerializeField] private float SCROLL_SPEED_AMPLIFIER = 50f;
+    [SerializeField] private float SCROLL_DAMP = 0.1f;
     [SerializeField] private float SCROLL_OFFSET = 100f;
     [SerializeField] private float SPACER_HEIGHT = 200f; 
     [SerializeField] private float MIN_WIDTH = 500f; 
@@ -33,6 +35,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     private VisualElement expBody;
     private Label title;
     private ScrollView content;
+    private Scroller scroller;
     private Button expand;
     private Button pause;
     private Button system;
@@ -71,11 +74,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
 
         title = root.Q<Label>(name: "title");
 
-        content = root.Q<ScrollView>(name: "content");
-        content.horizontalScrollerVisibility = ScrollerVisibility.Hidden;
-        content.verticalScrollerVisibility = ScrollerVisibility.Hidden;
-        content.mouseWheelScrollSize = SCROLL_SPEED;
-        content.elasticity = SCROLL_SPEED;
+        setScrollView();
 
         realChoice = Resources.Load<VisualTreeAsset>("Art/Frontend/Documents/TutorialPanel/RealChoice");
         fakeChoice = Resources.Load<VisualTreeAsset>("Art/Frontend/Documents/TutorialPanel/FakeChoice");
@@ -153,7 +152,7 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         currStory = new Story(inkJSON.text);
         
         dialogueVariables.StartListening(currStory);
-        // TODO: load variables
+        // TODO: Load variables
         
         tutIsPlaying = true;
         title.text = "???";
@@ -258,8 +257,8 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         VisualElement imgContainer = imgArea.Instantiate();
         VisualElement img = imgContainer.Q<VisualElement>(name:"Image");
         
-        Texture2D texture = Resources.Load<Texture2D>("Art/Images/" + imgVal);
-        if(texture == null){
+        Sprite sp = Resources.Load<Sprite>("Art/Images/" + imgVal);
+        if(sp == null){
             Debug.LogError("Can't find image: " + imgVal);
             return;
         }
@@ -268,9 +267,9 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
             img.style.width = MIN_WIDTH;
             Debug.LogWarning("No valid width!");
         } 
-        float aspectRatio = (float)texture.height / (float)texture.width;
+        float aspectRatio = (float)sp.textureRect.height / (float)sp.textureRect.width;
         img.style.height = new StyleLength(img.style.width.value.value * aspectRatio);
-        img.style.backgroundImage = texture;
+        img.style.backgroundImage = new StyleBackground(sp);
         content.Add(imgContainer);
     }
 
@@ -314,9 +313,30 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     }
 
     private void ScrollToBottom(){
-        Scroller scroller = content.verticalScroller;
         float targetValue = scroller.highValue > 0 ? scroller.highValue + SCROLL_OFFSET : 0;
         DOTween.To(()=>scroller.value, x=> scroller.value = x, targetValue, EXIT_LAG_TIME);
+    }
+
+    private void setScrollView(){
+        content = root.Q<ScrollView>(name: "content");
+        content.horizontalScrollerVisibility = ScrollerVisibility.Hidden;
+        scroller = content.verticalScroller;
+        scroller.valueChanged += ChangeSpeed;
+        content.RegisterCallback<WheelEvent>(ScrollCallback);
+    }
+
+    public void ScrollCallback(WheelEvent evt){
+        content.UnregisterCallback<WheelEvent>(ScrollCallback);
+        SCROLL_SPEED += evt.delta.y * SCROLL_SPEED_AMPLIFIER;
+        evt.StopPropagation();
+        content.RegisterCallback<WheelEvent>(ScrollCallback);
+    }
+ 
+    public void ChangeSpeed(float num){
+        scroller.valueChanged -= ChangeSpeed;
+        scroller.value += SCROLL_SPEED;
+        SCROLL_SPEED -= SCROLL_SPEED * SCROLL_DAMP;
+        scroller.valueChanged += ChangeSpeed;
     }
 
     private void HandleTags(List<string> tags){
