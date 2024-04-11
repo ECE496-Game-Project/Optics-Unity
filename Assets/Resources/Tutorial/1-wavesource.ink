@@ -26,16 +26,19 @@ Please feel free to ask me anything you want to know, sir.
 + [No other things I want to know.]->end
 
 === wave ===
-Of course, sir. Let me introduce the wave light to you. #title:Wave Knowledge #image:Tutorial/page2 #image:Tutorial/page3
+Of course, sir. Let me introduce the wave light to you. #title:Wave Knowledge 
+The Optical Electic Wave contains both Temporal and Spatial frequency, meaning that the magnitue of wave will change w.r.t. both time and space.#image:Tutorial/page2
+
+This can also be seen from the harmonic wave equaction as it contains k and w. #image:Tutorial/page3
 ~ isWaveTutFinish = true
 * [CONTINUE]->repeat
 
 === quiz ===
-What's a harmonic plane wave? #title:Wave Quiz
-    + [It is a harmonic wave]
+What's two component does harmonic wave contains? #title:Wave Quiz
+    + [It contains temporal and spatial frequency]
         Your answer is correct
         ** [CONTINUE]-> repeat
-    + [It is not a harmonic wave]
+    + [It contains animation and physics]
         Your answer is incorrect->quiz
 
 === repeat ===
