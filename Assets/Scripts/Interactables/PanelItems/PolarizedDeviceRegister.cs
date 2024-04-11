@@ -26,6 +26,7 @@ namespace GO_Device {
             TrackSlideInfo newTrackInfo = track.AddDevice(DeviceType, prec);
 
             ParamPanelManager.Instance.SelectParamView(newTrackInfo.device.gameObject);
+            TutorialPanel.Instance.CloseExpandPanel();
             Destroy(this);
 
             
