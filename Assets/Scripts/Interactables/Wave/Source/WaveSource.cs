@@ -10,6 +10,9 @@ namespace GO_Wave {
         [SerializeField] private SO_WaveParams _profile;
         [SerializeField] private LayerMask _interactMask;
         [SerializeField] private float _sampleResolution;
+
+        public Material mt;
+        public Gradient gradient;
         #endregion
 
         private WaveSourceParam m_param;
