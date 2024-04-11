@@ -30,12 +30,12 @@ I only allow the light that has polarization align with my polarization axis to 
     ++ [CONTINUE]->repeat
 
 === quiz ===
-My Polarization Axis is aligned with the x-axis, what kind of wave can NOT pass through me? #title:Polarizer Quiz #image:Tutorial/Polarization_Quiz_Question
+My Polarization Axis is aligned with the x-axis, what kind of wave can NOT pass through me? #title:Polarizer Quiz #image:Tutorial/Polarizer/Polarization_Quiz_Question
 +[Linear polarization align with x-axis]
     Incorrect! Since my axis is aligned with x-axis, I will let all the wave whose linear polarization align with x-axis pass through
     ++ [Redo the quiz] -> quiz
 +[Linear polarization with 45 degree away from the x-axis]
-    Incorrect! Wave with 45 degree linear polarization away from the x-axis still has wave component that is align with the y-axis, thus leaving this part of the wave passing through me #image:Tutorial/Polarization_Quiz_45_option
+    Incorrect! Wave with 45 degree linear polarization away from the x-axis still has wave component that is align with the y-axis, thus leaving this part of the wave passing through me #image:Tutorial/Polarizer/Polarization_Quiz_45_option
     ++ [Redo the quiz] -> quiz
 +[Linear polarization align with y-axis]
     Correct!!! In this situation, wave's polarization is orthogonal to my axis, thus I will block everyting
