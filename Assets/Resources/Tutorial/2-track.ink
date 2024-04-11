@@ -7,4 +7,4 @@ You could add, delete, and move devices on me by using the panel down there.
 
 === end ===
 You could invoke me again by clicking the track. May you have a good learning experience!
-* [LEAVE]->DONE
++ [LEAVE]->DONE

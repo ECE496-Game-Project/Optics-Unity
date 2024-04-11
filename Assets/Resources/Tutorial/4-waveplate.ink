@@ -29,11 +29,11 @@ Why do you come here?
 === polarizer ===
 To be continued... #title:Waveplate Knowledge
 ~ isWaveplateTutFinish = true
-* [CONTINUE]->repeat
++ [CONTINUE]->repeat
 
 === quiz ===
 To be continued... #title:Waveplate Quiz
-* [CONTINUE]->repeat
++ [CONTINUE]->repeat
 
 === repeat ===
 Do you have any other things to ask? #title:Waveplate #speaker:Waveplate
@@ -41,4 +41,4 @@ Do you have any other things to ask? #title:Waveplate #speaker:Waveplate
 
 === end ===
 You could invoke me again by clicking any waveplates. May you have a good learning experience!
-* [LEAVE]->DONE
++ [LEAVE]->DONE
