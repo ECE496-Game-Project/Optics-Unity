@@ -258,8 +258,8 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         VisualElement imgContainer = imgArea.Instantiate();
         VisualElement img = imgContainer.Q<VisualElement>(name:"Image");
         
-        Texture2D texture = Resources.Load<Texture2D>("Art/Images/" + imgVal);
-        if(texture == null){
+        Sprite sp = Resources.Load<Sprite>("Art/Images/" + imgVal);
+        if(sp == null){
             Debug.LogError("Can't find image: " + imgVal);
             return;
         }
@@ -268,9 +268,9 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
             img.style.width = MIN_WIDTH;
             Debug.LogWarning("No valid width!");
         } 
-        float aspectRatio = (float)texture.height / (float)texture.width;
+        float aspectRatio = (float)sp.textureRect.height / (float)sp.textureRect.width;
         img.style.height = new StyleLength(img.style.width.value.value * aspectRatio);
-        img.style.backgroundImage = texture;
+        img.style.backgroundImage = new StyleBackground(sp);
         content.Add(imgContainer);
     }
 
