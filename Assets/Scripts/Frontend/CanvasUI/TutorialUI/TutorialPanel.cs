@@ -33,6 +33,9 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
     private VisualElement root;
     private VisualElement expPanel;
     private VisualElement expBody;
+    private bool isMouseOverElement = false;
+
+
     private Label title;
     private ScrollView content;
     private Scroller scroller;
@@ -89,6 +92,10 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         OpenExpandPanel();
         PreRegisterCallback();
         BeginTutorial(defaultInkJSON);
+
+         // Assuming you have already obtained a reference to your specific VisualElement
+        expBody.RegisterCallback<MouseEnterEvent>(evt => MouseEntered(evt));
+        expBody.RegisterCallback<MouseLeaveEvent>(evt => MouseLeft(evt));
     }
 
     private void Update(){
@@ -379,8 +386,19 @@ public class TutorialPanel : MonoSingleton<TutorialPanel>
         return varValue;
     }
 
+    private void MouseEntered(MouseEnterEvent evt)
+    {
+        isMouseOverElement = true;
+    }
+
+    private void MouseLeft(MouseLeaveEvent evt)
+    {
+        isMouseOverElement = false;
+    }
+
     private bool IsUserInput(){
-        return TutorialController.Instance.isInput;
+
+        return TutorialController.Instance.isInput && isMouseOverElement;
     }
 
     #endregion

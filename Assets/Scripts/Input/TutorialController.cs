@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class TutorialController : InputController
@@ -38,13 +39,21 @@ public class TutorialController : InputController
 
     private void OnMouseLeftClick(InputAction.CallbackContext context){
         if (!m_isAllowed) return;
-        _isInput = true;
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            _isInput = true;
+        }
+        
     }
 
     private void OnPressEnter(InputAction.CallbackContext context){
         if (!m_isAllowed) return;
-        _isInput = true;
-        NotifyMyParentIsOn();
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            _isInput = true;
+            NotifyMyParentIsOn();
+        }
+        
     }
 
     public void OnMouseFinished(InputAction.CallbackContext context){
