@@ -3,6 +3,7 @@ using Interfaces;
 using ParameterTransfer;
 using GO_Wave;
 using UnityEngine;
+using Panel;
 
 namespace GO_Device {
     public partial class PolarizedDevice : I_ParameterPanel {
@@ -13,6 +14,21 @@ namespace GO_Device {
 
         public void ParameterChangeTrigger() {
             correspondWS?.Emit();
+        }
+
+        public void ReplaceDeviceWithType()
+        {
+            Track track = GetComponentInParent<Track>();
+            TrackSlideInfo trackInfo = track.GetTrackSlideInfo(this);
+
+            float prec = track.GetPrec(trackInfo);
+            track.RemoveDevice(trackInfo);
+            TrackSlideInfo newTrackInfo = track.AddDevice(DeviceType, prec);
+
+            ParamPanelManager.Instance.SelectParamView(newTrackInfo.device.gameObject);
+            Destroy(this);
+
+            
         }
 
         public void RegisterParametersCallback(ParameterInfoList ParameterInfos) {
@@ -27,7 +43,12 @@ namespace GO_Device {
             AxisDiffDegTuple.Getter = () => { return AxisDiffDeg; };
 
             NameTuple.Setter = (evt) => { this.name = evt.newValue; };
-            DeviceTypeTuple.Setter = (evt) => { DeviceType = (DEVICETYPE)evt.newValue; ParameterChangeTrigger(); };
+            DeviceTypeTuple.Setter = (evt) => { 
+                if (DeviceType != (DEVICETYPE)evt.newValue) {
+                    DeviceType = (DEVICETYPE)evt.newValue;
+                    ReplaceDeviceWithType();
+                }
+            };
             RotDegTuple.Setter = (evt) => { RotDeg = evt.newValue; ParameterChangeTrigger(); };
             AxisDiffDegTuple.Setter = (evt) => { AxisDiffDeg = evt.newValue; ParameterChangeTrigger(); };
         }
