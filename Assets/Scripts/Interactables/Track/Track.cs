@@ -4,6 +4,7 @@ using UnityEngine.Events;
 using UnityEngine.Assertions;
 using GO_Wave;
 using System.Collections;
+using Panel;
 
 namespace GO_Device {
     /// <summary>
@@ -32,6 +33,18 @@ namespace GO_Device {
             // Wait for one frame
             yield return null;
             WsOnTrack.Emit();
+        }
+
+        public TrackSlideInfo GetTrackSlideInfo(DeviceBase device)
+        {
+            foreach (var deviceOnTrack in DevicesOnTrack)
+            {
+                if (deviceOnTrack.device == device)
+                {
+                    return deviceOnTrack;
+                }
+            }
+            return null;
         }
 
         public void MovePosition(DeviceBase device, float prec) {
@@ -73,6 +86,26 @@ namespace GO_Device {
             return device;
         }
 
+        public TrackSlideInfo AddDevice(DEVICETYPE type, float position)
+        {
+            // Instanite Tail
+            DeviceBase newDevice = null;
+            if(type == DEVICETYPE.POLARIZER)
+                newDevice = Instantiate(TempSingletonManager.Instance.PolarizerPrefab, this.transform).GetComponent<DeviceBase>();
+            else if(type == DEVICETYPE.WEAVEPLATE)
+                newDevice = Instantiate(TempSingletonManager.Instance.WaveplatePrefab, this.transform).GetComponent<DeviceBase>();
+
+            newDevice.transform.position = Tail.position;
+            newDevice.transform.localScale = new Vector3(1, 1, 0.02f);
+            MovePosition(newDevice, position);
+            newDevice.gameObject.name = type.ToString() + DevicesOnTrack.Count;
+
+            var device = AddDevice(newDevice);
+            StartCoroutine(WaitOneFrameThenEmit());
+
+            return device;
+        }
+
         public TrackSlideInfo AddDevice(DeviceBase basedevice) {
             // Instanite Tail
             TrackSlideInfo slideinfo = new TrackSlideInfo();
@@ -94,6 +127,9 @@ namespace GO_Device {
         }
 
         public void RemoveDevice(TrackSlideInfo sliderInfo) {
+            if(ParamPanelManager.Instance.currentObj == sliderInfo.device.gameObject)
+                ParamPanelManager.Instance.SelectParamView(null);
+
             for (int i = 0; i < DevicesOnTrack.Count; i++)
             {
                 if (DevicesOnTrack[i] == sliderInfo)
