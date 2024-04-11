@@ -35,7 +35,7 @@ namespace GO_Wave {
                 if (evt.newValue == 0) return; 
                 m_param.lambda = evt.newValue / WaveAlgorithm.nmPerUnit;
                 float tmp = (evt.newValue - 400) / 380;
-                mt.SetColor("_BaseColor", gradient.Evaluate(1-tmp));
+                mt.SetColor("_BaseColor", gradient.Evaluate(tmp));
                 ParameterChangeTrigger(); 
             };
             nTuple.Setter = (evt) => { if (evt.newValue > 5 || evt.newValue < 1) return; m_param.n = evt.newValue; ParameterChangeTrigger(); };
